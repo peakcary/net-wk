@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <button id="btnConfirm">Confirm</button>
+    <div>
+    </div>
+    
+    <script src="../js/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <script  type="text/javascript">
+        $(function () {
+            $("#btnConfirm").click(function () {
+                getData(1);
+            });
+        });
+
+        function getData(index) {
+            $.ajax({
+                type: "post", 
+                url: "../Handler/DataHandler.ashx?t=getLeftTree",
+                data: "index=" + index,
+                complete: function () {
+                },
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
