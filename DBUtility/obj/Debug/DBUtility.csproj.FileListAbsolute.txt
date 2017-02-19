@@ -4,6 +4,5 @@ D:\Project\net-wk\DBUtility\bin\Debug\IBatisNet.Common.dll
 D:\Project\net-wk\DBUtility\bin\Debug\IBatisNet.DataMapper.dll
 D:\Project\net-wk\DBUtility\bin\Debug\MySql.Data.dll
 D:\Project\net-wk\DBUtility\bin\Debug\System.Data.SQLite.DLL
-D:\Project\net-wk\DBUtility\obj\Debug\DBUtility.csprojResolveAssemblyReference.cache
 D:\Project\net-wk\DBUtility\obj\Debug\WK.DBUtility.dll
 D:\Project\net-wk\DBUtility\obj\Debug\WK.DBUtility.pdb

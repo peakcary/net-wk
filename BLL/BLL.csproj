@@ -142,6 +142,7 @@
     <Compile Include="sys_constant_detail.cs" />
     <Compile Include="sys_sequence.cs" />
     <Compile Include="sys_user.cs" />
+    <Compile Include="user.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

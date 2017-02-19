@@ -49,7 +49,7 @@ public class DataHandler : IHttpHandler
 
         DataSet ds = new DataSet();
         StringBuilder strWhere = new StringBuilder();
-        Maticsoft.BLL.user bll = new Maticsoft.BLL.user();
+        WK.BLL.user bll = new WK.BLL.user();
         ds = bll.GetList(strWhere.ToString());  
         sb.Append("{'hello':'peak'}");
         return sb.ToString(); 
