@@ -72,6 +72,8 @@
   <ItemGroup>
     <Content Include="Controls\checkright.ascx" />
     <Content Include="Controls\copyright.ascx" />
+    <Content Include="data\bui_test.sql" />
+    <Content Include="data\wukong.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="pages\index.htm" />
