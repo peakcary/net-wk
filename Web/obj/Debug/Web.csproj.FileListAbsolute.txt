@@ -25,3 +25,4 @@ D:\Project\net-wk\Web\bin\WK.DAL.pdb
 D:\Project\net-wk\Web\bin\WK.DBUtility.pdb
 D:\Project\net-wk\Web\obj\Debug\WK.Web.dll
 D:\Project\net-wk\Web\obj\Debug\WK.Web.pdb
+D:\Project\net-wk\Web\bin\Newtonsoft.Json.dll

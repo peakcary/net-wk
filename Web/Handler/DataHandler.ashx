@@ -45,14 +45,12 @@ public class DataHandler : IHttpHandler
     //
     private string getLeftTree()
     {
-        StringBuilder sb = new StringBuilder();
-
+        StringBuilder sb = new StringBuilder(); 
         DataSet ds = new DataSet();
         StringBuilder strWhere = new StringBuilder();
         WK.BLL.user bll = new WK.BLL.user();
-        ds = bll.GetList(strWhere.ToString());  
-        sb.Append("{'hello':'peak'}");
-        return sb.ToString(); 
+        ds = bll.GetList(strWhere.ToString());
+        return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);  
     }
      
 

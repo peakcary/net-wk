@@ -53,6 +53,10 @@
       <HintPath>..\Lib\Microsoft.Web.UI.WebControls.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>src\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -70,14 +74,84 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bus_area\Add.aspx" />
+    <Content Include="bus_area\List.aspx" />
+    <Content Include="bus_area\Modify.aspx" />
+    <Content Include="bus_area\Show.aspx" />
+    <Content Include="bus_dish\Add.aspx" />
+    <Content Include="bus_dish\List.aspx" />
+    <Content Include="bus_dish\Modify.aspx" />
+    <Content Include="bus_dish\Show.aspx" />
+    <Content Include="bus_dish_plan\Add.aspx" />
+    <Content Include="bus_dish_plan\List.aspx" />
+    <Content Include="bus_dish_plan\Modify.aspx" />
+    <Content Include="bus_dish_plan\Show.aspx" />
+    <Content Include="bus_image\Add.aspx" />
+    <Content Include="bus_image\List.aspx" />
+    <Content Include="bus_image\Modify.aspx" />
+    <Content Include="bus_image\Show.aspx" />
+    <Content Include="bus_market\Add.aspx" />
+    <Content Include="bus_market\List.aspx" />
+    <Content Include="bus_market\Modify.aspx" />
+    <Content Include="bus_market\Show.aspx" />
+    <Content Include="bus_order\Add.aspx" />
+    <Content Include="bus_order\List.aspx" />
+    <Content Include="bus_order\Modify.aspx" />
+    <Content Include="bus_order\Show.aspx" />
+    <Content Include="bus_order_dish\Add.aspx" />
+    <Content Include="bus_order_dish\List.aspx" />
+    <Content Include="bus_order_dish\Modify.aspx" />
+    <Content Include="bus_order_dish\Show.aspx" />
+    <Content Include="bus_payment\Add.aspx" />
+    <Content Include="bus_payment\List.aspx" />
+    <Content Include="bus_payment\Modify.aspx" />
+    <Content Include="bus_payment\Show.aspx" />
     <Content Include="bus_pickup_address\Add.aspx" />
     <Content Include="bus_pickup_address\List.aspx" />
     <Content Include="bus_pickup_address\Modify.aspx" />
     <Content Include="bus_pickup_address\Show.aspx" />
+    <Content Include="bus_pickup_market\Add.aspx" />
+    <Content Include="bus_pickup_market\List.aspx" />
+    <Content Include="bus_pickup_market\Modify.aspx" />
+    <Content Include="bus_pickup_market\Show.aspx" />
+    <Content Include="bus_pickup_times\Add.aspx" />
+    <Content Include="bus_pickup_times\List.aspx" />
+    <Content Include="bus_pickup_times\Modify.aspx" />
+    <Content Include="bus_pickup_times\Show.aspx" />
+    <Content Include="bus_pickup_user\Add.aspx" />
+    <Content Include="bus_pickup_user\List.aspx" />
+    <Content Include="bus_pickup_user\Modify.aspx" />
+    <Content Include="bus_pickup_user\Show.aspx" />
+    <Content Include="bus_share\Add.aspx" />
+    <Content Include="bus_share\List.aspx" />
+    <Content Include="bus_share\Modify.aspx" />
+    <Content Include="bus_share\Show.aspx" />
+    <Content Include="bus_times\Add.aspx" />
+    <Content Include="bus_times\List.aspx" />
+    <Content Include="bus_times\Modify.aspx" />
+    <Content Include="bus_times\Show.aspx" />
+    <Content Include="bus_user\Add.aspx" />
+    <Content Include="bus_user\List.aspx" />
+    <Content Include="bus_user\Modify.aspx" />
+    <Content Include="bus_user\Show.aspx" />
+    <Content Include="bus_user_black_list\Add.aspx" />
+    <Content Include="bus_user_black_list\List.aspx" />
+    <Content Include="bus_user_black_list\Modify.aspx" />
+    <Content Include="bus_user_black_list\Show.aspx" />
+    <Content Include="bus_user_device\Add.aspx" />
+    <Content Include="bus_user_device\List.aspx" />
+    <Content Include="bus_user_device\Modify.aspx" />
+    <Content Include="bus_user_device\Show.aspx" />
+    <Content Include="bus_wx_user\Add.aspx" />
+    <Content Include="bus_wx_user\List.aspx" />
+    <Content Include="bus_wx_user\Modify.aspx" />
+    <Content Include="bus_wx_user\Show.aspx" />
     <Content Include="Controls\checkright.ascx" />
     <Content Include="Controls\copyright.ascx" />
     <Content Include="data\bui_test.sql" />
     <Content Include="data\wukong.sql" />
+    <Content Include="document\bui_test.sql" />
+    <Content Include="document\wukong.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="pages\index.htm" />
@@ -89,20 +163,381 @@
     <Content Include="pages\lib\bootstrap\js\bootstrap.js" />
     <Content Include="pages\lib\bootstrap\js\bootstrap.min.js" />
     <Content Include="pages\lib\html5shiv.min.js" />
+    <Content Include="pages\lib\jquery-tmpl\.gitignore" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\components\jquery-ui-1.8.1.custom.js" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\components\jquery-ui-1.8.1.custom.min.js" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\components\jquery.pager.js" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\css\jquery-ui-1.8.1.custom.css" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\css\movies.css" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_dots-small_65_a6a6a6_2x2.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_flat_0_333333_40x100.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_flat_65_ffffff_40x100.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_glass_55_fbf8ee_1x400.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_highlight-hard_100_eeeeee_1x100.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_highlight-hard_100_f6f6f6_1x100.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-bg_highlight-soft_15_cc0000_1x100.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-icons_004276_256x240.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\PagesCore\movies.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\PagesCore\moviesNoGlobals.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\PagesTmplPlus\movies1.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\PagesTmplPlus\movies2.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\movies\PagesTmplPlus\movies3.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\resources\demos.css" />
+    <Content Include="pages\lib\jquery-tmpl\demos\resources\movielist.css" />
+    <Content Include="pages\lib\jquery-tmpl\demos\resources\syntaxhighlighter.css" />
+    <Content Include="pages\lib\jquery-tmpl\demos\resources\syntaxhighlighter.min.js" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\basic.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\composition.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\conditional.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\each.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\resources\collapsed.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\resources\empty.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\resources\expanded.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\resources\folder.png" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\resources\tabs.css" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\resources\treeView.css" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\tabsTmpl.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\tabsWrap.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\tabsWrapImperative.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\tabsWrapNested.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\Interactive\treeView.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesCore\parameters.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesTmplPlus\basic.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesTmplPlus\composition.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\samplesTmplPlus\parameters.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\0_local-data-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\0_local-data.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\1_remote-data-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\1_remote-data.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\2_html-tag-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\2_html-tag.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\3_if-else-tag-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\3_if-else-tag.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\4_each-tag-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\4_each-tag.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\5_javascript-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\5_javascript.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\6_hierarchical-data-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\0_tmpl-read-only\6_hierarchical-data.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\1_tmpl-interactive\0_accordion-switching-template-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\1_tmpl-interactive\0_accordion-switching-template.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\1_tmpl-interactive\1_tree-view-using-tmpl-tag-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\1_tmpl-interactive\1_tree-view-using-tmpl-tag.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\1_tmpl-interactive\2_tabs-using-wrap-tag-source.html" />
+    <Content Include="pages\lib\jquery-tmpl\demos\step-by-step\1_tmpl-interactive\2_tabs-using-wrap-tag.html" />
+    <Content Include="pages\lib\jquery-tmpl\jquery.tmpl.js" />
+    <Content Include="pages\lib\jquery-tmpl\jquery.tmpl.min.js" />
+    <Content Include="pages\lib\jquery-tmpl\jquery.tmplPlus.js" />
+    <Content Include="pages\lib\jquery-tmpl\jquery.tmplPlus.min.js" />
+    <Content Include="pages\lib\jquery-tmpl\tests\core.js" />
+    <Content Include="pages\lib\jquery-tmpl\tests\index.html" />
+    <Content Include="pages\lib\jquery-tmpl\tests\qunit.css" />
+    <Content Include="pages\lib\jquery-tmpl\tests\qunit.js" />
     <Content Include="pages\lib\jqurey\1.12.4\jquery.min.js" />
     <Content Include="pages\lib\respond.min.js" />
     <Content Include="pages\main.css" />
     <Content Include="pages\main.htm" />
     <Content Include="pages\main.js" />
+    <Content Include="pages\PickupAddressList.htm" />
+    <Content Include="pages\PickupAddressList.js" />
+    <Content Include="pages\PickupAddressEdit.htm" />
+    <Content Include="pages\PickupAddressEdit.js" />
+    <Content Include="src\Newtonsoft.Json.dll" />
     <Content Include="Style.css" />
+    <Content Include="sys_constant\Add.aspx" />
+    <Content Include="sys_constant\List.aspx" />
+    <Content Include="sys_constant\Modify.aspx" />
+    <Content Include="sys_constant\Show.aspx" />
+    <Content Include="sys_constant_detail\Add.aspx" />
+    <Content Include="sys_constant_detail\List.aspx" />
+    <Content Include="sys_constant_detail\Modify.aspx" />
+    <Content Include="sys_constant_detail\Show.aspx" />
+    <Content Include="sys_sequence\Add.aspx" />
+    <Content Include="sys_sequence\List.aspx" />
+    <Content Include="sys_sequence\Modify.aspx" />
+    <Content Include="sys_sequence\Show.aspx" />
+    <Content Include="sys_user\Add.aspx" />
+    <Content Include="sys_user\List.aspx" />
+    <Content Include="sys_user\Modify.aspx" />
+    <Content Include="sys_user\Show.aspx" />
     <Content Include="user\Add.aspx" />
     <Content Include="user\List.aspx" />
     <Content Include="user\Modify.aspx" />
     <Content Include="user\Show.aspx" />
     <Content Include="ValidateCode.aspx" />
     <Content Include="Web.config" />
+    <Content Include="webctrl_client\1_0\Images\folder.gif" />
+    <Content Include="webctrl_client\1_0\Images\folderopen.gif" />
+    <Content Include="webctrl_client\1_0\Images\html.gif" />
+    <Content Include="webctrl_client\1_0\Images\root.gif" />
+    <Content Include="webctrl_client\1_0\MultiPage.htc" />
+    <Content Include="webctrl_client\1_0\TabStrip.htc" />
+    <Content Include="webctrl_client\1_0\toolbar.htc" />
+    <Content Include="webctrl_client\1_0\TreeImages\f.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\fminus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\fplus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\i.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\L.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\Lminus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\Lplus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\minus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\plus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\r.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\Rminus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\Rplus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\F.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\Fminus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\Fplus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\I.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\L.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\Lminus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\Lplus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\minus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\plus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\r.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\Rminus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\Rplus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\T.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\Tminus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\Tplus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\rtl\white.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\T.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\Tminus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\Tplus.gif" />
+    <Content Include="webctrl_client\1_0\TreeImages\white.gif" />
+    <Content Include="webctrl_client\1_0\treeview.htc" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bus_area\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_area\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_area\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_area\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_area\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_area\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_area\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_area\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_dish\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_dish\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_dish\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_dish\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_dish\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_dish\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_dish\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_dish\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_dish_plan\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_dish_plan\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_dish_plan\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_dish_plan\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_dish_plan\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_dish_plan\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_dish_plan\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_dish_plan\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_image\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_image\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_image\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_image\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_image\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_image\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_image\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_image\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_market\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_market\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_market\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_market\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_market\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_market\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_market\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_market\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_order\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_order\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_order\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_order\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_order\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_order\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_order\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_order\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_order_dish\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_order_dish\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_order_dish\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_order_dish\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_order_dish\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_order_dish\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_order_dish\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_order_dish\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_payment\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_payment\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_payment\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_payment\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_payment\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_payment\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_payment\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_payment\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
     <Compile Include="bus_pickup_address\Add.aspx.cs">
       <DependentUpon>Add.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -131,6 +566,258 @@
     <Compile Include="bus_pickup_address\Show.aspx.designer.cs">
       <DependentUpon>Show.aspx</DependentUpon>
     </Compile>
+    <Compile Include="bus_pickup_market\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_market\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_market\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_market\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_market\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_market\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_market\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_market\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_times\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_times\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_times\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_times\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_times\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_times\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_times\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_times\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_user\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_user\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_user\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_user\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_user\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_user\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_pickup_user\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_pickup_user\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_share\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_share\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_share\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_share\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_share\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_share\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_share\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_share\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_times\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_times\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_times\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_times\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_times\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_times\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_times\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_times\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user_black_list\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user_black_list\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user_black_list\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user_black_list\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user_black_list\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user_black_list\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user_black_list\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user_black_list\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user_device\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user_device\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user_device\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user_device\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user_device\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user_device\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_user_device\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_user_device\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_wx_user\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_wx_user\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_wx_user\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_wx_user\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_wx_user\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_wx_user\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bus_wx_user\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bus_wx_user\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CheckRight.ascx.cs">
       <DependentUpon>checkright.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -148,13 +835,129 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handler\PickupAddress.ashx.cs">
+      <DependentUpon>PickupAddress.ashx</DependentUpon>
+    </Compile>
     <Compile Include="MasterPage.master.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterPage.master.designer.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sys_constant\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_constant\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_constant\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_constant\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_constant\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_constant\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_constant\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_constant\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_constant_detail\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_constant_detail\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_constant_detail\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_constant_detail\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_constant_detail\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_constant_detail\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_constant_detail\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_constant_detail\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_sequence\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_sequence\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_sequence\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_sequence\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_sequence\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_sequence\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_sequence\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_sequence\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_user\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_user\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_user\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_user\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_user\Modify.aspx.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_user\Modify.aspx.designer.cs">
+      <DependentUpon>Modify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sys_user\Show.aspx.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sys_user\Show.aspx.designer.cs">
+      <DependentUpon>Show.aspx</DependentUpon>
+    </Compile>
     <Compile Include="user\Add.aspx.cs">
       <DependentUpon>Add.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -185,6 +988,7 @@
     </Compile>
     <Compile Include="ValidateCode.aspx.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ValidateCode.aspx.designer.cs">
       <DependentUpon>ValidateCode.aspx</DependentUpon>
@@ -219,11 +1023,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage.master" />
+    <Content Include="Handler\PickupAddress.ashx" />
     <None Include="pages\lib\bootstrap\config.json" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="pages\lib\jquery-tmpl\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

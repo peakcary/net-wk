@@ -6,3 +6,4 @@ D:\Project\net-wk\Common\bin\Debug\OpenSmtp.dll
 D:\Project\net-wk\Common\bin\Debug\OWC10Chart.dll
 D:\Project\net-wk\Common\obj\Debug\WK.Common.dll
 D:\Project\net-wk\Common\obj\Debug\WK.Common.pdb
+D:\Project\net-wk\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
