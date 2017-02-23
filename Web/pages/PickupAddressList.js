@@ -2,29 +2,22 @@
 $(function () {
     getDataList(1);
 });
-function getDataList(index) {
+function getDataList(index) {  
     $.ajax({
         type: "post",
         url: url + "?t=getDataList",
-        data: "index=" + index,
-        complete: function () {
+        data: {
+           key: "xdp", 
         },
-        success: function (data) {
-            var dataJson = eval("(" + data + ")");
-            $("#DataList").empty();
-            $("#DataTemplate").tmpl(dataJson).appendTo("#DataList");
-        }
-    });
-}
-function getDataDetail(id) {
-    $.ajax({
-        type: "post",
-        url: url + "?t=getDataDetail",
-        data: "id=" + id,
-        complete: function () {
-        },
+        dataType: 'json',   
         success: function (data) { 
-            alert(data);
+            $("#DataList").empty();
+            $("#DataTemplate").tmpl(data).appendTo("#DataList");
         }
     });
 }
+
+function goPageDetail(id) {
+    window.location.href = "PickupAddressEdit.htm?id="+id;
+}
+

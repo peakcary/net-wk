@@ -244,10 +244,10 @@
     <Content Include="pages\main.css" />
     <Content Include="pages\main.htm" />
     <Content Include="pages\main.js" />
+    <Content Include="pages\PickupAddressEdit.js" />
     <Content Include="pages\PickupAddressList.htm" />
     <Content Include="pages\PickupAddressList.js" />
     <Content Include="pages\PickupAddressEdit.htm" />
-    <Content Include="pages\PickupAddressEdit.js" />
     <Content Include="src\Newtonsoft.Json.dll" />
     <Content Include="Style.css" />
     <Content Include="sys_constant\Add.aspx" />

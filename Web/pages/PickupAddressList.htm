@@ -41,21 +41,24 @@
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <table class="table table-bordered  table-hover">
-                    <thead  >
+                <div>
+                    <a class="btn btn-default" href="#" role="button" onclick="goPageDetail(0)">新增</a>
+                </div>
+                <table class="table table-bordered  table-hover  mt10">
+                    <thead>
                         <tr>
                             <td>
                                 userId
-                            </td> 
+                            </td>
                             <td>
                                 username
-                            </td> 
+                            </td>
                             <td>
                                 password
-                            </td>  
+                            </td>
                             <td>
                                 操作
-                            </td> 
+                            </td>
                         </tr>
                     </thead>
                     <tbody id="DataList">
@@ -73,7 +76,7 @@
 	        <td>${userId}</td>  
             <td>${username}</td>
             <td>${password}</td> 
-            <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="getDataDetail('${userId}')" >编辑</a></td> 
+            <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${userId}')" >编辑</a></td> 
         </tr>
     </script>
 </body>
