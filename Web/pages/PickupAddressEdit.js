@@ -7,6 +7,8 @@ $(function () {
             if (r != null) return unescape(r[2]); return null;
         }
     })(jQuery);
+    
+getLeftNav();
     var id = $.getUrlParam('id');
     $("#hid").val(id); 
     if(id>0){
@@ -48,9 +50,9 @@ function editData() {
         dataType: 'json',   
         success: function (data) { 
         if(data.isSuccess){
-        goPageList();
+            goPageList();
         }else{
-        alert('保存失败！');
+            alert('保存失败！');
         }
         }
     });

@@ -1,4 +1,6 @@
 ﻿$(function () {
+
+    getLeftNav();
     $("#btnConfirm").click(function () {
         getData(1);
     });

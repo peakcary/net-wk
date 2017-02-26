@@ -2,3 +2,4 @@ D:\Project\net-wk\Model\bin\Debug\WK.Model.dll
 D:\Project\net-wk\Model\bin\Debug\WK.Model.pdb
 D:\Project\net-wk\Model\obj\Debug\WK.Model.dll
 D:\Project\net-wk\Model\obj\Debug\WK.Model.pdb
+D:\Project\net-wk\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

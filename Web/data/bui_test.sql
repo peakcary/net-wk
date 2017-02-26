@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-02-19 21:25:00
+Date: 2017-02-26 10:34:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -162,6 +162,9 @@ CREATE TABLE `bus_order` (
   `total_plan_price` decimal(10,2) NOT NULL DEFAULT '0.00',
   `total_real_price` decimal(10,2) NOT NULL DEFAULT '0.00',
   `meal_num` int(11) NOT NULL DEFAULT '1',
+  `pickup_start_time` time NOT NULL,
+  `pickup_end_time` char(10) NOT NULL,
+  `pickup_date` datetime NOT NULL,
   `is_delete` int(11) NOT NULL DEFAULT '0',
   `remark` varchar(500) DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
@@ -281,8 +284,10 @@ DROP TABLE IF EXISTS `bus_pickup_times`;
 CREATE TABLE `bus_pickup_times` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pickup_address_id` int(11) NOT NULL,
-  `times_id` int(11) NOT NULL,
   `dish_type` int(11) NOT NULL DEFAULT '0',
+  `pickup_start_time` time DEFAULT NULL,
+  `pickup_end_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
   `is_delete` int(11) NOT NULL DEFAULT '0',
   `remark` varchar(500) DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,

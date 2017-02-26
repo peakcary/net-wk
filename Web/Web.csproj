@@ -154,6 +154,7 @@
     <Content Include="document\wukong.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="pages\common.js" />
     <Content Include="pages\index.htm" />
     <Content Include="pages\lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="pages\lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -1024,6 +1025,7 @@
   <ItemGroup>
     <Content Include="MasterPage.master" />
     <Content Include="Handler\PickupAddress.ashx" />
+    <None Include="pages\leftnav.json" />
     <None Include="pages\lib\bootstrap\config.json" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />

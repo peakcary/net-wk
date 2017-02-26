@@ -1,5 +1,6 @@
 ﻿var url = "../Handler/PickupAddress.ashx"; 
 $(function () {
+getLeftNav();
     getDataList(1);
 });
 function getDataList(index) {  
@@ -20,4 +21,6 @@ function getDataList(index) {
 function goPageDetail(id) {
     window.location.href = "PickupAddressEdit.htm?id="+id;
 }
+
+
 
