@@ -54,3 +54,4 @@ C:\Project\net-wk\Web\obj\Debug\WK.Web.Global.resources
 C:\Project\net-wk\Web\obj\Debug\Web.csproj.GenerateResource.Cache
 C:\Project\net-wk\Web\obj\Debug\WK.Web.dll
 C:\Project\net-wk\Web\obj\Debug\WK.Web.pdb
+C:\Project\net-wk\Web\bin\Qiniu.dll

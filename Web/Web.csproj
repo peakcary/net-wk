@@ -57,6 +57,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>src\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Qiniu, Version=7.2.12.0, Culture=neutral, PublicKeyToken=2894d75bb9f220bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>src\Qiniu.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -150,11 +154,14 @@
     <Content Include="Controls\copyright.ascx" />
     <Content Include="data\bui_test.sql" />
     <Content Include="data\wukong.sql" />
+    <Content Include="pages\demo\upload\index.htm" />
     <Content Include="document\bui_test.sql" />
     <Content Include="document\wukong.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="pages\common.js" />
+    <Content Include="pages\demo\upload\main.js" />
+    <Content Include="pages\demo\upload\ui.js" />
     <Content Include="pages\index.htm" />
     <Content Include="pages\lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="pages\lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -241,26 +248,26 @@
     <Content Include="pages\lib\jquery-tmpl\tests\qunit.css" />
     <Content Include="pages\lib\jquery-tmpl\tests\qunit.js" />
     <Content Include="pages\lib\jqurey\1.12.4\jquery.min.js" />
-    <Content Include="pages\lib\js-sdk\.gitignore" />
-    <Content Include="pages\lib\js-sdk\demo\images\default.png" />
-    <Content Include="pages\lib\js-sdk\demo\images\favicon.ico" />
-    <Content Include="pages\lib\js-sdk\demo\images\loading.gif" />
-    <Content Include="pages\lib\js-sdk\demo\scripts\formdata.js" />
-    <Content Include="pages\lib\js-sdk\demo\scripts\highlight.js" />
-    <Content Include="pages\lib\js-sdk\demo\scripts\main.js" />
-    <Content Include="pages\lib\js-sdk\demo\scripts\multiple.js" />
-    <Content Include="pages\lib\js-sdk\demo\scripts\ui.js" />
-    <Content Include="pages\lib\js-sdk\demo\server.js" />
-    <Content Include="pages\lib\js-sdk\demo\styles\formdata.css" />
-    <Content Include="pages\lib\js-sdk\demo\styles\highlight.css" />
-    <Content Include="pages\lib\js-sdk\demo\styles\main.css" />
-    <Content Include="pages\lib\js-sdk\demo\views\formdata.html" />
-    <Content Include="pages\lib\js-sdk\demo\views\index.html" />
-    <Content Include="pages\lib\js-sdk\demo\views\multiple.html" />
-    <Content Include="pages\lib\js-sdk\dist\qiniu.js" />
-    <Content Include="pages\lib\js-sdk\dist\qiniu.min.js" />
-    <Content Include="pages\lib\js-sdk\Gruntfile.js" />
-    <Content Include="pages\lib\js-sdk\src\qiniu.js" />
+    <Content Include="pages\lib\qiniu\.gitignore" />
+    <Content Include="pages\lib\qiniu\demo\images\default.png" />
+    <Content Include="pages\lib\qiniu\demo\images\favicon.ico" />
+    <Content Include="pages\lib\qiniu\demo\images\loading.gif" />
+    <Content Include="pages\lib\qiniu\demo\scripts\formdata.js" />
+    <Content Include="pages\lib\qiniu\demo\scripts\highlight.js" />
+    <Content Include="pages\lib\qiniu\demo\scripts\main.js" />
+    <Content Include="pages\lib\qiniu\demo\scripts\multiple.js" />
+    <Content Include="pages\lib\qiniu\demo\scripts\ui.js" />
+    <Content Include="pages\lib\qiniu\demo\server.js" />
+    <Content Include="pages\lib\qiniu\demo\styles\formdata.css" />
+    <Content Include="pages\lib\qiniu\demo\styles\highlight.css" />
+    <Content Include="pages\lib\qiniu\demo\styles\main.css" />
+    <Content Include="pages\lib\qiniu\demo\views\formdata.html" />
+    <Content Include="pages\lib\qiniu\demo\views\index.html" />
+    <Content Include="pages\lib\qiniu\demo\views\multiple.html" />
+    <Content Include="pages\lib\qiniu\dist\qiniu.js" />
+    <Content Include="pages\lib\qiniu\dist\qiniu.min.js" />
+    <Content Include="pages\lib\qiniu\Gruntfile.js" />
+    <Content Include="pages\lib\qiniu\src\qiniu.js" />
     <Content Include="pages\lib\plupload-2.1.9\examples\custom.html" />
     <Content Include="pages\lib\plupload-2.1.9\examples\events.html" />
     <Content Include="pages\lib\plupload-2.1.9\examples\jquery\all_runtimes.html" />
@@ -423,7 +430,13 @@
     <Content Include="pages\PickupAddressList.htm" />
     <Content Include="pages\PickupAddressList.js" />
     <Content Include="pages\PickupAddressEdit.htm" />
+    <Content Include="pages\upload.htm" />
     <Content Include="src\Newtonsoft.Json.dll" />
+    <Content Include="src\n\Qiniu.dll" />
+    <Content Include="src\Qiniu.dll" />
+    <Content Include="src\QiniuLab-v1.4\Newtonsoft.Json.dll" />
+    <Content Include="src\QiniuLab-v1.4\Qiniu.dll" />
+    <Content Include="src\QiniuLab-v1.4\QiniuLab.exe" />
     <Content Include="Style.css" />
     <Content Include="sys_constant\Add.aspx" />
     <Content Include="sys_constant\List.aspx" />
@@ -1013,6 +1026,9 @@
     <Compile Include="Handler\PickupAddress.ashx.cs">
       <DependentUpon>PickupAddress.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handler\Upload.ashx.cs">
+      <DependentUpon>Upload.ashx</DependentUpon>
+    </Compile>
     <Compile Include="MasterPage.master.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1195,12 +1211,13 @@
   <ItemGroup>
     <Folder Include="Components\" />
     <Folder Include="Images\" />
-    <Folder Include="pages\lib\js-sdk\.git\objects\info\" />
-    <Folder Include="pages\lib\js-sdk\.git\refs\tags\" />
+    <Folder Include="pages\lib\qiniu\.git\objects\info\" />
+    <Folder Include="pages\lib\qiniu\.git\refs\tags\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage.master" />
     <Content Include="Handler\PickupAddress.ashx" />
+    <Content Include="Handler\Upload.ashx" />
     <None Include="pages\leftnav.json" />
     <None Include="pages\lib\bootstrap\config.json" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -1208,39 +1225,39 @@
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="pages\lib\jquery-tmpl\README.md" />
-    <None Include="pages\lib\js-sdk\.git\config" />
-    <None Include="pages\lib\js-sdk\.git\description" />
-    <None Include="pages\lib\js-sdk\.git\FETCH_HEAD" />
-    <None Include="pages\lib\js-sdk\.git\HEAD" />
-    <None Include="pages\lib\js-sdk\.git\hooks\applypatch-msg.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\commit-msg.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\post-update.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\pre-applypatch.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\pre-commit.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\pre-push.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\pre-rebase.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\pre-receive.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\prepare-commit-msg.sample" />
-    <None Include="pages\lib\js-sdk\.git\hooks\update.sample" />
-    <None Include="pages\lib\js-sdk\.git\index" />
-    <None Include="pages\lib\js-sdk\.git\info\exclude" />
-    <None Include="pages\lib\js-sdk\.git\logs\HEAD" />
-    <None Include="pages\lib\js-sdk\.git\logs\refs\heads\master" />
-    <None Include="pages\lib\js-sdk\.git\logs\refs\remotes\origin\HEAD" />
-    <None Include="pages\lib\js-sdk\.git\objects\pack\pack-64e367918d5dcbf3c4a20a2949ac22ef8f6d4ef3.idx" />
-    <None Include="pages\lib\js-sdk\.git\objects\pack\pack-64e367918d5dcbf3c4a20a2949ac22ef8f6d4ef3.pack" />
-    <None Include="pages\lib\js-sdk\.git\ORIG_HEAD" />
-    <None Include="pages\lib\js-sdk\.git\packed-refs" />
-    <None Include="pages\lib\js-sdk\.git\refs\heads\master" />
-    <None Include="pages\lib\js-sdk\.git\refs\remotes\origin\HEAD" />
-    <None Include="pages\lib\js-sdk\.jshintrc" />
-    <None Include="pages\lib\js-sdk\.travis.yml" />
-    <None Include="pages\lib\js-sdk\bower.json" />
-    <None Include="pages\lib\js-sdk\demo\config.js.example" />
-    <None Include="pages\lib\js-sdk\dist\qiniu.min.map" />
-    <None Include="pages\lib\js-sdk\Makefile" />
-    <None Include="pages\lib\js-sdk\package.json" />
-    <None Include="pages\lib\js-sdk\README.md" />
+    <None Include="pages\lib\qiniu\.git\config" />
+    <None Include="pages\lib\qiniu\.git\description" />
+    <None Include="pages\lib\qiniu\.git\FETCH_HEAD" />
+    <None Include="pages\lib\qiniu\.git\HEAD" />
+    <None Include="pages\lib\qiniu\.git\hooks\applypatch-msg.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\commit-msg.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\post-update.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\pre-applypatch.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\pre-commit.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\pre-push.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\pre-rebase.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\pre-receive.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\prepare-commit-msg.sample" />
+    <None Include="pages\lib\qiniu\.git\hooks\update.sample" />
+    <None Include="pages\lib\qiniu\.git\index" />
+    <None Include="pages\lib\qiniu\.git\info\exclude" />
+    <None Include="pages\lib\qiniu\.git\logs\HEAD" />
+    <None Include="pages\lib\qiniu\.git\logs\refs\heads\master" />
+    <None Include="pages\lib\qiniu\.git\logs\refs\remotes\origin\HEAD" />
+    <None Include="pages\lib\qiniu\.git\objects\pack\pack-64e367918d5dcbf3c4a20a2949ac22ef8f6d4ef3.idx" />
+    <None Include="pages\lib\qiniu\.git\objects\pack\pack-64e367918d5dcbf3c4a20a2949ac22ef8f6d4ef3.pack" />
+    <None Include="pages\lib\qiniu\.git\ORIG_HEAD" />
+    <None Include="pages\lib\qiniu\.git\packed-refs" />
+    <None Include="pages\lib\qiniu\.git\refs\heads\master" />
+    <None Include="pages\lib\qiniu\.git\refs\remotes\origin\HEAD" />
+    <None Include="pages\lib\qiniu\.jshintrc" />
+    <None Include="pages\lib\qiniu\.travis.yml" />
+    <None Include="pages\lib\qiniu\bower.json" />
+    <None Include="pages\lib\qiniu\demo\config.js.example" />
+    <None Include="pages\lib\qiniu\dist\qiniu.min.map" />
+    <None Include="pages\lib\qiniu\Makefile" />
+    <None Include="pages\lib\qiniu\package.json" />
+    <None Include="pages\lib\qiniu\README.md" />
     <None Include="pages\lib\plupload-2.1.9\examples\dump.php" />
     <None Include="pages\lib\plupload-2.1.9\examples\jquery\s3.php" />
     <None Include="pages\lib\plupload-2.1.9\examples\upload.php" />
