@@ -154,6 +154,11 @@
     <Content Include="Controls\copyright.ascx" />
     <Content Include="data\bui_test.sql" />
     <Content Include="data\wukong.sql" />
+    <Content Include="pages\bus_area_list.htm" />
+    <Content Include="pages\css\common.css" />
+    <Content Include="pages\js\bus_area_list.js" />
+    <Content Include="pages\bus_area_edit.htm" />
+    <Content Include="pages\js\bus_area_edit.js" />
     <Content Include="pages\demo\upload\index.htm" />
     <Content Include="document\bui_test.sql" />
     <Content Include="document\wukong.sql" />
@@ -163,6 +168,7 @@
     <Content Include="pages\demo\upload\main.js" />
     <Content Include="pages\demo\upload\ui.js" />
     <Content Include="pages\index.htm" />
+    <Content Include="pages\js\common.js" />
     <Content Include="pages\lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="pages\lib\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="pages\lib\bootstrap\css\bootstrap.css" />
@@ -1023,6 +1029,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handler\bus_area.ashx.cs">
+      <DependentUpon>bus_area.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handler\PickupAddress.ashx.cs">
       <DependentUpon>PickupAddress.ashx</DependentUpon>
     </Compile>
@@ -1218,6 +1227,8 @@
     <Content Include="MasterPage.master" />
     <Content Include="Handler\PickupAddress.ashx" />
     <Content Include="Handler\Upload.ashx" />
+    <Content Include="Handler\bus_area.ashx" />
+    <None Include="pages\js\leftnav.json" />
     <None Include="pages\leftnav.json" />
     <None Include="pages\lib\bootstrap\config.json" />
     <None Include="pages\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />

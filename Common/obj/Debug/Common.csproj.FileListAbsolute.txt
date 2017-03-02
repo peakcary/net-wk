@@ -13,6 +13,5 @@ C:\Project\net-wk\Common\bin\Debug\COM.Excel.dll
 C:\Project\net-wk\Common\bin\Debug\Excel.dll
 C:\Project\net-wk\Common\bin\Debug\OpenSmtp.dll
 C:\Project\net-wk\Common\bin\Debug\OWC10Chart.dll
-C:\Project\net-wk\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 C:\Project\net-wk\Common\obj\Debug\WK.Common.dll
 C:\Project\net-wk\Common\obj\Debug\WK.Common.pdb
