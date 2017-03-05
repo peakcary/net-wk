@@ -4,6 +4,7 @@
         url: "leftnav.json",
         dataType: 'json',
         success: function (data) {
+
             $("#leftNav").empty();
             $("#leftNavTemplate").tmpl(data).appendTo("#leftNav");
         }

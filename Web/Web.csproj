@@ -482,6 +482,8 @@
     <Content Include="data\bui_test.sql" />
     <Content Include="data\wukong.sql" />
     <Content Include="pages\bus_area_list.htm" />
+    <Content Include="pages\bus_market_edit.htm" />
+    <Content Include="pages\bus_market_list.htm" />
     <Content Include="pages\css\common.css" />
     <Content Include="pages\js\bus_area_list.js" />
     <Content Include="pages\bus_area_edit.htm" />
@@ -495,6 +497,8 @@
     <Content Include="pages\demo\upload\main.js" />
     <Content Include="pages\demo\upload\ui.js" />
     <Content Include="pages\index.htm" />
+    <Content Include="pages\js\bus_market_edit.js" />
+    <Content Include="pages\js\bus_market_list.js" />
     <Content Include="pages\js\common.js" />
     <Content Include="pages\lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="pages\lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -1367,6 +1371,9 @@
     <Compile Include="Handler\bus_area.ashx.cs">
       <DependentUpon>bus_area.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handler\bus_market.ashx.cs">
+      <DependentUpon>bus_market.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handler\PickupAddress.ashx.cs">
       <DependentUpon>PickupAddress.ashx</DependentUpon>
     </Compile>
@@ -1565,6 +1572,7 @@
     <Content Include="Handler\PickupAddress.ashx" />
     <Content Include="Handler\Upload.ashx" />
     <Content Include="Handler\bus_area.ashx" />
+    <Content Include="Handler\bus_market.ashx" />
     <None Include="pages\js\leftnav.json" />
     <None Include="pages\leftnav.json" />
     <None Include="pages\lib\bootstrap\config.json" />

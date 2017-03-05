@@ -83,9 +83,9 @@ namespace WK.DAL
 			parameters[12].Value = model.is_delete;
 			parameters[13].Value = model.remark;
 			parameters[14].Value = model.create_by;
-			parameters[15].Value = model.craete_date;
+			parameters[15].Value = DateTime.Now;
 			parameters[16].Value = model.update_by;
-			parameters[17].Value = model.update_date;
+			parameters[17].Value = DateTime.Now;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -160,7 +160,7 @@ namespace WK.DAL
 			parameters[14].Value = model.create_by;
 			parameters[15].Value = model.craete_date;
 			parameters[16].Value = model.update_by;
-			parameters[17].Value = model.update_date;
+			parameters[17].Value = DateTime.Now;
 			parameters[18].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
@@ -359,7 +359,7 @@ namespace WK.DAL
 			{
 				strSql.Append(" where "+strWhere);
 			}
-			object obj = DbHelperSQL.GetSingle(strSql.ToString());
+            object obj = DbHelperMySQL.GetSingle(strSql.ToString());
 			if (obj == null)
 			{
 				return 0;
@@ -374,25 +374,42 @@ namespace WK.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("SELECT * FROM ( ");
-			strSql.Append(" SELECT ROW_NUMBER() OVER (");
-			if (!string.IsNullOrEmpty(orderby.Trim()))
-			{
-				strSql.Append("order by T." + orderby );
-			}
-			else
-			{
-				strSql.Append("order by T.id desc");
-			}
-			strSql.Append(")AS Row, T.*  from bus_market T ");
-			if (!string.IsNullOrEmpty(strWhere.Trim()))
-			{
-				strSql.Append(" WHERE " + strWhere);
-			}
-			strSql.Append(" ) TT");
-			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
-			return DbHelperMySQL.Query(strSql.ToString());
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM bus_market ");
+            if (!string.IsNullOrEmpty(strWhere.Trim()))
+            {
+                strSql.Append(" WHERE " + strWhere);
+            }
+            if (!string.IsNullOrEmpty(orderby.Trim()))
+            {
+                strSql.Append(" order by " + orderby);
+            }
+            else
+            {
+                strSql.Append(" order by id desc");
+            }
+
+            strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex);
+            return DbHelperMySQL.Query(strSql.ToString());
+            //StringBuilder strSql=new StringBuilder();
+            //strSql.Append("SELECT * FROM ( ");
+            //strSql.Append(" SELECT ROW_NUMBER() OVER (");
+            //if (!string.IsNullOrEmpty(orderby.Trim()))
+            //{
+            //    strSql.Append("order by T." + orderby );
+            //}
+            //else
+            //{
+            //    strSql.Append("order by T.id desc");
+            //}
+            //strSql.Append(")AS Row, T.*  from bus_market T ");
+            //if (!string.IsNullOrEmpty(strWhere.Trim()))
+            //{
+            //    strSql.Append(" WHERE " + strWhere);
+            //}
+            //strSql.Append(" ) TT");
+            //strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            //return DbHelperMySQL.Query(strSql.ToString());
 		}
 
 		/*

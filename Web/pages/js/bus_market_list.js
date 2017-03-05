@@ -1,8 +1,7 @@
-﻿var url = "../../Handler/bus_area.ashx"; 
+﻿var url = "../../Handler/bus_market.ashx"; 
 var listPageSize = 10;
 $(function () {
-    getLeftNav();
-    //getDataList(1);
+    getLeftNav(); 
     initPagination();
 });
 
@@ -71,14 +70,14 @@ function deleteData(id) {
     if(confirm("确定删除吗?")){
         $.ajax({
         type: "post",
-        url: url + "?t=deleteData",
+        url: url + "?t=deleteDataByStatus",
         data: { 
             id: id
         },
         dataType: 'json',   
         success: function (data) { 
-            if(data.isSuccess){
-                getListByPage(0);
+            if(data.isSuccess){ 
+                getListByPage(0)
             }else{
                 alert('保存失败！');
             }
@@ -88,7 +87,7 @@ function deleteData(id) {
 } 
 
 function goPageDetail(id) {
-    window.location.href = "bus_area_edit.htm?id="+id;
+    window.location.href = "bus_market_edit.htm?id="+id;
 }
 
 

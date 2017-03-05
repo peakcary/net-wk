@@ -69,9 +69,11 @@ namespace WK.DAL
 			parameters[5].Value = model.is_delete;
 			parameters[6].Value = model.remark;
 			parameters[7].Value = model.create_by;
-			parameters[8].Value = model.create_date;
+            //parameters[8].Value = model.create_date;
+            parameters[8].Value = DateTime.Now;
 			parameters[9].Value = model.update_by;
-			parameters[10].Value = model.update_date;
+            //parameters[10].Value = model.update_date;
+            parameters[10].Value = DateTime.Now;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -122,10 +124,11 @@ namespace WK.DAL
 			parameters[4].Value = model.lat;
 			parameters[5].Value = model.is_delete;
 			parameters[6].Value = model.remark;
-			parameters[7].Value = model.create_by;
-			parameters[8].Value = model.create_date;
+            //parameters[7].Value = model.create_by;
+            //parameters[8].Value = model.create_date;
 			parameters[9].Value = model.update_by;
-			parameters[10].Value = model.update_date;
+            //parameters[10].Value = model.update_date;
+            parameters[10].Value = DateTime.Now;
 			parameters[11].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);

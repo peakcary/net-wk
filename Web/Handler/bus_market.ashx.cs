@@ -8,9 +8,9 @@ using System.Data;
 namespace WK.Web.Handler
 {
     /// <summary>
-    /// bus_area 的摘要说明
+    /// bus_market 的摘要说明
     /// </summary>
-    public class bus_area : IHttpHandler
+    public class bus_market : IHttpHandler
     {
         public bool IsReusable
         {
@@ -63,14 +63,17 @@ namespace WK.Web.Handler
                     sb.Append(getRecordCount(context));
                     break;
 
-                    
+                case "deleteDataByStatus":
+                    sb.Append(deleteDataByStatus(context));
+                    break;
+
+
                 default:
                     sb.Append("");
                     break;
             }
             context.Response.Write(sb.ToString());
         }
-
 
         /// <summary>
         /// 列表
@@ -82,7 +85,7 @@ namespace WK.Web.Handler
             StringBuilder sb = new StringBuilder();
             DataSet ds = new DataSet();
             StringBuilder strWhere = new StringBuilder();
-            WK.BLL.bus_area bll = new WK.BLL.bus_area();
+            WK.BLL.bus_market bll = new WK.BLL.bus_market();
             ds = bll.GetList(strWhere.ToString());
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
@@ -102,21 +105,22 @@ namespace WK.Web.Handler
 
             int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
             int pageSize = int.Parse(context.Request.Params["pageSize"]);
-            int startIndex =0; 
-            if (pageIndex >= 0) {
-                startIndex = pageSize * pageIndex; 
+            int startIndex = 0;
+            if (pageIndex >= 0)
+            {
+                startIndex = pageSize * pageIndex;
             }
 
-            WK.BLL.bus_area bll = new WK.BLL.bus_area();
+            WK.BLL.bus_market bll = new WK.BLL.bus_market();
             ds = bll.GetListByPage(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
 
         private string getRecordCount(HttpContext context)
         {
-            StringBuilder sb = new StringBuilder(); 
-            StringBuilder strWhere = new StringBuilder(); 
-            WK.BLL.bus_area bll = new WK.BLL.bus_area(); 
+            StringBuilder sb = new StringBuilder();
+            StringBuilder strWhere = new StringBuilder();
+            WK.BLL.bus_market bll = new WK.BLL.bus_market();
             Record r = new Record();
             r.RecordCount = bll.GetRecordCount(strWhere.ToString());
             return Newtonsoft.Json.JsonConvert.SerializeObject(r);
@@ -134,8 +138,8 @@ namespace WK.Web.Handler
             {
                 id = context.Request.Params["id"];
             }
-            WK.BLL.bus_area bll = new WK.BLL.bus_area();
-            WK.Model.bus_area model = bll.GetModel(int.Parse(id));
+            WK.BLL.bus_market bll = new WK.BLL.bus_market();
+            WK.Model.bus_market model = bll.GetModel(int.Parse(id));
             return Newtonsoft.Json.JsonConvert.SerializeObject(model);
         }
 
@@ -149,16 +153,25 @@ namespace WK.Web.Handler
             ReturnInfo returnInfo = new ReturnInfo();
             returnInfo.isSuccess = false;
 
-            WK.Model.bus_area model = new Model.bus_area();
-            model.id = int.Parse(context.Request.Params["id"]);
-            model.area_type = int.Parse(context.Request.Params["area_type"]);
-            model.lat = decimal.Parse( context.Request.Params["lat"]);
-            model.lon = decimal.Parse(context.Request.Params["lon"]);
-            model.name = context.Request.Params["name"];
-            model.parent_id = int.Parse( context.Request.Params["parent_id"]);
-            model.remark = context.Request.Params["remark"];
+            WK.Model.bus_market model = new Model.bus_market();
 
-            WK.BLL.bus_area bll = new WK.BLL.bus_area();
+            model.id = int.Parse(context.Request.Params["id"]);
+            model.address = context.Request.Params["address"];
+            model.area_id =int.Parse( context.Request.Params["area_id"]);
+            model.description_cn = context.Request.Params["description_cn"];
+            model.description_en = context.Request.Params["description_en"];
+            model.lat = decimal.Parse( context.Request.Params["lat"]);
+            model.lon = decimal.Parse( context.Request.Params["lon"]);
+            model.market_type =int.Parse( context.Request.Params["market_type"]);
+            model.markket_code = context.Request.Params["markket_code"];
+            model.name_cn = context.Request.Params["name_cn"];
+            model.name_en = context.Request.Params["name_en"];
+            model.remark = context.Request.Params["remark"];
+            model.sort =int.Parse( context.Request.Params["sort"]);
+            model.status =int.Parse( context.Request.Params["status"]);
+         
+
+            WK.BLL.bus_market bll = new WK.BLL.bus_market();
             if (model.id > 0)
             {
                 returnInfo.isSuccess = bll.Update(model);
@@ -169,7 +182,24 @@ namespace WK.Web.Handler
             }
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
-        } 
+        }
+
+
+        private string deleteDataByStatus(HttpContext context)
+        {
+            ReturnInfo returnInfo = new ReturnInfo();
+            returnInfo.isSuccess = false;
+            WK.BLL.bus_market bll = new WK.BLL.bus_market();
+            int id = int.Parse(context.Request.Params["id"]);
+            if (id > 0)
+            {
+                WK.Model.bus_market model = bll.GetModel(id);
+                model.is_delete = 1;
+                returnInfo.isSuccess = bll.Update(model);
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
 
         /// <summary>
         /// 删除
@@ -179,19 +209,16 @@ namespace WK.Web.Handler
         private string deleteData(HttpContext context)
         {
             ReturnInfo returnInfo = new ReturnInfo();
-            returnInfo.isSuccess = false; 
-            WK.BLL.bus_area bll = new WK.BLL.bus_area();
+            returnInfo.isSuccess = false;
+            WK.BLL.bus_market bll = new WK.BLL.bus_market();
             int id = int.Parse(context.Request.Params["id"]);
-            if (id  > 0)
+            if (id > 0)
             {
                 returnInfo.isSuccess = bll.Delete(id);
-            } 
+            }
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }
-
-        
-
-        
+ 
     }
 }
