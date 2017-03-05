@@ -66,7 +66,9 @@ namespace WK.Web.Handler
                 case "deleteDataByStatus":
                     sb.Append(deleteDataByStatus(context));
                     break;
-
+                case "getDataAreaList":
+                    sb.Append(getDataAreaList(context));
+                    break;
 
                 default:
                     sb.Append("");
@@ -218,6 +220,32 @@ namespace WK.Web.Handler
             }
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
+
+        private string getDataAreaList(HttpContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+            DataSet ds = new DataSet();
+            StringBuilder strWhere = new StringBuilder();
+
+            WK.BLL.bus_area bll = new WK.BLL.bus_area();
+            ds = bll.GetList(strWhere.ToString());
+            DataTable dt = new DataTable();
+            dt.Columns.Add("data", typeof(System.Int32));
+            dt.Columns.Add("value", typeof(System.String));
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                int l = ds.Tables[0].Rows.Count;
+                for (int i = 0; i < l; i++)
+                {
+                    DataRow row = dt.NewRow();
+                    row["data"] = ds.Tables[0].Rows[i]["id"];
+                    row["value"] = ds.Tables[0].Rows[i]["name"];
+                    dt.Rows.Add(row);
+                }
+
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
         }
  
     }

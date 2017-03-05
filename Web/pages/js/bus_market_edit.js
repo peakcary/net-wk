@@ -14,6 +14,7 @@ $(function () {
     if(id>0){
         getDataDetail(id);
     }
+    initAutoArea();
 });
 
 function getDataDetail(id) {
@@ -75,4 +76,40 @@ function editData() {
         }
         }
     });
+}
+
+function initAutoArea(){   
+
+            $.ajax({
+                    type: "post",
+                    url: url + "?t=getDataAreaList", 
+                    dataType: 'json',  
+                    success: function (data) {  
+                            $('#autoArea').autocomplete({
+                                lookup:data ,
+                                onSelect: function (suggestion) {
+                                    console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                                }
+                            });
+                    }
+                }); 
+
+
+   
+
+
+
+//var aa = [{value:"3234243",data:3},{value:"4243243",data:4}   ];
+// 
+// var countries = [
+//    { value: 'Andorra', data: 'AD' }, 
+//    { value: 'Zimbabwe', data: 'ZZ' }
+//];
+// $('#autoArea').autocomplete({
+//                    lookup: aa, 
+//                    onSelect: function (suggestion) {
+//                        console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
+//                    }
+//                }); 
+  
 }

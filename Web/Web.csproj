@@ -584,6 +584,11 @@
     <Content Include="pages\lib\jquery-tmpl\tests\index.html" />
     <Content Include="pages\lib\jquery-tmpl\tests\qunit.css" />
     <Content Include="pages\lib\jquery-tmpl\tests\qunit.js" />
+    <Content Include="pages\lib\jquery.autocomplete\demo\index.htm" />
+    <Content Include="pages\lib\jquery.autocomplete\jquery.autocomplete.js" />
+    <Content Include="pages\lib\jquery.autocomplete\jquery.autocomplete.min.js" />
+    <Content Include="pages\lib\jquery.autocomplete\license.txt" />
+    <Content Include="pages\lib\jquery.autocomplete\jquery.autocomplete.css" />
     <Content Include="pages\lib\jqurey\1.12.4\jquery.min.js" />
     <Content Include="pages\lib\jquery-pagination\demo.html" />
     <Content Include="pages\lib\jquery-pagination\demo_ajax.html" />

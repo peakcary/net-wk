@@ -82,8 +82,12 @@ namespace WK.Web.Handler
             StringBuilder sb = new StringBuilder();
             DataSet ds = new DataSet();
             StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
             WK.BLL.bus_area bll = new WK.BLL.bus_area();
             ds = bll.GetList(strWhere.ToString());
+
+
+
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
 
