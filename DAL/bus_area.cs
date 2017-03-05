@@ -296,7 +296,7 @@ namespace WK.DAL
 			{
 				strSql.Append(" where "+strWhere);
 			}
-			object obj = DbHelperSQL.GetSingle(strSql.ToString());
+            object obj = DbHelperMySQL.GetSingle(strSql.ToString());
 			if (obj == null)
 			{
 				return 0;
@@ -312,23 +312,21 @@ namespace WK.DAL
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("SELECT * FROM ( ");
-			strSql.Append(" SELECT ROW_NUMBER() OVER (");
-			if (!string.IsNullOrEmpty(orderby.Trim()))
-			{
-				strSql.Append("order by T." + orderby );
-			}
-			else
-			{
-				strSql.Append("order by T.id desc");
-			}
-			strSql.Append(")AS Row, T.*  from bus_area T ");
-			if (!string.IsNullOrEmpty(strWhere.Trim()))
-			{
-				strSql.Append(" WHERE " + strWhere);
-			}
-			strSql.Append(" ) TT");
-			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            strSql.Append("SELECT * FROM bus_area ");
+            if (!string.IsNullOrEmpty(strWhere.Trim()))
+            {
+                strSql.Append(" WHERE " + strWhere);
+            }
+            if (!string.IsNullOrEmpty(orderby.Trim()))
+            {
+                strSql.Append(" order by " + orderby);
+            }
+            else
+            {
+                strSql.Append(" order by id desc");
+            }
+            
+            strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex); 
 			return DbHelperMySQL.Query(strSql.ToString());
 		}
 

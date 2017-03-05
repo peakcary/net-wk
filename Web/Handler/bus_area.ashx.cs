@@ -25,6 +25,11 @@ namespace WK.Web.Handler
         {
             public bool isSuccess { get; set; }
         }
+        [Serializable]
+        public class Record
+        {
+            public int RecordCount { get; set; }
+        }
 
         public void ProcessRequest(HttpContext context)
         {
@@ -51,6 +56,12 @@ namespace WK.Web.Handler
                 case "deleteData":
                     sb.Append(deleteData(context));
                     break;
+                case "getListByPage":
+                    sb.Append(getListByPage(context));
+                    break;
+                case "getRecordCount":
+                    sb.Append(getRecordCount(context));
+                    break;
 
                     
                 default:
@@ -74,6 +85,40 @@ namespace WK.Web.Handler
             WK.BLL.bus_area bll = new WK.BLL.bus_area();
             ds = bll.GetList(strWhere.ToString());
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+        }
+
+        /// <summary>
+        /// 分页列表
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private string getListByPage(HttpContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+            DataSet ds = new DataSet();
+            StringBuilder strWhere = new StringBuilder();
+            StringBuilder orderby = new StringBuilder();
+
+            int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
+            int pageSize = int.Parse(context.Request.Params["pageSize"]);
+            int startIndex =0; 
+            if (pageIndex >= 0) {
+                startIndex = pageSize * pageIndex; 
+            }
+
+            WK.BLL.bus_area bll = new WK.BLL.bus_area();
+            ds = bll.GetListByPage(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+        }
+
+        private string getRecordCount(HttpContext context)
+        {
+            StringBuilder sb = new StringBuilder(); 
+            StringBuilder strWhere = new StringBuilder(); 
+            WK.BLL.bus_area bll = new WK.BLL.bus_area(); 
+            Record r = new Record();
+            r.RecordCount = bll.GetRecordCount(strWhere.ToString());
+            return Newtonsoft.Json.JsonConvert.SerializeObject(r);
         }
 
         /// <summary>
