@@ -9,4 +9,4 @@
             $("#leftNavTemplate").tmpl(data).appendTo("#leftNav");
         }
     });
-}
+} 
