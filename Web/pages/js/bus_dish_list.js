@@ -1,13 +1,13 @@
 ﻿var url = "../../Handler/bus_dish.ashx"; 
 var listPageSize = 10;
 $(function () {
-$("#loading").fadeIn()
+//$("#loading").fadeIn()
     getLeftNav(); ;
     initPagination();
 });
 
 function initPagination(){
-$("#loading").fadeIn();
+fLoadingShow();
      $.ajax({
         type: "post",
         url: url + "?t=getRecordCount",
@@ -48,7 +48,7 @@ function getListByPage(index) {
         dataType: 'json',   
         success: function (data) { 
         
-$("#loading").fadeOut();
+fLoadingHide();
             $("#DataList").empty();
             $("#DataTemplate").tmpl(data).appendTo("#DataList");
         }
