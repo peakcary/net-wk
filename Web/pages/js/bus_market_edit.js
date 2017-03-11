@@ -83,12 +83,14 @@ function initAutoArea(){
             type: "post",
             url: url + "?t=getDataAreaList", 
             dataType: 'json',  
+            preserveInput: true,
             success: function (data) {  
                     $('#autoArea').devbridgeAutocomplete({
                         lookup: data,
                         minChars: 0,
-                        onSelect: function (suggestion) {
-                            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                        onSelect: function (data) { 
+                        console.log(data.value,data.data);
+                            $("#area_id").val(data.data);
                         }, 
                         onHint: function (hint) {
                             console.log('hint'+hint);

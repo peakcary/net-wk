@@ -12,6 +12,10 @@
     "url": "bus_market_list.htm"
   },
   {
+    "name": "菜品信息",
+    "url": "bus_dish_list.htm"
+  },
+  {
     "name": "提货点",
     "url": "PickupAddressList.htm"
   },

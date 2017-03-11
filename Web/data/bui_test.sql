@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : 47.88.0.200
 Source Server Version : 50717
-Source Host           : 47.88.0.200 :3306
+Source Host           : 47.88.0.200:3306
 Source Database       : bui_test
 
 Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-02-26 10:34:58
+Date: 2017-03-08 21:35:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,6 +37,52 @@ CREATE TABLE `bus_area` (
 
 -- ----------------------------
 -- Records of bus_area
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `bus_discount`
+-- ----------------------------
+DROP TABLE IF EXISTS `bus_discount`;
+CREATE TABLE `bus_discount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `target_amount` decimal(10,2) NOT NULL,
+  `discount_amount` decimal(10,2) DEFAULT NULL,
+  `is_delete` int(11) NOT NULL DEFAULT '0',
+  `remark` varchar(500) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_date` char(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bus_discount
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `bus_discount_gift`
+-- ----------------------------
+DROP TABLE IF EXISTS `bus_discount_gift`;
+CREATE TABLE `bus_discount_gift` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `discount_id` int(11) NOT NULL,
+  `gift_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL DEFAULT '1',
+  `is_delete` int(11) NOT NULL DEFAULT '0',
+  `remark` varchar(500) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bus_discount_gift
 -- ----------------------------
 
 -- ----------------------------
@@ -92,6 +138,48 @@ CREATE TABLE `bus_dish_plan` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `bus_dish_size`
+-- ----------------------------
+DROP TABLE IF EXISTS `bus_dish_size`;
+CREATE TABLE `bus_dish_size` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `affect_price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `is_delete` int(11) NOT NULL DEFAULT '0',
+  `remark` varchar(500) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bus_dish_size
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `bus_gift`
+-- ----------------------------
+DROP TABLE IF EXISTS `bus_gift`;
+CREATE TABLE `bus_gift` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `is_delete` int(11) NOT NULL DEFAULT '0',
+  `remark` varchar(500) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_date` char(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bus_gift
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `bus_image`
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_image`;
@@ -107,6 +195,7 @@ CREATE TABLE `bus_image` (
   `create_date` datetime DEFAULT NULL,
   `update_by` int(11) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
+  `correlation_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -179,6 +268,27 @@ CREATE TABLE `bus_order` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `bus_order_discount`
+-- ----------------------------
+DROP TABLE IF EXISTS `bus_order_discount`;
+CREATE TABLE `bus_order_discount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `discount_id` int(11) NOT NULL,
+  `is_delete` int(11) NOT NULL DEFAULT '0',
+  `remark` varchar(500) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_date` char(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bus_order_discount
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `bus_order_dish`
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_order_dish`;
@@ -197,11 +307,34 @@ CREATE TABLE `bus_order_dish` (
   `create_date` datetime DEFAULT NULL,
   `update_by` int(11) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
+  `size_list` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bus_order_dish
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `bus_order_gift`
+-- ----------------------------
+DROP TABLE IF EXISTS `bus_order_gift`;
+CREATE TABLE `bus_order_gift` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL,
+  `gift_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL DEFAULT '0',
+  `is_delete` int(11) NOT NULL DEFAULT '0',
+  `remark` varchar(500) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bus_order_gift
 -- ----------------------------
 
 -- ----------------------------

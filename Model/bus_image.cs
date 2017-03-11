@@ -21,6 +21,7 @@ namespace WK.Model
 		private DateTime? _create_date;
 		private int? _update_by;
 		private DateTime? _update_date;
+		private int _correlation_id;
 		/// <summary>
 		/// auto_increment
 		/// </summary>
@@ -108,6 +109,14 @@ namespace WK.Model
 		{
 			set{ _update_date=value;}
 			get{return _update_date;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int correlation_id
+		{
+			set{ _correlation_id=value;}
+			get{return _correlation_id;}
 		}
 		#endregion Model
 
