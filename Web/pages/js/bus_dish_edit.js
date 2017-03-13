@@ -9,6 +9,10 @@ $(function () {
     })(jQuery);
     
     getLeftNav();
+     //编辑器
+            $('#remark').summernote({ height: 150 });
+            $('#description_cn').summernote({ height: 150 });
+            $('#description_en').summernote({ height: 150 });
     var id = $.getUrlParam('id');
     $("#hid").val(id); 
     if(id>0){
@@ -29,8 +33,8 @@ function getDataDetail(id) {
             $("#dish_type").val(data.dish_type);
             $("#name_en").val(data.name_en);
             $("#name_cn").val(data.name_cn);
-            $("#description_en").val(data.description_en);
-            $("#description_cn").val(data.description_cn); 
+            $("#description_en").code(data.description_en);
+            $("#description_cn").code(data.description_cn); 
             $("#original_price").val(data.original_price); 
             $("#discount_price").val(data.discount_price); 
             $("#sales_total").val(data.sales_total); 
@@ -54,8 +58,8 @@ function editData() {
             dish_type: $("#dish_type").val(),
             name_en: $("#name_en").val(),
             name_cn: $("#name_cn").val(),
-            description_en: $("#description_en").val(),
-            description_cn: $("#description_cn").val(),
+            description_en: $("#description_en").code(),
+            description_cn: $("#description_cn").code(),
             original_price: $("#original_price").val(),
             discount_price: $("#discount_price").val(),
             sales_total: $("#sales_total").val(),

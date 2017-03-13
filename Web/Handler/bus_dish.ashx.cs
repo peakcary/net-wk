@@ -134,7 +134,7 @@ namespace WK.Web.Handler
 
             WK.Model.bus_dish model = new Model.bus_dish();
             model.id = int.Parse(context.Request.Params["id"]);
-            model.description_cn = context.Request.Params["bus_image"];
+            model.description_cn = context.Request.Params["description_cn"];
             model.description_en = context.Request.Params["description_en"];
             model.discount_price = decimal.Parse(context.Request.Params["discount_price"]);
             model.sort = int.Parse(context.Request.Params["sort"]);
