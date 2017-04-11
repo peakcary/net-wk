@@ -21,7 +21,7 @@ namespace Maticsoft.DBUtility
         /// <returns></returns>
 		public static string Encrypt(string Text) 
 		{
-            return Encrypt(Text, "litianping");
+            return Encrypt(Text, "wukongwksongcan");
 		}
 		/// <summary> 
 		/// 加密数据 
@@ -60,7 +60,7 @@ namespace Maticsoft.DBUtility
         /// <returns></returns>
 		public static string Decrypt(string Text) 
 		{
-            return Decrypt(Text, "litianping");
+            return Decrypt(Text, "wukongwksongcan");
 		}
 		/// <summary> 
 		/// 解密数据 

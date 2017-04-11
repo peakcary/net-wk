@@ -125,6 +125,7 @@
     <Compile Include="bus_pickup_address_extend.cs" />
     <Compile Include="bus_pickup_user.cs" />
     <Compile Include="bus_times.cs" />
+    <Compile Include="bus_user_extend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
