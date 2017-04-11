@@ -1,7 +1,7 @@
 ﻿var url = "../../Handler/bus_user.ashx"; 
 var listPageSize = 10;
 $(function () { 
-    initPagination();
+    initPagination(); 
 });
 
 function initPagination(){
@@ -34,6 +34,7 @@ function pageselectCallback(page_index, jq){
 	}
 
 function getListByPageInfo(index) {  
+    loadingShow();
     $.ajax({
         type: "post",
         url: url + "?t=getListByPageInfo",
@@ -43,8 +44,12 @@ function getListByPageInfo(index) {
         },
         dataType: 'json',   
         success: function (data) { 
+            loadingHide();
             $("#DataList").empty();
             $("#DataTemplate").tmpl(data).appendTo("#DataList");
+        },
+        error:function(){
+            loadingHide();
         }
     });
 }

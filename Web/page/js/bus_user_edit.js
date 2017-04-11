@@ -16,6 +16,7 @@ $(function () {
 });
 
 function getDataDetail(id) {
+    loadingShow();
     $.ajax({
         type: "post",
         url: url + "?t=getDataDetail",
@@ -24,10 +25,14 @@ function getDataDetail(id) {
         }, 
         dataType: 'json',  
         success: function (data) { 
+            loadingHide();
             $("#hid").val(data.id);
             $("#nickname").val(data.nickname);
             $("#phone_num").val(data.phone_num);
             $("#pwd").val(data.pwd);
+        },
+        error:function(){
+            loadingHide();
         }
     });
 } 
@@ -36,7 +41,8 @@ function goPageList() {
     window.location.href = "bus_user_list.htm";
 }
 
-function editData() {   
+function editData() { 
+    loadingShow();  
     $.ajax({
         type: "post",
         url: url + "?t=editData",
@@ -48,11 +54,15 @@ function editData() {
         },
         dataType: 'json',   
         success: function (data) { 
-        if(data.isSuccess){
-            goPageList();
-        }else{
-            alert('保存失败！');
-        }
+            loadingHide();
+            if(data.isSuccess){
+                goPageList();
+            }else{
+                alert('保存失败！');
+            }
+        },
+        error:function(){
+            loadingHide();
         }
     });
 }
