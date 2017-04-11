@@ -39,6 +39,7 @@ namespace WK.Web.bus_pickup_address
 		this.lbllon.Text=model.lon.ToString();
 		this.lbllat.Text=model.lat.ToString();
 		this.lblstatus.Text=model.status.ToString();
+		this.lbldilivery_user_id.Text=model.dilivery_user_id.ToString();
 		this.lblsort.Text=model.sort.ToString();
 		this.lblis_delete.Text=model.is_delete.ToString();
 		this.lblremark.Text=model.remark;

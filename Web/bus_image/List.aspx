@@ -41,6 +41,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField> 
                             
+		<asp:BoundField DataField="correlation_id" HeaderText="correlation_id" SortExpression="correlation_id" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="bus_type" HeaderText="bus_type" SortExpression="bus_type" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="img_type" HeaderText="img_type" SortExpression="img_type" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="url" HeaderText="url" SortExpression="url" ItemStyle-HorizontalAlign="Center"  /> 

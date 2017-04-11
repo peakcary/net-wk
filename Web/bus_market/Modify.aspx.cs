@@ -36,7 +36,7 @@ namespace WK.Web.bus_market
 		this.txtmarkket_code.Text=model.markket_code;
 		this.txtname_en.Text=model.name_en;
 		this.txtname_cn.Text=model.name_cn;
-		this.txtmarket_type.Text=model.market_type.ToString();
+		this.txtmarket_type.Text=model.market_type;
 		this.txtarea_id.Text=model.area_id.ToString();
 		this.txtlon.Text=model.lon.ToString();
 		this.txtlat.Text=model.lat.ToString();
@@ -70,9 +70,9 @@ namespace WK.Web.bus_market
 			{
 				strErr+="name_cn不能为空！\\n";	
 			}
-			if(!PageValidate.IsNumber(txtmarket_type.Text))
+			if(this.txtmarket_type.Text.Trim().Length==0)
 			{
-				strErr+="market_type格式错误！\\n";	
+				strErr+="market_type不能为空！\\n";	
 			}
 			if(!PageValidate.IsNumber(txtarea_id.Text))
 			{
@@ -140,7 +140,7 @@ namespace WK.Web.bus_market
 			string markket_code=this.txtmarkket_code.Text;
 			string name_en=this.txtname_en.Text;
 			string name_cn=this.txtname_cn.Text;
-			int market_type=int.Parse(this.txtmarket_type.Text);
+			string market_type=this.txtmarket_type.Text;
 			int area_id=int.Parse(this.txtarea_id.Text);
 			decimal lon=decimal.Parse(this.txtlon.Text);
 			decimal lat=decimal.Parse(this.txtlat.Text);

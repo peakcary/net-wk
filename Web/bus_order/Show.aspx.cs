@@ -33,8 +33,8 @@ namespace WK.Web.bus_order
 		WK.Model.bus_order model=bll.GetModel(id);
 		this.lblid.Text=model.id.ToString();
 		this.lblorder_status.Text=model.order_status.ToString();
-		this.lblpayment_status.Text=model.payment_status.ToString();
-		this.lblmarket_id.Text=model.market_id.ToString();
+		this.lblpay_status.Text=model.pay_status.ToString();
+		this.lblpay_type.Text=model.pay_type.ToString();
 		this.lbluser_id.Text=model.user_id.ToString();
 		this.lbldilivery_user_id.Text=model.dilivery_user_id.ToString();
 		this.lblpickup_address_id.Text=model.pickup_address_id.ToString();
@@ -43,6 +43,9 @@ namespace WK.Web.bus_order
 		this.lbltotal_plan_price.Text=model.total_plan_price.ToString();
 		this.lbltotal_real_price.Text=model.total_real_price.ToString();
 		this.lblmeal_num.Text=model.meal_num.ToString();
+		this.lblpickup_start_time.Text=model.pickup_start_time.ToString();
+		this.lblpickup_end_time.Text=model.pickup_end_time;
+		this.lblpickup_date.Text=model.pickup_date.ToString();
 		this.lblis_delete.Text=model.is_delete.ToString();
 		this.lblremark.Text=model.remark;
 		this.lblcreate_by.Text=model.create_by.ToString();

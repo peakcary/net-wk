@@ -46,9 +46,9 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_pickup_address(");
-			strSql.Append("pickup_code,name,address,area_id,lon,lat,status,sort,is_delete,remark,create_by,create_date,update_by,update_date)");
+			strSql.Append("pickup_code,name,address,area_id,lon,lat,status,dilivery_user_id,sort,is_delete,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@pickup_code,@name,@address,@area_id,@lon,@lat,@status,@sort,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
+			strSql.Append("@pickup_code,@name,@address,@area_id,@lon,@lat,@status,@dilivery_user_id,@sort,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@pickup_code", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name", MySqlDbType.VarChar,100),
@@ -57,6 +57,7 @@ namespace WK.DAL
 					new MySqlParameter("@lon", MySqlDbType.Decimal,10),
 					new MySqlParameter("@lat", MySqlDbType.Decimal,10),
 					new MySqlParameter("@status", MySqlDbType.Int32,11),
+					new MySqlParameter("@dilivery_user_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@sort", MySqlDbType.Int32,11),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
@@ -71,13 +72,14 @@ namespace WK.DAL
 			parameters[4].Value = model.lon;
 			parameters[5].Value = model.lat;
 			parameters[6].Value = model.status;
-			parameters[7].Value = model.sort;
-			parameters[8].Value = model.is_delete;
-			parameters[9].Value = model.remark;
-			parameters[10].Value = model.create_by;
-			parameters[11].Value = model.create_date;
-			parameters[12].Value = model.update_by;
-			parameters[13].Value = model.update_date;
+			parameters[7].Value = model.dilivery_user_id;
+			parameters[8].Value = model.sort;
+			parameters[9].Value = model.is_delete;
+			parameters[10].Value = model.remark;
+			parameters[11].Value = model.create_by;
+			parameters[12].Value = model.create_date;
+			parameters[13].Value = model.update_by;
+			parameters[14].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -103,6 +105,7 @@ namespace WK.DAL
 			strSql.Append("lon=@lon,");
 			strSql.Append("lat=@lat,");
 			strSql.Append("status=@status,");
+			strSql.Append("dilivery_user_id=@dilivery_user_id,");
 			strSql.Append("sort=@sort,");
 			strSql.Append("is_delete=@is_delete,");
 			strSql.Append("remark=@remark,");
@@ -119,6 +122,7 @@ namespace WK.DAL
 					new MySqlParameter("@lon", MySqlDbType.Decimal,10),
 					new MySqlParameter("@lat", MySqlDbType.Decimal,10),
 					new MySqlParameter("@status", MySqlDbType.Int32,11),
+					new MySqlParameter("@dilivery_user_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@sort", MySqlDbType.Int32,11),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
@@ -134,14 +138,15 @@ namespace WK.DAL
 			parameters[4].Value = model.lon;
 			parameters[5].Value = model.lat;
 			parameters[6].Value = model.status;
-			parameters[7].Value = model.sort;
-			parameters[8].Value = model.is_delete;
-			parameters[9].Value = model.remark;
-			parameters[10].Value = model.create_by;
-			parameters[11].Value = model.create_date;
-			parameters[12].Value = model.update_by;
-			parameters[13].Value = model.update_date;
-			parameters[14].Value = model.id;
+			parameters[7].Value = model.dilivery_user_id;
+			parameters[8].Value = model.sort;
+			parameters[9].Value = model.is_delete;
+			parameters[10].Value = model.remark;
+			parameters[11].Value = model.create_by;
+			parameters[12].Value = model.create_date;
+			parameters[13].Value = model.update_by;
+			parameters[14].Value = model.update_date;
+			parameters[15].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -205,7 +210,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,pickup_code,name,address,area_id,lon,lat,status,sort,is_delete,remark,create_by,create_date,update_by,update_date from bus_pickup_address ");
+			strSql.Append("select id,pickup_code,name,address,area_id,lon,lat,status,dilivery_user_id,sort,is_delete,remark,create_by,create_date,update_by,update_date from bus_pickup_address ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -265,6 +270,10 @@ namespace WK.DAL
 				{
 					model.status=int.Parse(row["status"].ToString());
 				}
+				if(row["dilivery_user_id"]!=null && row["dilivery_user_id"].ToString()!="")
+				{
+					model.dilivery_user_id=int.Parse(row["dilivery_user_id"].ToString());
+				}
 				if(row["sort"]!=null && row["sort"].ToString()!="")
 				{
 					model.sort=int.Parse(row["sort"].ToString());
@@ -303,7 +312,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,pickup_code,name,address,area_id,lon,lat,status,sort,is_delete,remark,create_by,create_date,update_by,update_date ");
+			strSql.Append("select id,pickup_code,name,address,area_id,lon,lat,status,dilivery_user_id,sort,is_delete,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_pickup_address ");
 			if(strWhere.Trim()!="")
 			{

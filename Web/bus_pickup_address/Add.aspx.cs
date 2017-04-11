@@ -52,6 +52,10 @@ namespace WK.Web.bus_pickup_address
 			{
 				strErr+="status格式错误！\\n";	
 			}
+			if(!PageValidate.IsNumber(txtdilivery_user_id.Text))
+			{
+				strErr+="dilivery_user_id格式错误！\\n";	
+			}
 			if(!PageValidate.IsNumber(txtsort.Text))
 			{
 				strErr+="sort格式错误！\\n";	
@@ -93,6 +97,7 @@ namespace WK.Web.bus_pickup_address
 			decimal lon=decimal.Parse(this.txtlon.Text);
 			decimal lat=decimal.Parse(this.txtlat.Text);
 			int status=int.Parse(this.txtstatus.Text);
+			int dilivery_user_id=int.Parse(this.txtdilivery_user_id.Text);
 			int sort=int.Parse(this.txtsort.Text);
 			int is_delete=int.Parse(this.txtis_delete.Text);
 			string remark=this.txtremark.Text;
@@ -109,6 +114,7 @@ namespace WK.Web.bus_pickup_address
 			model.lon=lon;
 			model.lat=lat;
 			model.status=status;
+			model.dilivery_user_id=dilivery_user_id;
 			model.sort=sort;
 			model.is_delete=is_delete;
 			model.remark=remark;

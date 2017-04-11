@@ -25,6 +25,7 @@ namespace WK.Web.bus_pickup_address {
 	protected global::System.Web.UI.WebControls.Label lbllon;
 	protected global::System.Web.UI.WebControls.Label lbllat;
 	protected global::System.Web.UI.WebControls.Label lblstatus;
+	protected global::System.Web.UI.WebControls.Label lbldilivery_user_id;
 	protected global::System.Web.UI.WebControls.Label lblsort;
 	protected global::System.Web.UI.WebControls.Label lblis_delete;
 	protected global::System.Web.UI.WebControls.Label lblremark;

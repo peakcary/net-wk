@@ -35,10 +35,10 @@ namespace WK.Web.bus_user
 		this.lbluser_type.Text=model.user_type.ToString();
 		this.lblpwd.Text=model.pwd;
 		this.lblnickname.Text=model.nickname;
+		this.lblstatus.Text=model.status.ToString();
 		this.lblphone_num.Text=model.phone_num;
 		this.lblpic_url.Text=model.pic_url;
 		this.lblsex.Text=model.sex.ToString();
-		this.lblcode.Text=model.code;
 		this.lblgenerate_time.Text=model.generate_time.ToString();
 		this.lblcur_deviceId.Text=model.cur_deviceId;
 		this.lblis_delete.Text=model.is_delete.ToString();

@@ -18,6 +18,7 @@ namespace WK.Model
 		private decimal? _lon;
 		private decimal? _lat;
 		private int _status=0;
+		private int _dilivery_user_id;
 		private int? _sort=0;
 		private int _is_delete=0;
 		private string _remark;
@@ -88,6 +89,14 @@ namespace WK.Model
 		{
 			set{ _status=value;}
 			get{return _status;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int dilivery_user_id
+		{
+			set{ _dilivery_user_id=value;}
+			get{return _dilivery_user_id;}
 		}
 		/// <summary>
 		/// 

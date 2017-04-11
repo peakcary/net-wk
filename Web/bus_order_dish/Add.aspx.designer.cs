@@ -26,6 +26,7 @@ namespace WK.Web.bus_order_dish {
 		protected global::System.Web.UI.WebControls.TextBox txtunit_original_price;
 		protected global::System.Web.UI.WebControls.TextBox txtunit_discount_price;
 		protected global::System.Web.UI.WebControls.TextBox txtcount;
+		protected global::System.Web.UI.WebControls.TextBox txtsize_list;
 		protected global::System.Web.UI.WebControls.TextBox txtis_delete;
 		protected global::System.Web.UI.WebControls.TextBox txtremark;
 		protected global::System.Web.UI.WebControls.TextBox txtcreate_by;

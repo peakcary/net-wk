@@ -12,8 +12,10 @@ namespace WK.Model
 		#region Model
 		private int _id;
 		private int _pickup_address_id;
-		private int _times_id;
-		private int _dish_type=0;
+		private int _pickup_time;
+		private int _eat_type=0;
+		private DateTime? _pickup_start_time;
+		private DateTime? _pickup_end_time;
 		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
@@ -39,18 +41,34 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int times_id
+		public int pickup_time
 		{
-			set{ _times_id=value;}
-			get{return _times_id;}
+			set{ _pickup_time=value;}
+			get{return _pickup_time;}
 		}
 		/// <summary>
 		/// 
 		/// </summary>
-		public int dish_type
+		public int eat_type
 		{
-			set{ _dish_type=value;}
-			get{return _dish_type;}
+			set{ _eat_type=value;}
+			get{return _eat_type;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public DateTime? pickup_start_time
+		{
+			set{ _pickup_start_time=value;}
+			get{return _pickup_start_time;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public DateTime? pickup_end_time
+		{
+			set{ _pickup_end_time=value;}
+			get{return _pickup_end_time;}
 		}
 		/// <summary>
 		/// 

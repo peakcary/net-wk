@@ -60,7 +60,7 @@ namespace WK.BLL
 		/// </summary>
 		public bool DeleteList(string idlist )
 		{
-            return dal.DeleteList(idlist);
+			return dal.DeleteList(Maticsoft.Common.PageValidate.SafeLongFilter(idlist,0) );
 		}
 
 		/// <summary>

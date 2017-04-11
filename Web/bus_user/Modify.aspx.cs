@@ -36,10 +36,10 @@ namespace WK.Web.bus_user
 		this.txtuser_type.Text=model.user_type.ToString();
 		this.txtpwd.Text=model.pwd;
 		this.txtnickname.Text=model.nickname;
+		this.txtstatus.Text=model.status.ToString();
 		this.txtphone_num.Text=model.phone_num;
 		this.txtpic_url.Text=model.pic_url;
 		this.txtsex.Text=model.sex.ToString();
-		this.txtcode.Text=model.code;
 		this.txtgenerate_time.Text=model.generate_time.ToString();
 		this.txtcur_deviceId.Text=model.cur_deviceId;
 		this.txtis_delete.Text=model.is_delete.ToString();
@@ -67,6 +67,10 @@ namespace WK.Web.bus_user
 			{
 				strErr+="nickname不能为空！\\n";	
 			}
+			if(!PageValidate.IsNumber(txtstatus.Text))
+			{
+				strErr+="status格式错误！\\n";	
+			}
 			if(this.txtphone_num.Text.Trim().Length==0)
 			{
 				strErr+="phone_num不能为空！\\n";	
@@ -78,10 +82,6 @@ namespace WK.Web.bus_user
 			if(!PageValidate.IsNumber(txtsex.Text))
 			{
 				strErr+="sex格式错误！\\n";	
-			}
-			if(this.txtcode.Text.Trim().Length==0)
-			{
-				strErr+="code不能为空！\\n";	
 			}
 			if(!PageValidate.IsDateTime(txtgenerate_time.Text))
 			{
@@ -125,10 +125,10 @@ namespace WK.Web.bus_user
 			int user_type=int.Parse(this.txtuser_type.Text);
 			string pwd=this.txtpwd.Text;
 			string nickname=this.txtnickname.Text;
+			int status=int.Parse(this.txtstatus.Text);
 			string phone_num=this.txtphone_num.Text;
 			string pic_url=this.txtpic_url.Text;
 			int sex=int.Parse(this.txtsex.Text);
-			string code=this.txtcode.Text;
 			DateTime generate_time=DateTime.Parse(this.txtgenerate_time.Text);
 			string cur_deviceId=this.txtcur_deviceId.Text;
 			int is_delete=int.Parse(this.txtis_delete.Text);
@@ -144,10 +144,10 @@ namespace WK.Web.bus_user
 			model.user_type=user_type;
 			model.pwd=pwd;
 			model.nickname=nickname;
+			model.status=status;
 			model.phone_num=phone_num;
 			model.pic_url=pic_url;
 			model.sex=sex;
-			model.code=code;
 			model.generate_time=generate_time;
 			model.cur_deviceId=cur_deviceId;
 			model.is_delete=is_delete;

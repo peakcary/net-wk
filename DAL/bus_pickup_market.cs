@@ -46,13 +46,14 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_pickup_market(");
-			strSql.Append("pickup_address_id,market_id,is_delete,remark,create_by,create_date,update_by,update_date)");
+			strSql.Append("pickup_address_id,market_id,is_delete,sort,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@pickup_address_id,@market_id,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
+			strSql.Append("@pickup_address_id,@market_id,@is_delete,@sort,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@pickup_address_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
+					new MySqlParameter("@sort", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@create_date", MySqlDbType.DateTime),
@@ -61,11 +62,12 @@ namespace WK.DAL
 			parameters[0].Value = model.pickup_address_id;
 			parameters[1].Value = model.market_id;
 			parameters[2].Value = model.is_delete;
-			parameters[3].Value = model.remark;
-			parameters[4].Value = model.create_by;
-			parameters[5].Value = model.create_date;
-			parameters[6].Value = model.update_by;
-			parameters[7].Value = model.update_date;
+			parameters[3].Value = model.sort;
+			parameters[4].Value = model.remark;
+			parameters[5].Value = model.create_by;
+			parameters[6].Value = model.create_date;
+			parameters[7].Value = model.update_by;
+			parameters[8].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -87,6 +89,7 @@ namespace WK.DAL
 			strSql.Append("pickup_address_id=@pickup_address_id,");
 			strSql.Append("market_id=@market_id,");
 			strSql.Append("is_delete=@is_delete,");
+			strSql.Append("sort=@sort,");
 			strSql.Append("remark=@remark,");
 			strSql.Append("create_by=@create_by,");
 			strSql.Append("create_date=@create_date,");
@@ -97,6 +100,7 @@ namespace WK.DAL
 					new MySqlParameter("@pickup_address_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
+					new MySqlParameter("@sort", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@create_date", MySqlDbType.DateTime),
@@ -106,12 +110,13 @@ namespace WK.DAL
 			parameters[0].Value = model.pickup_address_id;
 			parameters[1].Value = model.market_id;
 			parameters[2].Value = model.is_delete;
-			parameters[3].Value = model.remark;
-			parameters[4].Value = model.create_by;
-			parameters[5].Value = model.create_date;
-			parameters[6].Value = model.update_by;
-			parameters[7].Value = model.update_date;
-			parameters[8].Value = model.id;
+			parameters[3].Value = model.sort;
+			parameters[4].Value = model.remark;
+			parameters[5].Value = model.create_by;
+			parameters[6].Value = model.create_date;
+			parameters[7].Value = model.update_by;
+			parameters[8].Value = model.update_date;
+			parameters[9].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -175,7 +180,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,pickup_address_id,market_id,is_delete,remark,create_by,create_date,update_by,update_date from bus_pickup_market ");
+			strSql.Append("select id,pickup_address_id,market_id,is_delete,sort,remark,create_by,create_date,update_by,update_date from bus_pickup_market ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -219,6 +224,10 @@ namespace WK.DAL
 				{
 					model.is_delete=int.Parse(row["is_delete"].ToString());
 				}
+				if(row["sort"]!=null && row["sort"].ToString()!="")
+				{
+					model.sort=int.Parse(row["sort"].ToString());
+				}
 				if(row["remark"]!=null)
 				{
 					model.remark=row["remark"].ToString();
@@ -249,7 +258,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,pickup_address_id,market_id,is_delete,remark,create_by,create_date,update_by,update_date ");
+			strSql.Append("select id,pickup_address_id,market_id,is_delete,sort,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_pickup_market ");
 			if(strWhere.Trim()!="")
 			{

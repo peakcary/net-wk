@@ -33,8 +33,8 @@ namespace WK.Web.bus_payment
 		WK.BLL.bus_payment bll=new WK.BLL.bus_payment();
 		WK.Model.bus_payment model=bll.GetModel(id);
 		this.lblid.Text=model.id.ToString();
-		this.txtpayment_channel.Text=model.payment_channel.ToString();
-		this.txtpayment_type.Text=model.payment_type.ToString();
+		this.txtpay_channel.Text=model.pay_channel.ToString();
+		this.txtpay_type.Text=model.pay_type.ToString();
 		this.txtamount.Text=model.amount.ToString();
 		this.txtorder_id.Text=model.order_id.ToString();
 		this.txtuser_id.Text=model.user_id.ToString();
@@ -52,13 +52,13 @@ namespace WK.Web.bus_payment
 		{
 			
 			string strErr="";
-			if(!PageValidate.IsNumber(txtpayment_channel.Text))
+			if(!PageValidate.IsNumber(txtpay_channel.Text))
 			{
-				strErr+="payment_channel格式错误！\\n";	
+				strErr+="pay_channel格式错误！\\n";	
 			}
-			if(!PageValidate.IsNumber(txtpayment_type.Text))
+			if(!PageValidate.IsNumber(txtpay_type.Text))
 			{
-				strErr+="payment_type格式错误！\\n";	
+				strErr+="pay_type格式错误！\\n";	
 			}
 			if(!PageValidate.IsDecimal(txtamount.Text))
 			{
@@ -107,8 +107,8 @@ namespace WK.Web.bus_payment
 				return;
 			}
 			int id=int.Parse(this.lblid.Text);
-			int payment_channel=int.Parse(this.txtpayment_channel.Text);
-			int payment_type=int.Parse(this.txtpayment_type.Text);
+			int pay_channel=int.Parse(this.txtpay_channel.Text);
+			int pay_type=int.Parse(this.txtpay_type.Text);
 			decimal amount=decimal.Parse(this.txtamount.Text);
 			int order_id=int.Parse(this.txtorder_id.Text);
 			int user_id=int.Parse(this.txtuser_id.Text);
@@ -123,8 +123,8 @@ namespace WK.Web.bus_payment
 
 			WK.Model.bus_payment model=new WK.Model.bus_payment();
 			model.id=id;
-			model.payment_channel=payment_channel;
-			model.payment_type=payment_type;
+			model.pay_channel=pay_channel;
+			model.pay_type=pay_type;
 			model.amount=amount;
 			model.order_id=order_id;
 			model.user_id=user_id;

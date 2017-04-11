@@ -6,7 +6,7 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 60px; 
 }
 .footer {
   position: absolute;
@@ -22,4 +22,12 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
- 
+.content
+{ 
+    margin-top:60px;
+}
+
+.mt10
+{
+    margin-top:10px;
+}

@@ -112,7 +112,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_area bll = new WK.BLL.bus_area();
-            ds = bll.GetListByPage(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
+            ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
 

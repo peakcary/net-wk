@@ -22,10 +22,10 @@ namespace WK.Web.bus_user {
 		protected global::System.Web.UI.WebControls.TextBox txtuser_type;
 		protected global::System.Web.UI.WebControls.TextBox txtpwd;
 		protected global::System.Web.UI.WebControls.TextBox txtnickname;
+		protected global::System.Web.UI.WebControls.TextBox txtstatus;
 		protected global::System.Web.UI.WebControls.TextBox txtphone_num;
 		protected global::System.Web.UI.WebControls.TextBox txtpic_url;
 		protected global::System.Web.UI.WebControls.TextBox txtsex;
-		protected global::System.Web.UI.WebControls.TextBox txtcode;
 		protected global::System.Web.UI.WebControls.TextBox txtgenerate_time;
 		protected global::System.Web.UI.WebControls.TextBox txtcur_deviceId;
 		protected global::System.Web.UI.WebControls.TextBox txtis_delete;

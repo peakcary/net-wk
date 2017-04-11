@@ -19,8 +19,8 @@ namespace WK.Web.bus_order {
     public partial class Show {
         	protected global::System.Web.UI.WebControls.Label lblid;
 	protected global::System.Web.UI.WebControls.Label lblorder_status;
-	protected global::System.Web.UI.WebControls.Label lblpayment_status;
-	protected global::System.Web.UI.WebControls.Label lblmarket_id;
+	protected global::System.Web.UI.WebControls.Label lblpay_status;
+	protected global::System.Web.UI.WebControls.Label lblpay_type;
 	protected global::System.Web.UI.WebControls.Label lbluser_id;
 	protected global::System.Web.UI.WebControls.Label lbldilivery_user_id;
 	protected global::System.Web.UI.WebControls.Label lblpickup_address_id;
@@ -29,6 +29,9 @@ namespace WK.Web.bus_order {
 	protected global::System.Web.UI.WebControls.Label lbltotal_plan_price;
 	protected global::System.Web.UI.WebControls.Label lbltotal_real_price;
 	protected global::System.Web.UI.WebControls.Label lblmeal_num;
+	protected global::System.Web.UI.WebControls.Label lblpickup_start_time;
+	protected global::System.Web.UI.WebControls.Label lblpickup_end_time;
+	protected global::System.Web.UI.WebControls.Label lblpickup_date;
 	protected global::System.Web.UI.WebControls.Label lblis_delete;
 	protected global::System.Web.UI.WebControls.Label lblremark;
 	protected global::System.Web.UI.WebControls.Label lblcreate_by;

@@ -11,17 +11,17 @@
 <table cellSpacing="0" cellPadding="0" width="100%" border="0">
 	<tr>
 	<td height="25" width="30%" align="right">
-		payment_channel
+		pay_channel
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtpayment_channel" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txtpay_channel" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		payment_type
+		pay_type
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtpayment_type" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txtpay_type" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

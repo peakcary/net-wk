@@ -22,6 +22,7 @@ namespace WK.Web.bus_pickup_market {
 		protected global::System.Web.UI.WebControls.TextBox txtpickup_address_id;
 		protected global::System.Web.UI.WebControls.TextBox txtmarket_id;
 		protected global::System.Web.UI.WebControls.TextBox txtis_delete;
+		protected global::System.Web.UI.WebControls.TextBox txtsort;
 		protected global::System.Web.UI.WebControls.TextBox txtremark;
 		protected global::System.Web.UI.WebControls.TextBox txtcreate_by;
 		protected global::System.Web.UI.WebControls.TextBox txtcreate_date;

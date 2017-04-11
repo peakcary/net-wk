@@ -24,13 +24,13 @@ namespace WK.Web.bus_payment
 		{
 			
 			string strErr="";
-			if(!PageValidate.IsNumber(txtpayment_channel.Text))
+			if(!PageValidate.IsNumber(txtpay_channel.Text))
 			{
-				strErr+="payment_channel格式错误！\\n";	
+				strErr+="pay_channel格式错误！\\n";	
 			}
-			if(!PageValidate.IsNumber(txtpayment_type.Text))
+			if(!PageValidate.IsNumber(txtpay_type.Text))
 			{
-				strErr+="payment_type格式错误！\\n";	
+				strErr+="pay_type格式错误！\\n";	
 			}
 			if(!PageValidate.IsDecimal(txtamount.Text))
 			{
@@ -78,8 +78,8 @@ namespace WK.Web.bus_payment
 				MessageBox.Show(this,strErr);
 				return;
 			}
-			int payment_channel=int.Parse(this.txtpayment_channel.Text);
-			int payment_type=int.Parse(this.txtpayment_type.Text);
+			int pay_channel=int.Parse(this.txtpay_channel.Text);
+			int pay_type=int.Parse(this.txtpay_type.Text);
 			decimal amount=decimal.Parse(this.txtamount.Text);
 			int order_id=int.Parse(this.txtorder_id.Text);
 			int user_id=int.Parse(this.txtuser_id.Text);
@@ -92,8 +92,8 @@ namespace WK.Web.bus_payment
 			DateTime update_date=DateTime.Parse(this.txtupdate_date.Text);
 
 			WK.Model.bus_payment model=new WK.Model.bus_payment();
-			model.payment_channel=payment_channel;
-			model.payment_type=payment_type;
+			model.pay_channel=pay_channel;
+			model.pay_type=pay_type;
 			model.amount=amount;
 			model.order_id=order_id;
 			model.user_id=user_id;

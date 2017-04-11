@@ -18,17 +18,31 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		times_id
+		pickup_time
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txttimes_id" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txtpickup_time" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		dish_type
+		eat_type
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtdish_type" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txteat_type" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_start_time
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtpickup_start_time" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_end_time
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtpickup_end_time" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

@@ -53,7 +53,7 @@ namespace WK.DAL
 					new MySqlParameter("@markket_code", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_en", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_cn", MySqlDbType.VarChar,100),
-					new MySqlParameter("@market_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@market_type", MySqlDbType.VarChar,500),
 					new MySqlParameter("@area_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@lon", MySqlDbType.Decimal,10),
 					new MySqlParameter("@lat", MySqlDbType.Decimal,10),
@@ -83,9 +83,9 @@ namespace WK.DAL
 			parameters[12].Value = model.is_delete;
 			parameters[13].Value = model.remark;
 			parameters[14].Value = model.create_by;
-			parameters[15].Value = DateTime.Now;
+			parameters[15].Value = model.craete_date;
 			parameters[16].Value = model.update_by;
-			parameters[17].Value = DateTime.Now;
+			parameters[17].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -127,7 +127,7 @@ namespace WK.DAL
 					new MySqlParameter("@markket_code", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_en", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_cn", MySqlDbType.VarChar,100),
-					new MySqlParameter("@market_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@market_type", MySqlDbType.VarChar,500),
 					new MySqlParameter("@area_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@lon", MySqlDbType.Decimal,10),
 					new MySqlParameter("@lat", MySqlDbType.Decimal,10),
@@ -160,7 +160,7 @@ namespace WK.DAL
 			parameters[14].Value = model.create_by;
 			parameters[15].Value = model.craete_date;
 			parameters[16].Value = model.update_by;
-			parameters[17].Value = DateTime.Now;
+			parameters[17].Value = model.update_date;
 			parameters[18].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
@@ -269,9 +269,9 @@ namespace WK.DAL
 				{
 					model.name_cn=row["name_cn"].ToString();
 				}
-				if(row["market_type"]!=null && row["market_type"].ToString()!="")
+				if(row["market_type"]!=null)
 				{
-					model.market_type=int.Parse(row["market_type"].ToString());
+					model.market_type=row["market_type"].ToString();
 				}
 				if(row["area_id"]!=null && row["area_id"].ToString()!="")
 				{
@@ -359,7 +359,7 @@ namespace WK.DAL
 			{
 				strSql.Append(" where "+strWhere);
 			}
-            object obj = DbHelperMySQL.GetSingle(strSql.ToString());
+			object obj = DbHelperSQL.GetSingle(strSql.ToString());
 			if (obj == null)
 			{
 				return 0;
@@ -374,42 +374,25 @@ namespace WK.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT * FROM bus_market ");
-            if (!string.IsNullOrEmpty(strWhere.Trim()))
-            {
-                strSql.Append(" WHERE " + strWhere);
-            }
-            if (!string.IsNullOrEmpty(orderby.Trim()))
-            {
-                strSql.Append(" order by " + orderby);
-            }
-            else
-            {
-                strSql.Append(" order by id desc");
-            }
-
-            strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex);
-            return DbHelperMySQL.Query(strSql.ToString());
-            //StringBuilder strSql=new StringBuilder();
-            //strSql.Append("SELECT * FROM ( ");
-            //strSql.Append(" SELECT ROW_NUMBER() OVER (");
-            //if (!string.IsNullOrEmpty(orderby.Trim()))
-            //{
-            //    strSql.Append("order by T." + orderby );
-            //}
-            //else
-            //{
-            //    strSql.Append("order by T.id desc");
-            //}
-            //strSql.Append(")AS Row, T.*  from bus_market T ");
-            //if (!string.IsNullOrEmpty(strWhere.Trim()))
-            //{
-            //    strSql.Append(" WHERE " + strWhere);
-            //}
-            //strSql.Append(" ) TT");
-            //strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
-            //return DbHelperMySQL.Query(strSql.ToString());
+			StringBuilder strSql=new StringBuilder();
+			strSql.Append("SELECT * FROM ( ");
+			strSql.Append(" SELECT ROW_NUMBER() OVER (");
+			if (!string.IsNullOrEmpty(orderby.Trim()))
+			{
+				strSql.Append("order by T." + orderby );
+			}
+			else
+			{
+				strSql.Append("order by T.id desc");
+			}
+			strSql.Append(")AS Row, T.*  from bus_market T ");
+			if (!string.IsNullOrEmpty(strWhere.Trim()))
+			{
+				strSql.Append(" WHERE " + strWhere);
+			}
+			strSql.Append(" ) TT");
+			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+			return DbHelperMySQL.Query(strSql.ToString());
 		}
 
 		/*

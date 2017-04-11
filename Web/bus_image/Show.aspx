@@ -16,6 +16,13 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
+		correlation_id
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblcorrelation_id" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
 		bus_type
 	：</td>
 	<td height="25" width="*" align="left">

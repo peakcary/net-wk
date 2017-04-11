@@ -11,6 +11,13 @@
 <table cellSpacing="0" cellPadding="0" width="100%" border="0">
 	<tr>
 	<td height="25" width="30%" align="right">
+		correlation_id
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtcorrelation_id" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
 		bus_type
 	：</td>
 	<td height="25" width="*" align="left">

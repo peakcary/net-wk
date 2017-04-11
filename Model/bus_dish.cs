@@ -12,13 +12,16 @@ namespace WK.Model
 		#region Model
 		private int _id;
 		private int _market_id;
-		private int _dish_type=0;
+		private int _dish_time;
+		private int _eat_type=0;
+		private string _dish_tag;
 		private string _name_en;
 		private string _name_cn;
 		private string _description_en;
 		private string _description_cn;
 		private decimal _original_price=0.00M;
 		private decimal? _discount_price;
+		private int _status;
 		private int _sales_total=0;
 		private int? _sort=0;
 		private int? _is_delete;
@@ -46,10 +49,26 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int dish_type
+		public int dish_time
 		{
-			set{ _dish_type=value;}
-			get{return _dish_type;}
+			set{ _dish_time=value;}
+			get{return _dish_time;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int eat_type
+		{
+			set{ _eat_type=value;}
+			get{return _eat_type;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string dish_tag
+		{
+			set{ _dish_tag=value;}
+			get{return _dish_tag;}
 		}
 		/// <summary>
 		/// 
@@ -98,6 +117,14 @@ namespace WK.Model
 		{
 			set{ _discount_price=value;}
 			get{return _discount_price;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int status
+		{
+			set{ _status=value;}
+			get{return _status;}
 		}
 		/// <summary>
 		/// 

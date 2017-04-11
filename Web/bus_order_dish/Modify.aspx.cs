@@ -40,6 +40,7 @@ namespace WK.Web.bus_order_dish
 		this.txtunit_original_price.Text=model.unit_original_price.ToString();
 		this.txtunit_discount_price.Text=model.unit_discount_price.ToString();
 		this.txtcount.Text=model.count.ToString();
+		this.txtsize_list.Text=model.size_list;
 		this.txtis_delete.Text=model.is_delete.ToString();
 		this.txtremark.Text=model.remark;
 		this.txtcreate_by.Text=model.create_by.ToString();
@@ -81,6 +82,10 @@ namespace WK.Web.bus_order_dish
 			{
 				strErr+="count格式错误！\\n";	
 			}
+			if(this.txtsize_list.Text.Trim().Length==0)
+			{
+				strErr+="size_list不能为空！\\n";	
+			}
 			if(!PageValidate.IsNumber(txtis_delete.Text))
 			{
 				strErr+="is_delete格式错误！\\n";	
@@ -119,6 +124,7 @@ namespace WK.Web.bus_order_dish
 			decimal unit_original_price=decimal.Parse(this.txtunit_original_price.Text);
 			decimal unit_discount_price=decimal.Parse(this.txtunit_discount_price.Text);
 			int count=int.Parse(this.txtcount.Text);
+			string size_list=this.txtsize_list.Text;
 			int is_delete=int.Parse(this.txtis_delete.Text);
 			string remark=this.txtremark.Text;
 			int create_by=int.Parse(this.txtcreate_by.Text);
@@ -136,6 +142,7 @@ namespace WK.Web.bus_order_dish
 			model.unit_original_price=unit_original_price;
 			model.unit_discount_price=unit_discount_price;
 			model.count=count;
+			model.size_list=size_list;
 			model.is_delete=is_delete;
 			model.remark=remark;
 			model.create_by=create_by;

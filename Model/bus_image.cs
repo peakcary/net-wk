@@ -11,6 +11,7 @@ namespace WK.Model
 		{}
 		#region Model
 		private int _id;
+		private int _correlation_id;
 		private int _bus_type=0;
 		private int _img_type=0;
 		private string _url;
@@ -21,7 +22,6 @@ namespace WK.Model
 		private DateTime? _create_date;
 		private int? _update_by;
 		private DateTime? _update_date;
-		private int _correlation_id;
 		/// <summary>
 		/// auto_increment
 		/// </summary>
@@ -29,6 +29,14 @@ namespace WK.Model
 		{
 			set{ _id=value;}
 			get{return _id;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int correlation_id
+		{
+			set{ _correlation_id=value;}
+			get{return _correlation_id;}
 		}
 		/// <summary>
 		/// 
@@ -109,14 +117,6 @@ namespace WK.Model
 		{
 			set{ _update_date=value;}
 			get{return _update_date;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public int correlation_id
-		{
-			set{ _correlation_id=value;}
-			get{return _correlation_id;}
 		}
 		#endregion Model
 

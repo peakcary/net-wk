@@ -14,6 +14,7 @@ namespace WK.Model
 		private int _pickup_address_id;
 		private int _market_id;
 		private int _is_delete=0;
+		private int? _sort=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;
@@ -50,6 +51,14 @@ namespace WK.Model
 		{
 			set{ _is_delete=value;}
 			get{return _is_delete;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int? sort
+		{
+			set{ _sort=value;}
+			get{return _sort;}
 		}
 		/// <summary>
 		/// 

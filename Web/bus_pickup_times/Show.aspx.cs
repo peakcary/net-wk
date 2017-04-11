@@ -33,8 +33,10 @@ namespace WK.Web.bus_pickup_times
 		WK.Model.bus_pickup_times model=bll.GetModel(id);
 		this.lblid.Text=model.id.ToString();
 		this.lblpickup_address_id.Text=model.pickup_address_id.ToString();
-		this.lbltimes_id.Text=model.times_id.ToString();
-		this.lbldish_type.Text=model.dish_type.ToString();
+		this.lblpickup_time.Text=model.pickup_time.ToString();
+		this.lbleat_type.Text=model.eat_type.ToString();
+		this.lblpickup_start_time.Text=model.pickup_start_time.ToString();
+		this.lblpickup_end_time.Text=model.pickup_end_time.ToString();
 		this.lblis_delete.Text=model.is_delete.ToString();
 		this.lblremark.Text=model.remark;
 		this.lblcreate_by.Text=model.create_by.ToString();

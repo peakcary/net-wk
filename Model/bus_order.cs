@@ -12,8 +12,8 @@ namespace WK.Model
 		#region Model
 		private int _id;
 		private int _order_status;
-		private int _payment_status;
-		private int _market_id;
+		private int _pay_status;
+		private int _pay_type;
 		private int _user_id;
 		private int _dilivery_user_id;
 		private int _pickup_address_id;
@@ -22,6 +22,9 @@ namespace WK.Model
 		private decimal _total_plan_price=0.00M;
 		private decimal _total_real_price=0.00M;
 		private int _meal_num=1;
+		private DateTime _pickup_start_time;
+		private string _pickup_end_time;
+		private DateTime _pickup_date;
 		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
@@ -47,18 +50,18 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int payment_status
+		public int pay_status
 		{
-			set{ _payment_status=value;}
-			get{return _payment_status;}
+			set{ _pay_status=value;}
+			get{return _pay_status;}
 		}
 		/// <summary>
 		/// 
 		/// </summary>
-		public int market_id
+		public int pay_type
 		{
-			set{ _market_id=value;}
-			get{return _market_id;}
+			set{ _pay_type=value;}
+			get{return _pay_type;}
 		}
 		/// <summary>
 		/// 
@@ -123,6 +126,30 @@ namespace WK.Model
 		{
 			set{ _meal_num=value;}
 			get{return _meal_num;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public DateTime pickup_start_time
+		{
+			set{ _pickup_start_time=value;}
+			get{return _pickup_start_time;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string pickup_end_time
+		{
+			set{ _pickup_end_time=value;}
+			get{return _pickup_end_time;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public DateTime pickup_date
+		{
+			set{ _pickup_date=value;}
+			get{return _pickup_date;}
 		}
 		/// <summary>
 		/// 

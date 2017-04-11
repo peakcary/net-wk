@@ -19,8 +19,8 @@ namespace WK.Web.bus_payment {
     public partial class Add 
     {
         
-		protected global::System.Web.UI.WebControls.TextBox txtpayment_channel;
-		protected global::System.Web.UI.WebControls.TextBox txtpayment_type;
+		protected global::System.Web.UI.WebControls.TextBox txtpay_channel;
+		protected global::System.Web.UI.WebControls.TextBox txtpay_type;
 		protected global::System.Web.UI.WebControls.TextBox txtamount;
 		protected global::System.Web.UI.WebControls.TextBox txtorder_id;
 		protected global::System.Web.UI.WebControls.TextBox txtuser_id;

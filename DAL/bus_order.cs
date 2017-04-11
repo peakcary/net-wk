@@ -46,13 +46,13 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_order(");
-			strSql.Append("order_status,payment_status,market_id,user_id,dilivery_user_id,pickup_address_id,consignee_name,consignee_phone,total_plan_price,total_real_price,meal_num,is_delete,remark,create_by,create_date,update_by,update_date)");
+			strSql.Append("order_status,pay_status,pay_type,user_id,dilivery_user_id,pickup_address_id,consignee_name,consignee_phone,total_plan_price,total_real_price,meal_num,pickup_start_time,pickup_end_time,pickup_date,is_delete,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@order_status,@payment_status,@market_id,@user_id,@dilivery_user_id,@pickup_address_id,@consignee_name,@consignee_phone,@total_plan_price,@total_real_price,@meal_num,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
+			strSql.Append("@order_status,@pay_status,@pay_type,@user_id,@dilivery_user_id,@pickup_address_id,@consignee_name,@consignee_phone,@total_plan_price,@total_real_price,@meal_num,@pickup_start_time,@pickup_end_time,@pickup_date,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@order_status", MySqlDbType.Int32,11),
-					new MySqlParameter("@payment_status", MySqlDbType.Int32,11),
-					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
+					new MySqlParameter("@pay_status", MySqlDbType.Int32,11),
+					new MySqlParameter("@pay_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@user_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@dilivery_user_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@pickup_address_id", MySqlDbType.Int32,11),
@@ -61,6 +61,9 @@ namespace WK.DAL
 					new MySqlParameter("@total_plan_price", MySqlDbType.Decimal,10),
 					new MySqlParameter("@total_real_price", MySqlDbType.Decimal,10),
 					new MySqlParameter("@meal_num", MySqlDbType.Int32,11),
+					new MySqlParameter("@pickup_start_time", MySqlDbType.Time),
+					new MySqlParameter("@pickup_end_time", MySqlDbType.VarChar,10),
+					new MySqlParameter("@pickup_date", MySqlDbType.DateTime),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -68,8 +71,8 @@ namespace WK.DAL
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@update_date", MySqlDbType.DateTime)};
 			parameters[0].Value = model.order_status;
-			parameters[1].Value = model.payment_status;
-			parameters[2].Value = model.market_id;
+			parameters[1].Value = model.pay_status;
+			parameters[2].Value = model.pay_type;
 			parameters[3].Value = model.user_id;
 			parameters[4].Value = model.dilivery_user_id;
 			parameters[5].Value = model.pickup_address_id;
@@ -78,12 +81,15 @@ namespace WK.DAL
 			parameters[8].Value = model.total_plan_price;
 			parameters[9].Value = model.total_real_price;
 			parameters[10].Value = model.meal_num;
-			parameters[11].Value = model.is_delete;
-			parameters[12].Value = model.remark;
-			parameters[13].Value = model.create_by;
-			parameters[14].Value = model.create_date;
-			parameters[15].Value = model.update_by;
-			parameters[16].Value = model.update_date;
+			parameters[11].Value = model.pickup_start_time;
+			parameters[12].Value = model.pickup_end_time;
+			parameters[13].Value = model.pickup_date;
+			parameters[14].Value = model.is_delete;
+			parameters[15].Value = model.remark;
+			parameters[16].Value = model.create_by;
+			parameters[17].Value = model.create_date;
+			parameters[18].Value = model.update_by;
+			parameters[19].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -103,8 +109,8 @@ namespace WK.DAL
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update bus_order set ");
 			strSql.Append("order_status=@order_status,");
-			strSql.Append("payment_status=@payment_status,");
-			strSql.Append("market_id=@market_id,");
+			strSql.Append("pay_status=@pay_status,");
+			strSql.Append("pay_type=@pay_type,");
 			strSql.Append("user_id=@user_id,");
 			strSql.Append("dilivery_user_id=@dilivery_user_id,");
 			strSql.Append("pickup_address_id=@pickup_address_id,");
@@ -113,6 +119,9 @@ namespace WK.DAL
 			strSql.Append("total_plan_price=@total_plan_price,");
 			strSql.Append("total_real_price=@total_real_price,");
 			strSql.Append("meal_num=@meal_num,");
+			strSql.Append("pickup_start_time=@pickup_start_time,");
+			strSql.Append("pickup_end_time=@pickup_end_time,");
+			strSql.Append("pickup_date=@pickup_date,");
 			strSql.Append("is_delete=@is_delete,");
 			strSql.Append("remark=@remark,");
 			strSql.Append("create_by=@create_by,");
@@ -122,8 +131,8 @@ namespace WK.DAL
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@order_status", MySqlDbType.Int32,11),
-					new MySqlParameter("@payment_status", MySqlDbType.Int32,11),
-					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
+					new MySqlParameter("@pay_status", MySqlDbType.Int32,11),
+					new MySqlParameter("@pay_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@user_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@dilivery_user_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@pickup_address_id", MySqlDbType.Int32,11),
@@ -132,6 +141,9 @@ namespace WK.DAL
 					new MySqlParameter("@total_plan_price", MySqlDbType.Decimal,10),
 					new MySqlParameter("@total_real_price", MySqlDbType.Decimal,10),
 					new MySqlParameter("@meal_num", MySqlDbType.Int32,11),
+					new MySqlParameter("@pickup_start_time", MySqlDbType.Time),
+					new MySqlParameter("@pickup_end_time", MySqlDbType.VarChar,10),
+					new MySqlParameter("@pickup_date", MySqlDbType.DateTime),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -140,8 +152,8 @@ namespace WK.DAL
 					new MySqlParameter("@update_date", MySqlDbType.DateTime),
 					new MySqlParameter("@id", MySqlDbType.Int32,11)};
 			parameters[0].Value = model.order_status;
-			parameters[1].Value = model.payment_status;
-			parameters[2].Value = model.market_id;
+			parameters[1].Value = model.pay_status;
+			parameters[2].Value = model.pay_type;
 			parameters[3].Value = model.user_id;
 			parameters[4].Value = model.dilivery_user_id;
 			parameters[5].Value = model.pickup_address_id;
@@ -150,13 +162,16 @@ namespace WK.DAL
 			parameters[8].Value = model.total_plan_price;
 			parameters[9].Value = model.total_real_price;
 			parameters[10].Value = model.meal_num;
-			parameters[11].Value = model.is_delete;
-			parameters[12].Value = model.remark;
-			parameters[13].Value = model.create_by;
-			parameters[14].Value = model.create_date;
-			parameters[15].Value = model.update_by;
-			parameters[16].Value = model.update_date;
-			parameters[17].Value = model.id;
+			parameters[11].Value = model.pickup_start_time;
+			parameters[12].Value = model.pickup_end_time;
+			parameters[13].Value = model.pickup_date;
+			parameters[14].Value = model.is_delete;
+			parameters[15].Value = model.remark;
+			parameters[16].Value = model.create_by;
+			parameters[17].Value = model.create_date;
+			parameters[18].Value = model.update_by;
+			parameters[19].Value = model.update_date;
+			parameters[20].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -220,7 +235,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,order_status,payment_status,market_id,user_id,dilivery_user_id,pickup_address_id,consignee_name,consignee_phone,total_plan_price,total_real_price,meal_num,is_delete,remark,create_by,create_date,update_by,update_date from bus_order ");
+			strSql.Append("select id,order_status,pay_status,pay_type,user_id,dilivery_user_id,pickup_address_id,consignee_name,consignee_phone,total_plan_price,total_real_price,meal_num,pickup_start_time,pickup_end_time,pickup_date,is_delete,remark,create_by,create_date,update_by,update_date from bus_order ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -256,13 +271,13 @@ namespace WK.DAL
 				{
 					model.order_status=int.Parse(row["order_status"].ToString());
 				}
-				if(row["payment_status"]!=null && row["payment_status"].ToString()!="")
+				if(row["pay_status"]!=null && row["pay_status"].ToString()!="")
 				{
-					model.payment_status=int.Parse(row["payment_status"].ToString());
+					model.pay_status=int.Parse(row["pay_status"].ToString());
 				}
-				if(row["market_id"]!=null && row["market_id"].ToString()!="")
+				if(row["pay_type"]!=null && row["pay_type"].ToString()!="")
 				{
-					model.market_id=int.Parse(row["market_id"].ToString());
+					model.pay_type=int.Parse(row["pay_type"].ToString());
 				}
 				if(row["user_id"]!=null && row["user_id"].ToString()!="")
 				{
@@ -295,6 +310,18 @@ namespace WK.DAL
 				if(row["meal_num"]!=null && row["meal_num"].ToString()!="")
 				{
 					model.meal_num=int.Parse(row["meal_num"].ToString());
+				}
+				if(row["pickup_start_time"]!=null && row["pickup_start_time"].ToString()!="")
+				{
+					model.pickup_start_time=DateTime.Parse(row["pickup_start_time"].ToString());
+				}
+				if(row["pickup_end_time"]!=null)
+				{
+					model.pickup_end_time=row["pickup_end_time"].ToString();
+				}
+				if(row["pickup_date"]!=null && row["pickup_date"].ToString()!="")
+				{
+					model.pickup_date=DateTime.Parse(row["pickup_date"].ToString());
 				}
 				if(row["is_delete"]!=null && row["is_delete"].ToString()!="")
 				{
@@ -330,7 +357,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,order_status,payment_status,market_id,user_id,dilivery_user_id,pickup_address_id,consignee_name,consignee_phone,total_plan_price,total_real_price,meal_num,is_delete,remark,create_by,create_date,update_by,update_date ");
+			strSql.Append("select id,order_status,pay_status,pay_type,user_id,dilivery_user_id,pickup_address_id,consignee_name,consignee_phone,total_plan_price,total_real_price,meal_num,pickup_start_time,pickup_end_time,pickup_date,is_delete,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_order ");
 			if(strWhere.Trim()!="")
 			{

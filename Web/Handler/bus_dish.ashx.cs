@@ -139,7 +139,7 @@ namespace WK.Web.Handler
             model.discount_price = decimal.Parse(context.Request.Params["discount_price"]);
             model.sort = int.Parse(context.Request.Params["sort"]);
             model.remark = context.Request.Params["remark"];
-            model.dish_type =int.Parse( context.Request.Params["dish_type"]);
+            //model.dish_type =int.Parse( context.Request.Params["dish_type"]);
             model.name_cn = context.Request.Params["name_cn"];
             model.name_en = context.Request.Params["name_en"];
             model.original_price =decimal.Parse( context.Request.Params["name_cn"]);

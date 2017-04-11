@@ -18,17 +18,17 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		payment_status
+		pay_status
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtpayment_status" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txtpay_status" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		market_id
+		pay_type
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtmarket_id" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txtpay_type" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
@@ -85,6 +85,27 @@
 	：</td>
 	<td height="25" width="*" align="left">
 		<asp:TextBox id="txtmeal_num" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_start_time
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtpickup_start_time" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_end_time
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtpickup_end_time" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_date
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox ID="txtpickup_date" runat="server" Width="70px"  onfocus="setday(this)"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

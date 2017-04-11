@@ -18,6 +18,7 @@ namespace WK.Model
 		private decimal? _unit_original_price;
 		private decimal? _unit_discount_price;
 		private int? _count;
+		private string _size_list;
 		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
@@ -87,6 +88,14 @@ namespace WK.Model
 		{
 			set{ _count=value;}
 			get{return _count;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string size_list
+		{
+			set{ _size_list=value;}
+			get{return _size_list;}
 		}
 		/// <summary>
 		/// 

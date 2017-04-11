@@ -119,32 +119,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bus_discount_gift.cs" />
+    <Compile Include="bus_dish_plan.cs" />
+    <Compile Include="bus_gift.cs" />
+    <Compile Include="bus_order_gift.cs" />
+    <Compile Include="bus_pickup_user.cs" />
+    <Compile Include="bus_times.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SysNode.cs" />
     <Compile Include="bus_area.cs" />
+    <Compile Include="bus_deadline.cs" />
+    <Compile Include="bus_discount.cs" />
     <Compile Include="bus_dish.cs" />
-    <Compile Include="bus_dish_plan.cs" />
+    <Compile Include="bus_dish_size.cs" />
+    <Compile Include="bus_feedback.cs" />
     <Compile Include="bus_image.cs" />
     <Compile Include="bus_market.cs" />
     <Compile Include="bus_order.cs" />
+    <Compile Include="bus_order_discount.cs" />
     <Compile Include="bus_order_dish.cs" />
     <Compile Include="bus_payment.cs" />
     <Compile Include="bus_pickup_address.cs" />
     <Compile Include="bus_pickup_market.cs" />
     <Compile Include="bus_pickup_times.cs" />
-    <Compile Include="bus_pickup_user.cs" />
     <Compile Include="bus_share.cs" />
-    <Compile Include="bus_times.cs" />
     <Compile Include="bus_user.cs" />
     <Compile Include="bus_user_black_list.cs" />
     <Compile Include="bus_user_device.cs" />
+    <Compile Include="bus_verify_code.cs" />
     <Compile Include="bus_wx_user.cs" />
     <Compile Include="sys_constant.cs" />
     <Compile Include="sys_constant_detail.cs" />
     <Compile Include="sys_sequence.cs" />
     <Compile Include="sys_user.cs" />
+    <Compile Include="tuser.cs" />
     <Compile Include="user.cs" />
   </ItemGroup>
   <ItemGroup>

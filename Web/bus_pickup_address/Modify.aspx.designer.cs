@@ -25,6 +25,7 @@ namespace WK.Web.bus_pickup_address {
 		protected global::System.Web.UI.WebControls.TextBox txtlon;
 		protected global::System.Web.UI.WebControls.TextBox txtlat;
 		protected global::System.Web.UI.WebControls.TextBox txtstatus;
+		protected global::System.Web.UI.WebControls.TextBox txtdilivery_user_id;
 		protected global::System.Web.UI.WebControls.TextBox txtsort;
 		protected global::System.Web.UI.WebControls.TextBox txtis_delete;
 		protected global::System.Web.UI.WebControls.TextBox txtremark;

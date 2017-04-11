@@ -37,6 +37,13 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
+		status
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtstatus" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
 		phone_num
 	：</td>
 	<td height="25" width="*" align="left">
@@ -55,13 +62,6 @@
 	：</td>
 	<td height="25" width="*" align="left">
 		<asp:TextBox id="txtsex" runat="server" Width="200px"></asp:TextBox>
-	</td></tr>
-	<tr>
-	<td height="25" width="30%" align="right">
-		code
-	：</td>
-	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtcode" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

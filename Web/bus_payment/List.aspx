@@ -41,8 +41,8 @@
                                 </ItemTemplate>
                             </asp:TemplateField> 
                             
-		<asp:BoundField DataField="payment_channel" HeaderText="payment_channel" SortExpression="payment_channel" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="payment_type" HeaderText="payment_type" SortExpression="payment_type" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="pay_channel" HeaderText="pay_channel" SortExpression="pay_channel" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="pay_type" HeaderText="pay_type" SortExpression="pay_type" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="amount" HeaderText="amount" SortExpression="amount" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="order_id" HeaderText="order_id" SortExpression="order_id" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="user_id" HeaderText="user_id" SortExpression="user_id" ItemStyle-HorizontalAlign="Center"  /> 

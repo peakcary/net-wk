@@ -44,10 +44,10 @@
 		<asp:BoundField DataField="user_type" HeaderText="user_type" SortExpression="user_type" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="pwd" HeaderText="pwd" SortExpression="pwd" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="nickname" HeaderText="nickname" SortExpression="nickname" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="status" HeaderText="status" SortExpression="status" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="phone_num" HeaderText="phone_num" SortExpression="phone_num" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="pic_url" HeaderText="pic_url" SortExpression="pic_url" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="sex" HeaderText="sex" SortExpression="sex" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="code" HeaderText="code" SortExpression="code" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="generate_time" HeaderText="generate_time" SortExpression="generate_time" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="cur_deviceId" HeaderText="cur_deviceId" SortExpression="cur_deviceId" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="is_delete" HeaderText="is_delete" SortExpression="is_delete" ItemStyle-HorizontalAlign="Center"  /> 

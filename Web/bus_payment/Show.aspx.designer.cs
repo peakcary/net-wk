@@ -18,8 +18,8 @@ namespace WK.Web.bus_payment {
     /// </remarks>
     public partial class Show {
         	protected global::System.Web.UI.WebControls.Label lblid;
-	protected global::System.Web.UI.WebControls.Label lblpayment_channel;
-	protected global::System.Web.UI.WebControls.Label lblpayment_type;
+	protected global::System.Web.UI.WebControls.Label lblpay_channel;
+	protected global::System.Web.UI.WebControls.Label lblpay_type;
 	protected global::System.Web.UI.WebControls.Label lblamount;
 	protected global::System.Web.UI.WebControls.Label lblorder_id;
 	protected global::System.Web.UI.WebControls.Label lbluser_id;

@@ -23,10 +23,24 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		dish_type
+		dish_time
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lbldish_type" runat="server"></asp:Label>
+		<asp:Label id="lbldish_time" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		eat_type
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lbleat_type" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		dish_tag
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lbldish_tag" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
@@ -69,6 +83,13 @@
 	：</td>
 	<td height="25" width="*" align="left">
 		<asp:Label id="lbldiscount_price" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		status
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblstatus" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

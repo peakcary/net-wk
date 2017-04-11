@@ -19,13 +19,16 @@ namespace WK.Web.bus_dish {
     public partial class Modify {
         	protected global::System.Web.UI.WebControls.Label lblid;
 		protected global::System.Web.UI.WebControls.TextBox txtmarket_id;
-		protected global::System.Web.UI.WebControls.TextBox txtdish_type;
+		protected global::System.Web.UI.WebControls.TextBox txtdish_time;
+		protected global::System.Web.UI.WebControls.TextBox txteat_type;
+		protected global::System.Web.UI.WebControls.TextBox txtdish_tag;
 		protected global::System.Web.UI.WebControls.TextBox txtname_en;
 		protected global::System.Web.UI.WebControls.TextBox txtname_cn;
 		protected global::System.Web.UI.WebControls.TextBox txtdescription_en;
 		protected global::System.Web.UI.WebControls.TextBox txtdescription_cn;
 		protected global::System.Web.UI.WebControls.TextBox txtoriginal_price;
 		protected global::System.Web.UI.WebControls.TextBox txtdiscount_price;
+		protected global::System.Web.UI.WebControls.TextBox txtstatus;
 		protected global::System.Web.UI.WebControls.TextBox txtsales_total;
 		protected global::System.Web.UI.WebControls.TextBox txtsort;
 		protected global::System.Web.UI.WebControls.TextBox txtis_delete;

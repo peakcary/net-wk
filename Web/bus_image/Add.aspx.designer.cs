@@ -19,6 +19,7 @@ namespace WK.Web.bus_image {
     public partial class Add 
     {
         
+		protected global::System.Web.UI.WebControls.TextBox txtcorrelation_id;
 		protected global::System.Web.UI.WebControls.TextBox txtbus_type;
 		protected global::System.Web.UI.WebControls.TextBox txtimg_type;
 		protected global::System.Web.UI.WebControls.TextBox txturl;

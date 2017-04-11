@@ -35,7 +35,7 @@ namespace WK.Web.bus_market
 		this.lblmarkket_code.Text=model.markket_code;
 		this.lblname_en.Text=model.name_en;
 		this.lblname_cn.Text=model.name_cn;
-		this.lblmarket_type.Text=model.market_type.ToString();
+		this.lblmarket_type.Text=model.market_type;
 		this.lblarea_id.Text=model.area_id.ToString();
 		this.lbllon.Text=model.lon.ToString();
 		this.lbllat.Text=model.lat.ToString();

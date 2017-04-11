@@ -46,18 +46,21 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_dish(");
-			strSql.Append("market_id,dish_type,name_en,name_cn,description_en,description_cn,original_price,discount_price,sales_total,sort,is_delete,remark,create_by,create_date,update_by,update_date)");
+			strSql.Append("market_id,dish_time,eat_type,dish_tag,name_en,name_cn,description_en,description_cn,original_price,discount_price,status,sales_total,sort,is_delete,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@market_id,@dish_type,@name_en,@name_cn,@description_en,@description_cn,@original_price,@discount_price,@sales_total,@sort,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
+			strSql.Append("@market_id,@dish_time,@eat_type,@dish_tag,@name_en,@name_cn,@description_en,@description_cn,@original_price,@discount_price,@status,@sales_total,@sort,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
-					new MySqlParameter("@dish_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@dish_time", MySqlDbType.Int32,11),
+					new MySqlParameter("@eat_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@dish_tag", MySqlDbType.VarChar,500),
 					new MySqlParameter("@name_en", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_cn", MySqlDbType.VarChar,100),
 					new MySqlParameter("@description_en", MySqlDbType.VarChar,1000),
 					new MySqlParameter("@description_cn", MySqlDbType.VarChar,1000),
 					new MySqlParameter("@original_price", MySqlDbType.Decimal,10),
 					new MySqlParameter("@discount_price", MySqlDbType.Decimal,10),
+					new MySqlParameter("@status", MySqlDbType.Int32,11),
 					new MySqlParameter("@sales_total", MySqlDbType.Int32,11),
 					new MySqlParameter("@sort", MySqlDbType.Int32,11),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
@@ -67,21 +70,24 @@ namespace WK.DAL
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@update_date", MySqlDbType.DateTime)};
 			parameters[0].Value = model.market_id;
-			parameters[1].Value = model.dish_type;
-			parameters[2].Value = model.name_en;
-			parameters[3].Value = model.name_cn;
-			parameters[4].Value = model.description_en;
-			parameters[5].Value = model.description_cn;
-			parameters[6].Value = model.original_price;
-			parameters[7].Value = model.discount_price;
-			parameters[8].Value = model.sales_total;
-			parameters[9].Value = model.sort;
-			parameters[10].Value = model.is_delete;
-			parameters[11].Value = model.remark;
-			parameters[12].Value = model.create_by;
-			parameters[13].Value = model.create_date;
-			parameters[14].Value = model.update_by;
-			parameters[15].Value = model.update_date;
+			parameters[1].Value = model.dish_time;
+			parameters[2].Value = model.eat_type;
+			parameters[3].Value = model.dish_tag;
+			parameters[4].Value = model.name_en;
+			parameters[5].Value = model.name_cn;
+			parameters[6].Value = model.description_en;
+			parameters[7].Value = model.description_cn;
+			parameters[8].Value = model.original_price;
+			parameters[9].Value = model.discount_price;
+			parameters[10].Value = model.status;
+			parameters[11].Value = model.sales_total;
+			parameters[12].Value = model.sort;
+			parameters[13].Value = model.is_delete;
+			parameters[14].Value = model.remark;
+			parameters[15].Value = model.create_by;
+			parameters[16].Value = model.create_date;
+			parameters[17].Value = model.update_by;
+			parameters[18].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -101,13 +107,16 @@ namespace WK.DAL
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update bus_dish set ");
 			strSql.Append("market_id=@market_id,");
-			strSql.Append("dish_type=@dish_type,");
+			strSql.Append("dish_time=@dish_time,");
+			strSql.Append("eat_type=@eat_type,");
+			strSql.Append("dish_tag=@dish_tag,");
 			strSql.Append("name_en=@name_en,");
 			strSql.Append("name_cn=@name_cn,");
 			strSql.Append("description_en=@description_en,");
 			strSql.Append("description_cn=@description_cn,");
 			strSql.Append("original_price=@original_price,");
 			strSql.Append("discount_price=@discount_price,");
+			strSql.Append("status=@status,");
 			strSql.Append("sales_total=@sales_total,");
 			strSql.Append("sort=@sort,");
 			strSql.Append("is_delete=@is_delete,");
@@ -119,13 +128,16 @@ namespace WK.DAL
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
-					new MySqlParameter("@dish_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@dish_time", MySqlDbType.Int32,11),
+					new MySqlParameter("@eat_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@dish_tag", MySqlDbType.VarChar,500),
 					new MySqlParameter("@name_en", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_cn", MySqlDbType.VarChar,100),
 					new MySqlParameter("@description_en", MySqlDbType.VarChar,1000),
 					new MySqlParameter("@description_cn", MySqlDbType.VarChar,1000),
 					new MySqlParameter("@original_price", MySqlDbType.Decimal,10),
 					new MySqlParameter("@discount_price", MySqlDbType.Decimal,10),
+					new MySqlParameter("@status", MySqlDbType.Int32,11),
 					new MySqlParameter("@sales_total", MySqlDbType.Int32,11),
 					new MySqlParameter("@sort", MySqlDbType.Int32,11),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
@@ -136,22 +148,25 @@ namespace WK.DAL
 					new MySqlParameter("@update_date", MySqlDbType.DateTime),
 					new MySqlParameter("@id", MySqlDbType.Int32,11)};
 			parameters[0].Value = model.market_id;
-			parameters[1].Value = model.dish_type;
-			parameters[2].Value = model.name_en;
-			parameters[3].Value = model.name_cn;
-			parameters[4].Value = model.description_en;
-			parameters[5].Value = model.description_cn;
-			parameters[6].Value = model.original_price;
-			parameters[7].Value = model.discount_price;
-			parameters[8].Value = model.sales_total;
-			parameters[9].Value = model.sort;
-			parameters[10].Value = model.is_delete;
-			parameters[11].Value = model.remark;
-			parameters[12].Value = model.create_by;
-			parameters[13].Value = model.create_date;
-			parameters[14].Value = model.update_by;
-			parameters[15].Value = model.update_date;
-			parameters[16].Value = model.id;
+			parameters[1].Value = model.dish_time;
+			parameters[2].Value = model.eat_type;
+			parameters[3].Value = model.dish_tag;
+			parameters[4].Value = model.name_en;
+			parameters[5].Value = model.name_cn;
+			parameters[6].Value = model.description_en;
+			parameters[7].Value = model.description_cn;
+			parameters[8].Value = model.original_price;
+			parameters[9].Value = model.discount_price;
+			parameters[10].Value = model.status;
+			parameters[11].Value = model.sales_total;
+			parameters[12].Value = model.sort;
+			parameters[13].Value = model.is_delete;
+			parameters[14].Value = model.remark;
+			parameters[15].Value = model.create_by;
+			parameters[16].Value = model.create_date;
+			parameters[17].Value = model.update_by;
+			parameters[18].Value = model.update_date;
+			parameters[19].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -215,7 +230,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,market_id,dish_type,name_en,name_cn,description_en,description_cn,original_price,discount_price,sales_total,sort,is_delete,remark,create_by,create_date,update_by,update_date from bus_dish ");
+			strSql.Append("select id,market_id,dish_time,eat_type,dish_tag,name_en,name_cn,description_en,description_cn,original_price,discount_price,status,sales_total,sort,is_delete,remark,create_by,create_date,update_by,update_date from bus_dish ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -251,9 +266,17 @@ namespace WK.DAL
 				{
 					model.market_id=int.Parse(row["market_id"].ToString());
 				}
-				if(row["dish_type"]!=null && row["dish_type"].ToString()!="")
+				if(row["dish_time"]!=null && row["dish_time"].ToString()!="")
 				{
-					model.dish_type=int.Parse(row["dish_type"].ToString());
+					model.dish_time=int.Parse(row["dish_time"].ToString());
+				}
+				if(row["eat_type"]!=null && row["eat_type"].ToString()!="")
+				{
+					model.eat_type=int.Parse(row["eat_type"].ToString());
+				}
+				if(row["dish_tag"]!=null)
+				{
+					model.dish_tag=row["dish_tag"].ToString();
 				}
 				if(row["name_en"]!=null)
 				{
@@ -278,6 +301,10 @@ namespace WK.DAL
 				if(row["discount_price"]!=null && row["discount_price"].ToString()!="")
 				{
 					model.discount_price=decimal.Parse(row["discount_price"].ToString());
+				}
+				if(row["status"]!=null && row["status"].ToString()!="")
+				{
+					model.status=int.Parse(row["status"].ToString());
 				}
 				if(row["sales_total"]!=null && row["sales_total"].ToString()!="")
 				{
@@ -321,7 +348,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,market_id,dish_type,name_en,name_cn,description_en,description_cn,original_price,discount_price,sales_total,sort,is_delete,remark,create_by,create_date,update_by,update_date ");
+			strSql.Append("select id,market_id,dish_time,eat_type,dish_tag,name_en,name_cn,description_en,description_cn,original_price,discount_price,status,sales_total,sort,is_delete,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_dish ");
 			if(strWhere.Trim()!="")
 			{
@@ -341,7 +368,7 @@ namespace WK.DAL
 			{
 				strSql.Append(" where "+strWhere);
 			}
-            object obj = DbHelperMySQL.GetSingle(strSql.ToString());
+			object obj = DbHelperSQL.GetSingle(strSql.ToString());
 			if (obj == null)
 			{
 				return 0;
@@ -356,23 +383,25 @@ namespace WK.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT * FROM bus_dish ");
-            if (!string.IsNullOrEmpty(strWhere.Trim()))
-            {
-                strSql.Append(" WHERE " + strWhere);
-            }
-            if (!string.IsNullOrEmpty(orderby.Trim()))
-            {
-                strSql.Append(" order by " + orderby);
-            }
-            else
-            {
-                strSql.Append(" order by id desc");
-            }
-
-            strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex);
-            return DbHelperMySQL.Query(strSql.ToString()); 
+			StringBuilder strSql=new StringBuilder();
+			strSql.Append("SELECT * FROM ( ");
+			strSql.Append(" SELECT ROW_NUMBER() OVER (");
+			if (!string.IsNullOrEmpty(orderby.Trim()))
+			{
+				strSql.Append("order by T." + orderby );
+			}
+			else
+			{
+				strSql.Append("order by T.id desc");
+			}
+			strSql.Append(")AS Row, T.*  from bus_dish T ");
+			if (!string.IsNullOrEmpty(strWhere.Trim()))
+			{
+				strSql.Append(" WHERE " + strWhere);
+			}
+			strSql.Append(" ) TT");
+			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+			return DbHelperMySQL.Query(strSql.ToString());
 		}
 
 		/*

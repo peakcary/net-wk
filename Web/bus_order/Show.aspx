@@ -23,17 +23,17 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		payment_status
+		pay_status
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lblpayment_status" runat="server"></asp:Label>
+		<asp:Label id="lblpay_status" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		market_id
+		pay_type
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lblmarket_id" runat="server"></asp:Label>
+		<asp:Label id="lblpay_type" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
@@ -90,6 +90,27 @@
 	：</td>
 	<td height="25" width="*" align="left">
 		<asp:Label id="lblmeal_num" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_start_time
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblpickup_start_time" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_end_time
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblpickup_end_time" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_date
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblpickup_date" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

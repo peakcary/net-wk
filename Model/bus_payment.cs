@@ -11,8 +11,8 @@ namespace WK.Model
 		{}
 		#region Model
 		private int _id;
-		private int _payment_channel=0;
-		private int _payment_type=0;
+		private int _pay_channel=0;
+		private int _pay_type=0;
 		private decimal _amount=0.00M;
 		private int _order_id;
 		private int _user_id;
@@ -34,18 +34,18 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int payment_channel
+		public int pay_channel
 		{
-			set{ _payment_channel=value;}
-			get{return _payment_channel;}
+			set{ _pay_channel=value;}
+			get{return _pay_channel;}
 		}
 		/// <summary>
 		/// 
 		/// </summary>
-		public int payment_type
+		public int pay_type
 		{
-			set{ _payment_type=value;}
-			get{return _payment_type;}
+			set{ _pay_type=value;}
+			get{return _pay_type;}
 		}
 		/// <summary>
 		/// 

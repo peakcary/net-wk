@@ -39,6 +39,7 @@ namespace WK.Web.bus_order_dish
 		this.lblunit_original_price.Text=model.unit_original_price.ToString();
 		this.lblunit_discount_price.Text=model.unit_discount_price.ToString();
 		this.lblcount.Text=model.count.ToString();
+		this.lblsize_list.Text=model.size_list;
 		this.lblis_delete.Text=model.is_delete.ToString();
 		this.lblremark.Text=model.remark;
 		this.lblcreate_by.Text=model.create_by.ToString();

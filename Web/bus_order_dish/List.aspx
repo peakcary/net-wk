@@ -48,6 +48,7 @@
 		<asp:BoundField DataField="unit_original_price" HeaderText="unit_original_price" SortExpression="unit_original_price" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="unit_discount_price" HeaderText="unit_discount_price" SortExpression="unit_discount_price" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="count" HeaderText="count" SortExpression="count" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="size_list" HeaderText="size_list" SortExpression="size_list" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="is_delete" HeaderText="is_delete" SortExpression="is_delete" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="remark" HeaderText="remark" SortExpression="remark" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="create_by" HeaderText="create_by" SortExpression="create_by" ItemStyle-HorizontalAlign="Center"  /> 

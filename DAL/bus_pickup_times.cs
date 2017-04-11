@@ -46,13 +46,15 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_pickup_times(");
-			strSql.Append("pickup_address_id,times_id,dish_type,is_delete,remark,create_by,create_date,update_by,update_date)");
+			strSql.Append("pickup_address_id,pickup_time,eat_type,pickup_start_time,pickup_end_time,is_delete,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@pickup_address_id,@times_id,@dish_type,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
+			strSql.Append("@pickup_address_id,@pickup_time,@eat_type,@pickup_start_time,@pickup_end_time,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@pickup_address_id", MySqlDbType.Int32,11),
-					new MySqlParameter("@times_id", MySqlDbType.Int32,11),
-					new MySqlParameter("@dish_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@pickup_time", MySqlDbType.Int32,11),
+					new MySqlParameter("@eat_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@pickup_start_time", MySqlDbType.Time),
+					new MySqlParameter("@pickup_end_time", MySqlDbType.Time),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -60,14 +62,16 @@ namespace WK.DAL
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@update_date", MySqlDbType.DateTime)};
 			parameters[0].Value = model.pickup_address_id;
-			parameters[1].Value = model.times_id;
-			parameters[2].Value = model.dish_type;
-			parameters[3].Value = model.is_delete;
-			parameters[4].Value = model.remark;
-			parameters[5].Value = model.create_by;
-			parameters[6].Value = model.create_date;
-			parameters[7].Value = model.update_by;
-			parameters[8].Value = model.update_date;
+			parameters[1].Value = model.pickup_time;
+			parameters[2].Value = model.eat_type;
+			parameters[3].Value = model.pickup_start_time;
+			parameters[4].Value = model.pickup_end_time;
+			parameters[5].Value = model.is_delete;
+			parameters[6].Value = model.remark;
+			parameters[7].Value = model.create_by;
+			parameters[8].Value = model.create_date;
+			parameters[9].Value = model.update_by;
+			parameters[10].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -87,8 +91,10 @@ namespace WK.DAL
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update bus_pickup_times set ");
 			strSql.Append("pickup_address_id=@pickup_address_id,");
-			strSql.Append("times_id=@times_id,");
-			strSql.Append("dish_type=@dish_type,");
+			strSql.Append("pickup_time=@pickup_time,");
+			strSql.Append("eat_type=@eat_type,");
+			strSql.Append("pickup_start_time=@pickup_start_time,");
+			strSql.Append("pickup_end_time=@pickup_end_time,");
 			strSql.Append("is_delete=@is_delete,");
 			strSql.Append("remark=@remark,");
 			strSql.Append("create_by=@create_by,");
@@ -98,8 +104,10 @@ namespace WK.DAL
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@pickup_address_id", MySqlDbType.Int32,11),
-					new MySqlParameter("@times_id", MySqlDbType.Int32,11),
-					new MySqlParameter("@dish_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@pickup_time", MySqlDbType.Int32,11),
+					new MySqlParameter("@eat_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@pickup_start_time", MySqlDbType.Time),
+					new MySqlParameter("@pickup_end_time", MySqlDbType.Time),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -108,15 +116,17 @@ namespace WK.DAL
 					new MySqlParameter("@update_date", MySqlDbType.DateTime),
 					new MySqlParameter("@id", MySqlDbType.Int32,11)};
 			parameters[0].Value = model.pickup_address_id;
-			parameters[1].Value = model.times_id;
-			parameters[2].Value = model.dish_type;
-			parameters[3].Value = model.is_delete;
-			parameters[4].Value = model.remark;
-			parameters[5].Value = model.create_by;
-			parameters[6].Value = model.create_date;
-			parameters[7].Value = model.update_by;
-			parameters[8].Value = model.update_date;
-			parameters[9].Value = model.id;
+			parameters[1].Value = model.pickup_time;
+			parameters[2].Value = model.eat_type;
+			parameters[3].Value = model.pickup_start_time;
+			parameters[4].Value = model.pickup_end_time;
+			parameters[5].Value = model.is_delete;
+			parameters[6].Value = model.remark;
+			parameters[7].Value = model.create_by;
+			parameters[8].Value = model.create_date;
+			parameters[9].Value = model.update_by;
+			parameters[10].Value = model.update_date;
+			parameters[11].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -180,7 +190,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,pickup_address_id,times_id,dish_type,is_delete,remark,create_by,create_date,update_by,update_date from bus_pickup_times ");
+			strSql.Append("select id,pickup_address_id,pickup_time,eat_type,pickup_start_time,pickup_end_time,is_delete,remark,create_by,create_date,update_by,update_date from bus_pickup_times ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -216,13 +226,21 @@ namespace WK.DAL
 				{
 					model.pickup_address_id=int.Parse(row["pickup_address_id"].ToString());
 				}
-				if(row["times_id"]!=null && row["times_id"].ToString()!="")
+				if(row["pickup_time"]!=null && row["pickup_time"].ToString()!="")
 				{
-					model.times_id=int.Parse(row["times_id"].ToString());
+					model.pickup_time=int.Parse(row["pickup_time"].ToString());
 				}
-				if(row["dish_type"]!=null && row["dish_type"].ToString()!="")
+				if(row["eat_type"]!=null && row["eat_type"].ToString()!="")
 				{
-					model.dish_type=int.Parse(row["dish_type"].ToString());
+					model.eat_type=int.Parse(row["eat_type"].ToString());
+				}
+				if(row["pickup_start_time"]!=null && row["pickup_start_time"].ToString()!="")
+				{
+					model.pickup_start_time=DateTime.Parse(row["pickup_start_time"].ToString());
+				}
+				if(row["pickup_end_time"]!=null && row["pickup_end_time"].ToString()!="")
+				{
+					model.pickup_end_time=DateTime.Parse(row["pickup_end_time"].ToString());
 				}
 				if(row["is_delete"]!=null && row["is_delete"].ToString()!="")
 				{
@@ -258,7 +276,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,pickup_address_id,times_id,dish_type,is_delete,remark,create_by,create_date,update_by,update_date ");
+			strSql.Append("select id,pickup_address_id,pickup_time,eat_type,pickup_start_time,pickup_end_time,is_delete,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_pickup_times ");
 			if(strWhere.Trim()!="")
 			{

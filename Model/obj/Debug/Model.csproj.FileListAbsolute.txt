@@ -7,4 +7,3 @@ C:\Project\net-wk\Model\bin\Debug\WK.Model.dll
 C:\Project\net-wk\Model\bin\Debug\WK.Model.pdb
 C:\Project\net-wk\Model\obj\Debug\WK.Model.dll
 C:\Project\net-wk\Model\obj\Debug\WK.Model.pdb
-C:\Project\net-wk\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

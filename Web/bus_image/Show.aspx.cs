@@ -32,6 +32,7 @@ namespace WK.Web.bus_image
 		WK.BLL.bus_image bll=new WK.BLL.bus_image();
 		WK.Model.bus_image model=bll.GetModel(id);
 		this.lblid.Text=model.id.ToString();
+		this.lblcorrelation_id.Text=model.correlation_id.ToString();
 		this.lblbus_type.Text=model.bus_type.ToString();
 		this.lblimg_type.Text=model.img_type.ToString();
 		this.lblurl.Text=model.url;

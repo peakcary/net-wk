@@ -21,10 +21,10 @@ namespace WK.Web.bus_user {
 	protected global::System.Web.UI.WebControls.Label lbluser_type;
 	protected global::System.Web.UI.WebControls.Label lblpwd;
 	protected global::System.Web.UI.WebControls.Label lblnickname;
+	protected global::System.Web.UI.WebControls.Label lblstatus;
 	protected global::System.Web.UI.WebControls.Label lblphone_num;
 	protected global::System.Web.UI.WebControls.Label lblpic_url;
 	protected global::System.Web.UI.WebControls.Label lblsex;
-	protected global::System.Web.UI.WebControls.Label lblcode;
 	protected global::System.Web.UI.WebControls.Label lblgenerate_time;
 	protected global::System.Web.UI.WebControls.Label lblcur_deviceId;
 	protected global::System.Web.UI.WebControls.Label lblis_delete;

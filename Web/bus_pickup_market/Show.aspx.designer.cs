@@ -21,6 +21,7 @@ namespace WK.Web.bus_pickup_market {
 	protected global::System.Web.UI.WebControls.Label lblpickup_address_id;
 	protected global::System.Web.UI.WebControls.Label lblmarket_id;
 	protected global::System.Web.UI.WebControls.Label lblis_delete;
+	protected global::System.Web.UI.WebControls.Label lblsort;
 	protected global::System.Web.UI.WebControls.Label lblremark;
 	protected global::System.Web.UI.WebControls.Label lblcreate_by;
 	protected global::System.Web.UI.WebControls.Label lblcreate_date;

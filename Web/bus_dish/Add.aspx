@@ -18,10 +18,24 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		dish_type
+		dish_time
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:TextBox id="txtdish_type" runat="server" Width="200px"></asp:TextBox>
+		<asp:TextBox id="txtdish_time" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		eat_type
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txteat_type" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		dish_tag
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtdish_tag" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
@@ -64,6 +78,13 @@
 	：</td>
 	<td height="25" width="*" align="left">
 		<asp:TextBox id="txtdiscount_price" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		status
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtstatus" runat="server" Width="200px"></asp:TextBox>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

@@ -28,9 +28,17 @@ namespace WK.Web.bus_dish
 			{
 				strErr+="market_id格式错误！\\n";	
 			}
-			if(!PageValidate.IsNumber(txtdish_type.Text))
+			if(!PageValidate.IsNumber(txtdish_time.Text))
 			{
-				strErr+="dish_type格式错误！\\n";	
+				strErr+="dish_time格式错误！\\n";	
+			}
+			if(!PageValidate.IsNumber(txteat_type.Text))
+			{
+				strErr+="eat_type格式错误！\\n";	
+			}
+			if(this.txtdish_tag.Text.Trim().Length==0)
+			{
+				strErr+="dish_tag不能为空！\\n";	
 			}
 			if(this.txtname_en.Text.Trim().Length==0)
 			{
@@ -55,6 +63,10 @@ namespace WK.Web.bus_dish
 			if(!PageValidate.IsDecimal(txtdiscount_price.Text))
 			{
 				strErr+="discount_price格式错误！\\n";	
+			}
+			if(!PageValidate.IsNumber(txtstatus.Text))
+			{
+				strErr+="status格式错误！\\n";	
 			}
 			if(!PageValidate.IsNumber(txtsales_total.Text))
 			{
@@ -95,13 +107,16 @@ namespace WK.Web.bus_dish
 				return;
 			}
 			int market_id=int.Parse(this.txtmarket_id.Text);
-			int dish_type=int.Parse(this.txtdish_type.Text);
+			int dish_time=int.Parse(this.txtdish_time.Text);
+			int eat_type=int.Parse(this.txteat_type.Text);
+			string dish_tag=this.txtdish_tag.Text;
 			string name_en=this.txtname_en.Text;
 			string name_cn=this.txtname_cn.Text;
 			string description_en=this.txtdescription_en.Text;
 			string description_cn=this.txtdescription_cn.Text;
 			decimal original_price=decimal.Parse(this.txtoriginal_price.Text);
 			decimal discount_price=decimal.Parse(this.txtdiscount_price.Text);
+			int status=int.Parse(this.txtstatus.Text);
 			int sales_total=int.Parse(this.txtsales_total.Text);
 			int sort=int.Parse(this.txtsort.Text);
 			int is_delete=int.Parse(this.txtis_delete.Text);
@@ -113,13 +128,16 @@ namespace WK.Web.bus_dish
 
 			WK.Model.bus_dish model=new WK.Model.bus_dish();
 			model.market_id=market_id;
-			model.dish_type=dish_type;
+			model.dish_time=dish_time;
+			model.eat_type=eat_type;
+			model.dish_tag=dish_tag;
 			model.name_en=name_en;
 			model.name_cn=name_cn;
 			model.description_en=description_en;
 			model.description_cn=description_cn;
 			model.original_price=original_price;
 			model.discount_price=discount_price;
+			model.status=status;
 			model.sales_total=sales_total;
 			model.sort=sort;
 			model.is_delete=is_delete;

@@ -18,6 +18,7 @@ namespace WK.Web.bus_image {
     /// </remarks>
     public partial class Show {
         	protected global::System.Web.UI.WebControls.Label lblid;
+	protected global::System.Web.UI.WebControls.Label lblcorrelation_id;
 	protected global::System.Web.UI.WebControls.Label lblbus_type;
 	protected global::System.Web.UI.WebControls.Label lblimg_type;
 	protected global::System.Web.UI.WebControls.Label lblurl;

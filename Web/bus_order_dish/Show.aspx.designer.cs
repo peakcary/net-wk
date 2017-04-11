@@ -25,6 +25,7 @@ namespace WK.Web.bus_order_dish {
 	protected global::System.Web.UI.WebControls.Label lblunit_original_price;
 	protected global::System.Web.UI.WebControls.Label lblunit_discount_price;
 	protected global::System.Web.UI.WebControls.Label lblcount;
+	protected global::System.Web.UI.WebControls.Label lblsize_list;
 	protected global::System.Web.UI.WebControls.Label lblis_delete;
 	protected global::System.Web.UI.WebControls.Label lblremark;
 	protected global::System.Web.UI.WebControls.Label lblcreate_by;

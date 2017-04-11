@@ -65,6 +65,13 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
+		dilivery_user_id
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lbldilivery_user_id" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
 		sort
 	：</td>
 	<td height="25" width="*" align="left">

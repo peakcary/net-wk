@@ -32,8 +32,8 @@ namespace WK.Web.bus_payment
 		WK.BLL.bus_payment bll=new WK.BLL.bus_payment();
 		WK.Model.bus_payment model=bll.GetModel(id);
 		this.lblid.Text=model.id.ToString();
-		this.lblpayment_channel.Text=model.payment_channel.ToString();
-		this.lblpayment_type.Text=model.payment_type.ToString();
+		this.lblpay_channel.Text=model.pay_channel.ToString();
+		this.lblpay_type.Text=model.pay_type.ToString();
 		this.lblamount.Text=model.amount.ToString();
 		this.lblorder_id.Text=model.order_id.ToString();
 		this.lbluser_id.Text=model.user_id.ToString();

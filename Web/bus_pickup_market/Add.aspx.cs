@@ -36,6 +36,10 @@ namespace WK.Web.bus_pickup_market
 			{
 				strErr+="is_delete格式错误！\\n";	
 			}
+			if(!PageValidate.IsNumber(txtsort.Text))
+			{
+				strErr+="sort格式错误！\\n";	
+			}
 			if(this.txtremark.Text.Trim().Length==0)
 			{
 				strErr+="remark不能为空！\\n";	
@@ -65,6 +69,7 @@ namespace WK.Web.bus_pickup_market
 			int pickup_address_id=int.Parse(this.txtpickup_address_id.Text);
 			int market_id=int.Parse(this.txtmarket_id.Text);
 			int is_delete=int.Parse(this.txtis_delete.Text);
+			int sort=int.Parse(this.txtsort.Text);
 			string remark=this.txtremark.Text;
 			int create_by=int.Parse(this.txtcreate_by.Text);
 			DateTime create_date=DateTime.Parse(this.txtcreate_date.Text);
@@ -75,6 +80,7 @@ namespace WK.Web.bus_pickup_market
 			model.pickup_address_id=pickup_address_id;
 			model.market_id=market_id;
 			model.is_delete=is_delete;
+			model.sort=sort;
 			model.remark=remark;
 			model.create_by=create_by;
 			model.create_date=create_date;

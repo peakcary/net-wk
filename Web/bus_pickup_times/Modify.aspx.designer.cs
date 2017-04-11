@@ -19,8 +19,10 @@ namespace WK.Web.bus_pickup_times {
     public partial class Modify {
         	protected global::System.Web.UI.WebControls.Label lblid;
 		protected global::System.Web.UI.WebControls.TextBox txtpickup_address_id;
-		protected global::System.Web.UI.WebControls.TextBox txttimes_id;
-		protected global::System.Web.UI.WebControls.TextBox txtdish_type;
+		protected global::System.Web.UI.WebControls.TextBox txtpickup_time;
+		protected global::System.Web.UI.WebControls.TextBox txteat_type;
+		protected global::System.Web.UI.WebControls.TextBox txtpickup_start_time;
+		protected global::System.Web.UI.WebControls.TextBox txtpickup_end_time;
 		protected global::System.Web.UI.WebControls.TextBox txtis_delete;
 		protected global::System.Web.UI.WebControls.TextBox txtremark;
 		protected global::System.Web.UI.WebControls.TextBox txtcreate_by;

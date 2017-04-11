@@ -16,17 +16,17 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		payment_channel
+		pay_channel
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lblpayment_channel" runat="server"></asp:Label>
+		<asp:Label id="lblpay_channel" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		payment_type
+		pay_type
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lblpayment_type" runat="server"></asp:Label>
+		<asp:Label id="lblpay_type" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

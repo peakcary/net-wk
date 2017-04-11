@@ -28,13 +28,13 @@ namespace WK.Web.bus_order
 			{
 				strErr+="order_status格式错误！\\n";	
 			}
-			if(!PageValidate.IsNumber(txtpayment_status.Text))
+			if(!PageValidate.IsNumber(txtpay_status.Text))
 			{
-				strErr+="payment_status格式错误！\\n";	
+				strErr+="pay_status格式错误！\\n";	
 			}
-			if(!PageValidate.IsNumber(txtmarket_id.Text))
+			if(!PageValidate.IsNumber(txtpay_type.Text))
 			{
-				strErr+="market_id格式错误！\\n";	
+				strErr+="pay_type格式错误！\\n";	
 			}
 			if(!PageValidate.IsNumber(txtuser_id.Text))
 			{
@@ -68,6 +68,18 @@ namespace WK.Web.bus_order
 			{
 				strErr+="meal_num格式错误！\\n";	
 			}
+			if(!PageValidate.IsDateTime(txtpickup_start_time.Text))
+			{
+				strErr+="pickup_start_time格式错误！\\n";	
+			}
+			if(this.txtpickup_end_time.Text.Trim().Length==0)
+			{
+				strErr+="pickup_end_time不能为空！\\n";	
+			}
+			if(!PageValidate.IsDateTime(txtpickup_date.Text))
+			{
+				strErr+="pickup_date格式错误！\\n";	
+			}
 			if(!PageValidate.IsNumber(txtis_delete.Text))
 			{
 				strErr+="is_delete格式错误！\\n";	
@@ -99,8 +111,8 @@ namespace WK.Web.bus_order
 				return;
 			}
 			int order_status=int.Parse(this.txtorder_status.Text);
-			int payment_status=int.Parse(this.txtpayment_status.Text);
-			int market_id=int.Parse(this.txtmarket_id.Text);
+			int pay_status=int.Parse(this.txtpay_status.Text);
+			int pay_type=int.Parse(this.txtpay_type.Text);
 			int user_id=int.Parse(this.txtuser_id.Text);
 			int dilivery_user_id=int.Parse(this.txtdilivery_user_id.Text);
 			int pickup_address_id=int.Parse(this.txtpickup_address_id.Text);
@@ -109,6 +121,9 @@ namespace WK.Web.bus_order
 			decimal total_plan_price=decimal.Parse(this.txttotal_plan_price.Text);
 			decimal total_real_price=decimal.Parse(this.txttotal_real_price.Text);
 			int meal_num=int.Parse(this.txtmeal_num.Text);
+			DateTime pickup_start_time=DateTime.Parse(this.txtpickup_start_time.Text);
+			string pickup_end_time=this.txtpickup_end_time.Text;
+			DateTime pickup_date=DateTime.Parse(this.txtpickup_date.Text);
 			int is_delete=int.Parse(this.txtis_delete.Text);
 			string remark=this.txtremark.Text;
 			int create_by=int.Parse(this.txtcreate_by.Text);
@@ -118,8 +133,8 @@ namespace WK.Web.bus_order
 
 			WK.Model.bus_order model=new WK.Model.bus_order();
 			model.order_status=order_status;
-			model.payment_status=payment_status;
-			model.market_id=market_id;
+			model.pay_status=pay_status;
+			model.pay_type=pay_type;
 			model.user_id=user_id;
 			model.dilivery_user_id=dilivery_user_id;
 			model.pickup_address_id=pickup_address_id;
@@ -128,6 +143,9 @@ namespace WK.Web.bus_order
 			model.total_plan_price=total_plan_price;
 			model.total_real_price=total_real_price;
 			model.meal_num=meal_num;
+			model.pickup_start_time=pickup_start_time;
+			model.pickup_end_time=pickup_end_time;
+			model.pickup_date=pickup_date;
 			model.is_delete=is_delete;
 			model.remark=remark;
 			model.create_by=create_by;

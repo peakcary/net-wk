@@ -34,8 +34,10 @@ namespace WK.Web.bus_pickup_times
 		WK.Model.bus_pickup_times model=bll.GetModel(id);
 		this.lblid.Text=model.id.ToString();
 		this.txtpickup_address_id.Text=model.pickup_address_id.ToString();
-		this.txttimes_id.Text=model.times_id.ToString();
-		this.txtdish_type.Text=model.dish_type.ToString();
+		this.txtpickup_time.Text=model.pickup_time.ToString();
+		this.txteat_type.Text=model.eat_type.ToString();
+		this.txtpickup_start_time.Text=model.pickup_start_time.ToString();
+		this.txtpickup_end_time.Text=model.pickup_end_time.ToString();
 		this.txtis_delete.Text=model.is_delete.ToString();
 		this.txtremark.Text=model.remark;
 		this.txtcreate_by.Text=model.create_by.ToString();
@@ -53,13 +55,21 @@ namespace WK.Web.bus_pickup_times
 			{
 				strErr+="pickup_address_id格式错误！\\n";	
 			}
-			if(!PageValidate.IsNumber(txttimes_id.Text))
+			if(!PageValidate.IsNumber(txtpickup_time.Text))
 			{
-				strErr+="times_id格式错误！\\n";	
+				strErr+="pickup_time格式错误！\\n";	
 			}
-			if(!PageValidate.IsNumber(txtdish_type.Text))
+			if(!PageValidate.IsNumber(txteat_type.Text))
 			{
-				strErr+="dish_type格式错误！\\n";	
+				strErr+="eat_type格式错误！\\n";	
+			}
+			if(!PageValidate.IsDateTime(txtpickup_start_time.Text))
+			{
+				strErr+="pickup_start_time格式错误！\\n";	
+			}
+			if(!PageValidate.IsDateTime(txtpickup_end_time.Text))
+			{
+				strErr+="pickup_end_time格式错误！\\n";	
 			}
 			if(!PageValidate.IsNumber(txtis_delete.Text))
 			{
@@ -93,8 +103,10 @@ namespace WK.Web.bus_pickup_times
 			}
 			int id=int.Parse(this.lblid.Text);
 			int pickup_address_id=int.Parse(this.txtpickup_address_id.Text);
-			int times_id=int.Parse(this.txttimes_id.Text);
-			int dish_type=int.Parse(this.txtdish_type.Text);
+			int pickup_time=int.Parse(this.txtpickup_time.Text);
+			int eat_type=int.Parse(this.txteat_type.Text);
+			DateTime pickup_start_time=DateTime.Parse(this.txtpickup_start_time.Text);
+			DateTime pickup_end_time=DateTime.Parse(this.txtpickup_end_time.Text);
 			int is_delete=int.Parse(this.txtis_delete.Text);
 			string remark=this.txtremark.Text;
 			int create_by=int.Parse(this.txtcreate_by.Text);
@@ -106,8 +118,10 @@ namespace WK.Web.bus_pickup_times
 			WK.Model.bus_pickup_times model=new WK.Model.bus_pickup_times();
 			model.id=id;
 			model.pickup_address_id=pickup_address_id;
-			model.times_id=times_id;
-			model.dish_type=dish_type;
+			model.pickup_time=pickup_time;
+			model.eat_type=eat_type;
+			model.pickup_start_time=pickup_start_time;
+			model.pickup_end_time=pickup_end_time;
 			model.is_delete=is_delete;
 			model.remark=remark;
 			model.create_by=create_by;

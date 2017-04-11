@@ -35,6 +35,7 @@ namespace WK.Web.bus_pickup_market
 		this.lblpickup_address_id.Text=model.pickup_address_id.ToString();
 		this.lblmarket_id.Text=model.market_id.ToString();
 		this.lblis_delete.Text=model.is_delete.ToString();
+		this.lblsort.Text=model.sort.ToString();
 		this.lblremark.Text=model.remark;
 		this.lblcreate_by.Text=model.create_by.ToString();
 		this.lblcreate_date.Text=model.create_date.ToString();

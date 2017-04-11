@@ -14,10 +14,10 @@ namespace WK.Model
 		private int _user_type=0;
 		private string _pwd;
 		private string _nickname;
+		private int _status;
 		private string _phone_num;
 		private string _pic_url;
 		private int _sex=1;
-		private string _code;
 		private DateTime? _generate_time;
 		private string _cur_deviceid;
 		private int _is_delete=0;
@@ -61,6 +61,14 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		public int status
+		{
+			set{ _status=value;}
+			get{return _status;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public string phone_num
 		{
 			set{ _phone_num=value;}
@@ -81,14 +89,6 @@ namespace WK.Model
 		{
 			set{ _sex=value;}
 			get{return _sex;}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public string code
-		{
-			set{ _code=value;}
-			get{return _code;}
 		}
 		/// <summary>
 		/// 

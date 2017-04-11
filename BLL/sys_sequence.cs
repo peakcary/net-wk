@@ -51,7 +51,7 @@ namespace WK.BLL
 		/// </summary>
 		public bool DeleteList(string sequence_namelist )
 		{
-			return dal.DeleteList(sequence_namelist );
+			return dal.DeleteList(Maticsoft.Common.PageValidate.SafeLongFilter(sequence_namelist,0) );
 		}
 
 		/// <summary>

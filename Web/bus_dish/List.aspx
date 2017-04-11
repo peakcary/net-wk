@@ -42,13 +42,16 @@
                             </asp:TemplateField> 
                             
 		<asp:BoundField DataField="market_id" HeaderText="market_id" SortExpression="market_id" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="dish_type" HeaderText="dish_type" SortExpression="dish_type" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="dish_time" HeaderText="dish_time" SortExpression="dish_time" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="eat_type" HeaderText="eat_type" SortExpression="eat_type" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="dish_tag" HeaderText="dish_tag" SortExpression="dish_tag" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="name_en" HeaderText="name_en" SortExpression="name_en" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="name_cn" HeaderText="name_cn" SortExpression="name_cn" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="description_en" HeaderText="description_en" SortExpression="description_en" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="description_cn" HeaderText="description_cn" SortExpression="description_cn" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="original_price" HeaderText="original_price" SortExpression="original_price" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="discount_price" HeaderText="discount_price" SortExpression="discount_price" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="status" HeaderText="status" SortExpression="status" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="sales_total" HeaderText="sales_total" SortExpression="sales_total" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="sort" HeaderText="sort" SortExpression="sort" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="is_delete" HeaderText="is_delete" SortExpression="is_delete" ItemStyle-HorizontalAlign="Center"  /> 

@@ -46,12 +46,12 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_payment(");
-			strSql.Append("payment_channel,payment_type,amount,order_id,user_id,correlation_code,is_delete,remark,create_by,create_date,update_by,update_date)");
+			strSql.Append("pay_channel,pay_type,amount,order_id,user_id,correlation_code,is_delete,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@payment_channel,@payment_type,@amount,@order_id,@user_id,@correlation_code,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
+			strSql.Append("@pay_channel,@pay_type,@amount,@order_id,@user_id,@correlation_code,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@payment_channel", MySqlDbType.Int32,11),
-					new MySqlParameter("@payment_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@pay_channel", MySqlDbType.Int32,11),
+					new MySqlParameter("@pay_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@amount", MySqlDbType.Decimal,10),
 					new MySqlParameter("@order_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@user_id", MySqlDbType.Int32,11),
@@ -62,8 +62,8 @@ namespace WK.DAL
 					new MySqlParameter("@create_date", MySqlDbType.DateTime),
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@update_date", MySqlDbType.DateTime)};
-			parameters[0].Value = model.payment_channel;
-			parameters[1].Value = model.payment_type;
+			parameters[0].Value = model.pay_channel;
+			parameters[1].Value = model.pay_type;
 			parameters[2].Value = model.amount;
 			parameters[3].Value = model.order_id;
 			parameters[4].Value = model.user_id;
@@ -92,8 +92,8 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update bus_payment set ");
-			strSql.Append("payment_channel=@payment_channel,");
-			strSql.Append("payment_type=@payment_type,");
+			strSql.Append("pay_channel=@pay_channel,");
+			strSql.Append("pay_type=@pay_type,");
 			strSql.Append("amount=@amount,");
 			strSql.Append("order_id=@order_id,");
 			strSql.Append("user_id=@user_id,");
@@ -106,8 +106,8 @@ namespace WK.DAL
 			strSql.Append("update_date=@update_date");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@payment_channel", MySqlDbType.Int32,11),
-					new MySqlParameter("@payment_type", MySqlDbType.Int32,11),
+					new MySqlParameter("@pay_channel", MySqlDbType.Int32,11),
+					new MySqlParameter("@pay_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@amount", MySqlDbType.Decimal,10),
 					new MySqlParameter("@order_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@user_id", MySqlDbType.Int32,11),
@@ -119,8 +119,8 @@ namespace WK.DAL
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@update_date", MySqlDbType.DateTime),
 					new MySqlParameter("@id", MySqlDbType.Int32,11)};
-			parameters[0].Value = model.payment_channel;
-			parameters[1].Value = model.payment_type;
+			parameters[0].Value = model.pay_channel;
+			parameters[1].Value = model.pay_type;
 			parameters[2].Value = model.amount;
 			parameters[3].Value = model.order_id;
 			parameters[4].Value = model.user_id;
@@ -195,7 +195,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,payment_channel,payment_type,amount,order_id,user_id,correlation_code,is_delete,remark,create_by,create_date,update_by,update_date from bus_payment ");
+			strSql.Append("select id,pay_channel,pay_type,amount,order_id,user_id,correlation_code,is_delete,remark,create_by,create_date,update_by,update_date from bus_payment ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -227,13 +227,13 @@ namespace WK.DAL
 				{
 					model.id=int.Parse(row["id"].ToString());
 				}
-				if(row["payment_channel"]!=null && row["payment_channel"].ToString()!="")
+				if(row["pay_channel"]!=null && row["pay_channel"].ToString()!="")
 				{
-					model.payment_channel=int.Parse(row["payment_channel"].ToString());
+					model.pay_channel=int.Parse(row["pay_channel"].ToString());
 				}
-				if(row["payment_type"]!=null && row["payment_type"].ToString()!="")
+				if(row["pay_type"]!=null && row["pay_type"].ToString()!="")
 				{
-					model.payment_type=int.Parse(row["payment_type"].ToString());
+					model.pay_type=int.Parse(row["pay_type"].ToString());
 				}
 				if(row["amount"]!=null && row["amount"].ToString()!="")
 				{
@@ -285,7 +285,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,payment_channel,payment_type,amount,order_id,user_id,correlation_code,is_delete,remark,create_by,create_date,update_by,update_date ");
+			strSql.Append("select id,pay_channel,pay_type,amount,order_id,user_id,correlation_code,is_delete,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_payment ");
 			if(strWhere.Trim()!="")
 			{

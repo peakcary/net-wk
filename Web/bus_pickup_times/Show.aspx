@@ -23,17 +23,31 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		times_id
+		pickup_time
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lbltimes_id" runat="server"></asp:Label>
+		<asp:Label id="lblpickup_time" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
-		dish_type
+		eat_type
 	：</td>
 	<td height="25" width="*" align="left">
-		<asp:Label id="lbldish_type" runat="server"></asp:Label>
+		<asp:Label id="lbleat_type" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_start_time
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblpickup_start_time" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
+		pickup_end_time
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblpickup_end_time" runat="server"></asp:Label>
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">

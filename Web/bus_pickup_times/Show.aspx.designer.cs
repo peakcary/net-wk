@@ -19,8 +19,10 @@ namespace WK.Web.bus_pickup_times {
     public partial class Show {
         	protected global::System.Web.UI.WebControls.Label lblid;
 	protected global::System.Web.UI.WebControls.Label lblpickup_address_id;
-	protected global::System.Web.UI.WebControls.Label lbltimes_id;
-	protected global::System.Web.UI.WebControls.Label lbldish_type;
+	protected global::System.Web.UI.WebControls.Label lblpickup_time;
+	protected global::System.Web.UI.WebControls.Label lbleat_type;
+	protected global::System.Web.UI.WebControls.Label lblpickup_start_time;
+	protected global::System.Web.UI.WebControls.Label lblpickup_end_time;
 	protected global::System.Web.UI.WebControls.Label lblis_delete;
 	protected global::System.Web.UI.WebControls.Label lblremark;
 	protected global::System.Web.UI.WebControls.Label lblcreate_by;

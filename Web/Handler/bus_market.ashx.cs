@@ -164,7 +164,7 @@ namespace WK.Web.Handler
             model.description_en = context.Request.Params["description_en"];
             model.lat = decimal.Parse( context.Request.Params["lat"]);
             model.lon = decimal.Parse( context.Request.Params["lon"]);
-            model.market_type =int.Parse( context.Request.Params["market_type"]);
+            model.market_type = context.Request.Params["market_type"];
             model.markket_code = context.Request.Params["markket_code"];
             model.name_cn = context.Request.Params["name_cn"];
             model.name_en = context.Request.Params["name_en"];

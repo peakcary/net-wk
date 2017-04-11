@@ -42,8 +42,8 @@
                             </asp:TemplateField> 
                             
 		<asp:BoundField DataField="order_status" HeaderText="order_status" SortExpression="order_status" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="payment_status" HeaderText="payment_status" SortExpression="payment_status" ItemStyle-HorizontalAlign="Center"  /> 
-		<asp:BoundField DataField="market_id" HeaderText="market_id" SortExpression="market_id" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="pay_status" HeaderText="pay_status" SortExpression="pay_status" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="pay_type" HeaderText="pay_type" SortExpression="pay_type" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="user_id" HeaderText="user_id" SortExpression="user_id" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="dilivery_user_id" HeaderText="dilivery_user_id" SortExpression="dilivery_user_id" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="pickup_address_id" HeaderText="pickup_address_id" SortExpression="pickup_address_id" ItemStyle-HorizontalAlign="Center"  /> 
@@ -52,6 +52,9 @@
 		<asp:BoundField DataField="total_plan_price" HeaderText="total_plan_price" SortExpression="total_plan_price" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="total_real_price" HeaderText="total_real_price" SortExpression="total_real_price" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="meal_num" HeaderText="meal_num" SortExpression="meal_num" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="pickup_start_time" HeaderText="pickup_start_time" SortExpression="pickup_start_time" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="pickup_end_time" HeaderText="pickup_end_time" SortExpression="pickup_end_time" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="pickup_date" HeaderText="pickup_date" SortExpression="pickup_date" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="is_delete" HeaderText="is_delete" SortExpression="is_delete" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="remark" HeaderText="remark" SortExpression="remark" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="create_by" HeaderText="create_by" SortExpression="create_by" ItemStyle-HorizontalAlign="Center"  /> 

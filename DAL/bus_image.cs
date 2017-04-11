@@ -46,10 +46,11 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_image(");
-			strSql.Append("bus_type,img_type,url,sort,is_delete,remark,create_by,create_date,update_by,update_date,correlation_id)");
+			strSql.Append("correlation_id,bus_type,img_type,url,sort,is_delete,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@bus_type,@img_type,@url,@sort,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date,@correlation_id)");
+			strSql.Append("@correlation_id,@bus_type,@img_type,@url,@sort,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
+					new MySqlParameter("@correlation_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@bus_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@img_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@url", MySqlDbType.VarChar,2000),
@@ -59,19 +60,18 @@ namespace WK.DAL
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@create_date", MySqlDbType.DateTime),
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
-					new MySqlParameter("@update_date", MySqlDbType.DateTime),
-					new MySqlParameter("@correlation_id", MySqlDbType.Int32,11)};
-			parameters[0].Value = model.bus_type;
-			parameters[1].Value = model.img_type;
-			parameters[2].Value = model.url;
-			parameters[3].Value = model.sort;
-			parameters[4].Value = model.is_delete;
-			parameters[5].Value = model.remark;
-			parameters[6].Value = model.create_by;
-			parameters[7].Value = model.create_date;
-			parameters[8].Value = model.update_by;
-			parameters[9].Value = model.update_date;
-			parameters[10].Value = model.correlation_id;
+					new MySqlParameter("@update_date", MySqlDbType.DateTime)};
+			parameters[0].Value = model.correlation_id;
+			parameters[1].Value = model.bus_type;
+			parameters[2].Value = model.img_type;
+			parameters[3].Value = model.url;
+			parameters[4].Value = model.sort;
+			parameters[5].Value = model.is_delete;
+			parameters[6].Value = model.remark;
+			parameters[7].Value = model.create_by;
+			parameters[8].Value = model.create_date;
+			parameters[9].Value = model.update_by;
+			parameters[10].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -90,6 +90,7 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update bus_image set ");
+			strSql.Append("correlation_id=@correlation_id,");
 			strSql.Append("bus_type=@bus_type,");
 			strSql.Append("img_type=@img_type,");
 			strSql.Append("url=@url,");
@@ -99,10 +100,10 @@ namespace WK.DAL
 			strSql.Append("create_by=@create_by,");
 			strSql.Append("create_date=@create_date,");
 			strSql.Append("update_by=@update_by,");
-			strSql.Append("update_date=@update_date,");
-			strSql.Append("correlation_id=@correlation_id");
+			strSql.Append("update_date=@update_date");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
+					new MySqlParameter("@correlation_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@bus_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@img_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@url", MySqlDbType.VarChar,2000),
@@ -113,19 +114,18 @@ namespace WK.DAL
 					new MySqlParameter("@create_date", MySqlDbType.DateTime),
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@update_date", MySqlDbType.DateTime),
-					new MySqlParameter("@correlation_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@id", MySqlDbType.Int32,11)};
-			parameters[0].Value = model.bus_type;
-			parameters[1].Value = model.img_type;
-			parameters[2].Value = model.url;
-			parameters[3].Value = model.sort;
-			parameters[4].Value = model.is_delete;
-			parameters[5].Value = model.remark;
-			parameters[6].Value = model.create_by;
-			parameters[7].Value = model.create_date;
-			parameters[8].Value = model.update_by;
-			parameters[9].Value = model.update_date;
-			parameters[10].Value = model.correlation_id;
+			parameters[0].Value = model.correlation_id;
+			parameters[1].Value = model.bus_type;
+			parameters[2].Value = model.img_type;
+			parameters[3].Value = model.url;
+			parameters[4].Value = model.sort;
+			parameters[5].Value = model.is_delete;
+			parameters[6].Value = model.remark;
+			parameters[7].Value = model.create_by;
+			parameters[8].Value = model.create_date;
+			parameters[9].Value = model.update_by;
+			parameters[10].Value = model.update_date;
 			parameters[11].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
@@ -190,7 +190,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,bus_type,img_type,url,sort,is_delete,remark,create_by,create_date,update_by,update_date,correlation_id from bus_image ");
+			strSql.Append("select id,correlation_id,bus_type,img_type,url,sort,is_delete,remark,create_by,create_date,update_by,update_date from bus_image ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -221,6 +221,10 @@ namespace WK.DAL
 				if(row["id"]!=null && row["id"].ToString()!="")
 				{
 					model.id=int.Parse(row["id"].ToString());
+				}
+				if(row["correlation_id"]!=null && row["correlation_id"].ToString()!="")
+				{
+					model.correlation_id=int.Parse(row["correlation_id"].ToString());
 				}
 				if(row["bus_type"]!=null && row["bus_type"].ToString()!="")
 				{
@@ -262,10 +266,6 @@ namespace WK.DAL
 				{
 					model.update_date=DateTime.Parse(row["update_date"].ToString());
 				}
-				if(row["correlation_id"]!=null && row["correlation_id"].ToString()!="")
-				{
-					model.correlation_id=int.Parse(row["correlation_id"].ToString());
-				}
 			}
 			return model;
 		}
@@ -276,7 +276,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,bus_type,img_type,url,sort,is_delete,remark,create_by,create_date,update_by,update_date,correlation_id ");
+			strSql.Append("select id,correlation_id,bus_type,img_type,url,sort,is_delete,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_image ");
 			if(strWhere.Trim()!="")
 			{

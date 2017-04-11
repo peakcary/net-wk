@@ -33,13 +33,16 @@ namespace WK.Web.bus_dish
 		WK.Model.bus_dish model=bll.GetModel(id);
 		this.lblid.Text=model.id.ToString();
 		this.lblmarket_id.Text=model.market_id.ToString();
-		this.lbldish_type.Text=model.dish_type.ToString();
+		this.lbldish_time.Text=model.dish_time.ToString();
+		this.lbleat_type.Text=model.eat_type.ToString();
+		this.lbldish_tag.Text=model.dish_tag;
 		this.lblname_en.Text=model.name_en;
 		this.lblname_cn.Text=model.name_cn;
 		this.lbldescription_en.Text=model.description_en;
 		this.lbldescription_cn.Text=model.description_cn;
 		this.lbloriginal_price.Text=model.original_price.ToString();
 		this.lbldiscount_price.Text=model.discount_price.ToString();
+		this.lblstatus.Text=model.status.ToString();
 		this.lblsales_total.Text=model.sales_total.ToString();
 		this.lblsort.Text=model.sort.ToString();
 		this.lblis_delete.Text=model.is_delete.ToString();

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-03 10:39:49
+Date: 2017-04-10 21:46:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `bus_area` (
   `update_by` int(11) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bus_area
@@ -73,6 +73,7 @@ CREATE TABLE `bus_discount` (
   `end_date` datetime NOT NULL,
   `min_amount` decimal(10,2) NOT NULL,
   `max_amount` decimal(10,2) NOT NULL,
+  `status` int(11) NOT NULL,
   `discount_amount` decimal(10,2) DEFAULT '0.00',
   `description` varchar(1000) NOT NULL,
   `is_delete` int(11) NOT NULL DEFAULT '0',
@@ -80,13 +81,14 @@ CREATE TABLE `bus_discount` (
   `create_by` int(11) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   `update_by` int(11) DEFAULT NULL,
-  `update_date` char(10) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bus_discount
 -- ----------------------------
+INSERT INTO `bus_discount` VALUES ('1', '周年优惠', '2017-04-03 19:07:59', '2017-05-03 19:08:07', '50.00', '-1.00', '0', '0.00', '满50送大可乐一瓶', '0', null, null, '2017-04-03 19:11:42', null, '2017-04-03 19:11:42');
 
 -- ----------------------------
 -- Table structure for `bus_dish`
@@ -104,6 +106,7 @@ CREATE TABLE `bus_dish` (
   `description_cn` varchar(1000) DEFAULT NULL,
   `original_price` decimal(10,2) NOT NULL DEFAULT '0.00',
   `discount_price` decimal(10,2) DEFAULT NULL,
+  `status` int(11) NOT NULL,
   `sales_total` int(11) NOT NULL DEFAULT '0',
   `sort` int(11) DEFAULT '0',
   `is_delete` int(11) DEFAULT NULL,
@@ -139,6 +142,27 @@ CREATE TABLE `bus_dish_size` (
 
 -- ----------------------------
 -- Records of bus_dish_size
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `bus_feedback`
+-- ----------------------------
+DROP TABLE IF EXISTS `bus_feedback`;
+CREATE TABLE `bus_feedback` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(2000) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `is_delete` int(11) NOT NULL DEFAULT '0',
+  `remark` varchar(500) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bus_feedback
 -- ----------------------------
 
 -- ----------------------------
@@ -316,6 +340,7 @@ CREATE TABLE `bus_pickup_address` (
   `lon` decimal(10,7) DEFAULT NULL,
   `lat` decimal(10,7) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
+  `dilivery_user_id` int(11) NOT NULL,
   `sort` int(11) DEFAULT '0',
   `is_delete` int(11) NOT NULL DEFAULT '0',
   `remark` varchar(500) DEFAULT NULL,
@@ -377,27 +402,6 @@ CREATE TABLE `bus_pickup_times` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `bus_pickup_user`
--- ----------------------------
-DROP TABLE IF EXISTS `bus_pickup_user`;
-CREATE TABLE `bus_pickup_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pickup_address_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `is_delete` int(11) NOT NULL DEFAULT '0',
-  `remark` varchar(500) DEFAULT NULL,
-  `create_by` int(11) DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
-  `update_by` int(11) DEFAULT NULL,
-  `update_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bus_pickup_user
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `bus_share`
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_share`;
@@ -430,6 +434,7 @@ CREATE TABLE `bus_user` (
   `user_type` int(11) NOT NULL DEFAULT '0',
   `pwd` varchar(100) NOT NULL,
   `nickname` varchar(100) NOT NULL,
+  `status` int(11) NOT NULL,
   `phone_num` varchar(50) DEFAULT NULL,
   `pic_url` varchar(1000) DEFAULT NULL,
   `sex` int(11) NOT NULL DEFAULT '1',
@@ -442,7 +447,7 @@ CREATE TABLE `bus_user` (
   `update_by` int(11) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20001 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bus_user
@@ -500,7 +505,7 @@ CREATE TABLE `bus_user_device` (
 DROP TABLE IF EXISTS `bus_verify_code`;
 CREATE TABLE `bus_verify_code` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `phone_num` int(11) NOT NULL DEFAULT '-1',
+  `phone_num` varchar(50) NOT NULL DEFAULT '-1',
   `code` varchar(100) NOT NULL,
   `verify_type` int(11) NOT NULL DEFAULT '0',
   `is_delete` int(11) NOT NULL DEFAULT '0',
@@ -510,11 +515,13 @@ CREATE TABLE `bus_verify_code` (
   `update_by` int(11) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bus_verify_code
 -- ----------------------------
+INSERT INTO `bus_verify_code` VALUES ('1', '11111111111', '123456', '1', '2', null, null, '2017-04-10 17:23:11', null, null);
+INSERT INTO `bus_verify_code` VALUES ('2', '11111111111', '123456', '1', '2', null, null, '2017-04-10 17:23:25', null, null);
 
 -- ----------------------------
 -- Table structure for `bus_wx_user`
@@ -553,11 +560,26 @@ CREATE TABLE `sys_constant` (
   `update_by` int(11) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_constant
 -- ----------------------------
+INSERT INTO `sys_constant` VALUES ('1', '性别', '用户性别', null, '2017-04-03 19:00:23', null, '2017-04-03 19:00:23');
+INSERT INTO `sys_constant` VALUES ('2', '用户类型', '用户类型', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('3', '区域类型', '区域类型', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('4', '业务类型', '业务类型', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('5', '图片类型', '图片类型', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('6', '验证码类型', '验证码类型', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('7', '用餐种类', '用餐种类', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('8', '用餐日期类型', '用餐日期类型', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('9', '业务状态', '业务状态', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('10', '是否删除', '是否删除', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('11', '订单状态', '订单状态', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('12', '支付状态', '支付状态', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('13', '支付类型', '支付类型', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('14', '最多展示天数', '最多展示天数', null, null, null, null);
+INSERT INTO `sys_constant` VALUES ('15', '最多发送短信条数', '同一手机一天内最多发送短信条数', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `sys_constant_detail`
@@ -574,11 +596,44 @@ CREATE TABLE `sys_constant_detail` (
   `update_by` int(11) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_constant_detail
 -- ----------------------------
+INSERT INTO `sys_constant_detail` VALUES ('1', '1', '男', '1', null, null, '2017-04-03 19:02:11', null, '2017-04-03 19:02:11');
+INSERT INTO `sys_constant_detail` VALUES ('2', '1', '女', '2', null, null, '2017-04-03 19:02:11', null, '2017-04-03 19:02:11');
+INSERT INTO `sys_constant_detail` VALUES ('3', '2', '客户', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('4', '2', '配送员', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('5', '3', '州', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('6', '4', '商户', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('7', '4', '菜品', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('8', '5', '详情图', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('9', '5', '缩略图', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('10', '6', '注册验证', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('11', '6', '修改密码验证', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('12', '7', '午餐', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('13', '7', '晚餐', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('14', '7', '全部', '3', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('15', '8', '工作日', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('16', '8', '周末', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('17', '8', '全部', '3', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('18', '9', '启用', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('19', '9', '停用', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('20', '10', '是', '1', '已删除', null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('21', '10', '否', '2', '未删除', null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('22', '11', '已预订', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('23', '11', '待取餐', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('24', '11', '待送达', '3', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('25', '11', '已完成', '4', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('26', '11', '已退单', '5', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('27', '11', '申请退单', '6', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('28', '12', '未支付', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('29', '12', '已支付', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('30', '13', '线上支付', '1', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('31', '13', '线下支付', '2', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('32', '14', '最多展示天数', '5', null, null, null, null, null);
+INSERT INTO `sys_constant_detail` VALUES ('33', '15', '最多发送短信数', '10', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `sys_user`

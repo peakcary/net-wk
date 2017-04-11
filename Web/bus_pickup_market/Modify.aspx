@@ -37,6 +37,13 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
+		sort
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:TextBox id="txtsort" runat="server" Width="200px"></asp:TextBox>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
 		remark
 	：</td>
 	<td height="25" width="*" align="left">

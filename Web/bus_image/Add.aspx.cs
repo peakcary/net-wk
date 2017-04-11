@@ -24,6 +24,10 @@ namespace WK.Web.bus_image
 		{
 			
 			string strErr="";
+			if(!PageValidate.IsNumber(txtcorrelation_id.Text))
+			{
+				strErr+="correlation_id格式错误！\\n";	
+			}
 			if(!PageValidate.IsNumber(txtbus_type.Text))
 			{
 				strErr+="bus_type格式错误！\\n";	
@@ -70,6 +74,7 @@ namespace WK.Web.bus_image
 				MessageBox.Show(this,strErr);
 				return;
 			}
+			int correlation_id=int.Parse(this.txtcorrelation_id.Text);
 			int bus_type=int.Parse(this.txtbus_type.Text);
 			int img_type=int.Parse(this.txtimg_type.Text);
 			string url=this.txturl.Text;
@@ -82,6 +87,7 @@ namespace WK.Web.bus_image
 			DateTime update_date=DateTime.Parse(this.txtupdate_date.Text);
 
 			WK.Model.bus_image model=new WK.Model.bus_image();
+			model.correlation_id=correlation_id;
 			model.bus_type=bus_type;
 			model.img_type=img_type;
 			model.url=url;

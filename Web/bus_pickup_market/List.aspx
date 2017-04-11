@@ -44,6 +44,7 @@
 		<asp:BoundField DataField="pickup_address_id" HeaderText="pickup_address_id" SortExpression="pickup_address_id" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="market_id" HeaderText="market_id" SortExpression="market_id" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="is_delete" HeaderText="is_delete" SortExpression="is_delete" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="sort" HeaderText="sort" SortExpression="sort" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="remark" HeaderText="remark" SortExpression="remark" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="create_by" HeaderText="create_by" SortExpression="create_by" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="create_date" HeaderText="create_date" SortExpression="create_date" ItemStyle-HorizontalAlign="Center"  /> 

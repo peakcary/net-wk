@@ -65,6 +65,13 @@
 	</td></tr>
 	<tr>
 	<td height="25" width="30%" align="right">
+		size_list
+	：</td>
+	<td height="25" width="*" align="left">
+		<asp:Label id="lblsize_list" runat="server"></asp:Label>
+	</td></tr>
+	<tr>
+	<td height="25" width="30%" align="right">
 		is_delete
 	：</td>
 	<td height="25" width="*" align="left">

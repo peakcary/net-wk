@@ -48,6 +48,7 @@
 		<asp:BoundField DataField="lon" HeaderText="lon" SortExpression="lon" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="lat" HeaderText="lat" SortExpression="lat" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="status" HeaderText="status" SortExpression="status" ItemStyle-HorizontalAlign="Center"  /> 
+		<asp:BoundField DataField="dilivery_user_id" HeaderText="dilivery_user_id" SortExpression="dilivery_user_id" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="sort" HeaderText="sort" SortExpression="sort" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="is_delete" HeaderText="is_delete" SortExpression="is_delete" ItemStyle-HorizontalAlign="Center"  /> 
 		<asp:BoundField DataField="remark" HeaderText="remark" SortExpression="remark" ItemStyle-HorizontalAlign="Center"  /> 
