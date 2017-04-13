@@ -8,6 +8,8 @@ $(function () {
         }
     })(jQuery);
      
+     $('#remark').summernote({ height: 150 });
+     
     var id = $.getUrlParam('id');
     $("#hid").val(id); 
     if(id>0){
@@ -30,7 +32,7 @@ function getDataDetail(id) {
             $("#lon").val(data.lon);
             $("#lat").val(data.lat);
             $("#sort").val(data.sort);
-            $("#remark").val(data.remark);
+            $("#remark").code(data.remark);
         }
     });
 } 
@@ -39,7 +41,7 @@ function goPageList() {
     window.location.href = "bus_pickup_list.htm";
 }
 
-function editData() {   
+function editData() {    
     $.ajax({
         type: "post",
         url: url + "?t=editData",
@@ -51,7 +53,7 @@ function editData() {
             sort: $("#sort").val(),
             lon: $("#lon").val(),
             lat: $("#lat").val(),
-            remark: $("#remark").val()
+            remark: $("#remark").code()
         },
         dataType: 'json',   
         success: function (data) { 
