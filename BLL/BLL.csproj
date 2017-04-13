@@ -123,6 +123,7 @@
     <Compile Include="bus_gift.cs" />
     <Compile Include="bus_order_gift.cs" />
     <Compile Include="bus_pickup_address_extend.cs" />
+    <Compile Include="bus_pickup_times_extend.cs" />
     <Compile Include="bus_pickup_user.cs" />
     <Compile Include="bus_times.cs" />
     <Compile Include="bus_user_extend.cs" />

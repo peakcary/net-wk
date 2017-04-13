@@ -63,6 +63,13 @@ namespace WK.Web.Handler
                     sb.Append(deleteDataByStatus(context));
                     break;
 
+
+
+                case "getPickupTimes":
+                    sb.Append(getPickupTimes(context));
+                    break;
+
+
                 case "getListUser2":
                     sb.Append(getListUser2(context));
                     break;
@@ -221,7 +228,73 @@ namespace WK.Web.Handler
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }
 
+        /// <summary>
+        /// 自提点时间列表
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private string getPickupTimes(HttpContext context)
+        {
+            int pickup_address_id = int.Parse(context.Request.Params["pickup_address_id"]);
+            StringBuilder sb = new StringBuilder();
+            DataSet ds = new DataSet();
+            StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
+            strWhere.AppendFormat(" and pickup_address_id = {0} ", pickup_address_id);
+            StringBuilder orderby = new StringBuilder();
 
+            int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
+            int pageSize = int.Parse(context.Request.Params["pageSize"]);
+            int startIndex = 0;
+            if (pageIndex >= 0)
+            {
+                startIndex = pageSize * pageIndex;
+            }
+
+            WK.BLL.bus_pickup_times bll = new WK.BLL.bus_pickup_times();
+            ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+        }
+
+        private string addPickupTimes(HttpContext context)
+        {
+            ReturnInfo returnInfo = new ReturnInfo();
+            returnInfo.isSuccess = false;
+
+            WK.Model.bus_pickup_times model = new Model.bus_pickup_times(); 
+             
+            //model.create_by;
+            //model.create_date
+            model.eat_type = int.Parse(context.Request.Params["eat_type"]);
+            model.is_delete = 0;
+            model.pickup_address_id = int.Parse(context.Request.Params["pickup_address_id"]);
+            model.pickup_end_time = DateTime.Parse(context.Request.Params["pickup_end_time"]);
+            model.pickup_start_time = DateTime.Parse(context.Request.Params["pickup_start_time"]);
+            model.pickup_time = int.Parse(context.Request.Params["pickup_time"]);
+            //model.remark
+            //model.update_by
+            //model.update_date
+
+            WK.BLL.bus_pickup_times bll = new WK.BLL.bus_pickup_times();
+            bll.Add(model);   
+            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
+
+        private string deletePickupTimes(HttpContext context)
+        {
+            ReturnInfo returnInfo = new ReturnInfo();
+            returnInfo.isSuccess = false;
+            WK.BLL.bus_pickup_times bll = new WK.BLL.bus_pickup_times();
+            int id = int.Parse(context.Request.Params["id"]);
+            if (id > 0)
+            {
+                WK.Model.bus_pickup_times model = bll.GetModel(id);
+                model.is_delete = 1;
+                returnInfo.isSuccess = bll.Update(model);
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
 
 
         private string getListUser2(HttpContext context)
