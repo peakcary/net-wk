@@ -1,7 +1,7 @@
 ﻿var url = "../../Handler/bus_pickup.ashx"; 
 var listPageSize = 10;
 $(function () { 
-    initPagination();
+    initPagination(); 
 });
 
 function initPagination(){
@@ -34,6 +34,7 @@ function pageselectCallback(page_index, jq){
 	}
 
 function getListByPageInfo(index) {  
+    loadingShow();
     $.ajax({
         type: "post",
         url: url + "?t=getListByPageInfo",
@@ -43,12 +44,36 @@ function getListByPageInfo(index) {
         },
         dataType: 'json',   
         success: function (data) { 
+            loadingHide();
             $("#DataList").empty();
             $("#DataTemplate").tmpl(data).appendTo("#DataList");
+        },
+        error:function(){
+            loadingHide();
         }
     });
 }
  
+
+function deleteDataByStatus(id) {
+    if(confirm("确定删除吗?")){
+        $.ajax({
+        type: "post",
+        url: url + "?t=deleteDataByStatus",
+        data: { 
+            id: id
+        },
+        dataType: 'json',   
+        success: function (data) { 
+            if(data.isSuccess){
+                getListByPageInfo(0);
+            }else{
+                alert('保存失败！');
+            }
+        }
+    });
+    }
+} 
 
 function deleteData(id) {
     if(confirm("确定删除吗?")){
@@ -61,7 +86,7 @@ function deleteData(id) {
         dataType: 'json',   
         success: function (data) { 
             if(data.isSuccess){
-                getListByPage(0);
+                getListByPageInfo(0);
             }else{
                 alert('保存失败！');
             }

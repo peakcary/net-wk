@@ -9,7 +9,7 @@ using System.Data;
 namespace WK.Web.Handler
 {
     /// <summary>
-    /// bus_pickup 的摘要说明
+    /// bus_pickup_address 的摘要说明
     /// </summary>
     public class bus_pickup : IHttpHandler
     {
@@ -50,7 +50,7 @@ namespace WK.Web.Handler
                 case "editData":
                     sb.Append(editData(context));
                     break;
-                case "deleteData":
+                case "deleteRData":
                     sb.Append(deleteData(context));
                     break;
                 case "getListByPageInfo":
@@ -62,16 +62,13 @@ namespace WK.Web.Handler
                 case "deleteDataByStatus":
                     sb.Append(deleteDataByStatus(context));
                     break;
-                case "getDataAreaList":
-                    sb.Append(getDataAreaList(context));
-                    break;
                 default:
                     sb.Append("");
                     break;
             }
             context.Response.Write(sb.ToString());
         }
-         
+
 
         /// <summary>
         /// 分页列表
@@ -83,7 +80,7 @@ namespace WK.Web.Handler
             StringBuilder sb = new StringBuilder();
             DataSet ds = new DataSet();
             StringBuilder strWhere = new StringBuilder();
-            //strWhere.Append(" is_delete != 1");
+            strWhere.Append(" is_delete != 1");
             StringBuilder orderby = new StringBuilder();
 
             int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
@@ -100,7 +97,7 @@ namespace WK.Web.Handler
         }
 
         /// <summary>
-        /// list count
+        /// 列表数量
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -108,6 +105,7 @@ namespace WK.Web.Handler
         {
             StringBuilder sb = new StringBuilder();
             StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
             WK.BLL.bus_pickup_address bll = new WK.BLL.bus_pickup_address();
             Record r = new Record();
             r.RecordCount = bll.GetListCount(strWhere.ToString());
@@ -127,7 +125,7 @@ namespace WK.Web.Handler
                 id = context.Request.Params["id"];
             }
             WK.BLL.bus_pickup_address bll = new WK.BLL.bus_pickup_address();
-            WK.Model.bus_pickup_address model = bll.GetModel(int.Parse(id));
+            WK.Model.bus_pickup_address model = bll.GetModel(int.Parse(id)); 
             return Newtonsoft.Json.JsonConvert.SerializeObject(model);
         }
 
@@ -143,20 +141,27 @@ namespace WK.Web.Handler
 
             WK.Model.bus_pickup_address model = new Model.bus_pickup_address();
 
-            model.id = int.Parse(context.Request.Params["id"]);
+            int id = 0;
+            if (context.Request.Params["id"] != "")
+            {
+                id = int.Parse(context.Request.Params["id"]);
+            }
+            model.id = id;
             model.address = context.Request.Params["address"];
-            model.area_id = int.Parse(context.Request.Params["area_id"]);
-            //model.description_cn = context.Request.Params["description_cn"];
-            //model.description_en = context.Request.Params["description_en"];
+            model.area_id = 0;
+            //model.create_by
+            //model.create_date
+            model.dilivery_user_id = 0;
+            model.is_delete = 0;
             model.lat = decimal.Parse(context.Request.Params["lat"]);
             model.lon = decimal.Parse(context.Request.Params["lon"]);
-            //model.market_type = context.Request.Params["market_type"];
-            //model.markket_code = context.Request.Params["markket_code"];
-            //model.name_cn = context.Request.Params["name_cn"];
-            //model.name_en = context.Request.Params["name_en"];
-            model.remark = context.Request.Params["remark"];
+            model.name  = context.Request.Params["name"];
+            model.pickup_code = context.Request.Params["pickup_code"];
+            model.remark = context.Request.Params["pickup_code"];
             model.sort = int.Parse(context.Request.Params["sort"]);
-            model.status = int.Parse(context.Request.Params["status"]);
+            model.status = 1;//1启用2停用
+            //model.update_by
+            //model.update_date
 
 
             WK.BLL.bus_pickup_address bll = new WK.BLL.bus_pickup_address();
@@ -172,7 +177,11 @@ namespace WK.Web.Handler
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }
 
-
+        /// <summary>
+        /// 状态删除
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         private string deleteDataByStatus(HttpContext context)
         {
             ReturnInfo returnInfo = new ReturnInfo();
@@ -206,32 +215,6 @@ namespace WK.Web.Handler
             }
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
-        }
-
-        private string getDataAreaList(HttpContext context)
-        {
-            StringBuilder sb = new StringBuilder();
-            DataSet ds = new DataSet();
-            StringBuilder strWhere = new StringBuilder();
-
-            WK.BLL.bus_area bll = new WK.BLL.bus_area();
-            ds = bll.GetList(strWhere.ToString());
-            DataTable dt = new DataTable();
-            dt.Columns.Add("data", typeof(System.Int32));
-            dt.Columns.Add("value", typeof(System.String));
-            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            {
-                int l = ds.Tables[0].Rows.Count;
-                for (int i = 0; i < l; i++)
-                {
-                    DataRow row = dt.NewRow();
-                    row["data"] = ds.Tables[0].Rows[i]["id"];
-                    row["value"] = ds.Tables[0].Rows[i]["name"];
-                    dt.Rows.Add(row);
-                }
-
-            }
-            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
         }
  
     }

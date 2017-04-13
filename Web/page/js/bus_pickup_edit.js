@@ -24,11 +24,12 @@ function getDataDetail(id) {
         }, 
         dataType: 'json',  
         success: function (data) { 
-            $("#parent_id").val(data.parent_id);
+            $("#pickup_code").val(data.pickup_code);
             $("#name").val(data.name);
-            $("#area_type").val(data.area_type);
+            $("#address").val(data.address);
             $("#lon").val(data.lon);
             $("#lat").val(data.lat);
+            $("#sort").val(data.sort);
             $("#remark").val(data.remark);
         }
     });
@@ -44,10 +45,10 @@ function editData() {
         url: url + "?t=editData",
         data: { 
             id: $("#hid").val(),
-            parent_id: $("#parent_id").val(),
+            pickup_code: $("#pickup_code").val(),
             name: $("#name").val(),
-            userId: $("#hid").val(),
-            area_type: $("#area_type").val(),
+            address: $("#address").val(),
+            sort: $("#sort").val(),
             lon: $("#lon").val(),
             lat: $("#lat").val(),
             remark: $("#remark").val()
