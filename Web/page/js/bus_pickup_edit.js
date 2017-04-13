@@ -15,6 +15,7 @@ $(function () {
     if(id>0){
         getDataDetail(id);
     }
+//    getListUser2();
 });
 
 function getDataDetail(id) {
@@ -33,6 +34,9 @@ function getDataDetail(id) {
             $("#lat").val(data.lat);
             $("#sort").val(data.sort);
             $("#remark").code(data.remark);
+            $("#dilivery_user_id").val(data.dilivery_user_id);
+            getListUser2(data.dilivery_user_id);
+
         }
     });
 } 
@@ -53,7 +57,8 @@ function editData() {
             sort: $("#sort").val(),
             lon: $("#lon").val(),
             lat: $("#lat").val(),
-            remark: $("#remark").code()
+            remark: $("#remark").code(),
+            dilivery_user_id: $("#dilivery_user_id").val()
         },
         dataType: 'json',   
         success: function (data) { 
@@ -62,6 +67,28 @@ function editData() {
         }else{
             alert('保存失败！');
         }
+        }
+    });
+}
+
+
+function getListUser2(id){
+    $.ajax({
+        type: "post",
+        url: url + "?t=getListUser2",
+        dataType: 'json',    
+        data: {
+           pageIndex: 0,
+           pageSize: 100 
+        },
+        success: function (data) {   
+            $("#dilivery_user_id").empty();
+            $("#dilivery_user_id").append("<option value='0'>请选择</option>");
+            $("#ListUserTemplate").tmpl(data).appendTo("#dilivery_user_id"); 
+            $("#dilivery_user_id").val(id);
+            
+        },
+        error:function(){ 
         }
     });
 }

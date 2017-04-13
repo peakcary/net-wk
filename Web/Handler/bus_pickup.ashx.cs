@@ -62,6 +62,10 @@ namespace WK.Web.Handler
                 case "deleteDataByStatus":
                     sb.Append(deleteDataByStatus(context));
                     break;
+
+                case "getListUser2":
+                    sb.Append(getListUser2(context));
+                    break;
                 default:
                     sb.Append("");
                     break;
@@ -151,7 +155,7 @@ namespace WK.Web.Handler
             model.area_id = 0;
             //model.create_by
             //model.create_date
-            model.dilivery_user_id = 0;
+            model.dilivery_user_id = int.Parse(context.Request.Params["dilivery_user_id"]);
             model.is_delete = 0;
             model.lat = decimal.Parse(context.Request.Params["lat"]);
             model.lon = decimal.Parse(context.Request.Params["lon"]);
@@ -215,6 +219,31 @@ namespace WK.Web.Handler
             }
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
+
+
+
+
+        private string getListUser2(HttpContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+            DataSet ds = new DataSet();
+            StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
+            strWhere.Append(" and user_type = 2 ");
+            StringBuilder orderby = new StringBuilder();
+
+            int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
+            int pageSize = int.Parse(context.Request.Params["pageSize"]);
+            int startIndex = 0;
+            if (pageIndex >= 0)
+            {
+                startIndex = pageSize * pageIndex;
+            }
+
+            WK.BLL.bus_user bll = new WK.BLL.bus_user();
+            ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
  
     }
