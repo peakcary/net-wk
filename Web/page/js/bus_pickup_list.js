@@ -55,9 +55,11 @@ function getListByPageInfo(index) {
 }
  
 
-function deleteDataByStatus(id) {
-    if(confirm("确定删除吗?")){
-        $.ajax({
+function deleteDataByStatus(id) { 
+layer.confirm('确定删除吗？', {
+  btn: ['确定','取消'] //按钮
+}, function(){ 
+    $.ajax({
         type: "post",
         url: url + "?t=deleteDataByStatus",
         data: { 
@@ -66,13 +68,18 @@ function deleteDataByStatus(id) {
         dataType: 'json',   
         success: function (data) { 
             if(data.isSuccess){
+            layer.msg('删除成功！');
                 getListByPageInfo(0);
             }else{
-                alert('保存失败！');
+                layer.msg('删除失败！');
             }
         }
     });
-    }
+}, function(){
+   
+});
+
+    
 } 
 
 function deleteData(id) {

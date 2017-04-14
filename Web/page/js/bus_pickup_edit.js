@@ -8,14 +8,14 @@ $(function () {
         }
     })(jQuery);
      
-     $('#remark').summernote({ height: 150 });
+     $('#remark').summernote({ height: 100 });
      
     var id = $.getUrlParam('id');
     $("#hid").val(id); 
     if(id>0){
         getDataDetail(id);
     }
-//    getListUser2();
+    getListUser2(0);
 });
 
 function getDataDetail(id) {
@@ -90,5 +90,27 @@ function getListUser2(id){
         },
         error:function(){ 
         }
+    });
+}
+
+
+
+///自己方法
+function openPickupTimesContainer(){
+    layer.open({
+      type: 1,
+      area: ['600px', '300px'],
+      title:"自提点时间",
+      scrollbar:false,
+      btn: ['确定', '取消']
+  ,yes: function(index, layero){
+  layer.close(index);
+  alert(1);
+    //按钮【按钮一】的回调
+  },btn2: function(index, layero){
+  alert(2);
+    //按钮【按钮二】的回调
+  },
+      content:$("#pickupTimesContainer")
     });
 }
