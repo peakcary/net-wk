@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Text;
 using System.Data;
+using System.Collections;
 
 namespace WK.Web.Handler
 {
@@ -27,6 +28,11 @@ namespace WK.Web.Handler
         }
         [Serializable]
         public class Record
+        {
+            public int RecordCount { get; set; }
+        }
+        [Serializable]
+        public class ImageObj
         {
             public int RecordCount { get; set; }
         }
@@ -114,6 +120,7 @@ namespace WK.Web.Handler
             WK.BLL.bus_market bll = new WK.BLL.bus_market();
             WK.Model.bus_market model = bll.GetModel(int.Parse(id));
 
+            #region 自提点
             WK.BLL.bus_pickup_market marketBll = new BLL.bus_pickup_market();
             StringBuilder strWhere = new StringBuilder();
             strWhere.Append(" is_delete != 1");
@@ -123,15 +130,34 @@ namespace WK.Web.Handler
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 model.pickup_address_id = int.Parse(ds.Tables[0].Rows[0]["pickup_address_id"].ToString());
-            } 
+            }
+            #endregion
+            WK.BLL.bus_image imageBll = new BLL.bus_image();
+            StringBuilder imageWhere = new StringBuilder();
+            imageWhere.Append(" is_delete != 1");
+            imageWhere.AppendFormat(" and correlation_id  = {0}", id);
+            imageWhere.AppendFormat(" and bus_type   = {0}", 1);
+            DataSet dsImage = new DataSet();
+            dsImage = imageBll.GetList(imageWhere.ToString());
+            string imageList = string.Empty; 
+            if (dsImage != null && dsImage.Tables.Count > 0 && dsImage.Tables[0].Rows.Count > 0)
+            { 
+                int imageCount = dsImage.Tables[0].Rows.Count;
+                for (int i = 0; i < imageCount; i++)
+                {
+                    imageList += dsImage.Tables[0].Rows[i]["url"] + "||" + dsImage.Tables[0].Rows[i]["img_type"]+";";
+                }
+            }
+            model.imageList = imageList;
+            #region 图片
+
+            #endregion
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(model);
         }
   
         private string editData(HttpContext context)
-        {
-            
-
+        { 
             WK.Model.bus_market model = new Model.bus_market();
 
             model.id =0;
@@ -160,8 +186,6 @@ namespace WK.Web.Handler
             model.address = context.Request.Params["address"]; 
 
             
-
-            
             WK.BLL.bus_market bll = new WK.BLL.bus_market();
              int market_id =0;
             if(model.id > 0){
@@ -172,6 +196,7 @@ namespace WK.Web.Handler
             ReturnInfo returnInfo = new ReturnInfo(); 
             returnInfo.isSuccess = model.id > 0 ? bll.Update(model) : bll.Add(model);
 
+            #region 自提点列表
             int pickup_address_id = 0;
             if (context.Request.Params["pickup_address_id"] != null
                 && context.Request.Params["pickup_address_id"].ToString() != "")
@@ -198,6 +223,25 @@ namespace WK.Web.Handler
                     marketBll.Add(marketModel);
                 }
             }
+            #endregion
+
+            #region 图片列表
+            string imageList = context.Request.Params["imageList"].ToString();
+            Object anArray = Newtonsoft.Json.JsonConvert.DeserializeObject(imageList);
+            int imageListCount = ((Newtonsoft.Json.Linq.JContainer)(anArray)).Count;
+            for (int i = 0; i < imageListCount; i++)
+            {
+                string imageKey = ((Newtonsoft.Json.Linq.JContainer)(anArray))[i]["imageKey"].ToString();
+                WK.Model.bus_image imageModel = new Model.bus_image();
+                imageModel.bus_type = 1; //业务类型（商户/菜）
+                imageModel.correlation_id = market_id;
+                imageModel.img_type = 1;//图片类型（详情图/缩略图）
+                imageModel.is_delete = 0;
+                imageModel.url = imageKey;
+                WK.BLL.bus_image imageBll = new BLL.bus_image();
+                imageBll.Add(imageModel);
+            }
+            #endregion
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }

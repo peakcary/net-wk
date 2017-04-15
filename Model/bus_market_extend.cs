@@ -9,5 +9,12 @@ namespace WK.Model
             set { _pickup_address_id = value; }
             get { return _pickup_address_id; }
         }
+
+        public string _imageList;
+        public string imageList
+        {
+            set { _imageList = value; }
+            get { return _imageList; }
+        }
     }
 }

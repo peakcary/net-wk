@@ -234,6 +234,7 @@
                         var imageObj = {};
                         imageObj.imageUrl = imageUrl;
                         imageObj.imagePath = file.name;
+                        imageObj.imageKey = res.key;
                         imageObj.imageSize = file.size;
                         $("#imageListTemplate").tmpl(imageObj).appendTo("#imageList"); 
 

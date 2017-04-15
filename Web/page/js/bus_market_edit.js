@@ -1,4 +1,7 @@
 ﻿var url = "../../Handler/bus_market.ashx"; 
+var urlUpload = "../Handler/Upload.ashx";
+var imageUrlHost = "http://om2v517pk.bkt.clouddn.com/";
+var imageListArray = [];
 $(function () {
     (function ($) {
         $.getUrlParam = function (name) {
@@ -11,6 +14,7 @@ $(function () {
      $('#remark').summernote({ height: 100 });
      $('#description_cn').summernote({ height: 100 });
      $('#description_en').summernote({ height: 100 });
+     initPicUpload();
      
     var id = $.getUrlParam('id'); 
     $("#hid").val(id); 
@@ -51,6 +55,8 @@ function getDataDetail(id) {
            
             getAreaList(data.area_id);
             getPickupList(data.pickup_address_id);
+            console.log("-----imageList",data.imageList);
+
         },
         error:function(){
             loadingHide();
@@ -82,7 +88,8 @@ function editData() {
             sort: $("#sort").val(), 
             remark: $("#remark").code(),
             description_cn: $("#description_cn").code(),
-            description_en: $("#description_en").code()
+            description_en: $("#description_en").code(),
+            imageList:JSON.stringify(imageListArray)
         },
         dataType: 'json',   
         success: function (data) { 
@@ -139,4 +146,74 @@ function getAreaList(id) {
     });
 }
  
+
+function initPicUpload(){
+var uploader = Qiniu.uploader({
+                runtimes: 'html5,flash,html4',
+                browse_button: 'pickfiles',
+                container: 'container',
+                drop_element: 'container',
+                max_file_size: '1000mb',
+                flash_swf_url: '../../../plupload-2.1.9/js/Moxie.swf',
+                dragdrop: true,
+                chunk_size: '4mb',
+                multi_selection: !(mOxie.Env.OS.toLowerCase() === "ios"),
+                uptoken_func: function () {
+                    var ajax = new XMLHttpRequest();
+                    ajax.open('GET', urlUpload, false);
+                    ajax.setRequestHeader("If-Modified-Since", "0");
+                    ajax.send();
+                    if (ajax.status === 200) {
+                        return ajax.responseText;
+                    } else {
+                        console.log('custom uptoken_func err');
+                        return '';
+                    }
+                },
+                domain: "om2v517pk.bkt.clouddn.com",
+                get_new_uptoken: false,
+                auto_start: true,
+                log_level: 5,
+                init: {
+                    'FilesAdded': function (up, files) {
+                        $('#success').hide();
+//                        console.log("----------FilesAdded", up, file);
+                        loadingShow();
+                    },
+                    'BeforeUpload': function (up, file) {
+//                        console.log("----------BeforeUpload", up, file);
+
+                    },
+                    'UploadProgress': function (up, file) {
+//                        console.log("----------UploadProgress", up, file);
+
+                    },
+                    'UploadComplete': function () {
+                        loadingHide();
+                        $('#success').show();
+                    },
+                    'FileUploaded': function (up, file, info) {
+//                        console.log("----------FileUploaded1", JSON.stringify(up));
+//                        console.log("----------FileUploaded2", JSON.stringify(file));
+//                        console.log("----------FileUploaded3", JSON.stringify(info));
+                        var res = $.parseJSON(info);
+                        var imageUrl = imageUrlHost + res.key; 
+                        var imageObj = {};
+                        imageObj.imageUrl = imageUrl;
+                        imageObj.imagePath = file.name;
+                        imageObj.imageKey = res.key;
+                        imageObj.imageSize = file.size;
+                        $("#imageListTemplate").tmpl(imageObj).appendTo("#imageList");  
+                        imageListArray.push(imageObj);
+
+                    },
+                    'Error': function (up, err, errTip) {
+//                        console.log("----------UploadProgress", up, err, errTip); 
+                    }
+                }
+            });
+            uploader.bind('FileUploaded', function () {
+                console.log('hello man,a file is uploaded');
+            });
+}
  
