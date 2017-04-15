@@ -1,4 +1,4 @@
-﻿var url = "../../Handler/bus_pickup.ashx"; 
+﻿var url = "../../Handler/bus_area.ashx"; 
 var listPageSize = 10;
 $(function () { 
     initPagination(); 
@@ -29,15 +29,15 @@ function initPagination(){
 }
 
 function pageselectCallback(page_index, jq){  
-        getListByPageInfo(page_index);
+        getDataList(page_index);
 		return false;
 	}
 
-function getListByPageInfo(index) {  
+function getDataList(index) {  
     loadingShow();
     $.ajax({
         type: "post",
-        url: url + "?t=getListByPageInfo",
+        url: url + "?t=getDataList",
         data: {
            pageIndex: index,
            pageSize: listPageSize 
@@ -46,7 +46,9 @@ function getListByPageInfo(index) {
         success: function (data) { 
             loadingHide();
             $("#DataList").empty();
-            $("#DataTemplate").tmpl(data).appendTo("#DataList");
+            $("#DataTemplate").tmpl(data).appendTo("#DataList"); 
+            $("#DataList").treetable({ expandable: true}); 
+           
         },
         error:function(){
             loadingHide();
@@ -55,51 +57,32 @@ function getListByPageInfo(index) {
 }
  
 
-function deleteDataByStatus(id) { 
+function deleteData(id) {
     layer.confirm('确定删除吗？', {
-      btn: ['确定','取消'] //按钮
+      btn: ['确定','取消']
     }, function(){ 
         $.ajax({
             type: "post",
-            url: url + "?t=deleteDataByStatus",
+            url: url + "?t=deleteData",
             data: { 
                 id: id
             },
             dataType: 'json',   
             success: function (data) { 
                 if(data.isSuccess){
-                layer.msg('删除成功！');
-                    getListByPageInfo(0);
-                }else{
-                    layer.msg('删除失败！');
+                    layer.msg('删除成功！');
+                        getListByPageInfo(0);
+                    }else{
+                        layer.msg('删除失败！');
+                    }
                 }
-            }
         });
     }); 
-} 
-
-function deleteData(id) {
-    if(confirm("确定删除吗?")){
-        $.ajax({
-        type: "post",
-        url: url + "?t=deleteData",
-        data: { 
-            id: id
-        },
-        dataType: 'json',   
-        success: function (data) { 
-            if(data.isSuccess){
-                getListByPageInfo(0);
-            }else{
-                alert('保存失败！');
-            }
-        }
-    });
-    }
-} 
+}  
+ 
 
 function goPageDetail(id) {
-    window.location.href = "bus_pickup_edit.htm?id="+id;
+    window.location.href = "bus_area_edit.htm?id="+id;
 }
 
 

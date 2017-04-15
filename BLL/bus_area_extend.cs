@@ -15,5 +15,12 @@ namespace WK.BLL
         {
             return dal.GetListByPageInfo(strWhere, orderby, startIndex, endIndex);
         }
+        /// <summary>
+        /// 分页获取数据列表
+        /// </summary>
+        public int GetListCount(string strWhere)
+        {
+            return dal.GetListCount(strWhere);
+        }
     }
 }

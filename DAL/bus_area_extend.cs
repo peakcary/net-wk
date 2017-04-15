@@ -31,5 +31,20 @@ namespace WK.DAL
             strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex);
             return DbHelperMySQL.Query(strSql.ToString());
         }
+
+        /// <summary>
+        /// 获取记录总数
+        /// </summary>
+        public int GetListCount(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) FROM bus_area ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            object obj = DbHelperMySQL.GetSingle(strSql.ToString());
+            return obj == null ? 0 : Convert.ToInt32(obj); 
+        }
     }
 }
