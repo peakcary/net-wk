@@ -1,7 +1,7 @@
 ﻿var url = "../../Handler/bus_market.ashx"; 
 var urlUpload = "../Handler/Upload.ashx";
 var imageUrlHost = "http://om2v517pk.bkt.clouddn.com/";
-var imageListArray = [];
+
 $(function () {
     (function ($) {
         $.getUrlParam = function (name) {
@@ -55,8 +55,25 @@ function getDataDetail(id) {
            
             getAreaList(data.area_id);
             getPickupList(data.pickup_address_id);
-            console.log("-----imageList",data.imageList);
-
+            //console.log("-----imageList",data.imageList);
+            var imageObjArray = [];
+            var imageArray = data.imageList.split(";");
+            var imageArrayLength = imageArray.length;
+             
+            if(imageArrayLength>0){
+                for(var i=0;i<imageArrayLength;i++){
+                    if(imageArray[i]!=""){
+                        var imagePath= imageArray[i].split("||")[0];
+                        var imageUrl = imageUrlHost + imagePath; 
+                        var imageObj = {};
+                        imageObj.imagePath = imagePath;
+                        imageObj.imageUrl = imageUrl;  
+                        imageObjArray.push(imageObj); 
+                    } 
+                }
+            } 
+            $("#imageListTemplate").tmpl(imageObjArray).appendTo("#imageList");  
+            //console.log("------imageArray",imageArray); 
         },
         error:function(){
             loadingHide();
@@ -68,8 +85,14 @@ function goPageList() {
     window.location.href = "bus_market_list.htm";
 }
 
-function editData() { 
+function editData() {  
     loadingShow();  
+    var imageListArray = []; 
+    $("#imageList").find("img").each(function(){
+            var imageObj = {};  
+            imageObj.imageKey = $(this).attr("ref");
+            imageListArray.push(imageObj);  
+    });
     $.ajax({
         type: "post",
         url: url + "?t=editData",
@@ -203,9 +226,7 @@ var uploader = Qiniu.uploader({
                         imageObj.imagePath = file.name;
                         imageObj.imageKey = res.key;
                         imageObj.imageSize = file.size;
-                        $("#imageListTemplate").tmpl(imageObj).appendTo("#imageList");  
-                        imageListArray.push(imageObj);
-
+                        $("#imageListTemplate").tmpl(imageObj).appendTo("#imageList"); 
                     },
                     'Error': function (up, err, errTip) {
 //                        console.log("----------UploadProgress", up, err, errTip); 

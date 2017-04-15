@@ -10,7 +10,7 @@ namespace WK.Model
             get { return _pickup_address_id; }
         }
 
-        public string _imageList;
+        private string _imageList;
         public string imageList
         {
             set { _imageList = value; }

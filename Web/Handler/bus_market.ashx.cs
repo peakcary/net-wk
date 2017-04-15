@@ -132,6 +132,8 @@ namespace WK.Web.Handler
                 model.pickup_address_id = int.Parse(ds.Tables[0].Rows[0]["pickup_address_id"].ToString());
             }
             #endregion
+
+            #region 图片
             WK.BLL.bus_image imageBll = new BLL.bus_image();
             StringBuilder imageWhere = new StringBuilder();
             imageWhere.Append(" is_delete != 1");
@@ -148,9 +150,7 @@ namespace WK.Web.Handler
                     imageList += dsImage.Tables[0].Rows[i]["url"] + "||" + dsImage.Tables[0].Rows[i]["img_type"]+";";
                 }
             }
-            model.imageList = imageList;
-            #region 图片
-
+            model.imageList = imageList; 
             #endregion
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(model);
@@ -226,6 +226,25 @@ namespace WK.Web.Handler
             #endregion
 
             #region 图片列表
+
+            WK.BLL.bus_image imageBll = new BLL.bus_image();
+            StringBuilder imageWhere = new StringBuilder();
+            imageWhere.Append(" is_delete != 1");
+            imageWhere.AppendFormat(" and correlation_id  = {0}", market_id);
+            imageWhere.AppendFormat(" and bus_type   = {0}", 1);
+            DataSet dsImage = new DataSet();
+            dsImage = imageBll.GetList(imageWhere.ToString());
+          
+            if (dsImage != null && dsImage.Tables.Count > 0 && dsImage.Tables[0].Rows.Count > 0)
+            {
+                int imageCount = dsImage.Tables[0].Rows.Count;
+                for (int i = 0; i < imageCount; i++)
+                {
+                    int imageId = int.Parse(dsImage.Tables[0].Rows[i]["id"].ToString());
+                    imageBll.Delete(imageId);
+                }
+            }
+
             string imageList = context.Request.Params["imageList"].ToString();
             Object anArray = Newtonsoft.Json.JsonConvert.DeserializeObject(imageList);
             int imageListCount = ((Newtonsoft.Json.Linq.JContainer)(anArray)).Count;
@@ -237,8 +256,7 @@ namespace WK.Web.Handler
                 imageModel.correlation_id = market_id;
                 imageModel.img_type = 1;//图片类型（详情图/缩略图）
                 imageModel.is_delete = 0;
-                imageModel.url = imageKey;
-                WK.BLL.bus_image imageBll = new BLL.bus_image();
+                imageModel.url = imageKey; 
                 imageBll.Add(imageModel);
             }
             #endregion
