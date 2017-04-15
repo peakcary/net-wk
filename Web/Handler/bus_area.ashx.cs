@@ -57,9 +57,10 @@ namespace WK.Web.Handler
                     break;
                 case "deleteData":
                     sb.Append(deleteData(context));
-                    break; 
-                
-
+                    break;
+                case "getDataList0":
+                    sb.Append(getDataList0(context));
+                    break;  
                     
                 default:
                     sb.Append("");
@@ -83,6 +84,7 @@ namespace WK.Web.Handler
             StringBuilder strWhere = new StringBuilder();
             strWhere.Append(" is_delete != 1");
             StringBuilder orderby = new StringBuilder();
+            orderby.Append("parent_id,id");
 
             int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
             int pageSize = int.Parse(context.Request.Params["pageSize"]);
@@ -113,7 +115,11 @@ namespace WK.Web.Handler
         private string editData(HttpContext context)
         {  
             WK.Model.bus_area model = new Model.bus_area();
-            model.id = int.Parse(context.Request.Params["id"]);
+            model.id = 0;
+            if (context.Request.Params["id"].ToString() != "")
+            {
+                model.id = int.Parse(context.Request.Params["id"]);
+            }
             model.area_type = 1;// int.Parse(context.Request.Params["area_type"]);
             model.lat = decimal.Parse( context.Request.Params["lat"]);
             model.lon = decimal.Parse(context.Request.Params["lon"]);
@@ -142,8 +148,19 @@ namespace WK.Web.Handler
             } 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);  
             
-        } 
+        }
 
+        private string getDataList0(HttpContext context)
+        {
+            StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
+            strWhere.AppendFormat(" and parent_id  = 0");  
+            WK.BLL.bus_area bll = new WK.BLL.bus_area();
+            DataSet ds = new DataSet();
+            ds = bll.GetListByPageInfo(strWhere.ToString(), "", 0, 100);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+        }  
+         
         
     }
 }

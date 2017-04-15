@@ -8,10 +8,13 @@ $(function () {
         }
     })(jQuery);
      
-    var id = $.getUrlParam('id');
+    var id = $.getUrlParam('id'); 
     $("#hid").val(id); 
     if(id>0){
-        getDataDetail(id);
+        getDataDetail(id); 
+    }else{ 
+        $("#parent_id_container").show();
+        getDataList0(0);
     }
 });
 
@@ -31,6 +34,12 @@ function getDataDetail(id) {
             $("#lon").val(data.lon);
             $("#name").val(data.name);
             $("#parent_id").val(data.parent_id); 
+            if(data.parent_id==0){
+                $("#parent_id_container").hide();
+            }else{
+            getDataList0(data.parent_id);
+            }
+            
         },
         error:function(){
             loadingHide();
@@ -66,6 +75,22 @@ function editData() {
         },
         error:function(){
             loadingHide();
+        }
+    });
+}
+
+function getDataList0(id) {   
+    $.ajax({
+        type: "post",
+        url: url + "?t=getDataList0",
+        dataType: 'json',   
+        success: function (data) { 
+            $("#parent_id").empty();
+            $("#parent_id").append("<option value='0'>请选择</option>");
+            $("#pAreaListTemplate").tmpl(data).appendTo("#parent_id"); 
+            $("#parent_id").val(id); 
+        },
+        error:function(){ 
         }
     });
 }

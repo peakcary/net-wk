@@ -73,7 +73,7 @@
             <li class="active">列表</li>
         </ol>
         <div class="container-fluid mt10">
-            <a class="btn btn-primary" href="bus_user_edit.htm" role="button">新增</a>
+            <a class="btn btn-primary" href="bus_area_edit.htm" role="button">新增</a>
         </div>
         <table class="table table-bordered  table-hover  mt10">
             <thead>
@@ -83,6 +83,9 @@
                     </td>
                     <td>
                         ID
+                    </td>
+                    <td>
+                        父ID
                     </td>
                     <td>
                         区域类型
@@ -121,6 +124,7 @@
         <tr data-tt-id="${id}" {{if parent_id > 0}}data-tt-parent-id="${parent_id}"{{else}}{{/if}}} > 
             <td>${name}</td>
             <td>${id}</td>  
+            <td>${parent_id}</td>  
             <td>${area_type}</td> 
             <td>${lon}</td>
             <td>${lat}</td>  

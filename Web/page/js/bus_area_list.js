@@ -47,7 +47,7 @@ function getDataList(index) {
             loadingHide();
             $("#DataList").empty();
             $("#DataTemplate").tmpl(data).appendTo("#DataList"); 
-            $("#DataList").treetable({ expandable: true}); 
+//            $("#DataList").treetable({ expandable: true}); 
            
         },
         error:function(){
