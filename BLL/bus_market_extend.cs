@@ -2,7 +2,7 @@
 
 namespace WK.BLL
 {
-    public partial class bus_area
+    public partial class bus_market
     {
         /// <summary>
         /// 分页获取数据列表

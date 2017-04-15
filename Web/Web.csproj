@@ -1237,6 +1237,8 @@
     <Content Include="page\js\common.js" />
     <Content Include="page\js\bus_area_edit.js" />
     <Content Include="page\js\bus_area_list.js" />
+    <Content Include="page\js\bus_market_edit.js" />
+    <Content Include="page\js\bus_market_list.js" />
     <Content Include="page\lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="page\lib\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="page\lib\bootstrap\css\bootstrap.css" />
@@ -2310,6 +2312,8 @@
     <Content Include="page\bus_user_list.htm" />
     <Content Include="page\bus_area_edit.htm" />
     <Content Include="page\bus_area_list.htm" />
+    <Content Include="page\bus_market_edit.htm" />
+    <Content Include="page\bus_market_list.htm" />
     <Content Include="src\Newtonsoft.Json.dll" />
     <Content Include="src\n\Qiniu.dll" />
     <Content Include="src\Qiniu.dll" />

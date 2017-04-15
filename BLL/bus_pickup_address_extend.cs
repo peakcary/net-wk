@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Collections.Generic;
-using Maticsoft.Common;
-using WK.Model;
+﻿using System.Data;
 
 namespace WK.BLL
 {

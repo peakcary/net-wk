@@ -152,7 +152,7 @@ namespace WK.Web.Handler
             model.pickup_code = context.Request.Params["pickup_code"];
             model.remark = context.Request.Params["remark"];
             model.sort = int.Parse(context.Request.Params["sort"]);
-            model.status = 1;//1启用2停用
+            model.status = int.Parse(context.Request.Params["status"]); ;//1启用2停用
             //model.update_by
             //model.update_date
 
