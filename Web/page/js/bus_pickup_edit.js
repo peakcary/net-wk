@@ -1,4 +1,5 @@
 ﻿var url = "../../Handler/bus_pickup.ashx"; 
+var pickup_address_id =0;
 $(function () {
     (function ($) {
         $.getUrlParam = function (name) {
@@ -14,7 +15,14 @@ $(function () {
     $("#hid").val(id); 
     if(id>0){
         getDataDetail(id);
+        getPickupTimes(id);
+        pickup_address_id = id;
+        
+     $("#picupTimesEditContainer").show();
+    }else{
+     $("#picupTimesEditContainer").hide();
     }
+
     getListUser2(0);
 });
 
@@ -102,15 +110,81 @@ function openPickupTimesContainer(){
       area: ['600px', '300px'],
       title:"自提点时间",
       scrollbar:false,
-      btn: ['确定', '取消']
-  ,yes: function(index, layero){
-  layer.close(index);
-  alert(1);
-    //按钮【按钮一】的回调
-  },btn2: function(index, layero){
-  alert(2);
-    //按钮【按钮二】的回调
-  },
+      btn: ['确定', '取消'],
+      yes: function(index, layero){
+          layer.close(index);
+          editPickupTimes(); 
+      },btn2: function(index, layero){ 
+      },
       content:$("#pickupTimesContainer")
     });
 }
+
+
+function editPickupTimes() {    
+    $.ajax({
+        type: "post",
+        url: url + "?t=editPickupTimes",
+        data: { 
+            pickup_address_id: $("#hid").val(),
+            eat_type:$('input[name=eat_type]:checked').val(),
+            pickup_time:$('input[name=pickup_time]:checked').val(),
+            pickup_start_time: $("#pickup_start_time").val(),
+            pickup_end_time: $("#pickup_end_time").val()
+        },
+        dataType: 'json',   
+        success: function (data) { 
+            if(data.isSuccess){
+                 getPickupTimes(pickup_address_id);
+            }else{ 
+                layer.msg('保存失败！');
+            }
+        }
+    });
+}
+
+function getPickupTimes(pickup_address_id){ 
+ $.ajax({
+        type: "post",
+        url: url + "?t=getPickupTimes",
+        data: {
+           pickup_address_id:pickup_address_id,
+           pageIndex: 0,
+           pageSize: 100 
+        },
+        dataType: 'json',   
+        success: function (data) { 
+            $("#pickupTimesList").empty();
+            $("#pickupTimesListTmpl").tmpl(data).appendTo("#pickupTimesList");
+        },
+        error:function(){ 
+        }
+    });
+}
+
+function deleteDataByStatus(id) { 
+    layer.confirm('确定删除吗？', 
+    {btn: ['确定','取消']},
+    function(){ 
+        $.ajax({
+            type: "post",
+            url: url + "?t=deletePickupTimes",
+            data: { 
+                id: id
+            },
+            dataType: 'json',   
+            success: function (data) { 
+                if(data.isSuccess){
+                    layer.msg('删除成功！');
+                        getPickupTimes(pickup_address_id);
+                    }else{
+                        layer.msg('删除失败！');
+                    }
+                }
+        });
+    }, function(){
+   
+    }); 
+}
+
+ 

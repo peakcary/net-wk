@@ -236,11 +236,11 @@ namespace WK.DAL
 				}
 				if(row["pickup_start_time"]!=null && row["pickup_start_time"].ToString()!="")
 				{
-					model.pickup_start_time=DateTime.Parse(row["pickup_start_time"].ToString());
+                    model.pickup_start_time = TimeSpan.Parse(row["pickup_start_time"].ToString());
 				}
 				if(row["pickup_end_time"]!=null && row["pickup_end_time"].ToString()!="")
 				{
-					model.pickup_end_time=DateTime.Parse(row["pickup_end_time"].ToString());
+                    model.pickup_end_time = TimeSpan.Parse(row["pickup_end_time"].ToString());
 				}
 				if(row["is_delete"]!=null && row["is_delete"].ToString()!="")
 				{

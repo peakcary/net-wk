@@ -14,8 +14,8 @@ namespace WK.Model
 		private int _pickup_address_id;
 		private int _pickup_time;
 		private int _eat_type=0;
-		private DateTime? _pickup_start_time;
-		private DateTime? _pickup_end_time;
+        private TimeSpan? _pickup_start_time;
+        private TimeSpan? _pickup_end_time;
 		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
@@ -57,7 +57,7 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? pickup_start_time
+        public TimeSpan? pickup_start_time
 		{
 			set{ _pickup_start_time=value;}
 			get{return _pickup_start_time;}
@@ -65,7 +65,7 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? pickup_end_time
+        public TimeSpan? pickup_end_time
 		{
 			set{ _pickup_end_time=value;}
 			get{return _pickup_end_time;}
