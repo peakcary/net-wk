@@ -1,5 +1,5 @@
 ﻿var url = "../../Handler/bus_pickup.ashx"; 
-var pickup_address_id =0;
+ 
 $(function () {
     (function ($) {
         $.getUrlParam = function (name) {
@@ -7,20 +7,17 @@ $(function () {
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         }
-    })(jQuery);
-     
+    })(jQuery); 
+    initInputValid();
      $('#remark').summernote({ height: 100 });
      
     var id = $.getUrlParam('id');
     $("#hid").val(id); 
     if(id>0){
         getDataDetail(id);
-        getPickupTimes(id);
-        pickup_address_id = id;
-        
-     $("#picupTimesEditContainer").show();
-    }else{
-     $("#picupTimesEditContainer").hide();
+        getPickupTimes(id);  
+    }else{ 
+    $("#picupTimesEditContainer").hide();
     }
 
     getListUser2(0);
@@ -42,7 +39,8 @@ function getDataDetail(id) {
             $("#lat").val(data.lat);
             $("#sort").val(data.sort);
             $("#remark").code(data.remark);
-            $("#dilivery_user_id").val(data.dilivery_user_id);
+            $("#dilivery_user_id").val(data.dilivery_user_id); 
+            $("input[name=status][value="+data.status+"]").attr("checked", 'checked');
             getListUser2(data.dilivery_user_id);
 
         }
@@ -53,7 +51,10 @@ function goPageList() {
     window.location.href = "bus_pickup_list.htm";
 }
 
-function editData() {    
+function editData(isTolist) {  
+if(!isDataValid()){
+return;
+}  
     $.ajax({
         type: "post",
         url: url + "?t=editData",
@@ -66,12 +67,32 @@ function editData() {
             lon: $("#lon").val(),
             lat: $("#lat").val(),
             remark: $("#remark").code(),
+            status: $('input[type="radio"][name="status"]:checked').val(),
+            sort: $("#sort").val(),
             dilivery_user_id: $("#dilivery_user_id").val()
         },
         dataType: 'json',   
         success: function (data) { 
         if(data.isSuccess){
-            goPageList();
+            $("#hid").val(data.primaryKey);
+            if(!isTolist){
+                layer.open({
+                      type: 1,
+                      area: ['600px', '300px'],
+                      title:"自提点时间",
+                      scrollbar:false,
+                      btn: ['确定', '取消'],
+                      yes: function(index, layero){
+                          layer.close(index);
+                          editPickupTimes(); 
+                      },btn2: function(index, layero){ 
+                      },
+                      content:$("#pickupTimesContainer")
+                    });
+            }else{
+              goPageList();
+            }
+            
         }else{
             alert('保存失败！');
         }
@@ -101,23 +122,11 @@ function getListUser2(id){
     });
 }
 
-
-
-///自己方法
+ 
 function openPickupTimesContainer(){
-    layer.open({
-      type: 1,
-      area: ['600px', '300px'],
-      title:"自提点时间",
-      scrollbar:false,
-      btn: ['确定', '取消'],
-      yes: function(index, layero){
-          layer.close(index);
-          editPickupTimes(); 
-      },btn2: function(index, layero){ 
-      },
-      content:$("#pickupTimesContainer")
-    });
+    if($("#hid").val()==""){
+        editData(false);
+    }  
 }
 
 
@@ -135,7 +144,7 @@ function editPickupTimes() {
         dataType: 'json',   
         success: function (data) { 
             if(data.isSuccess){
-                 getPickupTimes(pickup_address_id);
+                 getPickupTimes();
             }else{ 
                 layer.msg('保存失败！');
             }
@@ -143,19 +152,24 @@ function editPickupTimes() {
     });
 }
 
-function getPickupTimes(pickup_address_id){ 
+function getPickupTimes(){ 
  $.ajax({
         type: "post",
         url: url + "?t=getPickupTimes",
         data: {
-           pickup_address_id:pickup_address_id,
+           pickup_address_id:$("#hid").val(),
            pageIndex: 0,
            pageSize: 100 
         },
         dataType: 'json',   
         success: function (data) { 
-            $("#pickupTimesList").empty();
-            $("#pickupTimesListTmpl").tmpl(data).appendTo("#pickupTimesList");
+            if(data.length>0){
+              $("#picupTimesEditContainer").show();
+              $("#pickupTimesList").empty();
+              $("#pickupTimesListTmpl").tmpl(data).appendTo("#pickupTimesList");
+            }else{
+              $("#picupTimesEditContainer").hide();
+            }
         },
         error:function(){ 
         }
@@ -176,15 +190,44 @@ function deleteDataByStatus(id) {
             success: function (data) { 
                 if(data.isSuccess){
                     layer.msg('删除成功！');
-                        getPickupTimes(pickup_address_id);
+                        getPickupTimes($("#hid").val());
                     }else{
                         layer.msg('删除失败！');
                     }
                 }
         });
-    }, function(){
-   
     }); 
+} 
+
+function isDataValid(){
+    if($("#name").val()==""){
+        layer.msg('请输入名称！');
+        $("#name").focus();
+        return false;
+    }
+    if($("#address").val()==""){
+        layer.msg('请输入地址！');
+        $("#address").focus();
+        return false;
+    }
+    if($("#lon").val()==""){
+        layer.msg('请输入经度！');
+        $("#lon").focus();
+        return false;
+    }
+    if($("#lat").val()==""){
+        layer.msg('请输入纬度！');
+        $("#lat").focus();
+        return false;
+    }
+    return true;
 }
 
+function initInputValid(){
+    $("#lon").keyup(function(){    
+                    $(this).val($(this).val().replace(/[^0-9.]/g,''));    
+                }).bind("paste",function(){  //CTR+V事件处理    
+                    $(this).val($(this).val().replace(/[^0-9.]/g,''));     
+                }).css("ime-mode", "disabled"); //CSS设置输入法不可用    
+}
  

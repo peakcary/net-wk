@@ -23,6 +23,7 @@ namespace WK.Web.Handler
         public class ReturnInfo
         {
             public bool isSuccess { get; set; }
+            public int primaryKey { get; set; }
         }
         [Serializable]
         public class Record
@@ -135,7 +136,8 @@ namespace WK.Web.Handler
             WK.Model.bus_pickup_address model = new Model.bus_pickup_address();
 
             int id = 0;
-            if (context.Request.Params["id"] != "")
+            if (context.Request.Params["id"]!=null
+                &&context.Request.Params["id"].ToString() != "")
             {
                 id = int.Parse(context.Request.Params["id"]);
             }
@@ -151,7 +153,12 @@ namespace WK.Web.Handler
             model.name  = context.Request.Params["name"];
             model.pickup_code = context.Request.Params["pickup_code"];
             model.remark = context.Request.Params["remark"];
-            model.sort = int.Parse(context.Request.Params["sort"]);
+            model.sort = 0;
+            if (context.Request.Params["sort"] != null
+                && context.Request.Params["sort"].ToString() != "")
+            {
+                model.sort = int.Parse(context.Request.Params["sort"]);
+            }
             model.status = int.Parse(context.Request.Params["status"]); ;//1启用2停用
             //model.update_by
             //model.update_date
@@ -160,10 +167,12 @@ namespace WK.Web.Handler
             WK.BLL.bus_pickup_address bll = new WK.BLL.bus_pickup_address();
             if (model.id > 0)
             {
+                returnInfo.primaryKey = model.id;
                 returnInfo.isSuccess = bll.Update(model);
             }
             else
             {
+                returnInfo.primaryKey = bll.GetMaxId();
                 returnInfo.isSuccess = bll.Add(model);
             }
 

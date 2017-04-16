@@ -1,7 +1,11 @@
 ﻿var url = "../../Handler/bus_area.ashx"; 
 var listPageSize = 10;
 $(function () { 
-    initPagination(); 
+    initPagination();
+    
+    
+    
+     
 });
 
 function initPagination(){
@@ -46,8 +50,21 @@ function getDataList(index) {
         success: function (data) { 
             loadingHide();
             $("#DataList").empty();
-            $("#DataTemplate").tmpl(data).appendTo("#DataList"); 
-//            $("#DataList").treetable({ expandable: true}); 
+            $("#DataTemplate").tmpl(data).appendTo("#DataList");  
+
+            var option = {
+                theme:'vsStyle',
+                expandLevel : 2,
+                beforeExpand : function($treeTable, id) {
+                    
+                },
+                onSelect : function($treeTable, id) {
+                    window.console && console.log('onSelect:' + id); 
+                }
+
+            };
+            $('#tbData').treeTable(option);
+
            
         },
         error:function(){

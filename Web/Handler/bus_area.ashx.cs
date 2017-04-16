@@ -6,12 +6,13 @@ using System.Text;
 using System.Data;
 
 namespace WK.Web.Handler
-{
+{  
     /// <summary>
     /// bus_area 的摘要说明
     /// </summary>
     public class bus_area : IHttpHandler
     {
+       
         public bool IsReusable
         {
             get
@@ -97,8 +98,25 @@ namespace WK.Web.Handler
             WK.BLL.bus_area bll = new WK.BLL.bus_area();
             DataSet ds = new DataSet();
             ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
-        }  
+
+            List<WK.Model.bus_area> listArea = new List<Model.bus_area>();
+            DataTable dt = ds.Tables[0];
+            DataTable dtNew = dt.Clone();
+            DataRow[] dt0 = dt.Select("parent_id=0");
+            foreach (DataRow dr in dt0)
+            {
+                dtNew.ImportRow(dr);
+                DataRow[] dt1 = dt.Select("parent_id=" + dr["id"]);
+                foreach (DataRow dr11 in dt1)
+                {
+                    dtNew.ImportRow(dr11);
+                }
+                
+            } 
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dtNew);
+        }
+
+        
          
         private string getDataDetail(HttpContext context)
         {
