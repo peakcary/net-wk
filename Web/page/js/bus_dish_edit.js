@@ -115,6 +115,91 @@ function editData() {
     });
 }
 
+ 
+function opeanAddDishSizeContainer(){
+    layer.open({
+      type: 1,
+      area: ['600px', '220px'],
+      title:" 菜品规格",
+      scrollbar:false,
+      btn: ['确定', '取消'],
+      yes: function(index, layero){
+          layer.close(index); 
+          addDishSize();
+      },btn2: function(index, layero){ 
+      },
+      content:$("#addDishSizeContainer")
+    });
+}
+
+function addDishSize() {  
+    loadingShow(); 
+    $.ajax({
+        type: "post",
+        url: url + "?t=addDishSize",
+        data: { 
+            dish_id: $("#hid").val(),
+            name: $("#name").val(),
+            affect_price: $("#affect_price").val()
+        },
+        dataType: 'json',   
+        success: function (data) { 
+            loadingHide();
+            if(data.isSuccess){
+                getDishSize();
+            }else{
+             layer.msg('保存失败！'); 
+            }
+        },
+        error:function(){
+            loadingHide();
+        }
+    });
+}
+function getDishSize() {  
+    loadingShow();
+    $.ajax({
+        type: "post",
+        url: url + "?t=getDishSize",
+        data: {
+           dish_id:$("#hid").val()
+        },
+        dataType: 'json',   
+        success: function (data) { 
+            loadingHide();
+            $("#dtSizeList").empty();
+            $("#dtSizeListTmpl").tmpl(data).appendTo("#dtSizeList");  
+        },
+        error:function(){
+            loadingHide();
+        }
+    });
+}
+
+function deleteDishSize(id){
+ layer.confirm('确定删除吗？', {
+      btn: ['确定','取消']
+    }, function(){ 
+        $.ajax({
+            type: "post",
+            url: url + "?t=deleteDishSize",
+            data: { 
+                id: id
+            },
+            dataType: 'json',   
+            success: function (data) { 
+                if(data.isSuccess){
+                    layer.msg('删除成功！');
+                        getDishSize();
+                    }else{
+                        layer.msg('删除失败！');
+                    }
+                }
+        });
+    }); 
+} 
+
+
 function getAreaList(id) {   
     $.ajax({
         type: "post",

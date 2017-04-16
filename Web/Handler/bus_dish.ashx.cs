@@ -58,6 +58,15 @@ namespace WK.Web.Handler
                     break;
                 case "deleteData":
                     sb.Append(deleteData(context));
+                    break;
+                case "addDishSize":
+                    sb.Append(addDishSize(context));
+                    break;
+                case "getDishSize":
+                    sb.Append(getDishSize(context));
+                    break;
+                case "deleteDishSize":
+                    sb.Append(deleteDishSize(context));
                     break; 
 
                 default:
@@ -308,6 +317,51 @@ namespace WK.Web.Handler
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }
- 
+
+        private string addDishSize(HttpContext context)
+        {
+            WK.Model.bus_dish_size model = new Model.bus_dish_size();
+            model.affect_price = decimal.Parse(context.Request.Params["affect_price"]);
+            model.dish_id = int.Parse(context.Request.Params["dish_id"]);
+            model.is_delete = 0;
+            model.name = context.Request.Params["name"].ToString();
+
+            WK.BLL.bus_dish_size bll = new WK.BLL.bus_dish_size(); 
+            ReturnInfo returnInfo = new ReturnInfo();
+            returnInfo.isSuccess =  bll.Add(model);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
+
+        private string getDishSize(HttpContext context)
+        {
+            int dish_id = int.Parse(context.Request.Params["dish_id"]);  
+            StringBuilder sb = new StringBuilder();
+            DataSet ds = new DataSet();
+            StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
+            strWhere.AppendFormat(" and dish_id = {0}", dish_id); 
+            WK.BLL.bus_dish_size bll = new WK.BLL.bus_dish_size();
+            ds = bll.GetList(strWhere.ToString());
+            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+        }
+
+        private string deleteDishSize(HttpContext context)
+        {
+            ReturnInfo returnInfo = new ReturnInfo();
+            returnInfo.isSuccess = false;
+            WK.BLL.bus_dish_size bll = new WK.BLL.bus_dish_size();
+            int id = int.Parse(context.Request.Params["id"]);
+            if (id > 0)
+            {
+                WK.Model.bus_dish_size model = bll.GetModel(id);
+                model.is_delete = 1;
+                returnInfo.isSuccess = bll.Update(model);
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
+
+
+
     }
 }
