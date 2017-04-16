@@ -55,7 +55,11 @@ function getDataDetail(id) {
             $("#remark").code(data.remark);
             $("#description_cn").code(data.description_cn);
             $("#description_en").code(data.description_en); 
+            $("#imageList").empty();
             $("#imageListTemplate").tmpl(data.listImage).appendTo("#imageList");  
+            $("#dtSizeList").empty();
+            $("#dtSizeListTmpl").tmpl(data.listSize).appendTo("#dtSizeList");
+            console.log("-----data.listSize",data.listSize);
         },
         error:function(){
             loadingHide();

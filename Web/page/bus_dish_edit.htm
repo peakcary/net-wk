@@ -77,12 +77,12 @@
                 <div class="col-sm-10">
                     <label class="radio-inline">
                         <input type="radio" name="dish_time" checked value="1">
-                        周末 
+                        周末
                     </label>
                     <label class="radio-inline">
                         <input type="radio" name="dish_time" value="2">
                         工作日
-                    </label> 
+                    </label>
                     <label class="radio-inline">
                         <input type="radio" name="dish_time" value="3">
                         全周
@@ -100,7 +100,7 @@
                     <label class="radio-inline">
                         <input type="radio" name="eat_type" value="2">
                         晚餐
-                    </label> 
+                    </label>
                     <label class="radio-inline">
                         <input type="radio" name="eat_type" value="3">
                         所有
@@ -118,14 +118,14 @@
                 <label class="col-sm-2 control-label">
                     英文名称</label>
                 <div class="col-sm-10">
-                   <input type="text" class="form-control" id="name_en" placeholder="英文名称" />
+                    <input type="text" class="form-control" id="name_en" placeholder="英文名称" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">
                     中文名称</label>
                 <div class="col-sm-10">
-                   <input type="text" class="form-control" id="name_cn" placeholder="中文名称" />
+                    <input type="text" class="form-control" id="name_cn" placeholder="中文名称" />
                 </div>
             </div>
             <div class="form-group">
@@ -134,7 +134,7 @@
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="original_price" placeholder="菜品原价" />
                 </div>
-            </div> 
+            </div>
             <div class="form-group">
                 <label for="remark" class="col-sm-2 control-label">
                     菜品折扣价</label>
@@ -148,15 +148,15 @@
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="sales_total" placeholder="销售总数" />
                 </div>
-            </div> 
+            </div>
             <div class="form-group">
                 <label for="remark" class="col-sm-2 control-label">
                     排序</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="sort" placeholder="排序" />
                 </div>
-            </div> 
-             <div class="form-group">
+            </div>
+            <div class="form-group">
                 <label class="col-sm-2 control-label">
                     是否启用</label>
                 <div class="col-sm-10">
@@ -196,6 +196,39 @@
             </div>
             <div class="form-group">
                 <label for="remark" class="col-sm-2 control-label">
+                    菜品规格</label>
+                <div class="col-sm-10">
+                    <a href="#" class="btn btn-primary btn-sm">添加</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remark" class="col-sm-2 control-label">
+                </label>
+                <div class="col-sm-10">
+                    <table class="table table-bordered  table-hover  mt10">
+                        <thead>
+                            <tr>
+                                <td>
+                                    ID
+                                </td>
+                                <td>
+                                    规格名称
+                                </td>
+                                <td>
+                                    影响价格
+                                </td>
+                                <td>
+                                    操作
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody id="dtSizeList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remark" class="col-sm-2 control-label">
                     图片</label>
                 <div class="col-sm-10">
                     <div id="container">
@@ -226,7 +259,7 @@
       </div>
     </footer>
     <input type="hidden" id="hid" />
-    <input type="hidden" id="market_id" /> 
+    <input type="hidden" id="market_id" />
     <script src="lib/jqurey/1.12.4/jquery.min.js" type="text/javascript"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="lib/layer-v3.0.3/layer/layer.js" type="text/javascript"></script>
@@ -241,11 +274,19 @@
          <option value="${data}">${value}</option> 
     </script>
     <script src="lib/plupload-2.1.9/js/plupload.full.min.js" type="text/javascript"></script>
-    <script src="lib/qiniu/dist/qiniu.min.js" type="text/javascript"></script> 
+    <script src="lib/qiniu/dist/qiniu.min.js" type="text/javascript"></script>
     <script id="imageListTemplate" type="text/x-jquery-tmpl"> 
           <tr> 
             <td><image ref='${url}' width='70' height='70' src='http://om2v517pk.bkt.clouddn.com/${url}'/></td> 
           </tr>
+    </script>
+     <script id="dtSizeListTmpl" type="text/x-jquery-tmpl"> 
+        <tr> 
+            <td>${id}</td>   
+            <td>${name}</td>  
+            <td>${affect_price}</td> 
+            <td><a class="btn btn-danger btn-xs" href="#" role="button" onclick="deleteData('${id}')" >删除</a></td> 
+        </tr>
     </script>
 </body>
 </html>
