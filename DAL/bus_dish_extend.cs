@@ -32,5 +32,27 @@ namespace WK.DAL
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
+        /// <summary>
+        /// 获取记录总数
+        /// </summary>
+        public int GetListCount(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) FROM bus_dish ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            object obj = DbHelperMySQL.GetSingle(strSql.ToString());
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+
     }
 }
