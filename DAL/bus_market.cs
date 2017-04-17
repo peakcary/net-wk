@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Text;
-using Maticsoft.DBUtility;//Please add references
 using MySql.Data.MySqlClient;
+using Maticsoft.DBUtility;//Please add references
 namespace WK.DAL
 {
 	/// <summary>
@@ -46,11 +46,11 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_market(");
-			strSql.Append("markket_code,name_en,name_cn,market_type,area_id,lon,lat,address,description_en,description_cn,status,sort,is_delete,remark,create_by,craete_date,update_by,update_date)");
+			strSql.Append("market_code,name_en,name_cn,market_type,area_id,lon,lat,address,description_en,description_cn,status,sort,is_delete,remark,create_by,craete_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@markket_code,@name_en,@name_cn,@market_type,@area_id,@lon,@lat,@address,@description_en,@description_cn,@status,@sort,@is_delete,@remark,@create_by,@craete_date,@update_by,@update_date)");
+			strSql.Append("@market_code,@name_en,@name_cn,@market_type,@area_id,@lon,@lat,@address,@description_en,@description_cn,@status,@sort,@is_delete,@remark,@create_by,@craete_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@markket_code", MySqlDbType.VarChar,100),
+					new MySqlParameter("@market_code", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_en", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_cn", MySqlDbType.VarChar,100),
 					new MySqlParameter("@market_type", MySqlDbType.VarChar,500),
@@ -68,7 +68,7 @@ namespace WK.DAL
 					new MySqlParameter("@craete_date", MySqlDbType.DateTime),
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@update_date", MySqlDbType.DateTime)};
-			parameters[0].Value = model.markket_code;
+			parameters[0].Value = model.market_code;
 			parameters[1].Value = model.name_en;
 			parameters[2].Value = model.name_cn;
 			parameters[3].Value = model.market_type;
@@ -104,7 +104,7 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update bus_market set ");
-			strSql.Append("markket_code=@markket_code,");
+			strSql.Append("market_code=@market_code,");
 			strSql.Append("name_en=@name_en,");
 			strSql.Append("name_cn=@name_cn,");
 			strSql.Append("market_type=@market_type,");
@@ -124,7 +124,7 @@ namespace WK.DAL
 			strSql.Append("update_date=@update_date");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
-					new MySqlParameter("@markket_code", MySqlDbType.VarChar,100),
+					new MySqlParameter("@market_code", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_en", MySqlDbType.VarChar,100),
 					new MySqlParameter("@name_cn", MySqlDbType.VarChar,100),
 					new MySqlParameter("@market_type", MySqlDbType.VarChar,500),
@@ -143,7 +143,7 @@ namespace WK.DAL
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@update_date", MySqlDbType.DateTime),
 					new MySqlParameter("@id", MySqlDbType.Int32,11)};
-			parameters[0].Value = model.markket_code;
+			parameters[0].Value = model.market_code;
 			parameters[1].Value = model.name_en;
 			parameters[2].Value = model.name_cn;
 			parameters[3].Value = model.market_type;
@@ -225,7 +225,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,markket_code,name_en,name_cn,market_type,area_id,lon,lat,address,description_en,description_cn,status,sort,is_delete,remark,create_by,craete_date,update_by,update_date from bus_market ");
+			strSql.Append("select id,market_code,name_en,name_cn,market_type,area_id,lon,lat,address,description_en,description_cn,status,sort,is_delete,remark,create_by,craete_date,update_by,update_date from bus_market ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -257,9 +257,9 @@ namespace WK.DAL
 				{
 					model.id=int.Parse(row["id"].ToString());
 				}
-				if(row["markket_code"]!=null)
+				if(row["market_code"]!=null)
 				{
-					model.markket_code=row["markket_code"].ToString();
+					model.market_code=row["market_code"].ToString();
 				}
 				if(row["name_en"]!=null)
 				{
@@ -339,7 +339,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,markket_code,name_en,name_cn,market_type,area_id,lon,lat,address,description_en,description_cn,status,sort,is_delete,remark,create_by,craete_date,update_by,update_date ");
+			strSql.Append("select id,market_code,name_en,name_cn,market_type,area_id,lon,lat,address,description_en,description_cn,status,sort,is_delete,remark,create_by,craete_date,update_by,update_date ");
 			strSql.Append(" FROM bus_market ");
 			if(strWhere.Trim()!="")
 			{

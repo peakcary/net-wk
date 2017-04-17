@@ -38,7 +38,7 @@ function getDataDetail(id) {
         success: function (data) { 
             loadingHide();
             $("#hid").val(data.id);
-            $("#markket_code").val(data.markket_code);
+            $("#market_code").val(data.market_code);
             $("#name_en").val(data.name_en);
             $("#name_cn").val(data.name_cn); 
             $("input[name=status][value="+data.status+"]").attr("checked", 'checked');
@@ -99,7 +99,7 @@ function editData() {
         data: { 
             id: $("#hid").val(),
             area_id: $("#area_id").val(),
-            markket_code: $("#markket_code").val(),
+            market_code: $("#market_code").val(),
             name_en: $("#name_en").val(),
             name_cn: $("#name_cn").val(),
             status: $('input[type="radio"][name="status"]:checked').val(),

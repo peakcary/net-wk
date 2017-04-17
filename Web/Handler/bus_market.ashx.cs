@@ -177,7 +177,7 @@ namespace WK.Web.Handler
             model.lat = decimal.Parse( context.Request.Params["lat"]);
             model.lon = decimal.Parse( context.Request.Params["lon"]);
             model.market_type = context.Request.Params["market_type"];
-            model.markket_code = context.Request.Params["markket_code"];
+            model.market_code = context.Request.Params["market_code"];
             model.name_cn = context.Request.Params["name_cn"];
             model.name_en = context.Request.Params["name_en"];
             model.remark = context.Request.Params["remark"];

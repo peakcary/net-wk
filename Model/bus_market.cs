@@ -11,7 +11,7 @@ namespace WK.Model
 		{}
 		#region Model
 		private int _id;
-		private string _markket_code;
+		private string _market_code;
 		private string _name_en;
 		private string _name_cn;
 		private string _market_type= "0";
@@ -23,7 +23,7 @@ namespace WK.Model
 		private string _description_cn;
 		private int _status=0;
 		private int? _sort=0;
-		private int _is_delete=0;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _craete_date;
@@ -40,10 +40,10 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public string markket_code
+		public string market_code
 		{
-			set{ _markket_code=value;}
-			get{return _markket_code;}
+			set{ _market_code=value;}
+			get{return _market_code;}
 		}
 		/// <summary>
 		/// 
