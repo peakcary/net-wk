@@ -11,6 +11,7 @@ namespace WK.Model
 		{}
 		#region Model
 		private int _id;
+		private string _order_code;
 		private int _order_status;
 		private int _pay_status;
 		private int _pay_type;
@@ -23,9 +24,11 @@ namespace WK.Model
 		private decimal _total_real_price=0.00M;
 		private int _meal_num=1;
 		private DateTime _pickup_start_time;
-		private string _pickup_end_time;
+		private DateTime _pickup_end_time;
 		private DateTime _pickup_date;
-		private int _is_delete=0;
+		private int _dish_time;
+		private int _eat_type;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;
@@ -38,6 +41,14 @@ namespace WK.Model
 		{
 			set{ _id=value;}
 			get{return _id;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string order_code
+		{
+			set{ _order_code=value;}
+			get{return _order_code;}
 		}
 		/// <summary>
 		/// 
@@ -138,7 +149,7 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public string pickup_end_time
+		public DateTime pickup_end_time
 		{
 			set{ _pickup_end_time=value;}
 			get{return _pickup_end_time;}
@@ -150,6 +161,22 @@ namespace WK.Model
 		{
 			set{ _pickup_date=value;}
 			get{return _pickup_date;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int dish_time
+		{
+			set{ _dish_time=value;}
+			get{return _dish_time;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int eat_type
+		{
+			set{ _eat_type=value;}
+			get{return _eat_type;}
 		}
 		/// <summary>
 		/// 

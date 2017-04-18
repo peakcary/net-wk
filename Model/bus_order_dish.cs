@@ -19,7 +19,7 @@ namespace WK.Model
 		private decimal? _unit_discount_price;
 		private int? _count;
 		private string _size_list;
-		private int _is_delete=0;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

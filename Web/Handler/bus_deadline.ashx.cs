@@ -7,10 +7,11 @@ using Maticsoft.DBUtility;
 namespace WK.Web.Handler
 {
     /// <summary>
-    /// bus_user 的摘要说明
+    /// bus_deadline 的摘要说明
     /// </summary>
-    public class bus_user : IHttpHandler
+    public class bus_deadline : IHttpHandler
     {
+
 
         public bool IsReusable
         {
@@ -43,6 +44,13 @@ namespace WK.Web.Handler
             StringBuilder sb = new StringBuilder();
             switch (t)
             {
+
+                case "getListCount":
+                    sb.Append(getListCount(context));
+                    break; 
+                case "getListByPageInfo":
+                    sb.Append(getListByPageInfo(context));
+                    break;
                 case "getDataDetail":
                     sb.Append(getDataDetail(context));
                     break;
@@ -51,15 +59,6 @@ namespace WK.Web.Handler
                     break;
                 case "deleteRData":
                     sb.Append(deleteData(context));
-                    break;
-                case "getListByPageInfo":
-                    sb.Append(getListByPageInfo(context));
-                    break;
-                case "getListCount":
-                    sb.Append(getListCount(context));
-                    break;
-                case "deleteDataByStatus":
-                    sb.Append(deleteDataByStatus(context));
                     break; 
                 default:
                     sb.Append("");
@@ -68,12 +67,7 @@ namespace WK.Web.Handler
             context.Response.Write(sb.ToString());
         }
 
-
-        /// <summary>
-        /// 分页列表
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
+         
         private string getListByPageInfo(HttpContext context)
         {
             StringBuilder sb = new StringBuilder();
@@ -90,31 +84,21 @@ namespace WK.Web.Handler
                 startIndex = pageSize * pageIndex;
             }
 
-            WK.BLL.bus_user bll = new WK.BLL.bus_user();
+            WK.BLL.bus_deadline bll = new WK.BLL.bus_deadline();
             ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
-
-        /// <summary>
-        /// 列表数量
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
+         
         private string getListCount(HttpContext context)
         {
             StringBuilder sb = new StringBuilder();
             StringBuilder strWhere = new StringBuilder();
-            WK.BLL.bus_user bll = new WK.BLL.bus_user();
+            WK.BLL.bus_deadline bll = new WK.BLL.bus_deadline();
             Record r = new Record();
             r.RecordCount = bll.GetListCount(strWhere.ToString());
             return Newtonsoft.Json.JsonConvert.SerializeObject(r);
         }
-
-        /// <summary>
-        /// 详情
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
+         
         private string getDataDetail(HttpContext context)
         {
             string id = "";
@@ -122,75 +106,49 @@ namespace WK.Web.Handler
             {
                 id = context.Request.Params["id"];
             }
-            WK.BLL.bus_user bll = new WK.BLL.bus_user();
-            WK.Model.bus_user model = bll.GetModel(int.Parse(id));
-            model.pwd = DESEncrypt.Decrypt(model.pwd);
+            WK.BLL.bus_deadline bll = new WK.BLL.bus_deadline();
+            WK.Model.bus_deadline model = bll.GetModel(int.Parse(id));
+             
             return Newtonsoft.Json.JsonConvert.SerializeObject(model);
         }
-
-        /// <summary>
-        /// 编辑
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
+         
         private string editData(HttpContext context)
-        {
-            ReturnInfo returnInfo = new ReturnInfo();
-            returnInfo.isSuccess = false;
-
-            WK.Model.bus_user model = new Model.bus_user();
-
+        {  
+            WK.Model.bus_deadline model = new Model.bus_deadline(); 
             int id = 0;
             if (context.Request.Params["id"] != "")
             {
-                id = int.Parse(context.Request.Params["id"]); 
+                id = int.Parse(context.Request.Params["id"]);
             }
-            model.id = id; 
+            model.id = id;
             //model.create_by
             //model.create_date
-            //model.cur_deviceId = context.Request.Params["cur_deviceId"];
-            //model.generate_time
+            model.deadline_days = int.Parse(context.Request.Params["deadline_days"]);
+            model.deadline_time_type = int.Parse(context.Request.Params["deadline_time_type"]);
+            model.deadline_times = DateTime.Parse(context.Request.Params["deadline_times"]);
+            model.eat_type = int.Parse(context.Request.Params["eat_type"]);
             model.is_delete = 0;
-            model.nickname = context.Request.Params["nickname"];
-            model.phone_num = context.Request.Params["phone_num"];
-            //model.pic_url = context.Request.Params["pic_url"];
-            model.pwd = DESEncrypt.Encrypt(context.Request.Params["pwd"]);
-            //model.remark = context.Request.Params["remark"];
-            //model.sex = int.Parse( context.Request.Params["sex"]);
-            //model.status = int.Parse(context.Request.Params["status"]);
-            model.status = 1;//1启用2停用
+            //model.remark = context.Request.Params["remark"]; 
             //model.update_by
-            //model.update_date
-            model.user_type = 2;//1用户2配送员
-            
+            //model.update_date 
 
-            WK.BLL.bus_user bll = new WK.BLL.bus_user();
-            if (model.id > 0)
-            {
-                returnInfo.isSuccess = bll.Update(model);
-            }
-            else
-            {
-                returnInfo.isSuccess = bll.Add(model);
-            }
-
+            ReturnInfo returnInfo = new ReturnInfo();
+            returnInfo.isSuccess = false;
+            WK.BLL.bus_deadline bll = new WK.BLL.bus_deadline();
+            returnInfo.isSuccess = model.id > 0 ? bll.Update(model) : bll.Add(model); 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }
-
-        /// <summary>
-        /// 状态删除
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        private string deleteDataByStatus(HttpContext context)
+           
+         
+        private string deleteData(HttpContext context)
         {
             ReturnInfo returnInfo = new ReturnInfo();
             returnInfo.isSuccess = false;
-            WK.BLL.bus_user bll = new WK.BLL.bus_user();
+            WK.BLL.bus_deadline bll = new WK.BLL.bus_deadline();
             int id = int.Parse(context.Request.Params["id"]);
             if (id > 0)
             {
-                WK.Model.bus_user model = bll.GetModel(id);
+                WK.Model.bus_deadline model = bll.GetModel(id);
                 model.is_delete = 1;
                 returnInfo.isSuccess = bll.Update(model);
             }
@@ -198,26 +156,6 @@ namespace WK.Web.Handler
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }
 
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        private string deleteData(HttpContext context)
-        {
-            ReturnInfo returnInfo = new ReturnInfo();
-            returnInfo.isSuccess = false;
-            WK.BLL.bus_user bll = new WK.BLL.bus_user();
-            int id = int.Parse(context.Request.Params["id"]);
-            if (id > 0)
-            {
-                returnInfo.isSuccess = bll.Delete(id);
-            }
-
-            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
-        }
-
         
- 
     }
 }

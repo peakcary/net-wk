@@ -1,4 +1,4 @@
-﻿var url = "../../Handler/bus_user.ashx"; 
+﻿var url = "../../Handler/bus_deadline.ashx"; 
 var listPageSize = 10;
 $(function () { 
     initPagination(); 
@@ -80,7 +80,7 @@ function deleteData(id) {
 } 
 
 function goPageDetail(id) {
-    window.location.href = "bus_user_edit.htm?id="+id;
+    window.location.href = "bus_deadline_edit.htm?id="+id;
 }
 
 

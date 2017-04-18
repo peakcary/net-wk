@@ -58,7 +58,7 @@ namespace WK.DAL
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@create_date", MySqlDbType.DateTime),
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
-					new MySqlParameter("@update_date", MySqlDbType.VarChar,10)};
+					new MySqlParameter("@update_date", MySqlDbType.VarChar,100)};
 			parameters[0].Value = model.order_id;
 			parameters[1].Value = model.discount_id;
 			parameters[2].Value = model.discount_desc;
@@ -105,7 +105,7 @@ namespace WK.DAL
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
 					new MySqlParameter("@create_date", MySqlDbType.DateTime),
 					new MySqlParameter("@update_by", MySqlDbType.Int32,11),
-					new MySqlParameter("@update_date", MySqlDbType.VarChar,10),
+					new MySqlParameter("@update_date", MySqlDbType.VarChar,100),
 					new MySqlParameter("@id", MySqlDbType.Int32,11)};
 			parameters[0].Value = model.order_id;
 			parameters[1].Value = model.discount_id;
