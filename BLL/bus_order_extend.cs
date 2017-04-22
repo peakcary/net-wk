@@ -11,6 +11,14 @@ namespace WK.BLL
         {
             return dal.GetDateList(minDays);
         }
+        public DataSet GetPersonList(int minDays)
+        {
+            return dal.GetPersonList(minDays);
+        }
+        public DataSet GetPriceList(int minDays)
+        {
+            return dal.GetPriceList(minDays);
+        }
 
         /// <summary>
         /// 分页获取数据列表

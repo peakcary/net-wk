@@ -16,6 +16,24 @@ namespace WK.DAL
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
+        public DataSet GetPersonList(int minDays)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT count(DISTINCT user_id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            strSql.AppendFormat(" where create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day) ", minDays);
+            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
+            return DbHelperMySQL.Query(strSql.ToString());
+        }
+
+        public DataSet GetPriceList(int minDays)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT sum(total_real_price) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            strSql.AppendFormat(" where create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day) ", minDays);
+            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
+            return DbHelperMySQL.Query(strSql.ToString());
+        }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>

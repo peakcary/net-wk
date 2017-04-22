@@ -45,6 +45,12 @@ namespace WK.Web.Handler
             {
                 case "getDateOrderList":
                     sb.Append(getDateOrderList(context));
+                    break;
+                case "getPersonOrderList":
+                    sb.Append(getPersonOrderList(context));
+                    break;
+                case "getPriceOrderList":
+                    sb.Append(getPriceOrderList(context));
                     break; 
                 default:
                     sb.Append("");
@@ -59,6 +65,18 @@ namespace WK.Web.Handler
             int minDays = int.Parse(context.Request.Params["minDays"]); 
             WK.BLL.bus_order bll = new WK.BLL.bus_order(); 
             return Newtonsoft.Json.JsonConvert.SerializeObject(bll.GetDateList(minDays).Tables[0]);
+        }
+        private string getPersonOrderList(HttpContext context)
+        {
+            int minDays = int.Parse(context.Request.Params["minDays"]);
+            WK.BLL.bus_order bll = new WK.BLL.bus_order();
+            return Newtonsoft.Json.JsonConvert.SerializeObject(bll.GetPersonList(minDays).Tables[0]);
+        }
+        private string getPriceOrderList(HttpContext context)
+        {
+            int minDays = int.Parse(context.Request.Params["minDays"]);
+            WK.BLL.bus_order bll = new WK.BLL.bus_order();
+            return Newtonsoft.Json.JsonConvert.SerializeObject(bll.GetPriceList(minDays).Tables[0]);
         } 
     }
 }
