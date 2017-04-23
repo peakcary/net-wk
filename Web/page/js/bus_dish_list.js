@@ -2,6 +2,7 @@
 var listPageSize = 10;
 var market_id = 0;
 $(function () {
+    loadingShow();
     (function ($) {
         $.getUrlParam = function (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

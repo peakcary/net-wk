@@ -1,6 +1,7 @@
 ﻿var url = "../../Handler/bus_pickup.ashx"; 
 var listPageSize = 10;
 $(function () { 
+loadingShow();
     initPagination(); 
 });
 

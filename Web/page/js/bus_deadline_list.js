@@ -1,6 +1,7 @@
 ﻿var url = "../../Handler/bus_deadline.ashx"; 
 var listPageSize = 10;
 $(function () { 
+loadingShow();
     initPagination(); 
 });
 

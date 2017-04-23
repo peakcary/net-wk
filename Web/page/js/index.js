@@ -2,6 +2,7 @@
 var type = 'Date';
 var minDays = 7;
 $(function () {
+    loadingShow();
     getChartList(type, minDays);
     getListCountByTomorrowEattype(1);
     getListCountByTomorrowEattype(2);

@@ -20,6 +20,25 @@
         <script type="text/javascript" src="lib/html5shiv.min.js"></script>
         <script type="text/javascript" src="lib/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .sdiv
+        {
+            width: 70px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 10px;
+            background: #ddd;
+            text-align: center;
+            font-size: 10px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .sdiv-active
+        {
+            background: red;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <!-- Fixed navbar -->
@@ -67,14 +86,190 @@
             <li><a href="bus_user_list.htm">配送员</a></li>
             <li class="active">列表</li>
         </ol>
-        <div class="container-fluid mt10">
-            <a class="btn btn-primary" href="bus_user_edit.htm" role="button">新增</a>
+        <div class="container-fluid" style='padding: 0;'>
+            <table>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        订单号：
+                    </td>
+                    <td>
+                        <input type="text" style='width:70px;' />
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        用户ID：
+                    </td>
+                    <td>
+                        <input type="text" style='width:70px;' />
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" role="button">搜索</a>
+                    </td> 
+                </tr>
+                <tr style='margin-top: 5px;'>
+                    <td style='text-align: right; width: 100px;'>
+                        订单期：
+                    </td>
+                    <td>
+                        <div class='sdiv sdiv-active'>
+                            全部
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv'>
+                            明日午餐
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv'>
+                            明日晚餐
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv'>
+                            3/4午餐
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv'>
+                            3/4晚餐
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv'>
+                            3/5午餐
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv'>
+                            历史订单期
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr style='margin-top: 5px;'>
+                    <td style='text-align: right; width: 100px;'>
+                        订单状态：
+                    </td>
+                    <td>
+                        <div class='sdiv sdiv-active'>
+                            全部
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            接单中
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            待提货
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            配送中
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            已完成
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            已取消
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr style='margin-top: 5px;'>
+                    <td style='text-align: right; width: 100px;'>
+                        支付方式：
+                    </td>
+                    <td>
+                        <div class='sdiv sdiv-active'>
+                            全部
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            线上支付
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            货到付款
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr style='margin-top: 5px;'>
+                    <td style='text-align: right; width: 100px;'>
+                        是否有赠品：
+                    </td>
+                    <td>
+                        <div class='sdiv sdiv-active'>
+                            全部
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            有
+                        </div>
+                    </td>
+                    <td>
+                        <div class='sdiv '>
+                            无
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="container-fluid" style='padding: 0;'>
+            <div class='row'>
+                <div class="col-xs-11">
+                </div>
+                <div class="col-xs-1">
+                    <a class="btn btn-primary btn-xs" href="bus_user_edit.htm" role="button">新增</a>
+                </div>
+            </div>
         </div>
         <table class="table table-bordered  table-hover  mt10">
             <thead>
                 <tr>
                     <td>
-                      识别码
+                        识别码
                     </td>
                     <td>
                         订单号
@@ -134,7 +329,7 @@
     <script src="js/bus_order_list.js" type="text/javascript"></script>
     <script id="DataTemplate" type="text/x-jquery-tmpl">
         <tr>
-	        <td>${order_code}</td>  
+	        <td>${order_code.substr(order_code.length-4,4)}</td>  
             <td>${order_code}</td> 
             <td>${create_date}</td> 
             <td>${order_status}</td> 
