@@ -7,6 +7,38 @@ namespace WK.DAL
 {
     public partial class bus_order
     {
+        public int GetListCountByAllUser()
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT COUNT(DISTINCt user_id) ");
+            strSql.Append(" from bus_order  a ");
+            strSql.Append(" LEFT JOIN bus_user b on b.id = a.user_id ");
+            DataSet ds = DbHelperMySQL.Query(strSql.ToString());
+            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows.Count); 
+        }
+
+        public int GetListCountByYesterdayCreateUser()
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT COUNT(DISTINCt user_id) ");
+            strSql.Append(" from bus_order  a ");
+            strSql.Append(" LEFT JOIN bus_user b on b.id = a.user_id ");
+            strSql.Append(" WHERE DATE(b.create_date) = DATE_ADD(CURDATE(),interval -1 day) ");
+            DataSet ds = DbHelperMySQL.Query(strSql.ToString());
+            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows.Count); 
+        }
+
+
+        public int GetListCountByTomorrowEattype(int eatType)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT count(id) from bus_order ");
+            strSql.Append(" WHERE DATE(create_date) = DATE_ADD(CURDATE(),interval 1 day) ");
+            strSql.AppendFormat(" and eat_type={0} ", eatType);
+            DataSet ds = DbHelperMySQL.Query(strSql.ToString());
+            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows.Count); 
+        }
+
         public DataSet GetDateList(int minDays)
         { 
             StringBuilder strSql = new StringBuilder(); 

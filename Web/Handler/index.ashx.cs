@@ -51,7 +51,16 @@ namespace WK.Web.Handler
                     break;
                 case "getPriceOrderList":
                     sb.Append(getPriceOrderList(context));
-                    break; 
+                    break;
+                case "getListCountByTomorrowEattype":
+                    sb.Append(getListCountByTomorrowEattype(context));
+                    break;
+                case "getListCountByYesterdayCreateUser":
+                    sb.Append(getListCountByYesterdayCreateUser(context));
+                    break;
+                case "getListCountByAllUser":
+                    sb.Append(getListCountByAllUser(context));
+                    break;  
                 default:
                     sb.Append("");
                     break;
@@ -77,6 +86,31 @@ namespace WK.Web.Handler
             int minDays = int.Parse(context.Request.Params["minDays"]);
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
             return Newtonsoft.Json.JsonConvert.SerializeObject(bll.GetPriceList(minDays).Tables[0]);
+        }
+
+        private string getListCountByTomorrowEattype(HttpContext context)
+        {
+            int eatType = int.Parse(context.Request.Params["eatType"]);
+            WK.BLL.bus_order bll = new WK.BLL.bus_order();
+            Record r = new Record();
+            r.RecordCount = bll.GetListCountByTomorrowEattype(eatType);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(r);
+        }
+
+        private string getListCountByYesterdayCreateUser(HttpContext context)
+        { 
+            WK.BLL.bus_order bll = new WK.BLL.bus_order();
+            Record r = new Record();
+            r.RecordCount = bll.GetListCountByYesterdayCreateUser();
+            return Newtonsoft.Json.JsonConvert.SerializeObject(r);
+        }
+
+        private string getListCountByAllUser(HttpContext context)
+        { 
+            WK.BLL.bus_order bll = new WK.BLL.bus_order();
+            Record r = new Record();
+            r.RecordCount = bll.GetListCountByAllUser();
+            return Newtonsoft.Json.JsonConvert.SerializeObject(r);
         } 
     }
 }

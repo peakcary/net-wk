@@ -7,6 +7,20 @@ namespace WK.BLL
 {
     public partial class bus_order
     {
+        public int GetListCountByAllUser()
+        {
+            return dal.GetListCountByAllUser();
+        }
+
+        public int GetListCountByYesterdayCreateUser()
+        {
+            return dal.GetListCountByYesterdayCreateUser();
+        }
+        public int GetListCountByTomorrowEattype(int eatType)
+        {
+            return dal.GetListCountByTomorrowEattype(eatType);
+        }
+
         public DataSet GetDateList(int minDays)
         {
             return dal.GetDateList(minDays);
