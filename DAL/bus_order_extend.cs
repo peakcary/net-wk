@@ -104,7 +104,7 @@ namespace WK.DAL
             {
                 strSql.AppendFormat(" and a.eat_type ={0}", eat_type);
             }
-            if (minDays != 0)
+            if (minDays != -1)
             {
                 strSql.AppendFormat(" and a.create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day)", minDays);
             }

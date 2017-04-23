@@ -1,12 +1,12 @@
 ﻿var url = "../../Handler/bus_order.ashx";
 var listPageSize = 10;
-var market_id = 0;
+ 
 var order_code = "";
 var user_id = 0;
 var order_status = 0;
 var pay_status = 0;
 var eat_type = 0;
-var minDays = 0;
+var minDays = -1;
 var isDiscount = 0;
 var pageIndex = 0;
 var pageSize = 10000; 
@@ -17,15 +17,75 @@ $(function () {
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         }
-    })(jQuery);
-    market_id = $.getUrlParam('market_id');
-    $("#btnAdd").attr("href", "bus_dish_edit.htm?market_id=" + market_id);
+    })(jQuery); 
 
     $("#btnSearch").click(function () {
         order_code = $("#order_code").val();
         user_id = $("#user_id").val();
         initPagination();
     });
+     
+    $(".eat_type").each(function(index,ele){
+        $(this).click(function(){
+             $(".eat_type").each(function(index,ele){
+              $(ele).removeClass('sdiv-active'); 
+             });
+           $(this).addClass('sdiv-active'); 
+           var ref = $(this).attr('ref');
+           if(ref == '0'){
+            eat_type=0;
+            minDays=-1;
+           }else if(ref == '1'){
+            eat_type=1;
+            minDays=1;
+           }else if(ref == '2'){
+            eat_type=2;
+            minDays=1;
+           }else if(ref == '3'){
+            eat_type=1;
+            minDays=2;
+           }else if(ref == '4'){
+            eat_type=2;
+            minDays=2;
+           }
+            initPagination();
+        });
+    });
+
+    $(".order_status").each(function(index,ele){
+        $(this).click(function(){
+             $(".order_status").each(function(index,ele){
+              $(ele).removeClass('sdiv-active'); 
+             });
+           $(this).addClass('sdiv-active'); 
+           order_status = $(this).attr('ref');
+            initPagination();
+        });
+    });
+    $(".pay_status").each(function(index,ele){
+        $(this).click(function(){
+             $(".pay_status").each(function(index,ele){
+              $(ele).removeClass('sdiv-active'); 
+             });
+           $(this).addClass('sdiv-active'); 
+           pay_status = $(this).attr('ref');
+            initPagination();
+        });
+    });
+     $(".isDiscount").each(function(index,ele){
+        $(this).click(function(){
+             $(".isDiscount").each(function(index,ele){
+              $(ele).removeClass('sdiv-active'); 
+             });
+           $(this).addClass('sdiv-active'); 
+           pay_status = $(this).attr('ref');
+            initPagination();
+        });
+    });
+
+    
+
+    
     initPagination();
 });
 
@@ -57,6 +117,7 @@ function initPagination() {
 			        next_text: "后一页"
 		        });
             }else{
+             $("#DataList").empty();
             }
         }
     });
@@ -88,11 +149,16 @@ function getListByQuery(index){
         success: function (data) { 
         console.log(data);
             loadingHide();
+            
             $("#DataList").empty();
-            $("#DataTemplate").tmpl(data).appendTo("#DataList");  
+            if(data.length>0)
+            {$("#DataTemplate").tmpl(data).appendTo("#DataList");  
+            }
+            
            
         },
         error:function(){
+         $("#DataList").empty();
             loadingHide();
         }
     });
@@ -103,8 +169,7 @@ function getDataList(index) {
     $.ajax({
         type: "post",
         url: url + "?t=getDataList",
-        data: {
-            market_id: market_id,
+        data: { 
            pageIndex: index,
            pageSize: listPageSize 
         },
@@ -116,6 +181,7 @@ function getDataList(index) {
            
         },
         error:function(){
+        $("#DataList").empty();
             loadingHide();
         }
     });
