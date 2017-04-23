@@ -94,23 +94,17 @@
                     <td>
                         订单号：
                     </td>
-                    <td>
-                        <input type="text" style='width:70px;' />
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
+                    <td colspan="3">
+                        <input id="order_code" type="text" style='width:200px;' />
+                    </td>  
                     <td>
                         用户ID：
                     </td>
+                    <td colspan="2">
+                        <input id="user_id" type="text" style='width:120px;' />
+                    </td> 
                     <td>
-                        <input type="text" style='width:70px;' />
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary btn-xs" role="button">搜索</a>
+                        <a class="btn btn-primary btn-xs" id="btnSearch" role="button">搜索</a>
                     </td> 
                 </tr>
                 <tr style='margin-top: 5px;'>
@@ -133,24 +127,24 @@
                         </div>
                     </td>
                     <td>
-                        <div class='sdiv'>
+                        <!--<div class='sdiv'>
                             3/4午餐
-                        </div>
+                        </div>-->
                     </td>
                     <td>
-                        <div class='sdiv'>
+                       <!-- <div class='sdiv'>
                             3/4晚餐
-                        </div>
+                        </div>-->
                     </td>
                     <td>
-                        <div class='sdiv'>
+                        <!--<div class='sdiv'>
                             3/5午餐
-                        </div>
+                        </div>-->
                     </td>
                     <td>
-                        <div class='sdiv'>
+                        <!--<div class='sdiv'>
                             历史订单期
-                        </div>
+                        </div>-->
                     </td>
                     <td>
                     </td>
@@ -340,7 +334,7 @@
             <td></td> 
             <td>${pickup_address_id}</td> 
             <td>${dilivery_user_id}</td> 
-            <td></td> 
+            <td>{{if bid > 0 }}有{{else}}无{{/if}}</td> 
             <td></td> 
         </tr>
     </script>

@@ -66,6 +66,64 @@ namespace WK.DAL
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
+        public DataSet GetListByQuery(string order_code, int user_id,int order_status,int pay_status,int eat_type,int minDays,int isDiscount, int startIndex, int endIndex)
+        {
+            //SELECT a.*
+            //FROM bus_order a
+            //LEFT JOIN bus_order_discount b on b.order_id = a.id
+            //where 1=1
+            //and a.order_code = '0001201704180011' /*订单号*/
+            //and a.user_id = 1  /*用户ID*/
+            //and a.order_status = 1 /*订单状态 1已预订 2待取餐 3待送达 4已完成 5已退单 6申请退单*/
+            //and a.pay_status = 1 /*支付状态 1已支付 2未支付*/
+            //and a.eat_type = 1 /*饭餐类型 1午餐 2晚餐*/
+            //and a.create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval 1 day)
+            //and b.id is not null /*是否有赠品*/
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT a.*,b.id as bid ");
+            strSql.Append(" FROM bus_order a ");
+            strSql.Append(" LEFT JOIN bus_order_discount b on b.order_id = a.id ");
+            strSql.Append(" where 1=1 ");
+            if (order_code != string.Empty)
+            {
+                strSql.AppendFormat(" and a.order_code ='{0}'", order_code);
+            }
+            if (user_id != 0)
+            {
+                strSql.AppendFormat(" and a.user_id ={0}", user_id);
+            }
+            if (order_status != 0)
+            {
+                strSql.AppendFormat(" and a.order_status ={0}", order_status);
+            }
+            if (pay_status != 0)
+            {
+                strSql.AppendFormat(" and a.pay_status ={0}", pay_status);
+            }
+            if (eat_type != 0)
+            {
+                strSql.AppendFormat(" and a.eat_type ={0}", eat_type);
+            }
+            if (minDays != 0)
+            {
+                strSql.AppendFormat(" and a.create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day)", minDays);
+            }
+            if (isDiscount != 0)
+            {
+                if (isDiscount==1)
+                {
+                    strSql.AppendFormat(" and b.id is not null ");
+                }
+                else
+                {
+                    strSql.AppendFormat(" and b.id is  null ");
+                }
+                
+            }
+            strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex);
+            return DbHelperMySQL.Query(strSql.ToString());
+        }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>

@@ -55,6 +55,12 @@ namespace WK.Web.Handler
                     sb.Append(getDataList(context));
                     break;
 
+                case "getListByQuery":
+                    sb.Append(getListByQuery(context));
+                    break;
+
+                    
+
                 default:
                     sb.Append("");
                     break;
@@ -90,6 +96,62 @@ namespace WK.Web.Handler
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
             ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+        }
+        private string getListByQuery(HttpContext context)
+        {
+            string order_code=string.Empty;
+            if (context.Request.Params["order_code"] != null && context.Request.Params["order_code"].ToString() != "")
+            {
+                order_code = context.Request.Params["order_code"].ToString();
+            }
+            int user_id=0;
+            if (context.Request.Params["user_id"] != null && context.Request.Params["user_id"].ToString() != "")
+            {
+                user_id = int.Parse(context.Request.Params["user_id"].ToString());
+            }
+            int order_status=0;
+            if (context.Request.Params["order_status"] != null && context.Request.Params["order_status"].ToString() != "")
+            {
+                order_status = int.Parse(context.Request.Params["order_status"].ToString());
+            }
+            int pay_status=0;
+            if (context.Request.Params["pay_status"] != null && context.Request.Params["pay_status"].ToString() != "")
+            {
+                pay_status = int.Parse(context.Request.Params["pay_status"].ToString());
+            }
+            int eat_type=0;
+            if (context.Request.Params["eat_type"] != null && context.Request.Params["eat_type"].ToString() != "")
+            {
+                eat_type = int.Parse(context.Request.Params["eat_type"].ToString());
+            }
+            int minDays=0;
+            if (context.Request.Params["minDays"] != null && context.Request.Params["minDays"].ToString() != "")
+            {
+                minDays = int.Parse(context.Request.Params["minDays"].ToString());
+            }
+            int isDiscount=0;
+            if (context.Request.Params["isDiscount"] != null && context.Request.Params["isDiscount"].ToString() != "")
+            {
+                isDiscount = int.Parse(context.Request.Params["isDiscount"].ToString());
+            }
+             
+
+            StringBuilder sb = new StringBuilder();
+            DataSet ds = new DataSet();
+            
+             
+
+            int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
+            int pageSize = int.Parse(context.Request.Params["pageSize"]);
+            int startIndex = 0;
+            if (pageIndex >= 0)
+            {
+                startIndex = pageSize * pageIndex;
+            }
+
+            WK.BLL.bus_order bll = new WK.BLL.bus_order();
+            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize);
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         } 
     }

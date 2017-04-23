@@ -33,6 +33,10 @@ namespace WK.BLL
         {
             return dal.GetPriceList(minDays);
         }
+         public DataSet GetListByQuery(string order_code, int user_id,int order_status,int pay_status,int eat_type,int minDays,int isDiscount, int startIndex, int endIndex)
+        {
+            return dal.GetListByQuery(  order_code,  user_id, order_status,pay_status,eat_type, minDays,isDiscount, startIndex,   endIndex);
+        }
 
         /// <summary>
         /// 分页获取数据列表
