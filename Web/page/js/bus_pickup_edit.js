@@ -93,8 +93,8 @@ return;
               goPageList();
             }
             
-        }else{
-            alert('保存失败！');
+        }else{ 
+             layer.msg('保存失败！');
         }
         }
     });

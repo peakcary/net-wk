@@ -81,12 +81,12 @@ $(function () {
            pay_status = $(this).attr('ref');
             initPagination();
         });
-    });
-
-    
-
+    }); 
     
     initPagination();
+    getAllList();
+    getAllOrderListByQuery();
+    $("#btnExcelAll").on("click",fExcelAll);
 });
 
 function initPagination() {
@@ -213,7 +213,72 @@ function deleteData(id) {
  
 
 function goPageDetail(id) {
-    window.location.href = "bus_dish_edit.htm?id="+id;
+    window.location.href = "bus_order_detail.htm?id="+id;
+}
+
+function fExcelAll(){
+ $("#btnExcelAll").attr('download','all_order_data.xls');
+  return ExcellentExport.excel(this, 'tbExcelAll', 'tbExcelAll');
+
+}
+
+function getAllList(){
+$.ajax({
+        type: "post",
+        url: url + "?t=getListByQuery",
+        data: {
+            order_code: order_code,
+            user_id: user_id,
+            order_status: order_status,
+            pay_status: pay_status,
+            eat_type: eat_type,
+            minDays: minDays,
+            isDiscount: isDiscount,
+            minDays: minDays,
+           pageIndex: 0,
+           pageSize: 10000 
+        },
+        dataType: 'json',   
+        success: function (data) { 
+        console.log(data);
+            loadingHide(); 
+            $("#dataExcelAll").empty();
+            $("#dataExcelAllTemplate").tmpl(data).appendTo("#dataExcelAll");  
+            
+           
+        },
+        error:function(){
+         $("#dataExcelAll").empty(); 
+            loadingHide();
+        }
+    }); 
+}
+
+function getAllOrderListByQuery(){
+    $.ajax({
+        type: "post",
+        url: url + "?t=getAllOrderListByQuery",
+        data: {
+            order_code: order_code,
+            user_id: user_id,
+            order_status: order_status,
+            pay_status: pay_status,
+            eat_type: eat_type,
+            minDays: minDays,
+            isDiscount: isDiscount,
+            minDays: minDays,
+           pageIndex: 0,
+           pageSize: 10000 
+        },
+        dataType: 'json',   
+        success: function (data) { 
+        console.log(data);
+             console.log(data);
+        },
+        error:function(){
+          
+        }
+    });
 }
 
 

@@ -7,6 +7,10 @@ namespace WK.BLL
 {
     public partial class bus_order
     {
+        public DataSet GetDetailExtend(int id)
+        {
+            return dal.GetDetailExtend(id);
+        }
         public int GetListCountByAllUser()
         {
             return dal.GetListCountByAllUser();

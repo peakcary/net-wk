@@ -125,6 +125,7 @@
     <Compile Include="bus_dish_plan.cs" />
     <Compile Include="bus_gift.cs" />
     <Compile Include="bus_market_extend.cs" />
+    <Compile Include="bus_order_extend.cs" />
     <Compile Include="bus_order_gift.cs" />
     <Compile Include="bus_pickup_user.cs" />
     <Compile Include="bus_times.cs" />

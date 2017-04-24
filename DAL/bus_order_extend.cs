@@ -7,6 +7,19 @@ namespace WK.DAL
 {
     public partial class bus_order
     {
+
+        public DataSet GetDetailExtend(int id)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select a.*,b.*,c.nickname as userName,d.address,d.name as pickupName,e.discount_desc  ");
+            strSql.Append(" from bus_order a ");
+            strSql.Append(" LEFT JOIN bus_order_discount b on b.order_id = a.id ");
+            strSql.Append(" left JOIN bus_user c on c.id = a.user_id ");
+            strSql.Append(" LEFT JOIN bus_pickup_address d on d.id = a.pickup_address_id ");
+            strSql.Append(" left join bus_order_discount e on e.order_id = a.id ");
+            strSql.AppendFormat(" where a.id = {0} ",id);
+            return DbHelperMySQL.Query(strSql.ToString());
+        }
         public int GetListCountByAllUser()
         {
             StringBuilder strSql = new StringBuilder();
