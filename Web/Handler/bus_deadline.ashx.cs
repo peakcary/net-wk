@@ -57,7 +57,7 @@ namespace WK.Web.Handler
                 case "editData":
                     sb.Append(editData(context));
                     break;
-                case "deleteRData":
+                case "deleteData":
                     sb.Append(deleteData(context));
                     break; 
                 default:
@@ -69,8 +69,7 @@ namespace WK.Web.Handler
 
          
         private string getListByPageInfo(HttpContext context)
-        {
-            StringBuilder sb = new StringBuilder();
+        { 
             DataSet ds = new DataSet();
             StringBuilder strWhere = new StringBuilder();
             strWhere.Append(" is_delete != 1");
@@ -120,7 +119,17 @@ namespace WK.Web.Handler
             {
                 id = int.Parse(context.Request.Params["id"]);
             }
+            else
+            {
+                
+            }
             model.id = id;
+
+           
+            
+
+
+
             //model.create_by
             //model.create_date
             model.deadline_days = int.Parse(context.Request.Params["deadline_days"]);
@@ -135,6 +144,19 @@ namespace WK.Web.Handler
             ReturnInfo returnInfo = new ReturnInfo();
             returnInfo.isSuccess = false;
             WK.BLL.bus_deadline bll = new WK.BLL.bus_deadline();
+
+            StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
+            strWhere.AppendFormat(" and deadline_time_type  = {0}", model.deadline_time_type);
+            strWhere.AppendFormat(" and eat_type   = {0}", model.eat_type);
+             
+            DataSet ds = bll.GetList(strWhere.ToString());
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.id =int.Parse( ds.Tables[0].Rows[0]["id"].ToString());
+            }
+
+
             returnInfo.isSuccess = model.id > 0 ? bll.Update(model) : bll.Add(model); 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }

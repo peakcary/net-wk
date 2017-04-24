@@ -83,8 +83,7 @@ $(function () {
         });
     }); 
     
-    initPagination();
-    getAllList();
+    initPagination(); 
     getAllOrderListByQuery();
     $("#btnExcelAll").on("click",fExcelAll);
 });
@@ -218,41 +217,10 @@ function goPageDetail(id) {
 
 function fExcelAll(){
  $("#btnExcelAll").attr('download','all_order_data.xls');
-  return ExcellentExport.excel(this, 'tbExcelAll', 'tbExcelAll');
+  return ExcellentExport.excel(this, 'tbExcelAll', 'all');
 
 }
-
-function getAllList(){
-$.ajax({
-        type: "post",
-        url: url + "?t=getListByQuery",
-        data: {
-            order_code: order_code,
-            user_id: user_id,
-            order_status: order_status,
-            pay_status: pay_status,
-            eat_type: eat_type,
-            minDays: minDays,
-            isDiscount: isDiscount,
-            minDays: minDays,
-           pageIndex: 0,
-           pageSize: 10000 
-        },
-        dataType: 'json',   
-        success: function (data) { 
-        console.log(data);
-            loadingHide(); 
-            $("#dataExcelAll").empty();
-            $("#dataExcelAllTemplate").tmpl(data).appendTo("#dataExcelAll");  
-            
-           
-        },
-        error:function(){
-         $("#dataExcelAll").empty(); 
-            loadingHide();
-        }
-    }); 
-}
+ 
 
 function getAllOrderListByQuery(){
     $.ajax({
@@ -274,6 +242,8 @@ function getAllOrderListByQuery(){
         success: function (data) { 
         console.log(data);
              console.log(data);
+              $("#dataExcelAll").empty();
+            $("#dataExcelAllTemplate").tmpl(data).appendTo("#dataExcelAll");  
         },
         error:function(){
           

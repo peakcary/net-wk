@@ -19,6 +19,12 @@ namespace WK.Model
 		private decimal? _unit_discount_price;
 		private int? _count;
 		private string _size_list;
+		private string _dish_name_cn;
+		private string _dish_name_en;
+		private int _market_id;
+		private string _market_name_cn;
+		private string _market_name_en;
+		private int _order_status=0;
 		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
@@ -96,6 +102,54 @@ namespace WK.Model
 		{
 			set{ _size_list=value;}
 			get{return _size_list;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string dish_name_cn
+		{
+			set{ _dish_name_cn=value;}
+			get{return _dish_name_cn;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string dish_name_en
+		{
+			set{ _dish_name_en=value;}
+			get{return _dish_name_en;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int market_id
+		{
+			set{ _market_id=value;}
+			get{return _market_id;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string market_name_cn
+		{
+			set{ _market_name_cn=value;}
+			get{return _market_name_cn;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string market_name_en
+		{
+			set{ _market_name_en=value;}
+			get{return _market_name_en;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int order_status
+		{
+			set{ _order_status=value;}
+			get{return _order_status;}
 		}
 		/// <summary>
 		/// 

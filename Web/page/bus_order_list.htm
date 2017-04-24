@@ -352,6 +352,9 @@
                     <td>
                         赠品
                     </td> 
+                    <td>
+                        菜品
+                    </td> 
                 </tr>
             </thead>
             <tbody id="dataExcelAll">
@@ -385,7 +388,7 @@
             <td>${consignee_phone}</td> 
             <td>${pickup_address_id}</td> 
             <td>${consignee_name}</td> 
-            <td>{{if bid > 0 }}有{{else}}无{{/if}}</td> 
+            <td>{{if bid > 0 }}有{{else}}无{{/if}}</td>  
             <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${id}')" >详情</a></td> 
         </tr>
     </script>
@@ -402,7 +405,28 @@
             <td>${consignee_phone}</td> 
             <td>${pickup_address_id}</td> 
             <td>${consignee_name}</td> 
-            <td>{{if bid > 0 }}有{{else}}无{{/if}}</td>  
+            
+            <td>{{if orderDiscount.discount_id > 0 }}有{{else}}无{{/if}}</td> 
+            <td>
+                <table>
+
+                {{each(i,orderDish) listOrderDish}}
+                    <tr>
+                    <td>${i+1}</td>
+                    <td>${orderDish.market_name_cn}</td>
+                    <td>${orderDish.market_name_en}</td>
+                    <td>${orderDish.dish_name_cn}</td>
+                    <td>${orderDish.dish_name_en}</td>
+                    <td>${orderDish.count}</td>
+                    <td>${orderDish.size_list}</td>
+                    <td>${orderDish.unit_discount_price}</td>
+                    <td>${orderDish.unit_original_price}</td>
+                    <td>${orderDish.total_discount_price}</td>
+                    <td>${orderDish.total_original_price}</td>
+                    </tr>
+                {{/each}}
+                </table>
+            </td>
         </tr>
     </script>
 </body>

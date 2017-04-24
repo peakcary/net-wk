@@ -280,12 +280,52 @@ namespace WK.Web.Handler
                     orderModel.id = int.Parse(dr["id"].ToString());
                     orderModel.consignee_name = dr["consignee_name"].ToString();
                     orderModel.consignee_phone = dr["consignee_phone"].ToString();
-                    //orderModel.create_by = int.Parse( dr["create_by"].ToString());
-                    //orderModel.create_date = DateTime.Parse( dr["create_date"].ToString());
-                    //orderModel. = dr["consignee_name"].ToString();
-                    //orderModel.consignee_name = dr["consignee_name"].ToString();
-                    //orderModel.consignee_name = dr["consignee_name"].ToString();
 
+                    //orderModel.create_by = dr["create_by"] == null ? 0 : int.Parse(dr["create_by"].ToString());
+                    orderModel.create_date = DateTime.Parse(dr["create_date"].ToString());
+                    orderModel.dilivery_user_id =int.Parse( dr["dilivery_user_id"].ToString());
+                    orderModel.dish_time = int.Parse(dr["dilivery_user_id"].ToString());
+                    orderModel.eat_type = int.Parse(dr["eat_type"].ToString());
+                    orderModel.meal_num = int.Parse(dr["meal_num"].ToString());
+                    orderModel.order_code = dr["order_code"].ToString();
+                    orderModel.order_status =int.Parse( dr["order_status"].ToString());
+                    orderModel.pay_status =int.Parse( dr["pay_status"].ToString());
+                    orderModel.pay_type = int.Parse(dr["pay_status"].ToString());
+                    orderModel.pickup_address_id = int.Parse(dr["pickup_address_id"].ToString());
+                    orderModel.pickup_date = DateTime.Parse(dr["pickup_date"].ToString());
+                    orderModel.pickup_end_time = DateTime.Parse(dr["pickup_end_time"].ToString());
+                    orderModel.pickup_start_time = DateTime.Parse(dr["pickup_start_time"].ToString());
+                    orderModel.remark = dr["remark"].ToString();
+                    orderModel.total_plan_price = decimal.Parse(dr["total_plan_price"].ToString());
+                    orderModel.total_real_price = decimal.Parse(dr["total_real_price"].ToString());
+                    //orderModel.update_by = dr["create_by"] == null ? 0 : int.Parse(dr["total_real_price"].ToString());
+                    orderModel.update_date = DateTime.Parse(dr["update_date"].ToString());
+                    orderModel.user_id = int.Parse(dr["user_id"].ToString());
+
+                    WK.BLL.bus_order_discount orderDiscountBll = new BLL.bus_order_discount();
+                    Model.bus_order_discount orderDiscount = new Model.bus_order_discount();
+                    StringBuilder strWhereOrderDiscount = new StringBuilder();
+                    strWhereOrderDiscount.Append(" is_delete != 1");
+                    strWhereOrderDiscount.AppendFormat(" and order_id = {0}", orderModel.id);
+                    DataSet dsOrderDiscount = orderDiscountBll.GetList(strWhereOrderDiscount.ToString());
+                    if (dsOrderDiscount != null)
+                    {
+                        DataTable dtOrderDiscount = dsOrderDiscount.Tables[0];
+                        if (dtOrderDiscount != null && dtOrderDiscount.Rows.Count > 0)
+                         {
+                             int drOrderDiscountRowsCount = dtOrderDiscount.Rows.Count;
+
+                             for (int j = 0; j < drOrderDiscountRowsCount; j++)
+                             {
+                                 DataRow drOrderDiscount = dtOrderDiscount.Rows[j];
+                                 orderDiscount.discount_desc = drOrderDiscount["discount_desc"].ToString();
+                                 orderDiscount.discount_id =int.Parse( drOrderDiscount["discount_id"].ToString());
+                                 
+                             }
+                         }
+                    }
+                    orderModel.orderDiscount = orderDiscount;
+                     
                     List<Model.bus_order_dish> listOrderDish = new List<Model.bus_order_dish>();
                     StringBuilder strWhereOrderDish = new StringBuilder();
                     strWhereOrderDish.Append(" is_delete != 1");
@@ -306,6 +346,24 @@ namespace WK.Web.Handler
                                 Model.bus_order_dish orderDishModel = new Model.bus_order_dish();
                                 orderDishModel.id =  int.Parse(drOrderDish["id"].ToString());
                                 orderDishModel.count = int.Parse(drOrderDish["count"].ToString());
+                                //orderDishModel.create_by =drOrderDish["create_by"]==null?0: int.Parse(drOrderDish["create_by"].ToString());
+                                orderDishModel.create_date = DateTime.Parse(drOrderDish["create_date"].ToString());
+                                orderDishModel.dish_id = int.Parse(drOrderDish["dish_id"].ToString());
+                                orderDishModel.dish_name_cn = drOrderDish["dish_name_cn"].ToString();
+                                orderDishModel.dish_name_en = drOrderDish["dish_name_en"].ToString();
+                                orderDishModel.market_id = int.Parse(drOrderDish["market_id"].ToString());
+                                orderDishModel.market_name_cn = drOrderDish["market_name_cn"].ToString();
+                                orderDishModel.market_name_en = drOrderDish["market_name_en"].ToString();
+                                orderDishModel.order_id = int.Parse(drOrderDish["order_id"].ToString());
+                                orderDishModel.order_status = int.Parse(drOrderDish["order_status"].ToString());
+                                orderDishModel.remark = drOrderDish["remark"].ToString();
+                                orderDishModel.size_list = drOrderDish["size_list"].ToString();
+                                orderDishModel.total_discount_price = decimal.Parse(drOrderDish["total_discount_price"].ToString());
+                                orderDishModel.total_original_price = decimal.Parse(drOrderDish["total_original_price"].ToString());
+                                orderDishModel.unit_discount_price = decimal.Parse(drOrderDish["unit_discount_price"].ToString());
+                                orderDishModel.unit_original_price = decimal.Parse(drOrderDish["unit_original_price"].ToString());
+                                //orderDishModel.update_by =drOrderDish["update_by"]!=null? int.Parse(drOrderDish["update_by"].ToString()):0;
+                                orderDishModel.update_date = DateTime.Parse(drOrderDish["update_date"].ToString());
                                 listOrderDish.Add(orderDishModel);
                             }
                         }

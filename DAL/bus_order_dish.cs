@@ -46,9 +46,9 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_order_dish(");
-			strSql.Append("order_id,dish_id,total_original_price,total_discount_price,unit_original_price,unit_discount_price,count,size_list,is_delete,remark,create_by,create_date,update_by,update_date)");
+			strSql.Append("order_id,dish_id,total_original_price,total_discount_price,unit_original_price,unit_discount_price,count,size_list,dish_name_cn,dish_name_en,market_id,market_name_cn,market_name_en,order_status,is_delete,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@order_id,@dish_id,@total_original_price,@total_discount_price,@unit_original_price,@unit_discount_price,@count,@size_list,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
+			strSql.Append("@order_id,@dish_id,@total_original_price,@total_discount_price,@unit_original_price,@unit_discount_price,@count,@size_list,@dish_name_cn,@dish_name_en,@market_id,@market_name_cn,@market_name_en,@order_status,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@order_id", MySqlDbType.Int32,11),
 					new MySqlParameter("@dish_id", MySqlDbType.Int32,11),
@@ -58,6 +58,12 @@ namespace WK.DAL
 					new MySqlParameter("@unit_discount_price", MySqlDbType.Decimal,10),
 					new MySqlParameter("@count", MySqlDbType.Int32,11),
 					new MySqlParameter("@size_list", MySqlDbType.Text),
+					new MySqlParameter("@dish_name_cn", MySqlDbType.VarChar,100),
+					new MySqlParameter("@dish_name_en", MySqlDbType.VarChar,100),
+					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
+					new MySqlParameter("@market_name_cn", MySqlDbType.VarChar,100),
+					new MySqlParameter("@market_name_en", MySqlDbType.VarChar,100),
+					new MySqlParameter("@order_status", MySqlDbType.Int32,11),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -72,12 +78,18 @@ namespace WK.DAL
 			parameters[5].Value = model.unit_discount_price;
 			parameters[6].Value = model.count;
 			parameters[7].Value = model.size_list;
-			parameters[8].Value = model.is_delete;
-			parameters[9].Value = model.remark;
-			parameters[10].Value = model.create_by;
-			parameters[11].Value = model.create_date;
-			parameters[12].Value = model.update_by;
-			parameters[13].Value = model.update_date;
+			parameters[8].Value = model.dish_name_cn;
+			parameters[9].Value = model.dish_name_en;
+			parameters[10].Value = model.market_id;
+			parameters[11].Value = model.market_name_cn;
+			parameters[12].Value = model.market_name_en;
+			parameters[13].Value = model.order_status;
+			parameters[14].Value = model.is_delete;
+			parameters[15].Value = model.remark;
+			parameters[16].Value = model.create_by;
+			parameters[17].Value = model.create_date;
+			parameters[18].Value = model.update_by;
+			parameters[19].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -104,6 +116,12 @@ namespace WK.DAL
 			strSql.Append("unit_discount_price=@unit_discount_price,");
 			strSql.Append("count=@count,");
 			strSql.Append("size_list=@size_list,");
+			strSql.Append("dish_name_cn=@dish_name_cn,");
+			strSql.Append("dish_name_en=@dish_name_en,");
+			strSql.Append("market_id=@market_id,");
+			strSql.Append("market_name_cn=@market_name_cn,");
+			strSql.Append("market_name_en=@market_name_en,");
+			strSql.Append("order_status=@order_status,");
 			strSql.Append("is_delete=@is_delete,");
 			strSql.Append("remark=@remark,");
 			strSql.Append("create_by=@create_by,");
@@ -120,6 +138,12 @@ namespace WK.DAL
 					new MySqlParameter("@unit_discount_price", MySqlDbType.Decimal,10),
 					new MySqlParameter("@count", MySqlDbType.Int32,11),
 					new MySqlParameter("@size_list", MySqlDbType.Text),
+					new MySqlParameter("@dish_name_cn", MySqlDbType.VarChar,100),
+					new MySqlParameter("@dish_name_en", MySqlDbType.VarChar,100),
+					new MySqlParameter("@market_id", MySqlDbType.Int32,11),
+					new MySqlParameter("@market_name_cn", MySqlDbType.VarChar,100),
+					new MySqlParameter("@market_name_en", MySqlDbType.VarChar,100),
+					new MySqlParameter("@order_status", MySqlDbType.Int32,11),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -135,13 +159,19 @@ namespace WK.DAL
 			parameters[5].Value = model.unit_discount_price;
 			parameters[6].Value = model.count;
 			parameters[7].Value = model.size_list;
-			parameters[8].Value = model.is_delete;
-			parameters[9].Value = model.remark;
-			parameters[10].Value = model.create_by;
-			parameters[11].Value = model.create_date;
-			parameters[12].Value = model.update_by;
-			parameters[13].Value = model.update_date;
-			parameters[14].Value = model.id;
+			parameters[8].Value = model.dish_name_cn;
+			parameters[9].Value = model.dish_name_en;
+			parameters[10].Value = model.market_id;
+			parameters[11].Value = model.market_name_cn;
+			parameters[12].Value = model.market_name_en;
+			parameters[13].Value = model.order_status;
+			parameters[14].Value = model.is_delete;
+			parameters[15].Value = model.remark;
+			parameters[16].Value = model.create_by;
+			parameters[17].Value = model.create_date;
+			parameters[18].Value = model.update_by;
+			parameters[19].Value = model.update_date;
+			parameters[20].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -205,7 +235,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,order_id,dish_id,total_original_price,total_discount_price,unit_original_price,unit_discount_price,count,size_list,is_delete,remark,create_by,create_date,update_by,update_date from bus_order_dish ");
+			strSql.Append("select id,order_id,dish_id,total_original_price,total_discount_price,unit_original_price,unit_discount_price,count,size_list,dish_name_cn,dish_name_en,market_id,market_name_cn,market_name_en,order_status,is_delete,remark,create_by,create_date,update_by,update_date from bus_order_dish ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -269,6 +299,30 @@ namespace WK.DAL
 				{
 					model.size_list=row["size_list"].ToString();
 				}
+				if(row["dish_name_cn"]!=null)
+				{
+					model.dish_name_cn=row["dish_name_cn"].ToString();
+				}
+				if(row["dish_name_en"]!=null)
+				{
+					model.dish_name_en=row["dish_name_en"].ToString();
+				}
+				if(row["market_id"]!=null && row["market_id"].ToString()!="")
+				{
+					model.market_id=int.Parse(row["market_id"].ToString());
+				}
+				if(row["market_name_cn"]!=null)
+				{
+					model.market_name_cn=row["market_name_cn"].ToString();
+				}
+				if(row["market_name_en"]!=null)
+				{
+					model.market_name_en=row["market_name_en"].ToString();
+				}
+				if(row["order_status"]!=null && row["order_status"].ToString()!="")
+				{
+					model.order_status=int.Parse(row["order_status"].ToString());
+				}
 				if(row["is_delete"]!=null && row["is_delete"].ToString()!="")
 				{
 					model.is_delete=int.Parse(row["is_delete"].ToString());
@@ -303,7 +357,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,order_id,dish_id,total_original_price,total_discount_price,unit_original_price,unit_discount_price,count,size_list,is_delete,remark,create_by,create_date,update_by,update_date ");
+			strSql.Append("select id,order_id,dish_id,total_original_price,total_discount_price,unit_original_price,unit_discount_price,count,size_list,dish_name_cn,dish_name_en,market_id,market_name_cn,market_name_en,order_status,is_delete,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_order_dish ");
 			if(strWhere.Trim()!="")
 			{
