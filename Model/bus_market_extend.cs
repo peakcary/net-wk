@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace WK.Model
 { 
     public partial class bus_market
@@ -15,6 +16,13 @@ namespace WK.Model
         {
             set { _imageList = value; }
             get { return _imageList; }
+        }
+
+        private List<WK.Model.bus_order> _listOrder;
+        public List<WK.Model.bus_order> listOrder
+        {
+            set { _listOrder = value; }
+            get { return _listOrder; }
         }
     }
 }

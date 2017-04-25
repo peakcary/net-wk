@@ -137,6 +137,54 @@ namespace WK.DAL
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
+        public DataSet GetMarketOrderList(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT a.id as orderId, a.*,b.id as orderDishId, b.*,c.id as marketId,c.* ");
+            strSql.Append(" FROM bus_order a ");
+            strSql.Append(" left join bus_order_dish b on b.order_id = a.id and b.is_delete!=1 ");
+            strSql.Append(" left JOIN bus_market c on c.id = b.market_id and c.is_delete!=1 ");
+            strSql.Append(" where a.is_delete !=1 and  c.id is not null ");
+            if (order_code != string.Empty)
+            {
+                strSql.AppendFormat(" and a.order_code ='{0}'", order_code);
+            }
+            if (user_id != 0)
+            {
+                strSql.AppendFormat(" and a.user_id ={0}", user_id);
+            }
+            if (order_status != 0)
+            {
+                strSql.AppendFormat(" and a.order_status ={0}", order_status);
+            }
+            if (pay_status != 0)
+            {
+                strSql.AppendFormat(" and a.pay_status ={0}", pay_status);
+            }
+            if (eat_type != 0)
+            {
+                strSql.AppendFormat(" and a.eat_type ={0}", eat_type);
+            }
+            if (minDays != -1)
+            {
+                strSql.AppendFormat(" and a.create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day)", minDays);
+            }
+            if (isDiscount != 0)
+            {
+                if (isDiscount == 1)
+                {
+                    strSql.AppendFormat(" and b.id is not null ");
+                }
+                else
+                {
+                    strSql.AppendFormat(" and b.id is  null ");
+                }
+
+            }
+            strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex);
+            return DbHelperMySQL.Query(strSql.ToString());
+        }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -175,6 +223,9 @@ namespace WK.DAL
             object obj = DbHelperMySQL.GetSingle(strSql.ToString());
             return obj == null ? 0 : Convert.ToInt32(obj);
         }
+
+
+
 
 
     }

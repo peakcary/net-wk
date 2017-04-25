@@ -54,8 +54,7 @@ namespace WK.Web.Handler
                     break;
                 case "getDataList":
                     sb.Append(getDataList(context));
-                    break;
-
+                    break; 
                 case "getListByQuery":
                     sb.Append(getListByQuery(context));
                     break;
@@ -68,8 +67,11 @@ namespace WK.Web.Handler
                 case "getAllOrderListByQuery":
                     sb.Append(getAllOrderListByQuery(context));
                     break;
+                case "getMarketOrderList":
+                    sb.Append(getMarketOrderList(context));
+                    break;
 
-
+                    
                     
 
                     
@@ -211,7 +213,6 @@ namespace WK.Web.Handler
             ds = bll.GetList(strWhere.ToString());
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
-
 
         private string getAllOrderListByQuery(HttpContext context)
         {
@@ -376,6 +377,206 @@ namespace WK.Web.Handler
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(listOrder);
         }
-    
+
+        private string getMarketOrderList(HttpContext context)
+        {
+            string order_code = string.Empty;
+            if (context.Request.Params["order_code"] != null && context.Request.Params["order_code"].ToString() != "")
+            {
+                order_code = context.Request.Params["order_code"].ToString();
+            }
+            int user_id = 0;
+            if (context.Request.Params["user_id"] != null && context.Request.Params["user_id"].ToString() != "")
+            {
+                user_id = int.Parse(context.Request.Params["user_id"].ToString());
+            }
+            int order_status = 0;
+            if (context.Request.Params["order_status"] != null && context.Request.Params["order_status"].ToString() != "")
+            {
+                order_status = int.Parse(context.Request.Params["order_status"].ToString());
+            }
+            int pay_status = 0;
+            if (context.Request.Params["pay_status"] != null && context.Request.Params["pay_status"].ToString() != "")
+            {
+                pay_status = int.Parse(context.Request.Params["pay_status"].ToString());
+            }
+            int eat_type = 0;
+            if (context.Request.Params["eat_type"] != null && context.Request.Params["eat_type"].ToString() != "")
+            {
+                eat_type = int.Parse(context.Request.Params["eat_type"].ToString());
+            }
+            int minDays = 0;
+            if (context.Request.Params["minDays"] != null && context.Request.Params["minDays"].ToString() != "")
+            {
+                minDays = int.Parse(context.Request.Params["minDays"].ToString());
+            }
+            int isDiscount = 0;
+            if (context.Request.Params["isDiscount"] != null && context.Request.Params["isDiscount"].ToString() != "")
+            {
+                isDiscount = int.Parse(context.Request.Params["isDiscount"].ToString());
+            }
+
+
+            StringBuilder sb = new StringBuilder();
+            DataSet ds = new DataSet();
+
+
+
+            int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
+            int pageSize = int.Parse(context.Request.Params["pageSize"]);
+            int startIndex = 0;
+            if (pageIndex >= 0)
+            {
+                startIndex = pageSize * pageIndex;
+            }
+
+            WK.BLL.bus_order bll = new WK.BLL.bus_order();
+            ds = bll.GetMarketOrderList(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize);
+
+            
+
+            List<WK.Model.bus_market> listMarket = new List<Model.bus_market>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                DataTable dtMarket = ds.Tables[0];
+                DataView dvMarket = dtMarket.DefaultView;
+                DataTable dtMarketDistinct = dvMarket.ToTable(true, "marketId");
+                int dtMarketDistinctRowsCount = dtMarketDistinct.Rows.Count;
+                for (int i = 0; i < dtMarketDistinctRowsCount; i++)
+                {
+                    DataRow drMarketDistinct = dtMarketDistinct.Rows[0];
+                    int marketId =int.Parse( drMarketDistinct["marketId"].ToString());  
+                    DataRow[] drsMarketOrder = dtMarket.Select("marketId=" + marketId);
+                    int drsMarketOrderLength = drsMarketOrder.Length;
+                    if (drsMarketOrderLength > 0)
+                    {
+                        DataRow drMarketOrder0 = drsMarketOrder[0]; 
+                        WK.Model.bus_market marketModel = new Model.bus_market();
+                        marketModel.address = drMarketOrder0["address"].ToString();
+                        marketModel.area_id = int.Parse(drMarketOrder0["area_id"].ToString());
+                        marketModel.name_cn = drMarketOrder0["name_cn"].ToString();
+                        marketModel.name_en = drMarketOrder0["name_en"].ToString();
+                        marketModel.id = int.Parse(drMarketOrder0["marketId"].ToString());
+
+                        List<WK.Model.bus_order> listOrder = new List<Model.bus_order>();
+                        for (int j = 0; j < drsMarketOrderLength; j++)
+                        {
+                            DataRow drMarketOrder = drsMarketOrder[j]; 
+                            Model.bus_order orderModel = new Model.bus_order();
+                            orderModel.id = int.Parse(drMarketOrder["orderId"].ToString());
+                            orderModel.consignee_name = drMarketOrder["consignee_name"].ToString();
+                            orderModel.consignee_phone = drMarketOrder["consignee_phone"].ToString();
+
+                            orderModel.create_date = DateTime.Parse(drMarketOrder["create_date"].ToString());
+                            orderModel.dilivery_user_id = int.Parse(drMarketOrder["dilivery_user_id"].ToString());
+                            orderModel.dish_time = int.Parse(drMarketOrder["dilivery_user_id"].ToString());
+                            orderModel.eat_type = int.Parse(drMarketOrder["eat_type"].ToString());
+                            orderModel.meal_num = int.Parse(drMarketOrder["meal_num"].ToString());
+                            orderModel.order_code = drMarketOrder["order_code"].ToString();
+                            orderModel.order_status = int.Parse(drMarketOrder["order_status"].ToString());
+                            orderModel.pay_status = int.Parse(drMarketOrder["pay_status"].ToString());
+                            orderModel.pay_type = int.Parse(drMarketOrder["pay_status"].ToString());
+                            orderModel.pickup_address_id = int.Parse(drMarketOrder["pickup_address_id"].ToString());
+                            orderModel.pickup_date = DateTime.Parse(drMarketOrder["pickup_date"].ToString());
+                            orderModel.pickup_end_time = DateTime.Parse(drMarketOrder["pickup_end_time"].ToString());
+                            orderModel.pickup_start_time = DateTime.Parse(drMarketOrder["pickup_start_time"].ToString());
+                            orderModel.remark = drMarketOrder["remark"].ToString();
+                            orderModel.total_plan_price = decimal.Parse(drMarketOrder["total_plan_price"].ToString());
+                            orderModel.total_real_price = decimal.Parse(drMarketOrder["total_real_price"].ToString()); 
+                            orderModel.update_date = DateTime.Parse(drMarketOrder["update_date"].ToString());
+                            orderModel.user_id = int.Parse(drMarketOrder["user_id"].ToString());
+
+                            WK.BLL.bus_order_discount orderDiscountBll = new BLL.bus_order_discount();
+                            Model.bus_order_discount orderDiscount = new Model.bus_order_discount();
+                            StringBuilder strWhereOrderDiscount = new StringBuilder();
+                            strWhereOrderDiscount.Append(" is_delete != 1");
+                            strWhereOrderDiscount.AppendFormat(" and order_id = {0}", orderModel.id);
+                            DataSet dsOrderDiscount = orderDiscountBll.GetList(strWhereOrderDiscount.ToString());
+                            if (dsOrderDiscount != null)
+                            {
+                                DataTable dtOrderDiscount = dsOrderDiscount.Tables[0];
+                                if (dtOrderDiscount != null && dtOrderDiscount.Rows.Count > 0)
+                                {
+                                    int drOrderDiscountRowsCount = dtOrderDiscount.Rows.Count;
+
+                                    for (int k = 0; k < drOrderDiscountRowsCount; k++)
+                                    {
+                                        DataRow drOrderDiscount = dtOrderDiscount.Rows[k];
+                                        orderDiscount.discount_desc = drOrderDiscount["discount_desc"].ToString();
+                                        orderDiscount.discount_id = int.Parse(drOrderDiscount["discount_id"].ToString());
+
+                                    }
+                                }
+                            }
+                            orderModel.orderDiscount = orderDiscount;
+                            List<Model.bus_order_dish> listOrderDish = new List<Model.bus_order_dish>();
+                            StringBuilder strWhereOrderDish = new StringBuilder();
+                            strWhereOrderDish.Append(" is_delete != 1");
+                            strWhereOrderDish.AppendFormat(" and order_id = {0}", orderModel.id);
+                            WK.BLL.bus_order_dish bllOrderDish = new WK.BLL.bus_order_dish();
+                            DataSet dsOrderDish = bllOrderDish.GetList(strWhereOrderDish.ToString());
+                            if (dsOrderDish != null)
+                            {
+                                DataTable dtOrderDish = dsOrderDish.Tables[0];
+                                if (dtOrderDish != null && dtOrderDish.Rows.Count > 0)
+                                {
+                                    int dtOrderDishRowsCount = dtOrderDish.Rows.Count;
+
+                                    for (int k = 0; k < dtOrderDishRowsCount; k++)
+                                    {
+                                        DataRow drOrderDish = dtOrderDish.Rows[k];
+
+                                        Model.bus_order_dish orderDishModel = new Model.bus_order_dish();
+                                        orderDishModel.id = int.Parse(drOrderDish["id"].ToString());
+                                        orderDishModel.count = int.Parse(drOrderDish["count"].ToString());
+                                        //orderDishModel.create_by =drOrderDish["create_by"]==null?0: int.Parse(drOrderDish["create_by"].ToString());
+                                        orderDishModel.create_date = DateTime.Parse(drOrderDish["create_date"].ToString());
+                                        orderDishModel.dish_id = int.Parse(drOrderDish["dish_id"].ToString());
+                                        orderDishModel.dish_name_cn = drOrderDish["dish_name_cn"].ToString();
+                                        orderDishModel.dish_name_en = drOrderDish["dish_name_en"].ToString();
+                                        orderDishModel.market_id = int.Parse(drOrderDish["market_id"].ToString());
+                                        orderDishModel.market_name_cn = drOrderDish["market_name_cn"].ToString();
+                                        orderDishModel.market_name_en = drOrderDish["market_name_en"].ToString();
+                                        orderDishModel.order_id = int.Parse(drOrderDish["order_id"].ToString());
+                                        orderDishModel.order_status = int.Parse(drOrderDish["order_status"].ToString());
+                                        orderDishModel.remark = drOrderDish["remark"].ToString();
+                                        orderDishModel.size_list = drOrderDish["size_list"].ToString();
+                                        orderDishModel.total_discount_price = decimal.Parse(drOrderDish["total_discount_price"].ToString());
+                                        orderDishModel.total_original_price = decimal.Parse(drOrderDish["total_original_price"].ToString());
+                                        orderDishModel.unit_discount_price = decimal.Parse(drOrderDish["unit_discount_price"].ToString());
+                                        orderDishModel.unit_original_price = decimal.Parse(drOrderDish["unit_original_price"].ToString());
+                                        //orderDishModel.update_by =drOrderDish["update_by"]!=null? int.Parse(drOrderDish["update_by"].ToString()):0;
+                                        orderDishModel.update_date = DateTime.Parse(drOrderDish["update_date"].ToString());
+                                        listOrderDish.Add(orderDishModel);
+                                    }
+                                }
+                            }
+                            orderModel.listOrderDish = listOrderDish;
+
+
+                            listOrder.Add(orderModel);
+                        }
+
+                        marketModel.listOrder = listOrder;
+                        listMarket.Add(marketModel);
+                    }
+
+                }
+
+                    
+
+
+                //int dtMarketRowsCount = dtMarket.Rows.Count;
+                //for (int i = 0; i < dtMarketRowsCount; i++)
+                //{
+                //    DataRow drMarket = dtMarket.Rows[i];
+                //    WK.Model.bus_market marketModel = new Model.bus_market();
+                //    marketModel.
+                //}
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(listMarket);
+        }
+
     }
 }

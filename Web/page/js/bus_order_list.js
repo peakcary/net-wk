@@ -85,7 +85,9 @@ $(function () {
     
     initPagination(); 
     getAllOrderListByQuery();
-    $("#btnExcelAll").on("click",fExcelAll);
+    fExcelMarket();
+    $("#btnExcelAll").on("click",fExcelAll); 
+    $("#btnExcelMarket").on("click",eExcelMarket);
 });
 
 function initPagination() {
@@ -216,9 +218,14 @@ function goPageDetail(id) {
 }
 
 function fExcelAll(){
- $("#btnExcelAll").attr('download','all_order_data.xls');
+  $("#btnExcelAll").attr('download','all_order_data.xls');
   return ExcellentExport.excel(this, 'tbExcelAll', 'all');
 
+}
+
+function eExcelMarket(){
+$("#btnExcelMarket").attr('download','market_order_data.xls');
+  return ExcellentExport.excel(this, 'tbExcelMarket', 'all');
 }
  
 
@@ -239,14 +246,42 @@ function getAllOrderListByQuery(){
            pageSize: 10000 
         },
         dataType: 'json',   
-        success: function (data) { 
-        console.log(data);
-             console.log(data);
+        success: function (data) {  
               $("#dataExcelAll").empty();
-            $("#dataExcelAllTemplate").tmpl(data).appendTo("#dataExcelAll");  
+              $("#dataExcelAllTemplate").tmpl(data).appendTo("#dataExcelAll");  
         },
         error:function(){
           
+        }
+    });
+}
+
+function fExcelMarket(){
+$.ajax({
+        type: "post",
+        url: url + "?t=getMarketOrderList",
+        data: {
+            order_code: order_code,
+            user_id: user_id,
+            order_status: order_status,
+            pay_status: pay_status,
+            eat_type: eat_type,
+            minDays: minDays,
+            isDiscount: isDiscount,
+            minDays: minDays,
+           pageIndex: 0,
+           pageSize: 10000 
+        },
+        dataType: 'json',   
+        success: function (data) { 
+        console.log(data);
+         $("#dataExcelMarket").empty();
+              $("#dataExcelMarketTemplate").tmpl(data).appendTo("#dataExcelMarket");  
+        
+            
+        },
+        error:function(){
+          $("#dataExcelMarket").empty();
         }
     });
 }
