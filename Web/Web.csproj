@@ -99,6 +99,10 @@
     <Content Include="page\js\bus_order_list.js" />
     <Content Include="page\js\index.js" />
     <Content Include="page\js\bus_order_detail.js" />
+    <Content Include="page\js\sys_user_edit.js" />
+    <Content Include="page\js\sys_user_list.js" />
+    <Content Include="page\js\bus_feedback_edit.js" />
+    <Content Include="page\js\bus_feedback_list.js" />
     <Content Include="page\lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="page\lib\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="page\lib\bootstrap\css\bootstrap.css" />
@@ -1830,6 +1834,10 @@
     <Content Include="page\bus_deadline_list.htm" />
     <Content Include="page\bus_order_list.htm" />
     <Content Include="page\bus_order_detail.htm" />
+    <Content Include="page\sys_user_edit.htm" />
+    <Content Include="page\sys_user_list.htm" />
+    <Content Include="page\bus_feedback_edit.htm" />
+    <Content Include="page\bus_feedback_list.htm" />
     <Content Include="src\Newtonsoft.Json.dll" />
     <Content Include="src\n\Qiniu.dll" />
     <Content Include="src\Qiniu.dll" />
@@ -1851,6 +1859,9 @@
     <Compile Include="Handler\bus_dish.ashx.cs">
       <DependentUpon>bus_dish.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handler\bus_feedback.ashx.cs">
+      <DependentUpon>bus_feedback.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handler\bus_image.ashx.cs">
       <DependentUpon>bus_image.ashx</DependentUpon>
     </Compile>
@@ -1871,6 +1882,9 @@
     </Compile>
     <Compile Include="Handler\PickupAddress.ashx.cs">
       <DependentUpon>PickupAddress.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\sys_user.ashx.cs">
+      <DependentUpon>sys_user.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handler\Upload.ashx.cs">
       <DependentUpon>Upload.ashx</DependentUpon>
@@ -1914,6 +1928,8 @@
     <Content Include="Handler\bus_deadline.ashx" />
     <Content Include="Handler\bus_order.ashx" />
     <Content Include="Handler\index.ashx" />
+    <Content Include="Handler\sys_user.ashx" />
+    <Content Include="Handler\bus_feedback.ashx" />
     <None Include="page\lib\bootstrap\config.json" />
     <None Include="page\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <None Include="page\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />

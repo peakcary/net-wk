@@ -142,6 +142,7 @@
     <Compile Include="bus_discount_gift.cs" />
     <Compile Include="bus_dish_extend.cs" />
     <Compile Include="bus_dish_plan.cs" />
+    <Compile Include="bus_feedback_extend.cs" />
     <Compile Include="bus_gift.cs" />
     <Compile Include="bus_market_extend.cs" />
     <Compile Include="bus_order_extend.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="sys_constant_detail.cs" />
     <Compile Include="sys_sequence.cs" />
     <Compile Include="sys_user.cs" />
+    <Compile Include="sys_user_extend.cs" />
     <Compile Include="tuser.cs" />
     <Compile Include="user.cs" />
   </ItemGroup>
