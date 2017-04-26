@@ -16,7 +16,7 @@ namespace WK.Model
 		private string _content;
 		private string _link_url;
 		private string _pic_url;
-		private int _is_delete=0;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

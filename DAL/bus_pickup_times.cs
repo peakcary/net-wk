@@ -236,7 +236,7 @@ namespace WK.DAL
 				}
 				if(row["pickup_start_time"]!=null && row["pickup_start_time"].ToString()!="")
 				{
-                    model.pickup_start_time = TimeSpan.Parse(row["pickup_start_time"].ToString());
+					model.pickup_start_time=TimeSpan.Parse(row["pickup_start_time"].ToString());
 				}
 				if(row["pickup_end_time"]!=null && row["pickup_end_time"].ToString()!="")
 				{

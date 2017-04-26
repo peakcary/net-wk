@@ -86,8 +86,13 @@ $(function () {
     initPagination(); 
     getAllOrderListByQuery();
     fExcelMarket();
+    getDiliveryUserOrderList();
+    getPickupAddressOrderList();
     $("#btnExcelAll").on("click",fExcelAll); 
     $("#btnExcelMarket").on("click",eExcelMarket);
+    $("#btnExcelDiliveryUser").on("click",eExcelUser);
+    $("#btnExcelPickupAddress").on("click",eExcelAddress); 
+    
 });
 
 function initPagination() {
@@ -218,14 +223,18 @@ function goPageDetail(id) {
 }
 
 function fExcelAll(){
-  $("#btnExcelAll").attr('download','all_order_data.xls');
   return ExcellentExport.excel(this, 'tbExcelAll', 'all');
-
 }
 
 function eExcelMarket(){
-$("#btnExcelMarket").attr('download','market_order_data.xls');
   return ExcellentExport.excel(this, 'tbExcelMarket', 'all');
+}
+
+function eExcelUser(){ 
+  return ExcellentExport.excel(this, 'dtExcelUser', 'all');
+}
+function eExcelAddress(){ 
+  return ExcellentExport.excel(this, 'dtExcelAddress', 'all');
 }
  
 
@@ -275,13 +284,69 @@ $.ajax({
         dataType: 'json',   
         success: function (data) { 
         console.log(data);
-         $("#dataExcelMarket").empty();
+                $("#dataExcelMarket").empty();
               $("#dataExcelMarketTemplate").tmpl(data).appendTo("#dataExcelMarket");  
         
             
         },
         error:function(){
           $("#dataExcelMarket").empty();
+        }
+    });
+}
+
+function getPickupAddressOrderList(){
+$.ajax({
+        type: "post",
+        url: url + "?t=getPickupAddressOrderList",
+        data: {
+            order_code: order_code,
+            user_id: user_id,
+            order_status: order_status,
+            pay_status: pay_status,
+            eat_type: eat_type,
+            minDays: minDays,
+            isDiscount: isDiscount,
+            minDays: minDays,
+           pageIndex: 0,
+           pageSize: 10000 
+        },
+        dataType: 'json',   
+        success: function (data) { 
+            console.log(data);
+           $("#dataExcelAddress").empty();
+              $("#dataExcelAddressTemplate").tmpl(data).appendTo("#dataExcelAddress");  
+        },
+        error:function(){
+          $("#dataExcelAddress").empty();
+        }
+    });
+}
+
+function getDiliveryUserOrderList(){ 
+    $.ajax({
+        type: "post",
+        url: url + "?t=getDiliveryUserOrderList",
+        data: {
+            order_code: order_code,
+            user_id: user_id,
+            order_status: order_status,
+            pay_status: pay_status,
+            eat_type: eat_type,
+            minDays: minDays,
+            isDiscount: isDiscount,
+            minDays: minDays,
+           pageIndex: 0,
+           pageSize: 10000 
+        },
+        dataType: 'json',   
+        success: function (data) { 
+            console.log(data);
+         $("#dataExcelUser").empty();
+              $("#dataExcelUserTemplate").tmpl(data).appendTo("#dataExcelUser");  
+        },
+        error:function(){
+          $("#dataExcelUser").empty();
         }
     });
 }

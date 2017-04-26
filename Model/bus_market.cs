@@ -15,6 +15,7 @@ namespace WK.Model
 		private string _name_en;
 		private string _name_cn;
 		private string _market_type= "0";
+		private string _market_tel;
 		private int? _area_id=0;
 		private decimal? _lon;
 		private decimal? _lat;
@@ -68,6 +69,14 @@ namespace WK.Model
 		{
 			set{ _market_type=value;}
 			get{return _market_type;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string market_tel
+		{
+			set{ _market_tel=value;}
+			get{return _market_tel;}
 		}
 		/// <summary>
 		/// 

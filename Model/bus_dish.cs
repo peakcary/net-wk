@@ -24,7 +24,7 @@ namespace WK.Model
 		private int _status;
 		private int _sales_total=0;
 		private int? _sort=0;
-		private int? _is_delete;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;
@@ -145,7 +145,7 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? is_delete
+		public int is_delete
 		{
 			set{ _is_delete=value;}
 			get{return _is_delete;}

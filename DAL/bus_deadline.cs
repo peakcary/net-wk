@@ -53,7 +53,7 @@ namespace WK.DAL
 					new MySqlParameter("@deadline_time_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@eat_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@deadline_days", MySqlDbType.Int32,11),
-					new MySqlParameter("@deadline_times", MySqlDbType.DateTime),
+					new MySqlParameter("@deadline_times", MySqlDbType.Time),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -103,7 +103,7 @@ namespace WK.DAL
 					new MySqlParameter("@deadline_time_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@eat_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@deadline_days", MySqlDbType.Int32,11),
-					new MySqlParameter("@deadline_times", MySqlDbType.DateTime),
+					new MySqlParameter("@deadline_times", MySqlDbType.Time),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -231,7 +231,7 @@ namespace WK.DAL
 				}
 				if(row["deadline_times"]!=null && row["deadline_times"].ToString()!="")
 				{
-                    model.deadline_times =DateTime.Parse(row["deadline_times"].ToString());
+					model.deadline_times=DateTime.Parse(row["deadline_times"].ToString());
 				}
 				if(row["is_delete"]!=null && row["is_delete"].ToString()!="")
 				{

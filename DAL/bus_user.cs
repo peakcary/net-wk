@@ -46,9 +46,9 @@ namespace WK.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into bus_user(");
-			strSql.Append("user_type,pwd,nickname,status,phone_num,pic_url,sex,generate_time,cur_deviceId,is_delete,remark,create_by,create_date,update_by,update_date)");
+			strSql.Append("user_type,pwd,nickname,status,phone_num,pic_url,sex,generate_time,cur_deviceId,push_token,is_delete,remark,create_by,create_date,update_by,update_date)");
 			strSql.Append(" values (");
-			strSql.Append("@user_type,@pwd,@nickname,@status,@phone_num,@pic_url,@sex,@generate_time,@cur_deviceId,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
+			strSql.Append("@user_type,@pwd,@nickname,@status,@phone_num,@pic_url,@sex,@generate_time,@cur_deviceId,@push_token,@is_delete,@remark,@create_by,@create_date,@update_by,@update_date)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@user_type", MySqlDbType.Int32,11),
 					new MySqlParameter("@pwd", MySqlDbType.VarChar,100),
@@ -59,6 +59,7 @@ namespace WK.DAL
 					new MySqlParameter("@sex", MySqlDbType.Int32,11),
 					new MySqlParameter("@generate_time", MySqlDbType.DateTime),
 					new MySqlParameter("@cur_deviceId", MySqlDbType.VarChar,100),
+					new MySqlParameter("@push_token", MySqlDbType.VarChar,100),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -74,12 +75,13 @@ namespace WK.DAL
 			parameters[6].Value = model.sex;
 			parameters[7].Value = model.generate_time;
 			parameters[8].Value = model.cur_deviceId;
-			parameters[9].Value = model.is_delete;
-			parameters[10].Value = model.remark;
-			parameters[11].Value = model.create_by;
-			parameters[12].Value = model.create_date;
-			parameters[13].Value = model.update_by;
-			parameters[14].Value = model.update_date;
+			parameters[9].Value = model.push_token;
+			parameters[10].Value = model.is_delete;
+			parameters[11].Value = model.remark;
+			parameters[12].Value = model.create_by;
+			parameters[13].Value = model.create_date;
+			parameters[14].Value = model.update_by;
+			parameters[15].Value = model.update_date;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -107,6 +109,7 @@ namespace WK.DAL
 			strSql.Append("sex=@sex,");
 			strSql.Append("generate_time=@generate_time,");
 			strSql.Append("cur_deviceId=@cur_deviceId,");
+			strSql.Append("push_token=@push_token,");
 			strSql.Append("is_delete=@is_delete,");
 			strSql.Append("remark=@remark,");
 			strSql.Append("create_by=@create_by,");
@@ -124,6 +127,7 @@ namespace WK.DAL
 					new MySqlParameter("@sex", MySqlDbType.Int32,11),
 					new MySqlParameter("@generate_time", MySqlDbType.DateTime),
 					new MySqlParameter("@cur_deviceId", MySqlDbType.VarChar,100),
+					new MySqlParameter("@push_token", MySqlDbType.VarChar,100),
 					new MySqlParameter("@is_delete", MySqlDbType.Int32,11),
 					new MySqlParameter("@remark", MySqlDbType.VarChar,500),
 					new MySqlParameter("@create_by", MySqlDbType.Int32,11),
@@ -140,13 +144,14 @@ namespace WK.DAL
 			parameters[6].Value = model.sex;
 			parameters[7].Value = model.generate_time;
 			parameters[8].Value = model.cur_deviceId;
-			parameters[9].Value = model.is_delete;
-			parameters[10].Value = model.remark;
-			parameters[11].Value = model.create_by;
-			parameters[12].Value = model.create_date;
-			parameters[13].Value = model.update_by;
-			parameters[14].Value = model.update_date;
-			parameters[15].Value = model.id;
+			parameters[9].Value = model.push_token;
+			parameters[10].Value = model.is_delete;
+			parameters[11].Value = model.remark;
+			parameters[12].Value = model.create_by;
+			parameters[13].Value = model.create_date;
+			parameters[14].Value = model.update_by;
+			parameters[15].Value = model.update_date;
+			parameters[16].Value = model.id;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -210,7 +215,7 @@ namespace WK.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,user_type,pwd,nickname,status,phone_num,pic_url,sex,generate_time,cur_deviceId,is_delete,remark,create_by,create_date,update_by,update_date from bus_user ");
+			strSql.Append("select id,user_type,pwd,nickname,status,phone_num,pic_url,sex,generate_time,cur_deviceId,push_token,is_delete,remark,create_by,create_date,update_by,update_date from bus_user ");
 			strSql.Append(" where id=@id");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@id", MySqlDbType.Int32)
@@ -278,6 +283,10 @@ namespace WK.DAL
 				{
 					model.cur_deviceId=row["cur_deviceId"].ToString();
 				}
+				if(row["push_token"]!=null)
+				{
+					model.push_token=row["push_token"].ToString();
+				}
 				if(row["is_delete"]!=null && row["is_delete"].ToString()!="")
 				{
 					model.is_delete=int.Parse(row["is_delete"].ToString());
@@ -312,7 +321,7 @@ namespace WK.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,user_type,pwd,nickname,status,phone_num,pic_url,sex,generate_time,cur_deviceId,is_delete,remark,create_by,create_date,update_by,update_date ");
+			strSql.Append("select id,user_type,pwd,nickname,status,phone_num,pic_url,sex,generate_time,cur_deviceId,push_token,is_delete,remark,create_by,create_date,update_by,update_date ");
 			strSql.Append(" FROM bus_user ");
 			if(strWhere.Trim()!="")
 			{

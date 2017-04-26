@@ -20,7 +20,8 @@ namespace WK.Model
 		private int _sex=1;
 		private DateTime? _generate_time;
 		private string _cur_deviceid;
-		private int _is_delete=0;
+		private string _push_token;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;
@@ -105,6 +106,14 @@ namespace WK.Model
 		{
 			set{ _cur_deviceid=value;}
 			get{return _cur_deviceid;}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string push_token
+		{
+			set{ _push_token=value;}
+			get{return _push_token;}
 		}
 		/// <summary>
 		/// 

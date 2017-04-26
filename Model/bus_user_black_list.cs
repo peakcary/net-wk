@@ -13,7 +13,7 @@ namespace WK.Model
 		private int _id;
 		private int _user_type;
 		private string _phone_num;
-		private int _is_delete=0;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

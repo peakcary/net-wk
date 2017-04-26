@@ -8,7 +8,7 @@ namespace WK.BLL
 	/// <summary>
 	/// bus_deadline
 	/// </summary>
-    public partial class bus_deadline
+	public partial class bus_deadline
 	{
 		private readonly WK.DAL.bus_deadline dal=new WK.DAL.bus_deadline();
 		public bus_deadline()

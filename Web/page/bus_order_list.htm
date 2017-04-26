@@ -257,9 +257,9 @@
                 <div class='col-sm-8'>
                 </div>
                 <div class='col-sm-4'>
-                    <a id="btnExcelAll" class="btn btn-primary btn-xs">全部导出</a> <a id="btnExcelMarket" download="market_order_data.xls"
-                        class="btn btn-primary btn-xs">按商户导出</a> <a id="btnExcelAddr" class="btn btn-primary btn-xs">
-                            按自提点导出</a> <a id="btnExcelUser" class="btn btn-primary btn-xs">按配送员导出</a>
+                    <a id="btnExcelAll" download="data_all.xls" class="btn btn-primary btn-xs">全部导出</a> <a id="btnExcelMarket" download="data_market_order.xls"
+                        class="btn btn-primary btn-xs">按商户导出</a> <a download="data_address_order.xls" id="btnExcelPickupAddress" class="btn btn-primary btn-xs">
+                            按自提点导出</a> <a download="data_user_order.xls" id="btnExcelDiliveryUser" class="btn btn-primary btn-xs">按配送员导出</a>
                 </div>
             </div>
         </div>
@@ -365,13 +365,39 @@
             <thead>
                 <tr>
                     <td>
-                        shanghu
+                        商户
                     </td>
                     <td>
                     </td>
                 </tr>
             </thead>
             <tbody id="dataExcelMarket">
+            </tbody>
+        </table>
+        <table id='dtExcelUser'>
+            <thead>
+                <tr>
+                    <td>
+                        配送员
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="dataExcelUser">
+            </tbody>
+        </table>
+         <table id='dtExcelAddress'>
+            <thead>
+                <tr>
+                    <td>
+                        自提点
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="dataExcelAddress">
             </tbody>
         </table>
     </div>
@@ -401,7 +427,7 @@
             <td>${consignee_phone}</td> 
             <td>${pickup_address_id}</td> 
             <td>${consignee_name}</td> 
-            <td>{{if bid > 0 }}有{{else}}无{{/if}}</td>  
+            <td>{{if dicountId > 0 }}有{{else}}无{{/if}}</td>  
             <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${id}')" >详情</a></td> 
         </tr>
     </script>
@@ -501,12 +527,10 @@
                     <td>${user_id}</td> 
                     <td>${consignee_phone}</td> 
                     <td>${pickup_address_id}</td> 
-                    <td>${consignee_name}</td> 
-            
+                    <td>${consignee_name}</td>  
                     <td>{{if orderDiscount.discount_id > 0 }}有{{else}}无{{/if}}</td> 
                     <td>
-                        <table>
-
+                        <table> 
                         {{each(i,orderDish) listOrderDish}}
                             <tr>
                             <td>${i+1}</td>
@@ -529,10 +553,178 @@
                   </table>
             </td>
         </tr>
+    </script>
 
+    <script id="dataExcelAddressTemplate" type="text/x-jquery-tmpl"> 
+        <tr>
+             <td>${name}</td> 
+            <td> 
+                <table>
+                <tr>
+                    <td>
+                        识别码
+                    </td>
+                    <td>
+                        订单号
+                    </td>
+                    <td>
+                        订单期
+                    </td>
+                    <td>
+                        订单状态
+                    </td>
+                    <td>
+                        订单时间
+                    </td>
+                    <td>
+                        订单金额
+                    </td>
+                    <td>
+                        支付订单号
+                    </td>
+                    <td>
+                        用户
+                    </td>
+                    <td>
+                        电话
+                    </td>
+                    <td>
+                        自提点
+                    </td>
+                    <td>
+                        配送员
+                    </td>
+                    <td>
+                        赠品
+                    </td>
+                    <td>
+                        菜品
+                    </td>
+                </tr>
+                {{each(i,order) listOrder}}
+                <tr>
+	                <td>${order_code.substr(order_code.length-4,4)}</td>  
+                    <td>${order_code}</td> 
+                    <td>${create_date}</td> 
+                    <td>{{if order_status == 1}}已预订{{else order_status == 2}}待取餐{{else order_status == 3}}待送达{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{/if}}</td> 
+                    <td>${create_date}</td> 
+                    <td>${total_real_price }</td> 
+                    <td></td> 
+                    <td>${user_id}</td> 
+                    <td>${consignee_phone}</td> 
+                    <td>${pickup_address_id}</td> 
+                    <td>${consignee_name}</td>  
+                    <td>{{if orderDiscount.discount_id > 0 }}有{{else}}无{{/if}}</td> 
+                    <td>
+                        <table> 
+                        {{each(i,orderDish) listOrderDish}}
+                            <tr>
+                            <td>${i+1}</td>
+                            <td>${orderDish.market_name_cn}</td>
+                            <td>${orderDish.market_name_en}</td>
+                            <td>${orderDish.dish_name_cn}</td>
+                            <td>${orderDish.dish_name_en}</td>
+                            <td>${orderDish.count}</td>
+                            <td>${orderDish.size_list}</td>
+                            <td>${orderDish.unit_discount_price}</td>
+                            <td>${orderDish.unit_original_price}</td>
+                            <td>${orderDish.total_discount_price}</td>
+                            <td>${orderDish.total_original_price}</td>
+                            </tr>
+                        {{/each}}
+                        </table>
+                    </td>
+                </tr>
+                 {{/each}}
+                  </table>
+            </td>
+        </tr>
+    </script>
 
-
-       
+     <script id="dataExcelUserTemplate" type="text/x-jquery-tmpl"> 
+        <tr>
+             <td>${nickname}</td> 
+            <td> 
+                <table>
+                <tr>
+                    <td>
+                        识别码
+                    </td>
+                    <td>
+                        订单号
+                    </td>
+                    <td>
+                        订单期
+                    </td>
+                    <td>
+                        订单状态
+                    </td>
+                    <td>
+                        订单时间
+                    </td>
+                    <td>
+                        订单金额
+                    </td>
+                    <td>
+                        支付订单号
+                    </td>
+                    <td>
+                        用户
+                    </td>
+                    <td>
+                        电话
+                    </td>
+                    <td>
+                        自提点
+                    </td>
+                    <td>
+                        配送员
+                    </td>
+                    <td>
+                        赠品
+                    </td>
+                    <td>
+                        菜品
+                    </td>
+                </tr>
+                {{each(i,order) listOrder}}
+                <tr>
+	                <td>${order_code.substr(order_code.length-4,4)}</td>  
+                    <td>${order_code}</td> 
+                    <td>${create_date}</td> 
+                    <td>{{if order_status == 1}}已预订{{else order_status == 2}}待取餐{{else order_status == 3}}待送达{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{/if}}</td> 
+                    <td>${create_date}</td> 
+                    <td>${total_real_price }</td> 
+                    <td></td> 
+                    <td>${user_id}</td> 
+                    <td>${consignee_phone}</td> 
+                    <td>${pickup_address_id}</td> 
+                    <td>${consignee_name}</td>  
+                    <td>{{if orderDiscount.discount_id > 0 }}有{{else}}无{{/if}}</td> 
+                    <td>
+                        <table> 
+                        {{each(i,orderDish) listOrderDish}}
+                            <tr>
+                            <td>${i+1}</td>
+                            <td>${orderDish.market_name_cn}</td>
+                            <td>${orderDish.market_name_en}</td>
+                            <td>${orderDish.dish_name_cn}</td>
+                            <td>${orderDish.dish_name_en}</td>
+                            <td>${orderDish.count}</td>
+                            <td>${orderDish.size_list}</td>
+                            <td>${orderDish.unit_discount_price}</td>
+                            <td>${orderDish.unit_original_price}</td>
+                            <td>${orderDish.total_discount_price}</td>
+                            <td>${orderDish.total_original_price}</td>
+                            </tr>
+                        {{/each}}
+                        </table>
+                    </td>
+                </tr>
+                 {{/each}}
+                  </table>
+            </td>
+        </tr>
     </script>
 </body>
 </html>

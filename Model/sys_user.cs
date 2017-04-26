@@ -15,7 +15,7 @@ namespace WK.Model
 		private string _pwd;
 		private string _name;
 		private int _sex;
-		private int _is_delete=0;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

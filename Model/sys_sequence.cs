@@ -11,7 +11,7 @@ namespace WK.Model
 		{}
 		#region Model
 		private string _sequence_name;
-		private int? _value;
+		private int _value;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -23,7 +23,7 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? value
+		public int value
 		{
 			set{ _value=value;}
 			get{return _value;}

@@ -17,7 +17,7 @@ namespace WK.Model
 		private int? _device_type=0;
 		private string _pushtoken;
 		private string _app_version;
-		private int _is_delete=0;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

@@ -93,10 +93,12 @@ namespace WK.DAL
             //and a.create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval 1 day)
             //and b.id is not null /*是否有赠品*/
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" SELECT a.*,b.id as bid ");
+            strSql.Append(" SELECT a.id as orderId, a.*,b.id as dicountId,c.id as diliveryUserId,c.nickname,d.name as pickupAddressName ");
             strSql.Append(" FROM bus_order a ");
-            strSql.Append(" LEFT JOIN bus_order_discount b on b.order_id = a.id ");
-            strSql.Append(" where 1=1 ");
+            strSql.Append(" LEFT JOIN bus_order_discount b on b.order_id = a.id and b.is_delete!=1 ");
+            strSql.Append(" left join bus_user c on c.id = a.dilivery_user_id and c.is_delete!=1 ");
+            strSql.Append(" LEFT JOIN bus_pickup_address d on d.id = a.pickup_address_id and d.is_delete!=1 ");
+            strSql.Append(" where a.is_delete!=1 ");
             if (order_code != string.Empty)
             {
                 strSql.AppendFormat(" and a.order_code ='{0}'", order_code);

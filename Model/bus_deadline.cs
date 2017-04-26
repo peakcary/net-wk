@@ -15,7 +15,7 @@ namespace WK.Model
 		private int _eat_type;
 		private int _deadline_days=0;
 		private DateTime? _deadline_times;
-		private int _is_delete=0;
+		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;
