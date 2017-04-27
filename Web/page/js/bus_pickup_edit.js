@@ -21,6 +21,7 @@ $(function () {
     }
 
     getListUser2(0);
+    
 });
 
 function getDataDetail(id) {
@@ -126,7 +127,21 @@ function getListUser2(id){
 function openPickupTimesContainer(){
     if($("#hid").val()==""){
         editData(false);
-    }  
+    } else{
+    layer.open({
+                      type: 1,
+                      area: ['600px', '300px'],
+                      title:"自提点时间",
+                      scrollbar:false,
+                      btn: ['确定', '取消'],
+                      yes: function(index, layero){
+                          layer.close(index);
+                          editPickupTimes(); 
+                      },btn2: function(index, layero){ 
+                      },
+                      content:$("#pickupTimesContainer")
+                    });
+    } 
 }
 
 

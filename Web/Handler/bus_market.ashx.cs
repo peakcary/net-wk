@@ -129,7 +129,13 @@ namespace WK.Web.Handler
             ds = marketBll.GetList(strWhere.ToString());
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                model.pickup_address_id = int.Parse(ds.Tables[0].Rows[0]["pickup_address_id"].ToString());
+                model.pickup_address_ids = "";
+                int count = ds.Tables[0].Rows.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    model.pickup_address_ids  += ds.Tables[0].Rows[i]["pickup_address_id"].ToString()+",";
+                     
+                }
             }
             #endregion
 
@@ -197,32 +203,43 @@ namespace WK.Web.Handler
             returnInfo.isSuccess = model.id > 0 ? bll.Update(model) : bll.Add(model);
 
             #region 自提点列表
-            int pickup_address_id = 0;
-            if (context.Request.Params["pickup_address_id"] != null
-                && context.Request.Params["pickup_address_id"].ToString() != "")
+            string pickupAddressIds = context.Request.Params["pickup_address_id"];
+            if (pickupAddressIds!=null && pickupAddressIds != "")
             {
-                pickup_address_id = int.Parse(context.Request.Params["pickup_address_id"]);
-            }
-            if (pickup_address_id > 0)
-            {
-                WK.BLL.bus_pickup_market marketBll = new BLL.bus_pickup_market();
-                StringBuilder strWhere = new StringBuilder();
-                strWhere.Append(" is_delete != 1");
-                strWhere.AppendFormat(" and market_id = {0}", market_id);
-                DataSet ds = new DataSet();
-                ds = marketBll.GetList(strWhere.ToString());
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                string[] arr = pickupAddressIds.Split(',');
+                if (arr.Length > 0)
                 {
-                }
-                else
-                {
-                    WK.Model.bus_pickup_market marketModel = new Model.bus_pickup_market();
-                    marketModel.is_delete = 0;
-                    marketModel.market_id = market_id;
-                    marketModel.pickup_address_id = pickup_address_id;
-                    marketBll.Add(marketModel);
+                    WK.BLL.bus_pickup_market marketBll = new BLL.bus_pickup_market();
+                    StringBuilder strWhere = new StringBuilder();
+                    strWhere.Append(" is_delete != 1");
+                    strWhere.AppendFormat(" and market_id = {0}", market_id);
+                    DataSet ds = marketBll.GetList(strWhere.ToString());
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        int imageCount = ds.Tables[0].Rows.Count;
+                        for (int i = 0; i < imageCount; i++)
+                        {
+                            int Id = int.Parse(ds.Tables[0].Rows[i]["id"].ToString());
+                            marketBll.Delete(Id);
+                        }
+                    }
+                    for (int i = 0, l = arr.Length; i < l; i++)
+                    {
+                        string arrV = arr[i];
+                        if (arrV != "")
+                        {
+                            int pickup_address_id = int.Parse(arrV);
+                            WK.Model.bus_pickup_market marketModel = new Model.bus_pickup_market();
+                            marketModel.is_delete = 0;
+                            marketModel.market_id = market_id;
+                            marketModel.pickup_address_id = pickup_address_id;
+                            marketBll.Add(marketModel);
+                        }
+                        
+                    }
                 }
             }
+             
             #endregion
 
             #region 图片列表

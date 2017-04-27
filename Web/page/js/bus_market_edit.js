@@ -2,6 +2,8 @@
 var urlUpload = "../Handler/Upload.ashx";
 var imageUrlHost = "http://om2v517pk.bkt.clouddn.com/";
 
+
+var pickupAddressIds="";
 $(function () {
     (function ($) {
         $.getUrlParam = function (name) {
@@ -24,6 +26,7 @@ $(function () {
         getAreaList(0);
         getPickupList(0);
     }
+     
 });
 
 function getDataDetail(id) {
@@ -54,7 +57,7 @@ function getDataDetail(id) {
             $("#description_en").code(data.description_en);
            
             getAreaList(data.area_id);
-            getPickupList(data.pickup_address_id);
+            getPickupList(data.pickup_address_ids);
             //console.log("-----imageList",data.imageList);
             var imageObjArray = [];
             var imageArray = data.imageList.split(";");
@@ -86,6 +89,7 @@ function goPageList() {
 }
 
 function editData() {  
+ 
     loadingShow();  
     var imageListArray = []; 
     $("#imageList").find("img").each(function(){
@@ -106,7 +110,8 @@ function editData() {
             lon: $("#lon").val(), 
             lat: $("#lat").val(),
             market_type: $("#market_type").val(),
-            pickup_address_id: $("#pickup_address_id").val(),
+            //pickup_address_id: $("#pickup_address_id").val(),
+            pickup_address_id: pickupAddressIds,
             address: $("#address").val(),
             sort: $("#sort").val(), 
             remark: $("#remark").code(),
@@ -118,7 +123,7 @@ function editData() {
         success: function (data) { 
             loadingHide();
             if(data.isSuccess){
-                goPageList();
+                //goPageList();
             }else{
              layer.msg('保存失败！'); 
             }
@@ -149,7 +154,7 @@ function getAreaList(id) {
     });
 }
  
- function getPickupList(id) {   
+ function getPickupList(ids) {   
     $.ajax({
         type: "post",
         url: url + "?t=getPickupList",
@@ -158,11 +163,44 @@ function getAreaList(id) {
            pageSize: 100 
         },
         dataType: 'json',   
-        success: function (data){  
+        success: function (data){ 
+                var aids = ids.split(',');
+                $.each(data, function(j, n){  
+                    for(var i=0,l=aids.length;i<l;i++){
+                        if(aids[i]==data[j].data){
+                         data[j].s = true;
+                        }
+                    }
+                });
+                 
+  
+
+
             $("#pickup_address_id").empty();
-            $("#pickup_address_id").append("<option value='0'>请选择</option>");
+            //$("#pickup_address_id").append("<option value='0'>请选择</option>");
             $("#pickupListTemplate").tmpl(data).appendTo("#pickup_address_id");  
-            $("#pickup_address_id").val(id); 
+            
+            
+           
+            
+            
+
+
+            //$("#pickup_address_id").val(id); 
+
+
+             $("#pickup_address_id").multiselect({
+                click: function(event, ui){
+			        console.log(ui.value + ' ' + (ui.checked ? 'checked' : 'unchecked') );
+		        },
+               selectedText: function(numChecked, numTotal, checkedItems){
+                    pickupAddressIds="";
+                    for(var i=0,l= checkedItems.length;i<l;i++){
+                    console.log($(checkedItems[i]).attr('value'));
+                     pickupAddressIds+=$(checkedItems[i]).attr('value')+","; 
+                    } 
+               }
+            });
         },
         error:function(){ 
         }
