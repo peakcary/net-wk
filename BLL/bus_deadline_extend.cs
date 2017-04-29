@@ -3,6 +3,12 @@ namespace WK.BLL
 { 
 	public partial class bus_deadline
 	{
+
+        public DataSet GetAllListAndTime()
+        {
+            return dal.GetAllListAndTime();
+        }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>

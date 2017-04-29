@@ -134,7 +134,7 @@ namespace WK.Web.Handler
             //model.create_date
             model.deadline_days = int.Parse(context.Request.Params["deadline_days"]);
             model.deadline_time_type = int.Parse(context.Request.Params["deadline_time_type"]);
-            model.deadline_times = DateTime.Parse(context.Request.Params["deadline_times"]);
+            model.deadline_times = TimeSpan.Parse(context.Request.Params["deadline_times"]);
             model.eat_type = int.Parse(context.Request.Params["eat_type"]);
             model.is_delete = 0;
             //model.remark = context.Request.Params["remark"]; 

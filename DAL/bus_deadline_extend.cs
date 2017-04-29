@@ -8,6 +8,14 @@ namespace WK.DAL
 	public partial class bus_deadline
 	{
 
+        public DataSet GetAllListAndTime() 
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT  now(); ");
+            strSql.Append(" SELECT * FROM bus_deadline where is_delete != 1; "); 
+            return DbHelperMySQL.Query(strSql.ToString());
+        }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>

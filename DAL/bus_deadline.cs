@@ -231,7 +231,7 @@ namespace WK.DAL
 				}
 				if(row["deadline_times"]!=null && row["deadline_times"].ToString()!="")
 				{
-					model.deadline_times=DateTime.Parse(row["deadline_times"].ToString());
+                    model.deadline_times = TimeSpan.Parse(row["deadline_times"].ToString());
 				}
 				if(row["is_delete"]!=null && row["is_delete"].ToString()!="")
 				{

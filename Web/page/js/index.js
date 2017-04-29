@@ -3,38 +3,40 @@ var type = 'Date';
 var minDays = 7;
 $(function () {
     loadingShow();
+    getAllDeadlineListAndTime();
     getChartList(type, minDays);
     getListCountByTomorrowEattype(1);
     getListCountByTomorrowEattype(2);
     getListCountByYesterdayCreateUser();
     getListCountByAllUser();
+    
 
-    $("#btnChartDate").click(function () { 
+    $("#btnChartDate").click(function () {
         type = 'Date';
         getChartList(type, minDays);
     });
     $("#btnChartPerson").click(function () {
-       
+
         type = 'Person';
         getChartList(type, minDays);
     });
     $("#btnChartPrice").click(function () {
-       
+
         type = 'Price';
         getChartList(type, minDays);
     });
     $("#btnDate7").click(function () {
-       
+
         minDays = 7;
         getChartList(type, minDays);
     });
     $("#btnDate30").click(function () {
-       
+
         minDays = 30;
         getChartList(type, minDays);
     });
     $("#btnDate90").click(function () {
-       
+
         minDays = 90;
         getChartList(type, minDays);
     });
@@ -178,6 +180,37 @@ function getChartList(type, minDays) {
         }
     });
 }
+
+
+
+function getAllDeadlineListAndTime() {
+    $.ajax({
+        type: "post",
+        url: url + "?t=getAllDeadlineListAndTime",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var i = 0, l = data.length; i < l; i++) {
+                if (data[i].eat_type == 1) {
+                    if (data[i].isDead) {
+                        $("#eat_type1").html("已截单");
+                    } else {
+                        $("#eat_type1").html("截单倒计时：" + data[i].remainTime); 
+                    }
+
+                } else if (data[i].eat_type == 2) {
+                    if (data[i].isDead) {
+                        $("#eat_type2").html("已截单");
+                    } else {
+                        $("#eat_type2").html("截单倒计时：" + data[i].remainTime);
+                    }
+                }
+            }
+
+        }
+    });
+}
+
   
 
 

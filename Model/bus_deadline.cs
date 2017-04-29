@@ -14,7 +14,7 @@ namespace WK.Model
 		private int _deadline_time_type;
 		private int _eat_type;
 		private int _deadline_days=0;
-		private DateTime? _deadline_times;
+		private TimeSpan? _deadline_times;
 		private int _is_delete=2;
 		private string _remark;
 		private int? _create_by;
@@ -56,7 +56,7 @@ namespace WK.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime? deadline_times
+        public TimeSpan? deadline_times
 		{
 			set{ _deadline_times=value;}
 			get{return _deadline_times;}
