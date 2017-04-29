@@ -1,7 +1,36 @@
-﻿function loadingShow() {
+﻿
+var userid = 0;
+
+$(function () {
+
+    var loginId = "";
+
+    if (window.sessionStorage) {
+        loginId = sessionStorage.getItem('loginId');
+        loginName = sessionStorage.getItem('loginName');
+    }
+
+    $("#userInfo").html(loginName);
+
+    if (loginId == null && location.href.indexOf("login.htm") < 0) {
+        window.location.href = "login.htm?re=" + location.href;
+        $("#loginState").html("登录");
+    } else {
+        $("#loginState").html("注销");
+    }
+    $("#loginState").on("click", function () {
+        if (window.sessionStorage) {
+            loginId = sessionStorage.removeItem('loginId');
+            loginName = sessionStorage.removeItem('loginName');
+        }
+        window.location.href = "login.htm?re=" + location.href;
+    });
+});
+
+function loadingShow() {
     layer.load();
 }
-function loadingHide() { 
+function loadingHide() {
     setTimeout(function () {
         layer.closeAll('loading');
     }, 10);

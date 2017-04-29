@@ -1834,6 +1834,7 @@
     <Content Include="page\bus_deadline_list.htm" />
     <Content Include="page\bus_order_list.htm" />
     <Content Include="page\bus_order_detail.htm" />
+    <Content Include="page\login.htm" />
     <Content Include="page\sys_user_edit.htm" />
     <Content Include="page\sys_user_list.htm" />
     <Content Include="page\bus_feedback_edit.htm" />
@@ -1879,6 +1880,9 @@
     </Compile>
     <Compile Include="Handler\index.ashx.cs">
       <DependentUpon>index.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\login.ashx.cs">
+      <DependentUpon>login.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handler\PickupAddress.ashx.cs">
       <DependentUpon>PickupAddress.ashx</DependentUpon>
@@ -1930,6 +1934,7 @@
     <Content Include="Handler\index.ashx" />
     <Content Include="Handler\sys_user.ashx" />
     <Content Include="Handler\bus_feedback.ashx" />
+    <Content Include="Handler\login.ashx" />
     <None Include="page\lib\bootstrap\config.json" />
     <None Include="page\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <None Include="page\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
