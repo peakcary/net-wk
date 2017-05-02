@@ -95,6 +95,7 @@ namespace WK.Web.Handler
         private string getListCountByTomorrowEattype(HttpContext context)
         {
             int eatType = int.Parse(context.Request.Params["eatType"]);
+            int minDays = int.Parse(context.Request.Params["minDays"]);
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
             Record r = new Record();
             r.RecordCount = bll.GetListCountByTomorrowEattype(eatType);

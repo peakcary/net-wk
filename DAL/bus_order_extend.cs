@@ -38,7 +38,7 @@ namespace WK.DAL
             strSql.Append(" LEFT JOIN bus_user b on b.id = a.user_id ");
             strSql.Append(" WHERE DATE(b.create_date) = DATE_ADD(CURDATE(),interval -1 day) ");
             DataSet ds = DbHelperMySQL.Query(strSql.ToString());
-            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows.Count); 
+            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0][0]); 
         }
 
 
@@ -49,7 +49,7 @@ namespace WK.DAL
             strSql.Append(" WHERE DATE(create_date) = DATE_ADD(CURDATE(),interval 1 day) ");
             strSql.AppendFormat(" and eat_type={0} ", eatType);
             DataSet ds = DbHelperMySQL.Query(strSql.ToString());
-            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows.Count); 
+            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0][0]); 
         }
 
         public DataSet GetDateList(int minDays)

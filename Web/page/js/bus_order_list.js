@@ -352,3 +352,8 @@ function getDiliveryUserOrderList(){
 }
 
 
+function cancelOrder(id){
+ layer.msg(id); 
+}
+
+

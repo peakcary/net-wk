@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <title>悟空送餐管理后台</title>
+    <title>悟空送餐</title>
     <!-- Bootstrap core CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap theme -->
@@ -51,7 +51,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">悟空送餐管理后台</a>
+          <a class="navbar-brand" href="#">悟空送餐</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -112,7 +112,7 @@
                             搜索</a>
                     </td>
                 </tr>
-                <tr style='margin-top: 5px;'>
+                <tr style='margin-top: 10px;'>
                     <td style='text-align: right; width: 100px;'>
                         订单期：
                     </td>
@@ -256,21 +256,22 @@
                 </tr>
             </table>
         </div>
-        <div class="container-fluid" style='padding: 0;'>
+        <div class="container-fluid" style='padding: 0;margin-top:10px;margin-bottom:10px;'>
             <div class='row'>
+               
                 <div class='col-sm-8'>
-                </div>
-                <div class='col-sm-4'>
                     <a id="btnExcelAll" download="data_all.xls" class="btn btn-primary btn-xs">全部导出</a> <a id="btnExcelMarket" download="data_market_order.xls"
                         class="btn btn-primary btn-xs">按商户导出</a> <a download="data_address_order.xls" id="btnExcelPickupAddress" class="btn btn-primary btn-xs">
                             按自提点导出</a> <a download="data_user_order.xls" id="btnExcelDiliveryUser" class="btn btn-primary btn-xs">按配送员导出</a>
+                </div>
+                 <div class='col-sm-4'>
                 </div>
             </div>
         </div>
         <table class="table table-bordered  table-hover  mt10" id='datatable'>
             <thead>
                 <tr>
-                    <td>
+                    <td >
                         识别码
                     </td>
                     <td>
@@ -432,7 +433,9 @@
             <td>${pickup_address_id}</td> 
             <td>${consignee_name}</td> 
             <td>{{if dicountId > 0 }}有{{else}}无{{/if}}</td>  
-            <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${id}')" >详情</a></td> 
+            <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${id}')" >详情</a>
+            <a class="btn btn-primary btn-xs" href="#" role="button" onclick="cancelOrder('${id}')" >取消订单</a>
+            </td> 
         </tr>
     </script>
     <script id="dataExcelAllTemplate" type="text/x-jquery-tmpl">

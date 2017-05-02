@@ -47,7 +47,8 @@ function getListCountByTomorrowEattype(eatType) {
         type: "post",
         url: url + "?t=getListCountByTomorrowEattype",
         data: {
-            eatType: eatType
+            eatType: eatType,
+            minDays:1
         },
         dataType: 'json',
         success: function (data) {
