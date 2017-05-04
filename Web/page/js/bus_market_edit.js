@@ -123,7 +123,7 @@ function editData() {
         success: function (data) { 
             loadingHide();
             if(data.isSuccess){
-                //goPageList();
+                goPageList();
             }else{
              layer.msg('保存失败！'); 
             }
@@ -164,16 +164,16 @@ function getAreaList(id) {
         },
         dataType: 'json',   
         success: function (data){ 
-                var aids = ids.split(',');
-                $.each(data, function(j, n){  
-                    for(var i=0,l=aids.length;i<l;i++){
-                        if(aids[i]==data[j].data){
-                         data[j].s = true;
+                if(ids!=null){
+                    var aids = ids.split(',');
+                    $.each(data, function(j, n){  
+                        for(var i=0,l=aids.length;i<l;i++){
+                            if(aids[i]==data[j].data){
+                             data[j].s = true;
+                            }
                         }
-                    }
-                });
-                 
-  
+                    }); 
+                }
 
 
             $("#pickup_address_id").empty();

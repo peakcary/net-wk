@@ -25,6 +25,7 @@ $(function () {
 });
 
 function getDataDetail(id) {
+ loadingShow();
     $.ajax({
         type: "post",
         url: url + "?t=getDataDetail",
@@ -33,6 +34,7 @@ function getDataDetail(id) {
         }, 
         dataType: 'json',  
         success: function (data) { 
+         loadingHide();
             $("#pickup_code").val(data.pickup_code);
             $("#name").val(data.name);
             $("#address").val(data.address);
@@ -44,6 +46,9 @@ function getDataDetail(id) {
             $("input[name=status][value="+data.status+"]").attr("checked", 'checked');
             getListUser2(data.dilivery_user_id);
 
+        },
+        error:function(){
+            loadingHide();
         }
     });
 } 
@@ -56,6 +61,7 @@ function editData(isTolist) {
 if(!isDataValid()){
 return;
 }  
+loadingShow();  
     $.ajax({
         type: "post",
         url: url + "?t=editData",
@@ -74,35 +80,40 @@ return;
         },
         dataType: 'json',   
         success: function (data) { 
-        if(data.isSuccess){
-            $("#hid").val(data.primaryKey);
-            if(!isTolist){
-                layer.open({
-                      type: 1,
-                      area: ['600px', '300px'],
-                      title:"自提点时间",
-                      scrollbar:false,
-                      btn: ['确定', '取消'],
-                      yes: function(index, layero){
-                          layer.close(index);
-                          editPickupTimes(); 
-                      },btn2: function(index, layero){ 
-                      },
-                      content:$("#pickupTimesContainer")
-                    });
-            }else{
-              goPageList();
-            }
+        loadingHide();
+            if(data.isSuccess){
+                $("#hid").val(data.primaryKey);
+                if(!isTolist){
+                    layer.open({
+                          type: 1,
+                          area: ['600px', '300px'],
+                          title:"自提点时间",
+                          scrollbar:false,
+                          btn: ['确定', '取消'],
+                          yes: function(index, layero){
+                              layer.close(index);
+                              editPickupTimes(); 
+                          },btn2: function(index, layero){ 
+                          },
+                          content:$("#pickupTimesContainer")
+                        });
+                }else{
+                  goPageList();
+                }
             
-        }else{ 
-             layer.msg('保存失败！');
-        }
+            }else{ 
+                 layer.msg('保存失败！');
+            }
+        },
+        error:function(){
+            loadingHide();
         }
     });
 }
 
 
 function getListUser2(id){
+loadingShow();
     $.ajax({
         type: "post",
         url: url + "?t=getListUser2",
@@ -111,14 +122,16 @@ function getListUser2(id){
            pageIndex: 0,
            pageSize: 100 
         },
-        success: function (data) {   
+        success: function (data) { 
+        loadingHide();  
             $("#dilivery_user_id").empty();
             $("#dilivery_user_id").append("<option value='0'>请选择</option>");
             $("#ListUserTemplate").tmpl(data).appendTo("#dilivery_user_id"); 
             $("#dilivery_user_id").val(id);
             
         },
-        error:function(){ 
+        error:function(){
+            loadingHide();
         }
     });
 }
@@ -128,7 +141,7 @@ function openPickupTimesContainer(){
     if($("#hid").val()==""){
         editData(false);
     } else{
-    layer.open({
+            layer.open({
                       type: 1,
                       area: ['600px', '300px'],
                       title:"自提点时间",
@@ -145,7 +158,8 @@ function openPickupTimesContainer(){
 }
 
 
-function editPickupTimes() {    
+function editPickupTimes() {  
+loadingShow();  
     $.ajax({
         type: "post",
         url: url + "?t=editPickupTimes",
@@ -158,16 +172,21 @@ function editPickupTimes() {
         },
         dataType: 'json',   
         success: function (data) { 
+         loadingHide();
             if(data.isSuccess){
                  getPickupTimes();
             }else{ 
                 layer.msg('保存失败！');
             }
+        },
+        error:function(){
+            loadingHide();
         }
     });
 }
 
 function getPickupTimes(){ 
+loadingShow();  
  $.ajax({
         type: "post",
         url: url + "?t=getPickupTimes",
@@ -178,6 +197,7 @@ function getPickupTimes(){
         },
         dataType: 'json',   
         success: function (data) { 
+        loadingHide();
             if(data.length>0){
               $("#picupTimesEditContainer").show();
               $("#pickupTimesList").empty();
@@ -186,7 +206,8 @@ function getPickupTimes(){
               $("#picupTimesEditContainer").hide();
             }
         },
-        error:function(){ 
+        error:function(){
+            loadingHide();
         }
     });
 }

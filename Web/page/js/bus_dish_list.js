@@ -1,8 +1,7 @@
 ﻿var url = "../../Handler/bus_dish.ashx";
 var listPageSize = 10;
 var market_id = 0;
-$(function () {
-    loadingShow();
+$(function () { 
     (function ($) {
         $.getUrlParam = function (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

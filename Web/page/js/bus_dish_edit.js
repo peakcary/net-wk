@@ -71,7 +71,7 @@ function goPageList() {
     window.location.href = "bus_dish_list.htm?market_id="+$("#market_id").val(); 
 }
 
-function editData() {  
+function editData(isToList) {  
     loadingShow();  
     var listImage = []; 
     $("#imageList").find("img").each(function(){
@@ -104,7 +104,25 @@ function editData() {
         success: function (data) { 
             loadingHide();
             if(data.isSuccess){
-                goPageList();
+             goPageList();
+//                if(!isToList){
+//                   layer.open({
+//                      type: 1,
+//                      area: ['600px', '220px'],
+//                      title:" 菜品规格",
+//                      scrollbar:false,
+//                      btn: ['确定', '取消'],
+//                      yes: function(index, layero){
+//                          layer.close(index); 
+//                          addDishSize();
+//                      },btn2: function(index, layero){ 
+//                      },
+//                      content:$("#addDishSizeContainer")
+//                    });
+//                }else{
+//                    goPageList();
+//                }
+                
             }else{
              layer.msg('保存失败！'); 
             }
@@ -134,27 +152,31 @@ function opeanAddDishSizeContainer(){
 
 function addDishSize() {  
     loadingShow(); 
-    $.ajax({
-        type: "post",
-        url: url + "?t=addDishSize",
-        data: { 
-            dish_id: $("#hid").val(),
-            name: $("#name").val(),
-            affect_price: $("#affect_price").val()
-        },
-        dataType: 'json',   
-        success: function (data) { 
-            loadingHide();
-            if(data.isSuccess){
-                getDishSize();
-            }else{
-             layer.msg('保存失败！'); 
+    if($("#hid").val()==""){
+        editData(false);
+    } else{ 
+        $.ajax({
+            type: "post",
+            url: url + "?t=addDishSize",
+            data: { 
+                dish_id: $("#hid").val(),
+                name: $("#name").val(),
+                affect_price: $("#affect_price").val()
+            },
+            dataType: 'json',   
+            success: function (data) { 
+                loadingHide();
+                if(data.isSuccess){
+                    getDishSize();
+                }else{
+                 layer.msg('保存失败！'); 
+                }
+            },
+            error:function(){
+                loadingHide();
             }
-        },
-        error:function(){
-            loadingHide();
-        }
-    });
+        });
+    }
 }
 function getDishSize() {  
     loadingShow();

@@ -1,7 +1,6 @@
 ﻿var url = "../../Handler/bus_user.ashx"; 
 var listPageSize = 10;
-$(function () { 
-loadingShow();
+$(function () {  
     initPagination(); 
 });
 

@@ -353,7 +353,42 @@ function getDiliveryUserOrderList(){
 
 
 function cancelOrder(id){
- layer.msg(id); 
+
+$.ajax({
+      url: "http://47.88.0.200:8080/api/project/cancelOrder",
+      timeout:5000,
+      method: "POST",
+      data:{"":id+""},
+      headers:  { 
+   
+       } ,
+
+      dataType: 'JSON',
+        success:function(data){
+         layer.msg(data.Message);
+        }
+    });
+ 
+//     $.ajax({
+//        type: "post",
+//        url: "http://47.88.0.200:8080/api/project/cancelOrder",
+//        beforeSend: function(xhr) {
+//                ///xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+//                xhr.setRequestHeader("version", "1.0");
+//                xhr.setRequestHeader("os", "ios");
+//                xhr.setRequestHeader("deviceId", "12345");
+//        },
+//        data: {
+//            orderId: id
+//        },
+//        dataType: 'json',   
+//        success: function (data) { 
+//            console.log(data); 
+//        },
+//        error:function(err){
+//          console.log(err);
+//        }
+//    }); 
 }
 
 
