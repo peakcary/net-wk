@@ -85,8 +85,8 @@ namespace WK.Web.Handler
             StringBuilder sb = new StringBuilder();
             DataSet ds = new DataSet();
             StringBuilder strWhere = new StringBuilder();
-            //strWhere.Append(" is_delete != 1");
-            strWhere.Append("is_delete = 0 or is_delete is NULL");
+            strWhere.Append(" is_delete != 1");
+            //strWhere.Append("is_delete = 0 or is_delete is NULL");
             strWhere.AppendFormat(" and market_id = {0}", market_id);
             StringBuilder orderby = new StringBuilder();
 
@@ -107,8 +107,8 @@ namespace WK.Web.Handler
             int market_id = int.Parse(context.Request.Params["market_id"]);
             StringBuilder sb = new StringBuilder();
             StringBuilder strWhere = new StringBuilder();
-            //strWhere.Append(" is_delete != 1");
-            strWhere.Append("is_delete = 0 or is_delete is NULL");
+            strWhere.Append(" is_delete != 1");
+            //strWhere.Append("is_delete = 0 or is_delete is NULL");
             strWhere.AppendFormat(" and market_id = {0}", market_id);
             WK.BLL.bus_dish bll = new WK.BLL.bus_dish();
             Record r = new Record();

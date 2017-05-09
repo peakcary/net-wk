@@ -143,6 +143,7 @@ namespace WK.Web.Handler
             model.lon = decimal.Parse(context.Request.Params["lon"]);
             model.name = context.Request.Params["name"];
             model.parent_id = int.Parse( context.Request.Params["parent_id"]);
+            model.is_delete = 0;
             //model.remark = context.Request.Params["remark"];
 
             WK.BLL.bus_area bll = new WK.BLL.bus_area(); 

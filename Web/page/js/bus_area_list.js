@@ -1,5 +1,5 @@
 ﻿var url = "../../Handler/bus_area.ashx"; 
-var listPageSize = 10;
+var listPageSize = 100;
 $(function () {  
     initPagination(); 
 });

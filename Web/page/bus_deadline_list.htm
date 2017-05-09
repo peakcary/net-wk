@@ -77,10 +77,7 @@
         </div>
         <table class="table table-bordered  table-hover  mt10">
             <thead>
-                <tr>
-                    <td>
-                        ID
-                    </td>
+                <tr> 
                     <td>
                         日期类型
                     </td>
@@ -117,8 +114,7 @@
     <script src="js/common.js" type="text/javascript"></script>
     <script src="js/bus_deadline_list.js" type="text/javascript"></script>
     <script id="DataTemplate" type="text/x-jquery-tmpl">
-        <tr>
-	        <td>${id}</td>   
+        <tr>   
             <td>{{if deadline_time_type == 1}}工作日{{else deadline_time_type == 2}}周末{{/if}}</td>  
             <td>{{if eat_type == 1}}午餐{{else eat_type == 2}}晚餐{{/if}}</td>   
             <td>${deadline_days}</td> 

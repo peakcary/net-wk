@@ -206,11 +206,31 @@
             <div class="col-sm-8">
                 <label class="radio-inline">
                     <input type="radio" name="pickup_time" checked value="1">
-                    工作日
+                    周一
                 </label>
                 <label class="radio-inline">
                     <input type="radio" name="pickup_time" value="2">
-                    周末
+                    周二
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="pickup_time" value="3">
+                    周三
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="pickup_time" value="4">
+                    周四
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="pickup_time" value="5">
+                    周五
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="pickup_time" value="6">
+                    周六
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="pickup_time" value="7">
+                    周日
                 </label>
             </div>
         </div>
@@ -263,7 +283,7 @@
     <script src="js/bus_pickup_edit.js" type="text/javascript"></script>
     <script id="pickupTimesListTmpl" type="text/x-jquery-tmpl">
          <tr>
-	        <td>{{if pickup_time == 1}}工作日{{else}}周末{{/if}}</td>
+	        <td>{{if pickup_time == 1}}周一{{else pickup_time == 2}}周二{{else pickup_time ==3}}周三{{else pickup_time == 4}}周四{{else pickup_time == 5}}周五{{else pickup_time == 6}}周六{{else pickup_time == 7}}周日{{/if}}</td>
             <td>{{if eat_type  == 1}}午餐{{else}}晚餐{{/if}}</td>
             <td>${pickup_start_time}</td> 
             <td>${pickup_end_time}</td>

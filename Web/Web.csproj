@@ -1845,7 +1845,9 @@
     <Content Include="src\QiniuLab-v1.4\Newtonsoft.Json.dll" />
     <Content Include="src\QiniuLab-v1.4\Qiniu.dll" />
     <Content Include="src\QiniuLab-v1.4\QiniuLab.exe" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">

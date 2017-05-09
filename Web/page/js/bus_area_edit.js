@@ -86,7 +86,7 @@ function getDataList0(id) {
         dataType: 'json',   
         success: function (data) { 
             $("#parent_id").empty();
-            $("#parent_id").append("<option value='0'>请选择</option>");
+            $("#parent_id").append("<option value='0'></option>");
             $("#pAreaListTemplate").tmpl(data).appendTo("#parent_id"); 
             $("#parent_id").val(id); 
         },
