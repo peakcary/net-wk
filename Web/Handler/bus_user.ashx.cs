@@ -60,7 +60,10 @@ namespace WK.Web.Handler
                     break;
                 case "deleteDataByStatus":
                     sb.Append(deleteDataByStatus(context));
-                    break; 
+                    break;
+                case "deleteData":
+                    sb.Append(deleteDataByStatus(context));
+                    break;
                 default:
                     sb.Append("");
                     break;

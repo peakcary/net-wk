@@ -140,6 +140,7 @@ namespace WK.Web.Handler
             model.sort = int.Parse(context.Request.Params["sort"]);
             model.remark = context.Request.Params["remark"];
             model.url = context.Request.Params["url"];
+            model.is_delete = 0;
 
             WK.BLL.bus_image bll = new WK.BLL.bus_image();
             if (model.id > 0)

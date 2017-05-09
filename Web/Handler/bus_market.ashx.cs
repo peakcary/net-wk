@@ -189,8 +189,8 @@ namespace WK.Web.Handler
             model.remark = context.Request.Params["remark"];
             model.sort = int.Parse(context.Request.Params["sort"]);
             model.status = int.Parse(context.Request.Params["status"]);
-            model.address = context.Request.Params["address"]; 
-
+            model.address = context.Request.Params["address"];
+            model.is_delete = 0;
             
             WK.BLL.bus_market bll = new WK.BLL.bus_market();
              int market_id =0;
