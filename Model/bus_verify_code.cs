@@ -14,7 +14,7 @@ namespace WK.Model
 		private string _phone_num= "-1";
 		private string _code;
 		private int _verify_type=0;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

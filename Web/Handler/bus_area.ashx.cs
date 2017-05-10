@@ -139,8 +139,8 @@ namespace WK.Web.Handler
                 model.id = int.Parse(context.Request.Params["id"]);
             }
             model.area_type = 1;// int.Parse(context.Request.Params["area_type"]);
-            model.lat = decimal.Parse( context.Request.Params["lat"]);
-            model.lon = decimal.Parse(context.Request.Params["lon"]);
+            //model.lat = decimal.Parse( context.Request.Params["lat"]);
+            //model.lon = decimal.Parse(context.Request.Params["lon"]);
             model.name = context.Request.Params["name"];
             model.parent_id = int.Parse( context.Request.Params["parent_id"]);
             model.is_delete = 0;

@@ -28,7 +28,7 @@ namespace WK.Model
 		private DateTime _pickup_date;
 		private int _dish_time;
 		private int _eat_type;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

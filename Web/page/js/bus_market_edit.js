@@ -163,8 +163,8 @@ function getAreaList(id) {
            pageSize: 100 
         },
         dataType: 'json',   
-        success: function (data){ 
-                if(ids!=null){
+        success: function (data){  
+                if(ids!=null&&ids!=""){
                     var aids = ids.split(',');
                     $.each(data, function(j, n){  
                         for(var i=0,l=aids.length;i<l;i++){

@@ -103,6 +103,9 @@
     <Content Include="page\js\sys_user_list.js" />
     <Content Include="page\js\bus_feedback_edit.js" />
     <Content Include="page\js\bus_feedback_list.js" />
+    <Content Include="page\js\bus_discount_edit.js" />
+    <Content Include="page\js\bus_discount_list.js" />
+    <Content Include="page\js\bus_pickup_market_list.js" />
     <Content Include="page\lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="page\lib\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="page\lib\bootstrap\css\bootstrap.css" />
@@ -1839,6 +1842,9 @@
     <Content Include="page\sys_user_list.htm" />
     <Content Include="page\bus_feedback_edit.htm" />
     <Content Include="page\bus_feedback_list.htm" />
+    <Content Include="page\bus_discount_edit.htm" />
+    <Content Include="page\bus_discount_list.htm" />
+    <Content Include="page\bus_pickup_market_list.htm" />
     <Content Include="src\Newtonsoft.Json.dll" />
     <Content Include="src\n\Qiniu.dll" />
     <Content Include="src\Qiniu.dll" />
@@ -1859,6 +1865,9 @@
     <Compile Include="Handler\bus_deadline.ashx.cs">
       <DependentUpon>bus_deadline.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handler\bus_discount.ashx.cs">
+      <DependentUpon>bus_discount.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handler\bus_dish.ashx.cs">
       <DependentUpon>bus_dish.ashx</DependentUpon>
     </Compile>
@@ -1876,6 +1885,9 @@
     </Compile>
     <Compile Include="Handler\bus_pickup.ashx.cs">
       <DependentUpon>bus_pickup.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\bus_pickup_market.ashx.cs">
+      <DependentUpon>bus_pickup_market.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handler\bus_user.ashx.cs">
       <DependentUpon>bus_user.ashx</DependentUpon>
@@ -1937,6 +1949,8 @@
     <Content Include="Handler\sys_user.ashx" />
     <Content Include="Handler\bus_feedback.ashx" />
     <Content Include="Handler\login.ashx" />
+    <Content Include="Handler\bus_discount.ashx" />
+    <Content Include="Handler\bus_pickup_market.ashx" />
     <None Include="page\lib\bootstrap\config.json" />
     <None Include="page\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <None Include="page\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />

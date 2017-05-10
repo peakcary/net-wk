@@ -55,6 +55,7 @@
             <li  class="dropdown ">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置 <span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li><a href="bus_discount_list.htm">优惠活动</a></li> 
                 <li><a href="bus_deadline_list.htm">截单</a></li> 
                 <li><a href="sys_user_list.htm">系统管理员</a></li>  
                 <li><a href="bus_feedback_list.htm">意见反馈</a></li>   
@@ -87,13 +88,7 @@
                     </td> 
                     <td>
                         区域类型
-                    </td>
-                    <td>
-                        经度
-                    </td>
-                    <td>
-                        纬度
-                    </td>
+                    </td> 
                     <td>
                         操作
                     </td>
@@ -121,9 +116,7 @@
     <script id="DataTemplate" type="text/x-jquery-tmpl"> 
         <tr id="${id}" pid="${parent_id}" haschild="true" data-tt-id="${id}" {{if parent_id > 0}}data-tt-parent-id="${parent_id}"{{else}}{{/if}}} > 
             <td>${name}</td>  
-            <td>{{if area_type == 1}}州{{/if}}</td>   
-            <td>${lon}</td>
-            <td>${lat}</td>  
+            <td>{{if area_type == 1}}州{{/if}}</td>  
             <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${id}')" >编辑</a>
             <a class="btn btn-danger btn-xs" href="#" role="button" onclick="deleteData('${id}')" >删除</a></td> 
         </tr>

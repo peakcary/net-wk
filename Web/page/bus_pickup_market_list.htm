@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>悟空送餐</title>
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap theme -->
+    <link href="lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/jquery-pagination/lib/pagination.css" rel="stylesheet" type="text/css" />
+    <link href="lib/jquery-treetable/css/jquery.treetable.theme.default.css" rel="stylesheet"
+        type="text/css" />
+    <link href="lib/jquery-treetable/css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="lib/html5shiv.min.js"></script>
+        <script type="text/javascript" src="lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">悟空送餐</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+             <li class=""><a href="index.htm">首页</a></li>
+            <li  class=""><a href="bus_order_list.htm">订单管理</a></li>
+            <li  class="dropdown ">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商户管理 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="bus_area_list.htm">地区区域</a></li> 
+                <li><a href="bus_market_list.htm">商户</a></li> 
+              </ul>
+            </li>
+
+            <li class="active"><a href="bus_pickup_list.htm">自提点管理</a></li> 
+            <li class=""><a href="bus_user_list.htm">配送员管理</a></li>
+             <li  class="dropdown ">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="bus_discount_list.htm">优惠活动</a></li> 
+                <li><a href="bus_deadline_list.htm">截单</a></li>  
+                <li><a href="sys_user_list.htm">系统管理员</a></li>
+                <li><a href="bus_feedback_list.htm">意见反馈</a></li>    
+              </ul>
+            </li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a id="userInfo" ></a></li>
+            <li><a id="loginState" >登录</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <!-- Begin page content -->
+    <div class="container content">
+        <ol class="breadcrumb">
+            <li><a href="#">配送员管理</a></li>
+            <li><a href="bus_pickup_list.htm">自提点</a></li>
+            <li class="active">列表</li>
+        </ol>
+        <table class="table table-bordered  table-hover  mt10">
+            <thead>
+                <tr>
+                    <td>
+                        商户编号
+                    </td>
+                    <td>
+                        英文名称
+                    </td>
+                    <td>
+                        中文名称
+                    </td>
+                    <td>
+                        商户类别
+                    </td>
+                    <td>
+                        商户地址
+                    </td>
+                    <td>
+                        商户状态
+                    </td>
+                    <td>
+                        排序
+                    </td>
+                    <td>
+                        操作
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="DataList">
+            </tbody>
+        </table>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary" onclick="editData()">
+                    保存</button>
+                <button type="submit" class="btn btn-info" onclick="goPageList()">
+                    取消</button>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">.</p>
+      </div>
+    </footer>
+    <script src="lib/jqurey/1.12.4/jquery.min.js" type="text/javascript"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="lib/jquery-tmpl/jquery.tmpl.min.js" type="text/javascript"></script>
+    <script src="lib/jquery-pagination/lib/jquery.pagination.js" type="text/javascript"></script>
+    <script src="lib/jquery-treetable/jquery.treetable.js" type="text/javascript"></script>
+    <script src="lib/layer-v3.0.3/layer/layer.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/bus_pickup_market_list.js" type="text/javascript"></script>
+    <script id="DataTemplate" type="text/x-jquery-tmpl"> 
+        <tr id="row_${id}" refid="${id}" refpid="${bus_pickup_market_id}" >  
+            <td>${market_code}</td>
+            <td>${name_en}</td>  
+            <td>${name_cn}</td> 
+            <td>${market_type}</td>
+            <td>${address}</td>  
+            <td>{{if status == 1}}启用{{else status == 2}}停用{{/if}}</td>   
+            <td><input type="text" class="form-control" style="width:60px;" value="${pickupsort}" /></td>  
+            <td>
+            <a class="btn btn-danger btn-xs" href="#" role="button" onclick="deleteData('${id}')" >删除</a> 
+            </td> 
+        </tr>
+    </script>
+</body>
+</html>

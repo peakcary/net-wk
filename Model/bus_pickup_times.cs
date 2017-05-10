@@ -16,7 +16,7 @@ namespace WK.Model
 		private int _eat_type=0;
 		private TimeSpan? _pickup_start_time;
         private TimeSpan? _pickup_end_time;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

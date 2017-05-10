@@ -21,7 +21,7 @@ namespace WK.Model
 		private DateTime? _generate_time;
 		private string _cur_deviceid;
 		private string _push_token;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

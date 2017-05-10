@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>悟空送餐</title>
+    <!-- Bootstrap core CSS -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap theme -->
+    <link href="lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/common.css" rel="stylesheet" type="text/css" />
+    <link href="lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/jqcool.net-summernote/dist/summernote.css" rel="stylesheet" type="text/css" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="lib/html5shiv.min.js"></script>
+        <script type="text/javascript" src="lib/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">悟空送餐</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+             <li class=""><a href="index.htm">首页</a></li>
+            <li  class=""><a href="bus_order_list.htm">订单管理</a></li>
+             <li  class="dropdown ">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商户管理 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="bus_area_list.htm">地区区域</a></li>  
+                <li><a href="bus_market_list.htm">商户</a></li> 
+              </ul>
+            </li>
+            <li class=""><a href="bus_pickup_list.htm">自提点管理</a></li> 
+            <li class=""><a href="bus_user_list.htm">配送员管理</a></li>
+             <li  class="dropdown active">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置 <span class="caret"></span></a>
+              <ul class="dropdown-menu"> 
+                <li><a href="bus_discount_list.htm">优惠活动</a></li> 
+                <li><a href="bus_deadline_list.htm">截单</a></li>  
+                <li><a href="sys_user_list.htm">系统管理员</a></li> 
+                <li><a href="bus_feedback_list.htm">意见反馈</a></li>   
+              </ul>
+            </li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a id="userInfo" ></a></li>
+            <li><a id="loginState" >登录</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <!-- Begin page content -->
+    <div class="container content">
+        <ol class="breadcrumb">
+            <li><a href="#">设置</a></li>
+            <li><a href="bus_discount_list.htm">优惠活动</a></li>
+            <li class="active">列表</li>
+        </ol>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="pwd" class="col-sm-2 control-label">
+                    活动名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" placeholder="活动名称" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">
+                    开始日期</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="开始日期" id="start_date" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'end_date\')}',dateFmt:'yyyy-MM-dd'})" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">
+                    结束日期</label>
+               <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="结束日期" id="end_date" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'start_date\')}',dateFmt:'yyyy-MM-dd'})" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pwd" class="col-sm-2 control-label">
+                    最小金额</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="min_amount" placeholder="最小金额" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pwd" class="col-sm-2 control-label">
+                    最大金额</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="max_amount" placeholder="最多金额" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pwd" class="col-sm-2 control-label">
+                    优惠金额</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="discount_amount" placeholder="优惠金额" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">
+                    描述</label>
+                <div class="col-sm-10">
+                    <div id="description">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remark" class="col-sm-2 control-label">
+                    备注</label>
+                <div class="col-sm-10">
+                    <div id="remark">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    是否启用</label>
+                <div class="col-sm-10">
+                    <label class="radio-inline">
+                        <input type="radio" name="status" checked value="1">
+                        启用
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="status" value="2">
+                        停用
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" onclick="editData()">
+                        保存</button>
+                    <button type="submit" class="btn btn-info" onclick="goPageList()">
+                        取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">.</p>
+      </div>
+    </footer>
+    <input type="hidden" id="hid" />
+    <script src="lib/jqurey/1.12.4/jquery.min.js" type="text/javascript"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+     <script src="lib/jqcool.net-summernote/dist/summernote.min.js" type="text/javascript"></script>
+    <script src="lib/layer-v3.0.3/layer/layer.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="lib/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script src="js/bus_discount_edit.js" type="text/javascript"></script>
+</body>
+</html>

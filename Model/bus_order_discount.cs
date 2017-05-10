@@ -14,7 +14,7 @@ namespace WK.Model
 		private int _order_id;
 		private int _discount_id;
 		private string _discount_desc;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

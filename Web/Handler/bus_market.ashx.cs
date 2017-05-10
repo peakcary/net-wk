@@ -180,14 +180,28 @@ namespace WK.Web.Handler
             }
             model.description_cn = context.Request.Params["description_cn"];
             model.description_en = context.Request.Params["description_en"];
-            model.lat = decimal.Parse( context.Request.Params["lat"]);
-            model.lon = decimal.Parse( context.Request.Params["lon"]);
+
+           
+
+            if (context.Request.Params["lat"] != null
+                && context.Request.Params["lat"].ToString() != "")
+            {
+                model.lat = decimal.Parse(context.Request.Params["lat"]);
+            }
+            if (context.Request.Params["lon"] != null
+                && context.Request.Params["lon"].ToString() != "")
+            {
+                model.lon = decimal.Parse(context.Request.Params["lon"]);
+            }
+
+
             model.market_type = context.Request.Params["market_type"];
             model.market_code = context.Request.Params["market_code"];
             model.name_cn = context.Request.Params["name_cn"];
             model.name_en = context.Request.Params["name_en"];
             model.remark = context.Request.Params["remark"];
-            model.sort = int.Parse(context.Request.Params["sort"]);
+            //model.sort = int.Parse(context.Request.Params["sort"]);
+            model.sort = 0;
             model.status = int.Parse(context.Request.Params["status"]);
             model.address = context.Request.Params["address"];
             model.is_delete = 0;

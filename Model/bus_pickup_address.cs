@@ -20,7 +20,7 @@ namespace WK.Model
 		private int _status=0;
 		private int _dilivery_user_id;
 		private int? _sort=0;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

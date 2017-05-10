@@ -128,6 +128,7 @@
     <Compile Include="bus_order_extend.cs" />
     <Compile Include="bus_order_gift.cs" />
     <Compile Include="bus_pickup_address_model.cs" />
+    <Compile Include="bus_pickup_market_extend.cs" />
     <Compile Include="bus_pickup_user.cs" />
     <Compile Include="bus_times.cs" />
     <Compile Include="bus_user_extend.cs" />

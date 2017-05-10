@@ -24,7 +24,7 @@ namespace WK.Model
 		private string _description_cn;
 		private int _status=0;
 		private int? _sort=0;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _craete_date;

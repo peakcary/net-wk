@@ -45,5 +45,22 @@ namespace WK.DAL
             object obj = DbHelperMySQL.GetSingle(strSql.ToString());
             return obj == null ? 0 : Convert.ToInt32(obj);
         }
+
+        public DataSet GetPickupMarketList(int pickupid)
+        {
+            //SELECT b.*,a.id as bus_pickup_market_id,a.sort
+            //from bus_pickup_market a
+            //LEFT JOIN bus_market b on b.id = a.market_id and b.is_delete=0
+            //where pickup_address_id = 12
+            //ORDER BY a.sort
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT b.*,a.id as bus_pickup_market_id,a.sort as pickupsort ");
+            strSql.Append(" from bus_pickup_market a ");
+            strSql.Append(" LEFT JOIN bus_market b on b.id = a.market_id and b.is_delete=0 ");
+            strSql.AppendFormat(" where pickup_address_id = {0} ", pickupid);
+            strSql.Append(" ORDER BY a.sort ");
+             
+            return DbHelperMySQL.Query(strSql.ToString());
+        } 
     }
 }

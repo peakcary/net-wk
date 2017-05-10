@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bus_area_extend.cs" />
+    <Compile Include="bus_discount_extend.cs" />
     <Compile Include="bus_discount_gift.cs" />
     <Compile Include="bus_dish_extend.cs" />
     <Compile Include="bus_dish_plan.cs" />

@@ -16,7 +16,7 @@ namespace WK.Model
 		private int _area_type=0;
 		private decimal? _lon;
 		private decimal? _lat;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

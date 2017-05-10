@@ -14,7 +14,7 @@ namespace WK.Model
 		private string _name;
 		private int _dish_id;
 		private decimal _affect_price=0.00M;
-		private int _is_delete=2;
+		private int _is_delete=0;
 		private string _remark;
 		private int? _create_by;
 		private DateTime? _create_date;

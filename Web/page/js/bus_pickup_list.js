@@ -102,4 +102,8 @@ function goPageDetail(id) {
     window.location.href = "bus_pickup_edit.htm?id="+id;
 }
 
+function goMarketList(id){
+ window.location.href = "bus_pickup_market_list.htm?pickup_id="+id;
+}
+
 

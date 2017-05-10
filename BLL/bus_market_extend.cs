@@ -18,5 +18,11 @@ namespace WK.BLL
         {
             return dal.GetListCount(strWhere);
         }
+
+        public DataSet GetPickupMarketList(int pickupId)
+        {
+            return dal.GetPickupMarketList(pickupId);
+        }
+        
     }
 }
