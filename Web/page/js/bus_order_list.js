@@ -3,6 +3,7 @@ var listPageSize = 10;
  
 var order_code = "";
 var user_id = 0;
+var pickup_address_id = 0;
 var order_status = 0;
 var pay_status = 0;
 var eat_type = 0;
@@ -18,10 +19,11 @@ $(function () {
             if (r != null) return unescape(r[2]); return null;
         }
     })(jQuery); 
-
+    getPickUplist();
     $("#btnSearch").click(function () {
         order_code = $("#order_code").val();
         user_id = $("#user_id").val();
+        pickup_address_id = $("#pickup_address_id").val();
         initPagination();
     });
      
@@ -110,6 +112,7 @@ function initPagination() {
             minDays: minDays,
             pageIndex: pageIndex,
             pageSize: pageSize,
+            pickup_address_id: pickup_address_id
         },
         dataType: 'json',   
         success: function (data) {  
@@ -149,7 +152,8 @@ function getListByQuery(index){
             isDiscount: isDiscount,
             minDays: minDays,
            pageIndex: index,
-           pageSize: listPageSize 
+           pageSize: listPageSize,
+           pickup_address_id: pickup_address_id 
         },
         dataType: 'json',   
         success: function (data) { 
@@ -251,6 +255,7 @@ function getAllOrderListByQuery(){
             minDays: minDays,
             isDiscount: isDiscount,
             minDays: minDays,
+            pickup_address_id:pickup_address_id,
            pageIndex: 0,
            pageSize: 10000 
         },
@@ -278,6 +283,7 @@ $.ajax({
             minDays: minDays,
             isDiscount: isDiscount,
             minDays: minDays,
+            pickup_address_id:pickup_address_id,
            pageIndex: 0,
            pageSize: 10000 
         },
@@ -308,6 +314,7 @@ $.ajax({
             minDays: minDays,
             isDiscount: isDiscount,
             minDays: minDays,
+            pickup_address_id:pickup_address_id,
            pageIndex: 0,
            pageSize: 10000 
         },
@@ -336,6 +343,7 @@ function getDiliveryUserOrderList(){
             minDays: minDays,
             isDiscount: isDiscount,
             minDays: minDays,
+            pickup_address_id:pickup_address_id,
            pageIndex: 0,
            pageSize: 10000 
         },
@@ -352,43 +360,58 @@ function getDiliveryUserOrderList(){
 }
 
 
-function cancelOrder(id){
-
-$.ajax({
-      url: "http://47.88.0.200:8080/api/project/cancelOrder",
-      timeout:5000,
-      method: "POST",
-      data:{"":id+""},
-      headers:  { 
-   
-       } ,
-
-      dataType: 'JSON',
-        success:function(data){
-         layer.msg(data.Message);
+function cancelOrder(id,order_code){
+   $.ajax({
+        type: "post",
+        url: url + "?t=getHashCode",
+        data: {
+            orderid: id,
+            ordercode: order_code
+        },
+        dataType: 'json',   
+        success: function (data) {  
+            $.ajax({
+              url: "http://47.88.0.200:8080/api/project/cancelOrder",
+              timeout:5000,
+              method: "POST",
+              data: {
+                "orderId": id,
+                "hashCode": data.sValue
+              },
+              dataType: 'JSON',
+                success:function(data){
+                 layer.msg(data.Message);
+              }
+            });
+       
+        },
+        error:function(err){
+            layer.msg(err);
         }
-    });
- 
-//     $.ajax({
-//        type: "post",
-//        url: "http://47.88.0.200:8080/api/project/cancelOrder",
-//        beforeSend: function(xhr) {
-//                ///xhr.setRequestHeader("Access-Control-Allow-Origin","*");
-//                xhr.setRequestHeader("version", "1.0");
-//                xhr.setRequestHeader("os", "ios");
-//                xhr.setRequestHeader("deviceId", "12345");
-//        },
-//        data: {
-//            orderId: id
-//        },
-//        dataType: 'json',   
-//        success: function (data) { 
-//            console.log(data); 
-//        },
-//        error:function(err){
-//          console.log(err);
-//        }
-//    }); 
+    }); 
+
 }
 
+
+
+
+function getPickUplist() {   
+    $.ajax({
+        type: "post",
+        url: url + "?t=getPickUplist",
+        data: {
+           pageIndex: 0,
+           pageSize: 100 
+        },
+        dataType: 'json',   
+        success: function (data) {  
+             $("#pickup_address_id").empty();
+            $("#pickup_address_id").append("<option value='0'>请选择</option>");
+            $("#pickupListTemplate").tmpl(data).appendTo("#pickup_address_id");  
+        },
+        error:function(){
+            
+        }
+    });
+}
 

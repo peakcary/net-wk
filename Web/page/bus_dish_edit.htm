@@ -238,9 +238,12 @@
                     <div id="container">
                         <a class="btn btn-default " id="pickfiles" href="#"><i class="glyphicon glyphicon-plus">
                         </i><span>选择文件</span> </a>
+
+                        <span>图片比例：1:1 ，大小50K以内，最低分辨率60*60, 图片名称不要超过30字符</span>
                     </div>
                     <div id="fileInfo">
                     </div>
+                    
                     <div class="mt10">
                         <table class="table table-striped" id="imageList">
                         </table>
@@ -299,7 +302,8 @@
     <script src="lib/qiniu/dist/qiniu.min.js" type="text/javascript"></script>
     <script id="imageListTemplate" type="text/x-jquery-tmpl"> 
           <tr> 
-            <td><image ref='${url}' width='70' height='70' src='http://om2v517pk.bkt.clouddn.com/${url}'/></td> 
+            <td><image ref='${url}' width='70' height='70' src='http://olamk7iwq.bkt.gdipper.com/${url}'/></td> 
+            <td><a class="btn btn-danger btn-xs" href="#" role="button" onclick="deleteImage(this)" >删除</a></td> 
           </tr>
     </script>
      <script id="dtSizeListTmpl" type="text/x-jquery-tmpl"> 

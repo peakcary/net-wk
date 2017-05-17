@@ -1,6 +1,6 @@
 ﻿var url = "../../Handler/bus_market.ashx"; 
 var urlUpload = "../Handler/Upload.ashx";
-var imageUrlHost = "http://om2v517pk.bkt.clouddn.com/";
+var imageUrlHost = "http://olamk7iwq.bkt.gdipper.com/";
 
 
 var pickupAddressIds="";
@@ -206,6 +206,9 @@ function getAreaList(id) {
         }
     });
 }
+ function deleteImage(e){
+$(e).parent().parent().remove();
+}
  
 
 function initPicUpload(){
@@ -214,10 +217,10 @@ var uploader = Qiniu.uploader({
                 browse_button: 'pickfiles',
                 container: 'container',
                 drop_element: 'container',
-                max_file_size: '1000mb',
+                max_file_size: '200k',
                 flash_swf_url: '../../../plupload-2.1.9/js/Moxie.swf',
                 dragdrop: true,
-                chunk_size: '4mb',
+                chunk_size: '200k',
                 multi_selection: !(mOxie.Env.OS.toLowerCase() === "ios"),
                 uptoken_func: function () {
                     var ajax = new XMLHttpRequest();
@@ -231,10 +234,10 @@ var uploader = Qiniu.uploader({
                         return '';
                     }
                 },
-                domain: "om2v517pk.bkt.clouddn.com",
+                domain: "olamk7iwq.bkt.gdipper.com",
                 get_new_uptoken: false,
                 auto_start: true,
-                log_level: 5,
+                log_level: 0,
                 init: {
                     'FilesAdded': function (up, files) {
                         $('#success').hide();
@@ -243,6 +246,8 @@ var uploader = Qiniu.uploader({
                     },
                     'BeforeUpload': function (up, file) {
 //                        console.log("----------BeforeUpload", up, file);
+//            alert(file.size); 
+//            uploader.stop();
 
                     },
                     'UploadProgress': function (up, file) {
@@ -268,6 +273,7 @@ var uploader = Qiniu.uploader({
                     },
                     'Error': function (up, err, errTip) {
 //                        console.log("----------UploadProgress", up, err, errTip); 
+ layer.msg(errTip);
                     }
                 }
             });

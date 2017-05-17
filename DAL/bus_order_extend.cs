@@ -79,7 +79,7 @@ namespace WK.DAL
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
-        public DataSet GetListByQuery(string order_code, int user_id,int order_status,int pay_status,int eat_type,int minDays,int isDiscount, int startIndex, int endIndex)
+        public DataSet GetListByQuery(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex, int pickup_address_id)
         {
             //SELECT a.*
             //FROM bus_order a
@@ -93,11 +93,13 @@ namespace WK.DAL
             //and a.create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval 1 day)
             //and b.id is not null /*是否有赠品*/
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" SELECT a.id as orderId, a.*,b.id as dicountId,c.id as diliveryUserId,c.nickname,d.name as pickupAddressName ");
+            strSql.Append(" SELECT a.id as orderId, a.*,b.id as dicountId,c.id as diliveryUserId,c.nickname,d.name as pickupAddressName ,e.charge_id ");
             strSql.Append(" FROM bus_order a ");
             strSql.Append(" LEFT JOIN bus_order_discount b on b.order_id = a.id and b.is_delete!=1 ");
             strSql.Append(" left join bus_user c on c.id = a.dilivery_user_id and c.is_delete!=1 ");
             strSql.Append(" LEFT JOIN bus_pickup_address d on d.id = a.pickup_address_id and d.is_delete!=1 ");
+
+            strSql.Append(" LEFT JOIN bus_stripe_pay e on e.order_id = a.id and e.is_delete!=1 ");
             strSql.Append(" where a.is_delete!=1 ");
             if (order_code != string.Empty)
             {
@@ -107,6 +109,11 @@ namespace WK.DAL
             {
                 strSql.AppendFormat(" and a.user_id ={0}", user_id);
             }
+            if (pickup_address_id != 0)
+            {
+                strSql.AppendFormat(" and a.pickup_address_id ={0}", pickup_address_id);
+            }
+            
             if (order_status != 0)
             {
                 strSql.AppendFormat(" and a.order_status ={0}", order_status);

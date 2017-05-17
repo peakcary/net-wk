@@ -3,6 +3,8 @@ using System.Data;
 using System.Text;
 using System.Web;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace WK.Web.Handler
 {
@@ -24,6 +26,7 @@ namespace WK.Web.Handler
         public class ReturnInfo
         {
             public bool isSuccess { get; set; }
+            public string sValue { get; set; }
         }
         [Serializable]
         public class Record
@@ -77,10 +80,16 @@ namespace WK.Web.Handler
                     sb.Append(getPickupAddressOrderList(context));
                     break;
 
+                case "getHashCode":
+                    sb.Append(getHashCode(context));
+                    break;
 
+                case "getPickUplist":
+                    sb.Append(getPickUplist(context));
+                    break;
+ 
                     
-                    
-
+                     
                     
                 default:
                     sb.Append("");
@@ -89,8 +98,57 @@ namespace WK.Web.Handler
             context.Response.Write(sb.ToString());
         }
 
-        
+        private string getHashCode(HttpContext context) {
 
+            //DESEncode(order.id + order.order_code, "WuKongBui"）
+
+            string orderid  =context.Request.Params["orderid"];
+            string ordercode = context.Request.Params["ordercode"];
+            string encryptString = orderid + ordercode;
+            string Key = "WKongBui";
+            string hcode=string.Empty;
+            try
+            { 
+                var inputByteArray = Encoding.UTF8.GetBytes(encryptString);
+                var des = new DESCryptoServiceProvider();
+                des.Key = Encoding.ASCII.GetBytes(Key);
+                des.Mode = CipherMode.ECB;
+                var mStream = new MemoryStream();
+                var cStream = new CryptoStream(mStream, des.CreateEncryptor(), CryptoStreamMode.Write);
+                cStream.Write(inputByteArray, 0, inputByteArray.Length);
+                cStream.FlushFinalBlock();
+                hcode= Convert.ToBase64String(mStream.ToArray());
+            }
+            catch (Exception)
+            {
+                
+            }
+            ReturnInfo returnInfo = new ReturnInfo();
+            returnInfo.sValue = hcode;
+            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
+
+        private string getPickUplist(HttpContext context) {
+            StringBuilder sb = new StringBuilder();
+            DataSet ds = new DataSet();
+            StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
+            StringBuilder orderby = new StringBuilder();
+
+            int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
+            int pageSize = int.Parse(context.Request.Params["pageSize"]);
+            int startIndex = 0;
+            if (pageIndex >= 0)
+            {
+                startIndex = pageSize * pageIndex;
+            }
+
+            WK.BLL.bus_pickup_address bll = new WK.BLL.bus_pickup_address();
+            ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+
+        }
+        
         private string getDataDetailExtend(HttpContext context)
         {
             string id = "";
@@ -161,6 +219,11 @@ namespace WK.Web.Handler
             {
                 user_id = int.Parse(context.Request.Params["user_id"].ToString());
             }
+            int pickup_address_id = 0;
+            if (context.Request.Params["pickup_address_id"] != null && context.Request.Params["pickup_address_id"].ToString() != "")
+            {
+                pickup_address_id = int.Parse(context.Request.Params["pickup_address_id"].ToString());
+            }
             int order_status=0;
             if (context.Request.Params["order_status"] != null && context.Request.Params["order_status"].ToString() != "")
             {
@@ -202,7 +265,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize);
+            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id);
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
 
@@ -232,6 +295,11 @@ namespace WK.Web.Handler
             if (context.Request.Params["user_id"] != null && context.Request.Params["user_id"].ToString() != "")
             {
                 user_id = int.Parse(context.Request.Params["user_id"].ToString());
+            }
+            int pickup_address_id = 0;
+            if (context.Request.Params["pickup_address_id"] != null && context.Request.Params["pickup_address_id"].ToString() != "")
+            {
+                pickup_address_id = int.Parse(context.Request.Params["pickup_address_id"].ToString());
             }
             int order_status = 0;
             if (context.Request.Params["order_status"] != null && context.Request.Params["order_status"].ToString() != "")
@@ -274,7 +342,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize);
+            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id);
             List<Model.bus_order> listOrder = new List<Model.bus_order>();
             if (ds != null)
             {
@@ -649,6 +717,11 @@ namespace WK.Web.Handler
             {
                 user_id = int.Parse(context.Request.Params["user_id"].ToString());
             }
+            int pickup_address_id = 0;
+            if (context.Request.Params["pickup_address_id"] != null && context.Request.Params["pickup_address_id"].ToString() != "")
+            {
+                pickup_address_id = int.Parse(context.Request.Params["pickup_address_id"].ToString());
+            }
             int order_status = 0;
             if (context.Request.Params["order_status"] != null && context.Request.Params["order_status"].ToString() != "")
             {
@@ -684,7 +757,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-           DataSet  ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize);
+            DataSet ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id);
 
            DataTable dt = new DataTable();
 

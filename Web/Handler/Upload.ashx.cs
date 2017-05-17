@@ -41,7 +41,7 @@ namespace WK.Web.Handler
             string AK = "pfbSmizd7FGjdPqJ4l9jbvXDNgegvB3gZ2FqyPpI";
             string SK = "JCquyPx5tcrd8skdY8ZutBVLvlxnrDlJCPJuxaGE";
 			// 目标空间名
-			string bucket = "busimages";
+            string bucket = "wukongpeisong";
             //// 目标文件名
             //string saveKey = "SAVE_KEY";
             //// 本地文件

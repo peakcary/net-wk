@@ -94,19 +94,25 @@
         <div class="container-fluid" style='padding: 0;'>
             <table>
                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        订单号：
-                    </td>
-                    <td colspan="3">
-                        <input id="order_code" type="text" style='width: 200px;' />
+                    <td style='text-align: right; width: 100px;'>订单号：
+                    </td> 
+                    <td colspan="2">
+                        <input id="order_code" type="text" style='width: 150px;' />
                     </td>
                     <td>
                         用户ID：
                     </td>
-                    <td colspan="2">
-                        <input id="user_id" type="text" style='width: 120px;' />
+                    <td colspan="1">
+                        <input id="user_id" type="text" style='width: 60px;' />
+                    </td>
+                    
+                    <td>
+                        自提点：
+                    </td>
+                    <td colspan="1">
+                         <select id="pickup_address_id" class="form-control"  >
+                            <option value="0">请选择</option>
+                        </select>
                     </td>
                     <td>
                         <a class="btn btn-primary btn-xs" id="btnSearch" role="button" style="margin-left: 10px;">
@@ -420,6 +426,9 @@
     <script src="js/common.js" type="text/javascript"></script>
     <script src="js/bus_order_list.js" type="text/javascript"></script>
     <script src="lib/excellentexport-master/excellentexport.min.js" type="text/javascript"></script>
+     <script id="pickupListTemplate" type="text/x-jquery-tmpl">
+         <option  value="${id}">${name}</option> 
+    </script>
     <script id="DataTemplate" type="text/x-jquery-tmpl">
         <tr>
 	        <td>${order_code.substr(order_code.length-4,4)}</td>  
@@ -428,14 +437,14 @@
             <td>{{if order_status == 1}}已预订{{else order_status == 2}}待取餐{{else order_status == 3}}待送达{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{/if}}</td> 
             <td>${create_date}</td> 
             <td>${total_real_price }</td> 
-            <td></td> 
-            <td>${user_id}</td> 
+            <td>${charge_id}</td> 
+            <td>${nickname}</td> 
             <td>${consignee_phone}</td> 
-            <td>${pickup_address_id}</td> 
+            <td>${pickupAddressName}</td> 
             <td>${consignee_name}</td> 
             <td>{{if dicountId > 0 }}有{{else}}无{{/if}}</td>  
             <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${id}')" >详情</a>
-            <a class="btn btn-primary btn-xs" href="#" role="button" onclick="cancelOrder('${id}')" >取消订单</a>
+            <a class="btn btn-primary btn-xs" href="#" role="button" onclick="cancelOrder('${id}','${order_code}')" >取消订单</a>
             </td> 
         </tr>
     </script>
@@ -448,10 +457,10 @@
             <td>{{if order_status == 1}}已预订{{else order_status == 2}}待取餐{{else order_status == 3}}待送达{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{/if}}</td> 
             <td>${create_date}</td> 
             <td>${total_real_price }</td> 
-            <td></td> 
-            <td>${user_id}</td> 
+            <td>${charge_id}</td> 
+            <td>${nickname}</td> 
             <td>${consignee_phone}</td> 
-            <td>${pickup_address_id}</td> 
+            <td>${pickupAddressName}</td> 
             <td>${consignee_name}</td> 
             
             <td>{{if orderDiscount.discount_id > 0 }}有{{else}}无{{/if}}</td> 
@@ -531,10 +540,10 @@
                     <td>{{if order_status == 1}}已预订{{else order_status == 2}}待取餐{{else order_status == 3}}待送达{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{/if}}</td> 
                     <td>${create_date}</td> 
                     <td>${total_real_price }</td> 
-                    <td></td> 
-                    <td>${user_id}</td> 
+                    <td>${charge_id}</td> 
+                    <td>${nickname}</td> 
                     <td>${consignee_phone}</td> 
-                    <td>${pickup_address_id}</td> 
+                    <td>${pickupAddressName}</td> 
                     <td>${consignee_name}</td>  
                     <td>{{if orderDiscount.discount_id > 0 }}有{{else}}无{{/if}}</td> 
                     <td>
@@ -617,10 +626,10 @@
                     <td>{{if order_status == 1}}已预订{{else order_status == 2}}待取餐{{else order_status == 3}}待送达{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{/if}}</td> 
                     <td>${create_date}</td> 
                     <td>${total_real_price }</td> 
-                    <td></td> 
-                    <td>${user_id}</td> 
+                     <td>${charge_id}</td> 
+                    <td>${nickname}</td> 
                     <td>${consignee_phone}</td> 
-                    <td>${pickup_address_id}</td> 
+                    <td>${pickupAddressName}</td> 
                     <td>${consignee_name}</td>  
                     <td>{{if orderDiscount.discount_id > 0 }}有{{else}}无{{/if}}</td> 
                     <td>
@@ -703,10 +712,10 @@
                     <td>{{if order_status == 1}}已预订{{else order_status == 2}}待取餐{{else order_status == 3}}待送达{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{/if}}</td> 
                     <td>${create_date}</td> 
                     <td>${total_real_price }</td> 
-                    <td></td> 
-                    <td>${user_id}</td> 
+                     <td>${charge_id}</td> 
+                    <td>${nickname}</td> 
                     <td>${consignee_phone}</td> 
-                    <td>${pickup_address_id}</td> 
+                    <td>${pickupAddressName}</td> 
                     <td>${consignee_name}</td>  
                     <td>{{if orderDiscount.discount_id > 0 }}有{{else}}无{{/if}}</td> 
                     <td>

@@ -1,6 +1,6 @@
 ﻿var url = "../../Handler/bus_dish.ashx"; 
 var urlUpload = "../Handler/Upload.ashx";
-var imageUrlHost = "http://om2v517pk.bkt.clouddn.com/";
+var imageUrlHost = "http://olamk7iwq.bkt.gdipper.com/";
 
 $(function () {
     (function ($) {
@@ -261,6 +261,10 @@ function getAreaList(id) {
         }
     });
 }
+
+function deleteImage(e){
+$(e).parent().parent().remove();
+}
  
 
 function initPicUpload(){
@@ -269,10 +273,10 @@ var uploader = Qiniu.uploader({
                 browse_button: 'pickfiles',
                 container: 'container',
                 drop_element: 'container',
-                max_file_size: '1000mb',
+                max_file_size: '50k',
                 flash_swf_url: '../../../plupload-2.1.9/js/Moxie.swf',
                 dragdrop: true,
-                chunk_size: '4mb',
+                chunk_size: '50k',
                 multi_selection: !(mOxie.Env.OS.toLowerCase() === "ios"),
                 uptoken_func: function () {
                     var ajax = new XMLHttpRequest();
@@ -286,7 +290,7 @@ var uploader = Qiniu.uploader({
                         return '';
                     }
                 },
-                domain: "om2v517pk.bkt.clouddn.com",
+                domain: "olamk7iwq.bkt.gdipper.com",
                 get_new_uptoken: false,
                 auto_start: true,
                 log_level: 5,
@@ -297,7 +301,7 @@ var uploader = Qiniu.uploader({
                         loadingShow();
                     },
                     'BeforeUpload': function (up, file) {
-//                        console.log("----------BeforeUpload", up, file);
+//                        console.log("----------BeforeUpload", up, file); 
 
                     },
                     'UploadProgress': function (up, file) {
@@ -309,10 +313,12 @@ var uploader = Qiniu.uploader({
                         $('#success').show();
                     },
                     'FileUploaded': function (up, file, info) {
-//                        console.log("----------FileUploaded1", JSON.stringify(up));
-//                        console.log("----------FileUploaded2", JSON.stringify(file));
-//                        console.log("----------FileUploaded3", JSON.stringify(info));
+                        console.log("----------FileUploaded1", JSON.stringify(up));
+                        console.log("----------FileUploaded2", JSON.stringify(file));
+                        console.log("----------FileUploaded3", JSON.stringify(info));
                         var res = $.parseJSON(info);
+                        var imageName =res.hash+ res.key.substr(res.key.lastIndexOf('.')); 
+
                         var imageUrl = imageUrlHost + res.key; 
                         var imageObj = {};
                         imageObj.imageUrl = imageUrl; 
@@ -320,7 +326,8 @@ var uploader = Qiniu.uploader({
                         $("#imageListTemplate").tmpl(imageObj).appendTo("#imageList"); 
                     },
                     'Error': function (up, err, errTip) {
-//                        console.log("----------UploadProgress", up, err, errTip); 
+                        console.log("----------Error", up, err, errTip); 
+                        layer.msg(errTip);
                     }
                 }
             });

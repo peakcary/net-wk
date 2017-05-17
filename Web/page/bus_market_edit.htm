@@ -201,7 +201,7 @@
                 <div class="col-sm-10">
                     <div id="container">
                         <a class="btn btn-default " id="pickfiles" href="#"><i class="glyphicon glyphicon-plus">
-                        </i><span>选择文件</span> </a>
+                        </i><span>选择文件</span> </a><span>图片比例：2:1 ，大小200K以内，最低分辨率750*375, 图片名称不要超过30字符</span>
                     </div>
                     <div id="fileInfo">
                     </div>
@@ -245,6 +245,8 @@
     <script id="imageListTemplate" type="text/x-jquery-tmpl"> 
           <tr> 
             <td><image ref='${imagePath}' width='70' height='70' src='${imageUrl}'/></td> 
+            
+            <td><a class="btn btn-danger btn-xs" href="#" role="button" onclick="deleteImage(this)" >删除</a></td> 
           </tr>
     </script>
     <script src="lib/jquery-ui-multiselect/src/jquery-ui.min.js" type="text/javascript"></script>
