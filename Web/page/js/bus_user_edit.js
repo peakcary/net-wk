@@ -58,7 +58,12 @@ function editData() {
             if(data.isSuccess){
                 goPageList();
             }else{
-                alert('保存失败！');
+                 
+                if(data.rMessage!=null&&data.rMessage!=""){
+                    layer.msg(data.rMessage);
+                }else{
+                    layer.msg('保存失败！');
+                }
             }
         },
         error:function(){

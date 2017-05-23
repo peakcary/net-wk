@@ -72,6 +72,12 @@ namespace WK.Web.Handler
                     sb.Append(getPickupList(context));
                     break;
 
+                case "updateStatus":
+                    sb.Append(updateStatus(context));
+                    break;
+
+                    
+
                 default:
                     sb.Append("");
                     break;
@@ -311,31 +317,81 @@ namespace WK.Web.Handler
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }
 
+        private string updateStatus(HttpContext context)
+        {
+            ReturnInfo returnInfo = new ReturnInfo();
+            returnInfo.isSuccess = false;
+            WK.BLL.bus_market bll = new WK.BLL.bus_market();
+            int id = int.Parse(context.Request.Params["id"]);
+            int status = int.Parse(context.Request.Params["status"]);
+            if (id > 0)
+            {
+                WK.Model.bus_market model = bll.GetModel(id);
+                model.status = status==1?0:1;
+                returnInfo.isSuccess = bll.Update(model);
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+        }
+
         private string getAreaList(HttpContext context)
         {
-            StringBuilder sb = new StringBuilder();
-            DataSet ds = new DataSet();
+            //StringBuilder sb = new StringBuilder();
+            //DataSet ds = new DataSet();
+            //StringBuilder strWhere = new StringBuilder();
+            //strWhere.Append(" is_delete != 1");
+
+            //WK.BLL.bus_area bll = new WK.BLL.bus_area();
+            //ds = bll.GetList(strWhere.ToString());
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("data", typeof(System.Int32));
+            //dt.Columns.Add("value", typeof(System.String));
+            //if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    int l = ds.Tables[0].Rows.Count;
+            //    for (int i = 0; i < l; i++)
+            //    {
+            //        DataRow row = dt.NewRow();
+            //        row["data"] = ds.Tables[0].Rows[i]["id"];
+            //        row["value"] = ds.Tables[0].Rows[i]["name"];
+            //        dt.Rows.Add(row);
+            //    }
+
+            //}
+            //return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
+
             StringBuilder strWhere = new StringBuilder();
             strWhere.Append(" is_delete != 1");
+            StringBuilder orderby = new StringBuilder();
+            orderby.Append("parent_id,id");
+
+            int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
+            int pageSize = int.Parse(context.Request.Params["pageSize"]);
+            int startIndex = 0;
+            if (pageIndex >= 0)
+            {
+                startIndex = pageSize * pageIndex;
+            }
 
             WK.BLL.bus_area bll = new WK.BLL.bus_area();
-            ds = bll.GetList(strWhere.ToString());
-            DataTable dt = new DataTable();
-            dt.Columns.Add("data", typeof(System.Int32));
-            dt.Columns.Add("value", typeof(System.String));
-            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            DataSet ds = new DataSet();
+            ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
+
+            List<WK.Model.bus_area> listArea = new List<Model.bus_area>();
+            DataTable dt = ds.Tables[0];
+            DataTable dtNew = dt.Clone();
+            DataRow[] dt0 = dt.Select("parent_id=0");
+            foreach (DataRow dr in dt0)
             {
-                int l = ds.Tables[0].Rows.Count;
-                for (int i = 0; i < l; i++)
+                dtNew.ImportRow(dr);
+                DataRow[] dt1 = dt.Select("parent_id=" + dr["id"]);
+                foreach (DataRow dr11 in dt1)
                 {
-                    DataRow row = dt.NewRow();
-                    row["data"] = ds.Tables[0].Rows[i]["id"];
-                    row["value"] = ds.Tables[0].Rows[i]["name"];
-                    dt.Rows.Add(row);
+                    dtNew.ImportRow(dr11);
                 }
 
             }
-            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dtNew);
         }
 
         private string getPickupList(HttpContext context)

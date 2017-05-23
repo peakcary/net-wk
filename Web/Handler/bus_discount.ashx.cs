@@ -85,7 +85,20 @@ namespace WK.Web.Handler
 
             WK.BLL.bus_discount bll = new WK.BLL.bus_discount();
             ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+            DataTable dt = ds.Tables[0];
+            //DataTable dt1 = dt.Clone();
+            dt.Columns.Add("start_date1");
+            dt.Columns.Add("end_date1");
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0, l = dt.Rows.Count; i < l; i++)
+                {
+                    //dt1.Rows.Add(dt.Rows[i]);
+                    dt.Rows[i]["start_date1"] = DateTime.Parse(dt.Rows[i]["start_date"].ToString()).ToString("yyyy-MM-dd");
+                    dt.Rows[i]["end_date1"] = DateTime.Parse(dt.Rows[i]["end_date"].ToString()).ToString("yyyy-MM-dd");
+                }
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
         }
 
         private string getListCount(HttpContext context)

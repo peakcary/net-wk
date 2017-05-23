@@ -235,7 +235,7 @@
     <script src="js/common.js" type="text/javascript"></script>
     <script src="js/bus_market_edit.js" type="text/javascript"></script>
     <script id="areaListTemplate" type="text/x-jquery-tmpl">
-         <option value="${data}">${value}</option> 
+         <option value="${id}">${name}</option> 
     </script>
     <script id="pickupListTemplate" type="text/x-jquery-tmpl">
          <option  {{if s }}selected="selected"{{/if}} value="${data}">${value}</option> 
@@ -244,7 +244,7 @@
     <script src="lib/qiniu/dist/qiniu.min.js" type="text/javascript"></script> 
     <script id="imageListTemplate" type="text/x-jquery-tmpl"> 
           <tr> 
-            <td><image ref='${imagePath}' width='70' height='70' src='${imageUrl}'/></td> 
+            <td><image ref='${imagePath}' width='300' height='150' src='${imageUrl}'/></td> 
             
             <td><a class="btn btn-danger btn-xs" href="#" role="button" onclick="deleteImage(this)" >删除</a></td> 
           </tr>

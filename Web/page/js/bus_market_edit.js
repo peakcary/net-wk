@@ -221,6 +221,8 @@ var uploader = Qiniu.uploader({
                 flash_swf_url: '../../../plupload-2.1.9/js/Moxie.swf',
                 dragdrop: true,
                 chunk_size: '200k',
+                unique_names: false,
+                save_key: false,
                 multi_selection: !(mOxie.Env.OS.toLowerCase() === "ios"),
                 uptoken_func: function () {
                     var ajax = new XMLHttpRequest();
@@ -271,9 +273,24 @@ var uploader = Qiniu.uploader({
                         imageObj.imageSize = file.size;
                         $("#imageListTemplate").tmpl(imageObj).appendTo("#imageList"); 
                     },
+                    'Key': function(up, file) {
+                        
+                        // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+                        // 该配置必须要在unique_names: false，save_key: false时才生效
+//                         var d = Date.Now();  
+//                        var dd = d.getDate() < 10 ? "0" + d.getDate() : d.getDate().toString();  
+//                        var mmm = mths[d.getMonth()];  
+//                        var yyyy = d.getFullYear().toString(); //2011  
+                            //var YY = YYYY.substr(2);   // 11  
+                        //return dd + mmm + yyyy;  
+                        var date = Date.now();
+                        var key=date+ file.name.substring(file.name.lastIndexOf('.'));;
+                        // do something with key here
+                        return key
+                    },
                     'Error': function (up, err, errTip) {
 //                        console.log("----------UploadProgress", up, err, errTip); 
- layer.msg(errTip);
+                        layer.msg(errTip);
                     }
                 }
             });

@@ -24,6 +24,7 @@ namespace WK.Web.Handler
         public class ReturnInfo
         {
             public bool isSuccess { get; set; }
+            public string rMessage { get; set; }
         }
         [Serializable]
         public class Record
@@ -83,6 +84,7 @@ namespace WK.Web.Handler
             DataSet ds = new DataSet();
             StringBuilder strWhere = new StringBuilder();
             strWhere.Append(" is_delete != 1");
+            strWhere.Append(" and user_type = 2 ");
             StringBuilder orderby = new StringBuilder();
 
             int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
@@ -107,6 +109,8 @@ namespace WK.Web.Handler
         {
             StringBuilder sb = new StringBuilder();
             StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
+            strWhere.Append(" and user_type = 2 ");
             WK.BLL.bus_user bll = new WK.BLL.bus_user();
             Record r = new Record();
             r.RecordCount = bll.GetListCount(strWhere.ToString());
@@ -138,46 +142,66 @@ namespace WK.Web.Handler
         /// <returns></returns>
         private string editData(HttpContext context)
         {
-            ReturnInfo returnInfo = new ReturnInfo();
-            returnInfo.isSuccess = false;
-
-            WK.Model.bus_user model = new Model.bus_user();
-
-            int id = 0;
-            if (context.Request.Params["id"] != "")
+            string phone_num = context.Request.Params["phone_num"];
+            StringBuilder sb = new StringBuilder();
+            StringBuilder strWhere = new StringBuilder();
+            strWhere.Append(" is_delete != 1");
+            strWhere.Append(" and user_type = 2 ");
+            strWhere.AppendFormat(" and phone_num = {0} ", phone_num);
+            WK.BLL.bus_user bll = new WK.BLL.bus_user(); 
+            int RecordCount = bll.GetListCount(strWhere.ToString());
+            if (RecordCount > 0)
             {
-                id = int.Parse(context.Request.Params["id"]); 
+                ReturnInfo returnInfo = new ReturnInfo();
+                returnInfo.isSuccess = false;
+                returnInfo.rMessage = "已经存在同手机配送员";
+                return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
             }
-            model.id = id; 
-            //model.create_by
-            //model.create_date
-            //model.cur_deviceId = context.Request.Params["cur_deviceId"];
-            //model.generate_time
-            model.is_delete = 0;
-            model.nickname = context.Request.Params["nickname"];
-            model.phone_num = context.Request.Params["phone_num"];
-            //model.pic_url = context.Request.Params["pic_url"];
-            model.pwd = DESEncrypt.Encrypt(context.Request.Params["pwd"]);
-            //model.remark = context.Request.Params["remark"];
-            //model.sex = int.Parse( context.Request.Params["sex"]);
-            //model.status = int.Parse(context.Request.Params["status"]);
-            model.status = 1;//1启用2停用
-            //model.update_by
-            //model.update_date
-            model.user_type = 2;//1用户2配送员
+            else {
+               
+
+                WK.Model.bus_user model = new Model.bus_user();
+
+                int id = 0;
+                if (context.Request.Params["id"] != "")
+                {
+                    id = int.Parse(context.Request.Params["id"]);
+                }
+                model.id = id;
+                //model.create_by
+                //model.create_date
+                //model.cur_deviceId = context.Request.Params["cur_deviceId"];
+                //model.generate_time
+                model.is_delete = 0;
+                model.nickname = context.Request.Params["nickname"];
+                model.phone_num = context.Request.Params["phone_num"];
+                //model.pic_url = context.Request.Params["pic_url"];
+                model.pwd = DESEncrypt.Encrypt(context.Request.Params["pwd"]);
+                //model.remark = context.Request.Params["remark"];
+                //model.sex = int.Parse( context.Request.Params["sex"]);
+                //model.status = int.Parse(context.Request.Params["status"]);
+                model.status = 1;//1启用2停用
+                //model.update_by
+                //model.update_date
+                model.user_type = 2;//1用户2配送员
+
+                ReturnInfo returnInfo = new ReturnInfo();
+                returnInfo.isSuccess = false;
+                //WK.BLL.bus_user bll = new WK.BLL.bus_user();
+                if (model.id > 0)
+                {
+                    returnInfo.isSuccess = bll.Update(model);
+                }
+                else
+                {
+                    returnInfo.isSuccess = bll.Add(model);
+                }
+
+                return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
+            }
+
+
             
-
-            WK.BLL.bus_user bll = new WK.BLL.bus_user();
-            if (model.id > 0)
-            {
-                returnInfo.isSuccess = bll.Update(model);
-            }
-            else
-            {
-                returnInfo.isSuccess = bll.Add(model);
-            }
-
-            return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }
 
         /// <summary>

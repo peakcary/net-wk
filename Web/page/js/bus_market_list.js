@@ -70,7 +70,7 @@ function deleteData(id) {
             success: function (data) { 
                 if(data.isSuccess){
                     layer.msg('删除成功！');
-                        getListByPageInfo(0);
+                        initPagination();
                     }else{
                         layer.msg('删除失败！');
                     }
@@ -78,6 +78,26 @@ function deleteData(id) {
         });
     }); 
 }  
+ function updateStatus(id,status) {
+    $.ajax({
+            type: "post",
+            url: url + "?t=updateStatus",
+            data: { 
+                id: id,
+                status:status
+            },
+            dataType: 'json',   
+            success: function (data) { 
+                if(data.isSuccess){
+                        layer.msg('操作成功！');
+                        initPagination();
+                    }else{
+                        layer.msg('操作失败！');
+                    }
+                }
+        }); 
+}  
+
  
 
 function goPageDetail(id) {

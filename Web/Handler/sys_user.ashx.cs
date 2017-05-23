@@ -93,7 +93,18 @@ namespace WK.Web.Handler
 
             WK.BLL.sys_user bll = new WK.BLL.sys_user();
             ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+            DataTable dt = ds.Tables[0];
+
+            DataTable dt1 = dt.Clone();
+
+
+            if (dt.Rows.Count > 0) {
+                for (int i = 0, l = dt.Rows.Count; i < l; i++) {
+
+                    dt.Rows[i]["pwd"] = DESEncrypt.Decrypt(dt.Rows[i]["pwd"].ToString()).ToString();
+                }
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
         }
 
         /// <summary>

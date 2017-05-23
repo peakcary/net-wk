@@ -102,7 +102,8 @@ loadingShow();
                 }
             
             }else{ 
-                 layer.msg('保存失败！');
+                layer.msg('保存失败！');
+                 
             }
         },
         error:function(){

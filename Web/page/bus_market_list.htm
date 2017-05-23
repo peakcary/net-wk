@@ -131,7 +131,7 @@
             <td>${name_cn}</td> 
             <td>${market_type}</td>
             <td>${address}</td>  
-            <td>{{if status == 1}}启用{{else status == 2}}停用{{/if}}</td>   
+            <td>{{if status == 1}}<a class="btn btn-primary btn-xs" href="#" role="button" onclick="updateStatus('${id}','${status}')" >启用</a>{{else status == 0}}<a class="btn btn-primary btn-xs" href="#" role="button" onclick="updateStatus('${id}','${status}')" >停用</a>{{/if}}</td>   
             <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${id}')" >编辑</a>
             <a class="btn btn-danger btn-xs" href="#" role="button" onclick="deleteData('${id}')" >删除</a>
             <a class="btn btn-danger btn-xs" href="bus_dish_list.htm?market_id=${id}"  role="button" >菜品列表</a>
