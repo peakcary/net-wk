@@ -54,28 +54,43 @@ namespace WK.DAL
 
         public DataSet GetDateList(int minDays)
         { 
+            //StringBuilder strSql = new StringBuilder();
+            //strSql.Append(" SELECT COUNT(id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') as dt  from bus_order ");
+            //strSql.AppendFormat(" where create_date BETWEEN   DATE_ADD(CURDATE(),interval {0} day) and CURDATE()", -minDays);
+            //strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') ");
+            //return DbHelperMySQL.Query(strSql.ToString());
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" SELECT COUNT(id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') as dt  from bus_order ");
-            strSql.AppendFormat(" where create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day) ", minDays);
-            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') ");
+            strSql.Append(" SELECT COUNT(id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            strSql.AppendFormat(" where create_date BETWEEN   DATE_ADD(CURDATE(),interval {0} day) and CURDATE()", -minDays);
+            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
         public DataSet GetPersonList(int minDays)
         {
+            //StringBuilder strSql = new StringBuilder();
+            //strSql.Append(" SELECT count(DISTINCT user_id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            //strSql.AppendFormat(" where create_date BETWEEN  DATE_ADD(CURDATE(),interval {0} day) and CURDATE()  ", -minDays);
+            //strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
+            //return DbHelperMySQL.Query(strSql.ToString());
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" SELECT count(DISTINCT user_id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') as dt  from bus_order ");
-            strSql.AppendFormat(" where create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day) ", minDays);
-            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') ");
+            strSql.Append(" SELECT count(DISTINCT user_id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            strSql.AppendFormat(" where create_date BETWEEN  DATE_ADD(CURDATE(),interval {0} day) and CURDATE()  ", -minDays);
+            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
         public DataSet GetPriceList(int minDays)
         {
+            //StringBuilder strSql = new StringBuilder();
+            //strSql.Append(" SELECT sum(total_real_price) as ct,DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') as dt  from bus_order ");
+            //strSql.AppendFormat(" where create_date BETWEEN  DATE_ADD(CURDATE(),interval {0} day) and  CURDATE() ", -minDays);
+            //strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') ");
+            //return DbHelperMySQL.Query(strSql.ToString());
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" SELECT sum(total_real_price) as ct,DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') as dt  from bus_order ");
-            strSql.AppendFormat(" where create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day) ", minDays);
-            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') ");
+            strSql.Append(" SELECT sum(total_real_price) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            strSql.AppendFormat(" where create_date BETWEEN  DATE_ADD(CURDATE(),interval {0} day) and  CURDATE() ", -minDays);
+            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
