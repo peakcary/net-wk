@@ -27,7 +27,7 @@ namespace WK.DAL
             strSql.Append(" from bus_order  a ");
             strSql.Append(" LEFT JOIN bus_user b on b.id = a.user_id ");
             DataSet ds = DbHelperMySQL.Query(strSql.ToString());
-            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows.Count); 
+            return ds == null ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0][0]); 
         }
 
         public int GetListCountByYesterdayCreateUser()
