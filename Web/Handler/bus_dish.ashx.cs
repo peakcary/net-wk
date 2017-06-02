@@ -24,6 +24,7 @@ namespace WK.Web.Handler
         public class ReturnInfo
         {
             public bool isSuccess { get; set; }
+            public int id { get; set; }
         }
         [Serializable]
         public class Record
@@ -182,122 +183,129 @@ namespace WK.Web.Handler
         }
 
         private string editData(HttpContext context)
-        {  
-            WK.Model.bus_dish model = new Model.bus_dish();
-            int id = 0;
-            if (context.Request.Params["id"] != null && context.Request.Params["id"].ToString() != "")
-            {
-               id = int.Parse(context.Request.Params["id"]);
-            }
-            model.id = id;
-            //model.create_by
-            //model.create_date
-            model.description_cn = context.Request.Params["description_cn"];
-            model.description_en = context.Request.Params["description_en"];
-            model.discount_price = decimal.Parse(context.Request.Params["discount_price"]);
-            model.dish_tag = context.Request.Params["dish_tag"];//
-            model.dish_time = int.Parse(context.Request.Params["dish_time"]);//菜品提供的时间，1周末2工作日3全周
-            model.eat_type = int.Parse(context.Request.Params["eat_type"]);//1午餐2晚餐3所有
-            model.is_delete = 0;
-            model.market_id = int.Parse(context.Request.Params["market_id"]);
-            model.name_cn = context.Request.Params["name_cn"];
-            model.name_en = context.Request.Params["name_en"];
-            model.original_price = decimal.Parse(context.Request.Params["original_price"]);
-            model.remark = context.Request.Params["remark"];
-            model.sales_total = int.Parse(context.Request.Params["sales_total"]); 
-            model.sort = int.Parse(context.Request.Params["sort"]);
-            model.status = int.Parse(context.Request.Params["status"]);//1启用 2停用
-            //model.update_by
-            //model.update_date 
-            
-            WK.BLL.bus_dish bll = new WK.BLL.bus_dish(); 
-            id = model.id > 0 ? model.id : bll.GetMaxId(); 
+        {
             ReturnInfo returnInfo = new ReturnInfo();
-            returnInfo.isSuccess = model.id > 0 ? bll.Update(model) : bll.Add(model);
-
-            #region 菜品规格
-            string dishSizeList = string.Empty;
-            if (context.Request.Params["dishSizeList"] != null)
+            try
             {
-                dishSizeList = context.Request.Params["dishSizeList"].ToString();
-            }
-            if (dishSizeList != "")
-            { 
-                WK.BLL.bus_dish_size sizeBll = new BLL.bus_dish_size();
-                StringBuilder sizeWhere = new StringBuilder();
-                sizeWhere.Append(" is_delete != 1");
-                sizeWhere.AppendFormat(" and dish_id  = {0}", id);
-                DataSet dsSize =  sizeBll.GetList(sizeWhere.ToString());
-                if (dsSize != null 
-                    && dsSize.Tables.Count > 0 
-                    && dsSize.Tables[0].Rows.Count > 0)
+                WK.Model.bus_dish model = new Model.bus_dish();
+                int id = 0;
+                if (context.Request.Params["id"] != null && context.Request.Params["id"].ToString() != "")
                 {
-                    int dsSizeCount = dsSize.Tables[0].Rows.Count;
-                    for (int i = 0; i < dsSizeCount; i++)
+                    id = int.Parse(context.Request.Params["id"]);
+                }
+                model.id = id;
+                //model.create_by
+                //model.create_date
+                model.description_cn = context.Request.Params["description_cn"];
+                model.description_en = context.Request.Params["description_en"];
+                model.discount_price = decimal.Parse(context.Request.Params["discount_price"]);
+                model.dish_tag = context.Request.Params["dish_tag"];//
+                model.dish_time = int.Parse(context.Request.Params["dish_time"]);//菜品提供的时间，1周末2工作日3全周
+                model.eat_type = int.Parse(context.Request.Params["eat_type"]);//1午餐2晚餐3所有
+                model.is_delete = 0;
+                model.market_id = int.Parse(context.Request.Params["market_id"]);
+                model.name_cn = context.Request.Params["name_cn"];
+                model.name_en = context.Request.Params["name_en"];
+                model.original_price = decimal.Parse(context.Request.Params["original_price"]);
+                model.remark = context.Request.Params["remark"];
+                model.sales_total = int.Parse(context.Request.Params["sales_total"]);
+                model.sort = int.Parse(context.Request.Params["sort"]);
+                model.status = int.Parse(context.Request.Params["status"]);//1启用 2停用
+                //model.update_by
+                //model.update_date 
+
+                WK.BLL.bus_dish bll = new WK.BLL.bus_dish();
+                id = model.id > 0 ? model.id : bll.GetMaxId();
+
+                returnInfo.isSuccess = model.id > 0 ? bll.Update(model) : bll.Add(model);
+                returnInfo.id = id;
+
+                #region 菜品规格
+                string dishSizeList = string.Empty;
+                if (context.Request.Params["dishSizeList"] != null)
+                {
+                    dishSizeList = context.Request.Params["dishSizeList"].ToString();
+                }
+                if (dishSizeList != "")
+                {
+                    WK.BLL.bus_dish_size sizeBll = new BLL.bus_dish_size();
+                    StringBuilder sizeWhere = new StringBuilder();
+                    sizeWhere.Append(" is_delete != 1");
+                    sizeWhere.AppendFormat(" and dish_id  = {0}", id);
+                    DataSet dsSize = sizeBll.GetList(sizeWhere.ToString());
+                    if (dsSize != null
+                        && dsSize.Tables.Count > 0
+                        && dsSize.Tables[0].Rows.Count > 0)
                     {
-                        int sizeId = int.Parse(dsSize.Tables[0].Rows[i]["id"].ToString());
-                        sizeBll.Delete(sizeId);
+                        int dsSizeCount = dsSize.Tables[0].Rows.Count;
+                        for (int i = 0; i < dsSizeCount; i++)
+                        {
+                            int sizeId = int.Parse(dsSize.Tables[0].Rows[i]["id"].ToString());
+                            sizeBll.Delete(sizeId);
+                        }
+                    }
+
+                    Object anArray = Newtonsoft.Json.JsonConvert.DeserializeObject(dishSizeList);
+                    int dishSizeListCount = ((Newtonsoft.Json.Linq.JContainer)(anArray)).Count;
+                    for (int i = 0; i < dishSizeListCount; i++)
+                    {
+                        string name = ((Newtonsoft.Json.Linq.JContainer)(anArray))[i]["name"].ToString();
+                        string affect_price = ((Newtonsoft.Json.Linq.JContainer)(anArray))[i]["affect_price"].ToString();
+                        WK.Model.bus_dish_size sizeModel = new Model.bus_dish_size();
+                        sizeModel.affect_price = decimal.Parse(affect_price);
+                        sizeModel.dish_id = id;
+                        sizeModel.is_delete = 0;
+                        sizeModel.name = name;
+                        sizeBll.Add(sizeModel);
                     }
                 }
-            
-                Object anArray = Newtonsoft.Json.JsonConvert.DeserializeObject(dishSizeList);
-                int dishSizeListCount = ((Newtonsoft.Json.Linq.JContainer)(anArray)).Count;
-                for (int i = 0; i < dishSizeListCount; i++)
-                {
-                    string name = ((Newtonsoft.Json.Linq.JContainer)(anArray))[i]["name"].ToString();
-                    string affect_price = ((Newtonsoft.Json.Linq.JContainer)(anArray))[i]["affect_price"].ToString();
-                    WK.Model.bus_dish_size sizeModel = new Model.bus_dish_size();
-                    sizeModel.affect_price = decimal.Parse(affect_price);
-                    sizeModel.dish_id = id;
-                    sizeModel.is_delete = 0;
-                    sizeModel.name = name;
-                    sizeBll.Add(sizeModel);
-                } 
-            }
-            #endregion
+                #endregion
 
-            #region 图片 
-            string listImage = string.Empty;
-            if (context.Request.Params["listImage"] != null)
-            {
-                listImage = context.Request.Params["listImage"].ToString();
-            } 
-            if (listImage != "")
-            {
-                WK.BLL.bus_image imageBll = new BLL.bus_image();
-                StringBuilder imageWhere = new StringBuilder();
-                imageWhere.Append(" is_delete != 1");
-                imageWhere.AppendFormat(" and correlation_id  = {0}", id);
-                imageWhere.AppendFormat(" and bus_type   = {0}", 2);
-                DataSet dsImage = new DataSet();
-                dsImage = imageBll.GetList(imageWhere.ToString());
-                string imageList = string.Empty;
-                if (dsImage != null && dsImage.Tables.Count > 0 && dsImage.Tables[0].Rows.Count > 0)
+                #region 图片
+                string listImage = string.Empty;
+                if (context.Request.Params["listImage"] != null)
                 {
-                    int imageCount = dsImage.Tables[0].Rows.Count;
-                    for (int i = 0; i < imageCount; i++)
+                    listImage = context.Request.Params["listImage"].ToString();
+                }
+                if (listImage != "")
+                {
+                    WK.BLL.bus_image imageBll = new BLL.bus_image();
+                    StringBuilder imageWhere = new StringBuilder();
+                    imageWhere.Append(" is_delete != 1");
+                    imageWhere.AppendFormat(" and correlation_id  = {0}", id);
+                    imageWhere.AppendFormat(" and bus_type   = {0}", 2);
+                    DataSet dsImage = new DataSet();
+                    dsImage = imageBll.GetList(imageWhere.ToString());
+                    string imageList = string.Empty;
+                    if (dsImage != null && dsImage.Tables.Count > 0 && dsImage.Tables[0].Rows.Count > 0)
                     {
-                        int imageId = int.Parse(dsImage.Tables[0].Rows[i]["id"].ToString());
-                        imageBll.Delete(imageId);
+                        int imageCount = dsImage.Tables[0].Rows.Count;
+                        for (int i = 0; i < imageCount; i++)
+                        {
+                            int imageId = int.Parse(dsImage.Tables[0].Rows[i]["id"].ToString());
+                            imageBll.Delete(imageId);
+                        }
+                    }
+
+                    Object imageArray = Newtonsoft.Json.JsonConvert.DeserializeObject(listImage);
+                    int listImageCount = ((Newtonsoft.Json.Linq.JContainer)(imageArray)).Count;
+                    for (int i = 0; i < listImageCount; i++)
+                    {
+                        string url = ((Newtonsoft.Json.Linq.JContainer)(imageArray))[i]["url"].ToString();
+                        WK.Model.bus_image imageModel = new Model.bus_image();
+                        imageModel.bus_type = 2;
+                        imageModel.correlation_id = id;
+                        imageModel.img_type = 1;
+                        imageModel.sort = i + 1;
+                        imageModel.url = url;
+                        imageBll.Add(imageModel);
                     }
                 }
-
-                Object imageArray = Newtonsoft.Json.JsonConvert.DeserializeObject(listImage);
-                int listImageCount = ((Newtonsoft.Json.Linq.JContainer)(imageArray)).Count;
-                for (int i = 0; i < listImageCount; i++)
-                {
-                    string url = ((Newtonsoft.Json.Linq.JContainer)(imageArray))[i]["url"].ToString(); 
-                    WK.Model.bus_image imageModel = new Model.bus_image();
-                    imageModel.bus_type = 2 ;
-                    imageModel.correlation_id = id;
-                    imageModel.img_type = 1;
-                    imageModel.sort = i+1;
-                    imageModel.url = url; 
-                    imageBll.Add(imageModel);
-                } 
-            } 
-            #endregion
-
+                #endregion
+            }
+            catch{
+                returnInfo.isSuccess = false;
+            }
 
             return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
         }

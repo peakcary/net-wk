@@ -268,7 +268,7 @@ var uploader = Qiniu.uploader({
                         var imageUrl = imageUrlHost + res.key; 
                         var imageObj = {};
                         imageObj.imageUrl = imageUrl;
-                        imageObj.imagePath = file.name;
+                        imageObj.imagePath = res.key;
                         imageObj.imageKey = res.key;
                         imageObj.imageSize = file.size;
                         $("#imageListTemplate").tmpl(imageObj).appendTo("#imageList"); 

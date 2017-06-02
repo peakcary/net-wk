@@ -142,6 +142,11 @@ namespace WK.Web.Handler
         /// <returns></returns>
         private string editData(HttpContext context)
         {
+            int id = 0;
+            if (context.Request.Params["id"] != "")
+            {
+                id = int.Parse(context.Request.Params["id"]);
+            }
             string phone_num = context.Request.Params["phone_num"];
             StringBuilder sb = new StringBuilder();
             StringBuilder strWhere = new StringBuilder();
@@ -150,23 +155,17 @@ namespace WK.Web.Handler
             strWhere.AppendFormat(" and phone_num = {0} ", phone_num);
             WK.BLL.bus_user bll = new WK.BLL.bus_user(); 
             int RecordCount = bll.GetListCount(strWhere.ToString());
-            if (RecordCount > 0)
+            if (RecordCount > 0 && id<=0)
             {
                 ReturnInfo returnInfo = new ReturnInfo();
                 returnInfo.isSuccess = false;
                 returnInfo.rMessage = "已经存在同手机配送员";
                 return Newtonsoft.Json.JsonConvert.SerializeObject(returnInfo);
             }
-            else {
-               
-
+            else { 
                 WK.Model.bus_user model = new Model.bus_user();
 
-                int id = 0;
-                if (context.Request.Params["id"] != "")
-                {
-                    id = int.Parse(context.Request.Params["id"]);
-                }
+                
                 model.id = id;
                 //model.create_by
                 //model.create_date

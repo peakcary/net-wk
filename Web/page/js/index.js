@@ -91,7 +91,7 @@ function getChartList(type, minDays) {
         t = 'getDateOrderList';
         seriesName = "订单数";
         yAxisTitle = "订单数";
-        title = '最近' + minDays + '订单数';
+        title = '最近' + minDays + '天订单数';
         $("#btnChartDate").removeClass("btn-default").addClass("btn-info");
         $("#btnChartPerson").removeClass("btn-info").addClass("btn-default");
         $("#btnChartPrice").removeClass("btn-info").addClass("btn-default");
@@ -99,15 +99,15 @@ function getChartList(type, minDays) {
         t = 'getPersonOrderList';
         seriesName = "购买人数";
         yAxisTitle = "购买人数";
-        title = '最近' + minDays + '购买人数'; 
+        title = '最近' + minDays + '天购买人数'; 
         $("#btnChartDate").removeClass("btn-info").addClass("btn-default");
         $("#btnChartPerson").removeClass("btn-default").addClass("btn-info");
         $("#btnChartPrice").removeClass("btn-info").addClass("btn-default"); 
     } else if (type == 'Price') {
         t = 'getPriceOrderList';
         seriesName = "销售额";
-        yAxisTitle = "销售额"; 
-        title = '最近' + minDays + '销售额';
+        yAxisTitle = "销售额";
+        title = '最近' + minDays + '天销售额';
         $("#btnChartDate").removeClass("btn-info").addClass("btn-default");
         $("#btnChartPerson").removeClass("btn-info").addClass("btn-default");
         $("#btnChartPrice").removeClass("btn-default").addClass("btn-info");

@@ -3,6 +3,8 @@ var listPageSize = 10;
  
 var order_code = "";
 var user_id = 0;
+var phone_num = "";
+var consignee_phone = "";
 var pickup_address_id = 0;
 var order_status = 0;
 var pay_status = 0;
@@ -23,6 +25,8 @@ $(function () {
     $("#btnSearch").click(function () {
         order_code = $("#order_code").val();
         user_id = $("#user_id").val();
+        phone_num = $("#phone_num").val();
+        consignee_phone = $("#consignee_phone").val();
         pickup_address_id = $("#pickup_address_id").val();
         initPagination();
     });
@@ -104,6 +108,8 @@ function initPagination() {
         data: {
             order_code: order_code,
             user_id: user_id,
+            phone_num: phone_num,
+            consignee_phone: consignee_phone,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -137,7 +143,7 @@ function pageselectCallback(page_index, jq){
 		return false;
 	}
 
-function getListByQuery(index){
+	function getListByQuery(index) { 
     loadingShow();
     $.ajax({
         type: "post",
@@ -145,6 +151,8 @@ function getListByQuery(index){
         data: {
             order_code: order_code,
             user_id: user_id,
+            phone_num: phone_num,
+            consignee_phone: consignee_phone,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -249,6 +257,8 @@ function getAllOrderListByQuery(){
         data: {
             order_code: order_code,
             user_id: user_id,
+            phone_num: phone_num,
+            consignee_phone:consignee_phone,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -277,6 +287,8 @@ $.ajax({
         data: {
             order_code: order_code,
             user_id: user_id,
+            phone_num: phone_num,
+            consignee_phone:consignee_phone,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -308,6 +320,8 @@ $.ajax({
         data: {
             order_code: order_code,
             user_id: user_id,
+            phone_num: phone_num,
+            consignee_phone:consignee_phone,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -337,6 +351,8 @@ function getDiliveryUserOrderList(){
         data: {
             order_code: order_code,
             user_id: user_id,
+            phone_num: phone_num,
+            consignee_phone: consignee_phone,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,

@@ -249,7 +249,18 @@ namespace WK.Web.Handler
             {
                 isDiscount = int.Parse(context.Request.Params["isDiscount"].ToString());
             }
-             
+            string phone_num = "";
+            if (context.Request.Params["phone_num"] != null && context.Request.Params["phone_num"].ToString() != "")
+            {
+                phone_num = context.Request.Params["phone_num"].ToString();
+            }
+            string consignee_phone = "";
+            if (context.Request.Params["consignee_phone"] != null && context.Request.Params["consignee_phone"].ToString() != "")
+            {
+                consignee_phone = context.Request.Params["consignee_phone"].ToString();
+            }
+            
+
 
             StringBuilder sb = new StringBuilder();
             DataSet ds = new DataSet();
@@ -265,7 +276,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id);
+            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone);
             return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
         }
 
@@ -327,7 +338,16 @@ namespace WK.Web.Handler
                 isDiscount = int.Parse(context.Request.Params["isDiscount"].ToString());
             }
 
-
+            string phone_num = "";
+            if (context.Request.Params["phone_num"] != null && context.Request.Params["phone_num"].ToString() != "")
+            {
+                phone_num = context.Request.Params["phone_num"].ToString();
+            }
+            string consignee_phone = "";
+            if (context.Request.Params["consignee_phone"] != null && context.Request.Params["consignee_phone"].ToString() != "")
+            {
+                consignee_phone = context.Request.Params["consignee_phone"].ToString();
+            }
             StringBuilder sb = new StringBuilder();
             DataSet ds = new DataSet();
 
@@ -342,7 +362,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id);
+            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone);
             List<Model.bus_order> listOrder = new List<Model.bus_order>();
             if (ds != null)
             {
@@ -746,7 +766,18 @@ namespace WK.Web.Handler
             if (context.Request.Params["isDiscount"] != null && context.Request.Params["isDiscount"].ToString() != "")
             {
                 isDiscount = int.Parse(context.Request.Params["isDiscount"].ToString());
-            } 
+            }
+            string phone_num = "";
+            if (context.Request.Params["phone_num"] != null && context.Request.Params["phone_num"].ToString() != "")
+            {
+                  phone_num = context.Request.Params["phone_num"].ToString();
+            }
+            string consignee_phone = "";
+            if (context.Request.Params["consignee_phone"] != null && context.Request.Params["consignee_phone"].ToString() != "")
+            {
+                consignee_phone = context.Request.Params["consignee_phone"].ToString();
+            }
+             
 
             int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
             int pageSize = int.Parse(context.Request.Params["pageSize"]);
@@ -757,7 +788,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-            DataSet ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id);
+            DataSet ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone);
 
            DataTable dt = new DataTable();
 

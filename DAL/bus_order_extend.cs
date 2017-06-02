@@ -54,32 +54,32 @@ namespace WK.DAL
 
         public DataSet GetDateList(int minDays)
         { 
-            StringBuilder strSql = new StringBuilder(); 
-            strSql.Append(" SELECT COUNT(id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" SELECT COUNT(id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') as dt  from bus_order ");
             strSql.AppendFormat(" where create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day) ", minDays);
-            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
+            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') ");
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
         public DataSet GetPersonList(int minDays)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" SELECT count(DISTINCT user_id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            strSql.Append(" SELECT count(DISTINCT user_id) as ct,DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') as dt  from bus_order ");
             strSql.AppendFormat(" where create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day) ", minDays);
-            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
+            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') ");
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
         public DataSet GetPriceList(int minDays)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" SELECT sum(total_real_price) as ct,DATE_FORMAT(create_date, '%Y-%m-%d') as dt  from bus_order ");
+            strSql.Append(" SELECT sum(total_real_price) as ct,DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') as dt  from bus_order ");
             strSql.AppendFormat(" where create_date BETWEEN CURDATE() and DATE_ADD(CURDATE(),interval {0} day) ", minDays);
-            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d') ");
+            strSql.Append(" GROUP BY DATE_FORMAT(create_date, '%Y-%m-%d %H-%i-%s') ");
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
-        public DataSet GetListByQuery(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex, int pickup_address_id)
+        public DataSet GetListByQuery(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex, int pickup_address_id, string phone_num, string consignee_phone)
         {
             //SELECT a.*
             //FROM bus_order a
@@ -139,9 +139,19 @@ namespace WK.DAL
                 else
                 {
                     strSql.AppendFormat(" and b.id is  null ");
-                }
-                
+                } 
             }
+            if (phone_num != "")
+            {
+                strSql.AppendFormat(" and c.phone_num ='{0}'", phone_num);
+            }
+            if (consignee_phone != "")
+            {
+                strSql.AppendFormat(" and a.consignee_phone ='{0}'", consignee_phone);
+            }
+            
+
+            
             strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex);
             return DbHelperMySQL.Query(strSql.ToString());
         }

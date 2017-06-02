@@ -81,7 +81,7 @@ function deleteData(id) {
             success: function (data) { 
                 if(data.isSuccess){
                     layer.msg('删除成功！');
-                        getListByPageInfo(0);
+                        initPagination();
                     }else{
                         layer.msg('删除失败！');
                     }

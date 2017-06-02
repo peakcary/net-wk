@@ -104,24 +104,33 @@ function editData(isToList) {
         success: function (data) { 
             loadingHide();
             if(data.isSuccess){
-             goPageList();
-//                if(!isToList){
-//                   layer.open({
-//                      type: 1,
-//                      area: ['600px', '220px'],
-//                      title:" 菜品规格",
-//                      scrollbar:false,
-//                      btn: ['确定', '取消'],
-//                      yes: function(index, layero){
-//                          layer.close(index); 
-//                          addDishSize();
-//                      },btn2: function(index, layero){ 
-//                      },
-//                      content:$("#addDishSizeContainer")
-//                    });
-//                }else{
-//                    goPageList();
-//                }
+                if(isToList){
+                    goPageList();
+                }else{ 
+                $("#hid").val(data.id);
+                    $.ajax({
+                        type: "post",
+                        url: url + "?t=addDishSize",
+                        data: { 
+                            dish_id: $("#hid").val(),
+                            name: $("#name").val(),
+                            affect_price: $("#affect_price").val()
+                        },
+                        dataType: 'json',   
+                        success: function (data) { 
+                            loadingHide();
+                            if(data.isSuccess){
+                                layer.msg('保存成功！'); 
+                                window.location.href = "bus_dish_edit.htm?id="+$("#hid").val(); 
+                            }else{
+                             layer.msg('保存失败！'); 
+                            }
+                        },
+                        error:function(){
+                            loadingHide();
+                        }
+                    });
+                } 
                 
             }else{
              layer.msg('保存失败！'); 
