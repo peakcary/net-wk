@@ -39,6 +39,14 @@ namespace WK.Web.Handler
             public int RecordCount { get; set; }
         }
 
+        [Serializable]
+        public class SizeInfo
+        { 
+            public int sizeId { get; set; }
+            public string sizeName { get; set; }
+            public decimal sizePrice { get; set; }
+        }
+
         public void ProcessRequest(HttpContext context)
         {
             //不让浏览器缓存
@@ -204,7 +212,16 @@ namespace WK.Web.Handler
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
             ds = bll.GetListByPageInfo(strWhere.ToString(), orderby.ToString(), startIndex, pageSize);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+            DataTable dt = ds.Tables[0];
+            dt.Columns.Add("create_date1"); 
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0, l = dt.Rows.Count; i < l; i++)
+                {
+                    dt.Rows[i]["create_date1"] = DateTime.Parse(dt.Rows[i]["create_date"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"); 
+                }
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
         }
         
         private string getListByQuery(HttpContext context)
@@ -277,7 +294,16 @@ namespace WK.Web.Handler
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
             ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+            DataTable dt = ds.Tables[0];
+            dt.Columns.Add("create_date1");
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0, l = dt.Rows.Count; i < l; i++)
+                {
+                    dt.Rows[i]["create_date1"] = DateTime.Parse(dt.Rows[i]["create_date"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                }
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
         }
 
         private string getOrderDishList(HttpContext context)
@@ -292,7 +318,28 @@ namespace WK.Web.Handler
 
             WK.BLL.bus_order_dish bll = new WK.BLL.bus_order_dish();
             ds = bll.GetList(strWhere.ToString());
-            return Newtonsoft.Json.JsonConvert.SerializeObject(ds.Tables[0]);
+            DataTable dt = ds.Tables[0];
+            dt.Columns.Add("size_list1"); 
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0, l = dt.Rows.Count; i < l; i++)
+                {
+                    List<SizeInfo> listSize = new List<SizeInfo>();
+                    listSize = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SizeInfo>>(dt.Rows[i]["size_list"].ToString());
+                    string s = "";
+                    if (listSize != null && listSize.Count > 0)
+                    {
+                        for (int j = 0, ll = listSize.Count; j < ll; j++)
+                        {
+                            s += listSize[j].sizeName + ",";
+                        }
+                    }
+                   
+                    dt.Rows[i]["size_list1"] = s;
+                }
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(dt);
         }
 
         private string getAllOrderListByQuery(HttpContext context)

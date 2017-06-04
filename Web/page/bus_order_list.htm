@@ -288,9 +288,9 @@
                     <td>
                         订单号
                     </td>
-                    <td>
+                   <!-- <td>
                         订单期
-                    </td>
+                    </td>-->
                     <td>
                         订单状态
                     </td>
@@ -300,9 +300,9 @@
                     <td>
                         订单金额
                     </td>
-                    <td>
+                   <!-- <td>
                         支付订单号
-                    </td>
+                    </td>-->
                     <td>
                         用户
                     </td>
@@ -437,11 +437,10 @@
         <tr>
 	        <td>${order_code.substr(order_code.length-4,4)}</td>  
             <td>${order_code}</td> 
-            <td>${create_date}</td>  
             <td>{{if order_status == 1}}已预订{{else order_status == 2}}等待配送{{else order_status == 3}}正在配送{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{else order_status == 0}}未支付{{/if}}</td> 
-            <td>${create_date}</td> 
+            <td>${create_date1}</td> 
             <td>${total_real_price }</td> 
-            <td>${charge_id}</td> 
+          
             <td>${consignee_name}</td> 
             <td>${consignee_phone}</td> 
             <td>${pickupAddressName}</td> 
