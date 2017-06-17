@@ -276,8 +276,17 @@ namespace WK.Web.Handler
             {
                 consignee_phone = context.Request.Params["consignee_phone"].ToString();
             }
-            
 
+            string order_com = "";
+            if (context.Request.Params["order_com"] != null && context.Request.Params["order_com"].ToString() != "")
+            {
+                order_com = context.Request.Params["order_com"].ToString();
+            }
+            string order_sc = "";
+            if (context.Request.Params["order_sc"] != null && context.Request.Params["order_sc"].ToString() != "")
+            {
+                order_sc = context.Request.Params["order_sc"].ToString();
+            }
 
             StringBuilder sb = new StringBuilder();
             DataSet ds = new DataSet();
@@ -293,7 +302,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone);
+            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone, order_com, order_sc);
             DataTable dt = ds.Tables[0];
             dt.Columns.Add("create_date1");
             if (dt.Rows.Count > 0)
@@ -395,6 +404,16 @@ namespace WK.Web.Handler
             {
                 consignee_phone = context.Request.Params["consignee_phone"].ToString();
             }
+            string order_com = "";
+            if (context.Request.Params["order_com"] != null && context.Request.Params["order_com"].ToString() != "")
+            {
+                order_com = context.Request.Params["order_com"].ToString();
+            }
+            string order_sc = "";
+            if (context.Request.Params["order_sc"] != null && context.Request.Params["order_sc"].ToString() != "")
+            {
+                order_sc = context.Request.Params["order_sc"].ToString();
+            }
             StringBuilder sb = new StringBuilder();
             DataSet ds = new DataSet();
 
@@ -409,7 +428,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone);
+            ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone, order_com, order_sc);
             List<Model.bus_order> listOrder = new List<Model.bus_order>();
             if (ds != null)
             {
@@ -824,8 +843,17 @@ namespace WK.Web.Handler
             {
                 consignee_phone = context.Request.Params["consignee_phone"].ToString();
             }
-             
 
+            string order_com = "";
+            if (context.Request.Params["order_com"] != null && context.Request.Params["order_com"].ToString() != "")
+            {
+                order_com = context.Request.Params["order_com"].ToString();
+            }
+            string order_sc = "";
+            if (context.Request.Params["order_sc"] != null && context.Request.Params["order_sc"].ToString() != "")
+            {
+                order_sc = context.Request.Params["order_sc"].ToString();
+            }
             int pageIndex = int.Parse(context.Request.Params["pageIndex"]);
             int pageSize = int.Parse(context.Request.Params["pageSize"]);
             int startIndex = 0;
@@ -835,7 +863,7 @@ namespace WK.Web.Handler
             }
 
             WK.BLL.bus_order bll = new WK.BLL.bus_order();
-            DataSet ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone);
+            DataSet ds = bll.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, pageSize, pickup_address_id, phone_num, consignee_phone, order_com, order_sc);
 
            DataTable dt = new DataTable();
 

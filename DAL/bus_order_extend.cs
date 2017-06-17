@@ -94,7 +94,7 @@ namespace WK.DAL
             return DbHelperMySQL.Query(strSql.ToString());
         }
 
-        public DataSet GetListByQuery(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex, int pickup_address_id, string phone_num, string consignee_phone)
+        public DataSet GetListByQuery(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex, int pickup_address_id, string phone_num, string consignee_phone, string order_com, string order_sc)
         {
             //SELECT a.*
             //FROM bus_order a
@@ -164,10 +164,37 @@ namespace WK.DAL
             {
                 strSql.AppendFormat(" and a.consignee_phone ='{0}'", consignee_phone);
             }
-            
 
-            
+            if (order_com != "" &&　order_sc　 != "")
+            {
+                if (order_com == "create_date") {
+                    strSql.Append(" order by a.create_date  " + order_sc);
+                }
+                if (order_com == "total_real_price") {
+                    strSql.Append(" order by a.total_real_price  " + order_sc);
+                }
+                if (order_com == "order_status")
+                {
+                    strSql.Append(" order by a.order_status  " + order_sc);
+                }
+                if (order_com == "consignee_name")
+                {
+                    strSql.Append(" order by a.consignee_name  " + order_sc);
+                }
+                if (order_com == "nickname")
+                {
+                    strSql.Append(" order by c.nickname  " + order_sc);
+                }
+                
+                
+            }
+
+            　
+
+
+           
             strSql.AppendFormat("  LIMIT  {0},{1}", startIndex, endIndex);
+            
             return DbHelperMySQL.Query(strSql.ToString());
         }
 

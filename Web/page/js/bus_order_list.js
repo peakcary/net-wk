@@ -13,14 +13,16 @@ var minDays = -1;
 var isDiscount = 0;
 var pageIndex = 0;
 var pageSize = 10000; 
-$(function () { 
+var order_com = "";
+var order_sc = "";
+$(function () {
     (function ($) {
         $.getUrlParam = function (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         }
-    })(jQuery); 
+    })(jQuery);
     getPickUplist();
     $("#btnSearch").click(function () {
         order_code = $("#order_code").val();
@@ -28,77 +30,105 @@ $(function () {
         phone_num = $("#phone_num").val();
         consignee_phone = $("#consignee_phone").val();
         pickup_address_id = $("#pickup_address_id").val();
+        order_com = $("#order_com").val();
+        order_sc = $("#order_sc").val();
+
         initPagination();
     });
-     
-    $(".eat_type").each(function(index,ele){
-        $(this).click(function(){
-             $(".eat_type").each(function(index,ele){
-              $(ele).removeClass('sdiv-active'); 
-             });
-           $(this).addClass('sdiv-active'); 
-           var ref = $(this).attr('ref');
-           if(ref == '0'){
-            eat_type=0;
-            minDays=-1;
-           }else if(ref == '1'){
-            eat_type=1;
-            minDays=1;
-           }else if(ref == '2'){
-            eat_type=2;
-            minDays=1;
-           }else if(ref == '3'){
-            eat_type=1;
-            minDays=2;
-           }else if(ref == '4'){
-            eat_type=2;
-            minDays=2;
-           }
+
+    $("#order_com").change(function () {
+        order_code = $("#order_code").val();
+        user_id = $("#user_id").val();
+        phone_num = $("#phone_num").val();
+        consignee_phone = $("#consignee_phone").val();
+        pickup_address_id = $("#pickup_address_id").val();
+        order_com = $("#order_com").val();
+        order_sc = $("#order_sc").val();
+
+        initPagination();
+    });
+    $("#order_sc").change(function () {
+        order_code = $("#order_code").val();
+        user_id = $("#user_id").val();
+        phone_num = $("#phone_num").val();
+        consignee_phone = $("#consignee_phone").val();
+        pickup_address_id = $("#pickup_address_id").val();
+        order_com = $("#order_com").val();
+        order_sc = $("#order_sc").val();
+
+        initPagination();
+    });
+
+    
+
+    $(".eat_type").each(function (index, ele) {
+        $(this).click(function () {
+            $(".eat_type").each(function (index, ele) {
+                $(ele).removeClass('sdiv-active');
+            });
+            $(this).addClass('sdiv-active');
+            var ref = $(this).attr('ref');
+            if (ref == '0') {
+                eat_type = 0;
+                minDays = -1;
+            } else if (ref == '1') {
+                eat_type = 1;
+                minDays = 1;
+            } else if (ref == '2') {
+                eat_type = 2;
+                minDays = 1;
+            } else if (ref == '3') {
+                eat_type = 1;
+                minDays = 2;
+            } else if (ref == '4') {
+                eat_type = 2;
+                minDays = 2;
+            }
             initPagination();
         });
     });
 
-    $(".order_status").each(function(index,ele){
-        $(this).click(function(){
-             $(".order_status").each(function(index,ele){
-              $(ele).removeClass('sdiv-active'); 
-             });
-           $(this).addClass('sdiv-active'); 
-           order_status = $(this).attr('ref');
+    $(".order_status").each(function (index, ele) {
+        $(this).click(function () {
+            $(".order_status").each(function (index, ele) {
+                $(ele).removeClass('sdiv-active');
+            });
+            $(this).addClass('sdiv-active');
+            order_status = $(this).attr('ref');
             initPagination();
         });
     });
-    $(".pay_status").each(function(index,ele){
-        $(this).click(function(){
-             $(".pay_status").each(function(index,ele){
-              $(ele).removeClass('sdiv-active'); 
-             });
-           $(this).addClass('sdiv-active'); 
-           pay_status = $(this).attr('ref');
+    $(".pay_status").each(function (index, ele) {
+        $(this).click(function () {
+            $(".pay_status").each(function (index, ele) {
+                $(ele).removeClass('sdiv-active');
+            });
+            $(this).addClass('sdiv-active');
+            pay_status = $(this).attr('ref');
             initPagination();
         });
     });
-     $(".isDiscount").each(function(index,ele){
-        $(this).click(function(){
-             $(".isDiscount").each(function(index,ele){
-              $(ele).removeClass('sdiv-active'); 
-             });
-           $(this).addClass('sdiv-active'); 
-           pay_status = $(this).attr('ref');
+    $(".isDiscount").each(function (index, ele) {
+        $(this).click(function () {
+            $(".isDiscount").each(function (index, ele) {
+                $(ele).removeClass('sdiv-active');
+            });
+            $(this).addClass('sdiv-active');
+            pay_status = $(this).attr('ref');
             initPagination();
         });
-    }); 
-    
-    initPagination(); 
+    });
+
+    initPagination();
     getAllOrderListByQuery();
     fExcelMarket();
     getDiliveryUserOrderList();
     getPickupAddressOrderList();
-    $("#btnExcelAll").on("click",fExcelAll); 
-    $("#btnExcelMarket").on("click",eExcelMarket);
-    $("#btnExcelDiliveryUser").on("click",eExcelUser);
-    $("#btnExcelPickupAddress").on("click",eExcelAddress); 
-    
+    $("#btnExcelAll").on("click", fExcelAll);
+    $("#btnExcelMarket").on("click", eExcelMarket);
+    $("#btnExcelDiliveryUser").on("click", eExcelUser);
+    $("#btnExcelPickupAddress").on("click", eExcelAddress);
+
 });
 
 function initPagination() {
@@ -110,6 +140,9 @@ function initPagination() {
             user_id: user_id,
             phone_num: phone_num,
             consignee_phone: consignee_phone,
+            
+            order_com: order_com,
+            order_sc: order_sc,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -152,7 +185,9 @@ function pageselectCallback(page_index, jq){
             order_code: order_code,
             user_id: user_id,
             phone_num: phone_num,
-            consignee_phone: consignee_phone,
+            consignee_phone: consignee_phone, 
+            order_com: order_com,
+            order_sc: order_sc,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -259,6 +294,8 @@ function getAllOrderListByQuery(){
             user_id: user_id,
             phone_num: phone_num,
             consignee_phone:consignee_phone,
+             order_com: order_com,
+            order_sc: order_sc,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -289,6 +326,8 @@ $.ajax({
             user_id: user_id,
             phone_num: phone_num,
             consignee_phone:consignee_phone,
+             order_com: order_com,
+            order_sc: order_sc,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -322,6 +361,8 @@ $.ajax({
             user_id: user_id,
             phone_num: phone_num,
             consignee_phone:consignee_phone,
+             order_com: order_com,
+            order_sc: order_sc,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -353,6 +394,8 @@ function getDiliveryUserOrderList(){
             user_id: user_id,
             phone_num: phone_num,
             consignee_phone: consignee_phone,
+             order_com: order_com,
+            order_sc: order_sc,
             order_status: order_status,
             pay_status: pay_status,
             eat_type: eat_type,
@@ -395,7 +438,8 @@ function cancelOrder(id,order_code){
                 "hashCode": data.sValue
               },
               dataType: 'JSON',
-                success:function(data){
+        success: function (data) {
+            getListByPageInfo(0);
                  layer.msg(data.Message);
               }
             });

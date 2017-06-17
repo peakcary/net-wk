@@ -37,9 +37,9 @@ namespace WK.BLL
         {
             return dal.GetPriceList(minDays);
         }
-        public DataSet GetListByQuery(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex, int pickup_address_id, string phone_num, string consignee_phone)
+        public DataSet GetListByQuery(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex, int pickup_address_id, string phone_num, string consignee_phone, string order_com, string order_sc)
         {
-            return dal.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, endIndex, pickup_address_id, phone_num, consignee_phone);
+            return dal.GetListByQuery(order_code, user_id, order_status, pay_status, eat_type, minDays, isDiscount, startIndex, endIndex, pickup_address_id, phone_num, consignee_phone, order_com, order_sc);
         }
 
          public DataSet GetMarketOrderList(string order_code, int user_id, int order_status, int pay_status, int eat_type, int minDays, int isDiscount, int startIndex, int endIndex)

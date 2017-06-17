@@ -275,7 +275,24 @@
                         class="btn btn-primary btn-xs">按商户导出</a> <a download="data_address_order.xls" id="btnExcelPickupAddress" class="btn btn-primary btn-xs">
                             按自提点导出</a> <a download="data_user_order.xls" id="btnExcelDiliveryUser" class="btn btn-primary btn-xs">按配送员导出</a>
                 </div>
-                 <div class='col-sm-4'>
+                 <div class='col-sm-1'>
+                </div>
+                  <div class='col-sm-2 '>
+                  <select id="order_com" style="width:120px;"  class="form-control  x-sm">
+                    <option value="create_date">订单时间</option>
+                    <option value="order_status">订单状态</option>
+                    <option value="total_real_price">订单金额</option>
+                    <option value="consignee_name">用户</option>
+                    <option value="pickupAddressName">自提点</option>
+                    <option value="nickname">配送员</option>
+                    
+                  </select>
+                </div>
+                 <div class='col-sm-1'>
+                  <select id="order_sc"  style="width:80px;margin-right:20px;"  class="form-control x-sm">
+                    <option value="desc">降序</option>
+                    <option value="asc">升序</option>
+                  </select>
                 </div>
             </div>
         </div>
