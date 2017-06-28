@@ -68,13 +68,25 @@ namespace WK.Web.Handler
                     break;
                 case "deleteDishSize":
                     sb.Append(deleteDishSize(context));
-                    break; 
+                    break;
+
+                case "getSysConstantDetailById":
+                    sb.Append(getSysConstantDetailById(context));
+                    break;
+
 
                 default:
                     sb.Append("");
                     break;
             }
             context.Response.Write(sb.ToString());
+        }
+
+        private string getSysConstantDetailById(HttpContext context)
+        {
+            int id = int.Parse(context.Request.Params["id"]);
+            WK.BLL.sys_constant_detail bll = new WK.BLL.sys_constant_detail();
+            return Newtonsoft.Json.JsonConvert.SerializeObject(bll.GetModel(id));
         }
 
         private string getDataList(HttpContext context)

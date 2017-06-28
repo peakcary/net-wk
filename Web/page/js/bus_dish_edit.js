@@ -1,7 +1,7 @@
 ﻿var url = "../../Handler/bus_dish.ashx"; 
 var urlUpload = "../Handler/Upload.ashx";
-var imageUrlHost = "http://olamk7iwq.bkt.gdipper.com/";
-
+//var imageUrlHost = "http://olamk7iwq.bkt.gdipper.com/";
+var imageUrlHost ="";
 $(function () {
     (function ($) {
         $.getUrlParam = function (name) {
@@ -27,7 +27,22 @@ $(function () {
         getAreaList(0);
         getPickupList(0);
     }
+    getSysConstantDetailById();
 });
+
+function getSysConstantDetailById() {
+    $.ajax({
+        type: "post",
+        url: url + "?t=getSysConstantDetailById",
+        data: {
+            id: 48
+        },
+        dataType: 'json',
+        success: function (data) {
+            imageUrlHost=data.constant_value; 
+        }
+    });
+}
 
 function getDataDetail(id) {
     loadingShow();

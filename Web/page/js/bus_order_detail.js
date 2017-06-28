@@ -32,16 +32,19 @@ function getDataDetail(id) {
         success: function (data) { 
             loadingHide();
             data = data[0]
+            console.log(data) 
             $("#hid").val(data.id); 
             $("#order_code").html(data.order_code);  
             $("#total_real_price").html(data.total_real_price); 
-            $("#create_date").html(data.create_date); 
-            $("#userName").html(data.userName);
-            $("#consignee_name").html(data.consignee_name);
-            $("#consignee_phone").html(data.consignee_phone); 
-            $("#pickupName").html(data.pickupName); 
+            $("#create_date").html(data.create_date.replace("T"," ")); 
+            $("#userName123").html(data.userName);
             $("#consignee_name").html(data.consignee_name); 
+            $("#consignee_phone").html(data.consignee_phone); 
+            $("#pickupName").html(data.pickupName);  
             $("#discount_desc").html(data.discount_desc);  
+            $("#meal_num").html(data.meal_num);  
+
+            
             var payStatus="";
             if(data.pay_status==1){
                 payStatus='已支付';
@@ -55,30 +58,27 @@ function getDataDetail(id) {
             }else{
                 payType='线下支付';
             }
-            $("#pay_type").html(payType);
-            $("#userName").html(userName);
-             
-            $("#consignee_name").html(data.consignee_name);
-            $("#consignee_phone").html(data.consignee_phone); 
-            
+            $("#pay_type").html(payType);   
+           
 
-            
-            
+
             var orderStatus = "";
             if(data.order_status==1){
                 orderStatus='已预订';
             }else if(data.order_status==2){
-                orderStatus='待取餐';
+                orderStatus='等待配送';
             }else if(data.order_status==3){
-                orderStatus='待送达';
+                orderStatus='正在配送';
             }else if(data.order_status==4){
                 orderStatus='已完成';
             }else if(data.order_status==5){
                 orderStatus='已退单';
             }else if(data.order_status==6){
                 orderStatus='申请退单';
+            }else if(data.order_status==0){
+                orderStatus='未支付';
             }
-            $('#order_status').html(orderStatus);
+            $('#orderStatus123').html(orderStatus);
            
              
         },
