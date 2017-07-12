@@ -129,6 +129,8 @@ $(function () {
     $("#btnExcelDiliveryUser").on("click", eExcelUser);
     $("#btnExcelPickupAddress").on("click", eExcelAddress);
 
+    $("#btnExcelSearch").on("click", eExcelSearch);
+
 });
 
 function initPagination() {
@@ -171,7 +173,8 @@ function initPagination() {
     });
 }
 
-function pageselectCallback(page_index, jq){  
+function pageselectCallback(page_index, jq) {
+    getListBySearch();
         getListByQuery(page_index);
 		return false;
 	}
@@ -217,6 +220,43 @@ function pageselectCallback(page_index, jq){
     });
 }
 
+function getListBySearch() { 
+    $.ajax({
+        type: "post",
+        url: url + "?t=getListByQuery",
+        data: {
+            order_code: order_code,
+            user_id: user_id,
+            phone_num: phone_num,
+            consignee_phone: consignee_phone,
+            order_com: order_com,
+            order_sc: order_sc,
+            order_status: order_status,
+            pay_status: pay_status,
+            eat_type: eat_type,
+            minDays: minDays,
+            isDiscount: isDiscount,
+            minDays: minDays,
+            pageIndex: 0,
+            pageSize: 1000,
+            pickup_address_id: pickup_address_id
+        },
+        dataType: 'json',
+        success: function (data) {
+
+
+            $("#dataSearch").empty();
+            $("#dataExcelSearchTemplate").tmpl(data).appendTo("#dataSearch");
+
+
+        },
+        error: function () {
+            $("#DataList").empty();
+            loadingHide();
+        }
+    });
+}
+
 function getDataList(index) {  
     loadingShow();
     $.ajax({
@@ -230,7 +270,9 @@ function getDataList(index) {
         success: function (data) { 
             loadingHide();
             $("#DataList").empty();
-            $("#DataTemplate").tmpl(data).appendTo("#DataList");  
+            $("#DataTemplate").tmpl(data).appendTo("#DataList");
+
+              
            
         },
         error:function(){
@@ -262,11 +304,12 @@ function deleteData(id) {
                 }
         });
     }); 
-}  
- 
+}
+
 
 function goPageDetail(id) {
-    window.location.href = "bus_order_detail.htm?id="+id;
+    window.open("bus_order_detail.htm?id=" + id, "_blank")
+    //window.location.href = "bus_order_detail.htm?id="+id;
 }
 
 function fExcelAll(){
@@ -282,6 +325,9 @@ function eExcelUser(){
 }
 function eExcelAddress(){ 
   return ExcellentExport.excel(this, 'dtExcelAddress', 'all');
+}
+function eExcelSearch() {
+    return ExcellentExport.excel(this, 'dtExcelSearch', 'all');
 }
  
 

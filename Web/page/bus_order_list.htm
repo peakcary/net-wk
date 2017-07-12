@@ -273,7 +273,7 @@
                 <div class='col-sm-8'>
                     <a id="btnExcelAll" download="data_all.xls" class="btn btn-primary btn-xs">全部导出</a> <a id="btnExcelMarket" download="data_market_order.xls"
                         class="btn btn-primary btn-xs">按商户导出</a> <a download="data_address_order.xls" id="btnExcelPickupAddress" class="btn btn-primary btn-xs">
-                            按自提点导出</a> <a download="data_user_order.xls" id="btnExcelDiliveryUser" class="btn btn-primary btn-xs">按配送员导出</a>
+                            按自提点导出</a> <a download="data_user_order.xls" id="btnExcelDiliveryUser" class="btn btn-primary btn-xs">按配送员导出</a><a download="data_search_order.xls" id="btnExcelSearch" class="btn btn-primary btn-xs">按筛选导出</a>
                 </div>
                  <div class='col-sm-1'>
                 </div>
@@ -346,7 +346,51 @@
         <div id="Pagination" class="pagination">
         </div>
     </div>
-    <div style="display: none;">
+    <div style="display:none;">
+     <table id='dtExcelSearch'>
+            <thead>
+                <tr>
+                    <td >
+                        识别码
+                    </td>
+                    <td>
+                        订单号
+                    </td>
+                   <!-- <td>
+                        订单期
+                    </td>-->
+                    <td>
+                        订单状态
+                    </td>
+                    <td>
+                        订单时间
+                    </td>
+                    <td>
+                        订单金额
+                    </td>
+                   <!-- <td>
+                        支付订单号
+                    </td>-->
+                    <td>
+                        用户
+                    </td>
+                    <td>
+                        取餐人手机号
+                    </td>
+                    <td>
+                        自提点
+                    </td>
+                    <td>
+                        配送员
+                    </td>
+                    <td>
+                        赠品
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="dataSearch">
+            </tbody>
+        </table> 
         <table id='tbExcelAll'>
             <thead>
                 <tr>
@@ -463,10 +507,25 @@
             <td>${pickupAddressName}</td> 
             <td>${nickname}</td> 
             <td>{{if dicountId > 0 }}有{{else}}无{{/if}}</td>  
-            <td><a class="btn btn-primary btn-xs" href="#" role="button" onclick="goPageDetail('${id}')" >详情</a>{{if order_status == 1 || order_status == 2 ||order_status == 3}}
+            <td><a class="btn btn-primary btn-xs"  href="#" role="button" onclick="goPageDetail('${id}')" >详情</a>{{if order_status == 1 || order_status == 2 ||order_status == 3}}
             <a class="btn btn-primary btn-xs" href="#" role="button" onclick="cancelOrder('${id}','${order_code}')" >取消订单</a>
             {{/if}}
             </td> 
+        </tr>
+    </script>
+    <script id="dataExcelSearchTemplate" type="text/x-jquery-tmpl">
+        <tr>
+	        <td>${order_code.substr(order_code.length-4,4)}</td>  
+            <td>${order_code}</td> 
+            <td>{{if order_status == 1}}已预订{{else order_status == 2}}等待配送{{else order_status == 3}}正在配送{{else order_status == 4}}已完成{{else order_status == 5}}已退单{{else order_status == 6}}申请退单{{else order_status == 0}}未支付{{/if}}</td> 
+            <td>${create_date1}</td> 
+            <td>${total_real_price }</td> 
+          
+            <td>${consignee_name}</td> 
+            <td>${consignee_phone}</td> 
+            <td>${pickupAddressName}</td> 
+            <td>${nickname}</td> 
+            <td>{{if dicountId > 0 }}有{{else}}无{{/if}}</td>  
         </tr>
     </script>
     <script id="dataExcelAllTemplate" type="text/x-jquery-tmpl">

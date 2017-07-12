@@ -1,4 +1,8 @@
-﻿var url = "../../Handler/bus_order.ashx";  
+﻿var url = "../../Handler/bus_order.ashx"; 
+
+var urlPickup = "../../Handler/bus_pickup.ashx"; 
+
+ 
 
 $(function () {
     (function ($) {
@@ -20,6 +24,32 @@ $(function () {
     }
 });
 
+
+function getPickupTimes(pickup_address_id){ 
+ 
+ $.ajax({
+        type: "post",
+        url: urlPickup + "?t=getPickupTimes",
+        data: {
+           pickup_address_id:pickup_address_id,
+           pageIndex: 0,
+           pageSize: 100 
+        },
+        dataType: 'json',   
+        success: function (data) { 
+       console.log(data);
+            if(data.length>0){
+              
+            }else{
+               
+            }
+        },
+        error:function(){
+            loadingHide();
+        }
+    });
+}
+
 function getDataDetail(id) {
     loadingShow();
     $.ajax({
@@ -32,19 +62,16 @@ function getDataDetail(id) {
         success: function (data) { 
             loadingHide();
             data = data[0]
-            console.log(data) 
             $("#hid").val(data.id); 
             $("#order_code").html(data.order_code);  
             $("#total_real_price").html(data.total_real_price); 
-            $("#create_date").html(data.create_date.replace("T"," ")); 
-            $("#userName123").html(data.userName);
-            $("#consignee_name").html(data.consignee_name); 
+            $("#create_date").html(data.create_date); 
+            $("#userName").html(data.userName);
+            $("#consignee_name").html(data.consignee_name);
             $("#consignee_phone").html(data.consignee_phone); 
-            $("#pickupName").html(data.pickupName);  
+            $("#pickupName").html(data.pickupName); 
+            $("#consignee_name").html(data.consignee_name); 
             $("#discount_desc").html(data.discount_desc);  
-            $("#meal_num").html(data.meal_num);  
-
-            
             var payStatus="";
             if(data.pay_status==1){
                 payStatus='已支付';
@@ -58,27 +85,39 @@ function getDataDetail(id) {
             }else{
                 payType='线下支付';
             }
-            $("#pay_type").html(payType);   
-           
+            $("#pay_type").html(payType);
+             var eatType="";
+            if(data.eat_type==1){
+                eatType='午餐';
+            }else if(data.eat_type==2){
+                eatType='晚餐';
+            }
+            $("#eatType").html(eatType);
 
+            
+            $("#userName").html(userName);
+             
+            $("#consignee_name").html(data.consignee_name);
+            $("#consignee_phone").html(data.consignee_phone); 
+            
 
+            
+            
             var orderStatus = "";
             if(data.order_status==1){
                 orderStatus='已预订';
             }else if(data.order_status==2){
-                orderStatus='等待配送';
+                orderStatus='待取餐';
             }else if(data.order_status==3){
-                orderStatus='正在配送';
+                orderStatus='待送达';
             }else if(data.order_status==4){
                 orderStatus='已完成';
             }else if(data.order_status==5){
                 orderStatus='已退单';
             }else if(data.order_status==6){
                 orderStatus='申请退单';
-            }else if(data.order_status==0){
-                orderStatus='未支付';
             }
-            $('#orderStatus123').html(orderStatus);
+            $('#order_status').html(orderStatus);
            
              
         },

@@ -1,8 +1,8 @@
 ﻿var url = "../../Handler/bus_market.ashx"; 
 var urlUpload = "../Handler/Upload.ashx";
-//var imageUrlHost = "http://olamk7iwq.bkt.gdipper.com/";
+var imageUrlHost = "http://wkps.tedxiong.com/";
 
-var imageUrlHost ="";
+
 var pickupAddressIds="";
 $(function () {
     (function ($) {
@@ -26,24 +26,8 @@ $(function () {
         getAreaList(0);
         getPickupList(0);
     }
-    getSysConstantDetailById();
+     
 });
-
-function getSysConstantDetailById() {
-    $.ajax({
-        type: "post",
-        url: url + "?t=getSysConstantDetailById",
-        data: {
-            id: 48
-        },
-        dataType: 'json',
-        success: function (data) {
-            imageUrlHost=data.constant_value; 
-             
-
-        }
-    });
-}
 
 function getDataDetail(id) {
     loadingShow();
@@ -252,7 +236,7 @@ var uploader = Qiniu.uploader({
                         return '';
                     }
                 },
-                domain: "olamk7iwq.bkt.gdipper.com",
+                domain: "wkps.tedxiong.com",
                 get_new_uptoken: false,
                 auto_start: true,
                 log_level: 0,
@@ -277,7 +261,6 @@ var uploader = Qiniu.uploader({
                         $('#success').show();
                     },
                     'FileUploaded': function (up, file, info) {
-                   // alert(imageUrlHost);
 //                        console.log("----------FileUploaded1", JSON.stringify(up));
 //                        console.log("----------FileUploaded2", JSON.stringify(file));
 //                        console.log("----------FileUploaded3", JSON.stringify(info));

@@ -1,7 +1,6 @@
 ﻿
 var userid = 0;
-var imageUrlHost = "";
-var url = "../../Handler/index.ashx";
+
 $(function () {
 
     var loginId = "";
@@ -26,22 +25,7 @@ $(function () {
         }
         window.location.href = "login.htm?re=" + location.href;
     });
-    getSysConstantDetailById();
 });
-
-function getSysConstantDetailById() {
-    $.ajax({
-        type: "post",
-        url: url + "?t=getSysConstantDetailById",
-        data: {
-            id: 48
-        },
-        dataType: 'json',
-        success: function (data) {
-            imageUrlHost=data.constant_value; 
-        }
-    });
-}
 
 function loadingShow() {
     layer.load();
